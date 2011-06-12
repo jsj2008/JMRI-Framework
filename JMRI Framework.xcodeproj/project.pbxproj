@@ -78,6 +78,7 @@
 		48849564139565860086790D /* JMRIXMLIOThrottle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMRIXMLIOThrottle.m; sourceTree = "<group>"; };
 		4888594E1375B1F4001EAD5B /* JMRIServiceBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; path = JMRIServiceBrowser.h; sourceTree = "<group>"; };
 		4888594F1375B1F4001EAD5B /* JMRIServiceBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMRIServiceBrowser.m; sourceTree = "<group>"; };
+		48AB635413A4EBBF002DB6AE /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		48E71B69139490E7003AB481 /* JMRIXMLIORoster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; path = JMRIXMLIORoster.h; sourceTree = "<group>"; };
 		48E71B6A139490E7003AB481 /* JMRIXMLIORoster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMRIXMLIORoster.m; sourceTree = "<group>"; };
 		48F65A1013796DEF0086D4E3 /* JMRINetService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; path = JMRINetService.h; sourceTree = "<group>"; };
@@ -123,6 +124,7 @@
 				32C88DFF0371C24200C91783 /* Other Sources */,
 				0867D69AFE84028FC02AAC07 /* Frameworks */,
 				034768DFFF38A50411DB9C8B /* Products */,
+				48AB635413A4EBBF002DB6AE /* README.md */,
 			);
 			name = Framework;
 			sourceTree = "<group>";
