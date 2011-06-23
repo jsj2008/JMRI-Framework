@@ -46,8 +46,12 @@
 */
 
 - (void)netServiceDidResolveAddress:(NSNetService *)sender {
-	NSLog(@"JMRIXMLIOService TXT Record: %@", [NSString stringWithUTF8String:[[sender TXTRecordData] bytes]]);
-	if (![self containsService:sender]) {
+    // replace with NSDictionary of txtRecordData when path=index.html is not constant and other meaningful data is published
+    NSDictionary *txtRecords = [NSNetService dictionaryFromTXTRecordData:[sender TXTRecordData]];
+	NSLog(@"JMRIXMLIOService TXT Record: %@", txtRecords);
+    // the test for path=index.html should hopefully be only temporary && JMRI post 2.12 should have a jmri=version instead
+    if ([txtRecords objectForKey:@"path"] &&
+        ![self containsService:sender]) {
 		JMRIXMLIOService *service = [[[JMRIXMLIOService alloc] initWithNetService:sender] autorelease];
 		[self.services addObject:service];
 		if ([self.delegate respondsToSelector:@selector(JMRIServiceBrowser:didFindService:moreComing:)]) {
