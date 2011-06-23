@@ -246,6 +246,9 @@ NSString *const JMRIXMLIOItemValueKey = @"JMRIXMLIOItemValueKey";
 																	value, JMRIXMLIOItemValueKey,
 																	nil]];
 	}
+    if ([name isEqualToString:JMRIXMLIOMetadataJMRIVersion] && value) {
+        version_ = value;
+    }
 }
 
 - (void)JMRIXMLIOServiceHelper:(JMRIXMLIOServiceHelper *)helper didWriteItem:(JMRIXMLIOItem *)item withName:(NSString *)name ofType:(NSString *)type withValue:(NSString *)value {

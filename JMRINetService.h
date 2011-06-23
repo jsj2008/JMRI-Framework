@@ -26,6 +26,7 @@
 	BOOL logTraffic;
 	NSString *manualAddress;
 	NSInteger manualPort;
+    NSString *version_;
 
 }
 
@@ -53,6 +54,7 @@
 @property BOOL logTraffic;
 @property NSTimeInterval timeoutInterval;
 @property (readonly) BOOL resolved;
+@property (readonly, retain) NSString *version;
 
 #pragma mark -
 #pragma mark Net service properties

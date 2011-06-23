@@ -121,6 +121,7 @@
 @synthesize service = _service;
 @synthesize logTraffic;
 @synthesize timeoutInterval;
+@synthesize version = version_;
 
 - (BOOL)resolved {
 	return (self.port != -1);
