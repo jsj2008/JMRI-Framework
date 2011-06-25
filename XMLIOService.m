@@ -155,7 +155,7 @@ NSString *const XMLIOItemValueKey = @"XMLIOItemValueKey";
 		if (connection) {
 			connections++;
 			if (self.logTraffic) {
-				NSLog(@"XMLIOService opened new connection. %i connections are open.", connections);
+				NSLog(@"XMLIOService opened new connection. %lu connections are open.", (unsigned long)connections);
 			}
 			if ([self.delegate respondsToSelector:@selector(XMLIOService:didConnectWithRequest:)]) {
 				[self.delegate XMLIOService:self didConnectWithRequest:request];
@@ -226,7 +226,7 @@ NSString *const XMLIOItemValueKey = @"XMLIOItemValueKey";
 		[self.delegate XMLIOService:self didFailWithError:error];
 	}
 	if (self.logTraffic) {
-		NSLog(@"XMLIOService connection failed. %i connections remain open.", connections);
+		NSLog(@"XMLIOService connection failed. %lu connections remain open.", (unsigned long)connections);
 	}
 }
 
@@ -294,7 +294,7 @@ NSString *const XMLIOItemValueKey = @"XMLIOItemValueKey";
 		[self.delegate XMLIOServiceDidFinishLoading:self];
 	}
 	if (self.logTraffic) {
-		NSLog(@"XMLIOService has just closed a connection. %i connections remain open.", connections);
+		NSLog(@"XMLIOService has just closed a connection. %lu connections remain open.", (unsigned long)connections);
 	}
 }
 

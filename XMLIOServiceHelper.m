@@ -211,11 +211,11 @@ NSString *const JavaNO = @"false"; // java.lang.Boolean.toString returns "false"
 }
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
-    NSLog(@"Error %i, Description: %@, Line: %i, Column: %i", 
-		  [parseError code],
+    NSLog(@"Error %ld, Description: %@, Line: %ld, Column: %ld", 
+		  (long)[parseError code],
 		  [[parser parserError] localizedDescription],
-		  [parser lineNumber],
-		  [parser columnNumber]);
+		  (long)[parser lineNumber],
+		  (long)[parser columnNumber]);
 	if ([self.delegate respondsToSelector:@selector(XMLIOServiceHelper:didFailWithError:)]) {
 		[self.delegate XMLIOServiceHelper:self didFailWithError:parseError];
 	}

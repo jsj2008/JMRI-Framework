@@ -20,7 +20,7 @@
 - (id)initWithIdentifier:(NSUInteger)identifier {
     if ((self = [super init])) {
         identifier_ = identifier;
-        key_ = [NSString stringWithFormat:@"F%u", self.identifier, nil];
+        key_ = [NSString stringWithFormat:@"F%lu", (unsigned long)self.identifier, nil];
         self.label = self.key;
         self.lockable = YES;
         self.state = XMLIOItemStateUnknown;
@@ -31,6 +31,7 @@
 - (void)dealloc {
     [key_ release];
     self.label = nil;
+    [super dealloc];
 }
 
 @end
