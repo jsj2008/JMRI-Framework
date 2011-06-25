@@ -10,7 +10,7 @@
  THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 //
-//  JMRIXMLIOService.m
+//  XMLIOService.m
 //  NScaleApp
 //
 //  Created by Randall Wood on 4/5/2011.
@@ -19,72 +19,72 @@
 #import "JMRIXMLIOService.h"
 #import "JMRIXMLIOServiceHelper.h"
 
-NSString *const JMRIXMLIOTypeMemory = @"memory";
-NSString *const JMRIXMLIOTypeMetadata = @"metadata";
-NSString *const JMRIXMLIOTypePanel = @"panel";
-NSString *const JMRIXMLIOTypePower = @"power";
-NSString *const JMRIXMLIOTypeRoster = @"roster";
-NSString *const JMRIXMLIOTypeRoute = @"route";
-NSString *const JMRIXMLIOTypeSensor = @"sensor";
-NSString *const JMRIXMLIOTypeTurnout = @"turnout";
+NSString *const XMLIOTypeMemory = @"memory";
+NSString *const XMLIOTypeMetadata = @"metadata";
+NSString *const XMLIOTypePanel = @"panel";
+NSString *const XMLIOTypePower = @"power";
+NSString *const XMLIOTypeRoster = @"roster";
+NSString *const XMLIOTypeRoute = @"route";
+NSString *const XMLIOTypeSensor = @"sensor";
+NSString *const XMLIOTypeTurnout = @"turnout";
 
-NSString *const JMRIXMLIOItemComment = @"comment";
-NSString *const JMRIXMLIOItemInverted = @"inverted";
-NSString *const JMRIXMLIOItemName = @"name";
-NSString *const JMRIXMLIOItemType = @"type";
-NSString *const JMRIXMLIOItemUserName = @"userName";
-NSString *const JMRIXMLIOItemValue = @"value";
+NSString *const XMLIOItemComment = @"comment";
+NSString *const XMLIOItemInverted = @"inverted";
+NSString *const XMLIOItemName = @"name";
+NSString *const XMLIOItemType = @"type";
+NSString *const XMLIOItemUserName = @"userName";
+NSString *const XMLIOItemValue = @"value";
 
-NSString *const JMRIXMLIORosterDCCAddress = @"dccAddress";
-NSString *const JMRIXMLIORosterAddressLength = @"addressLength";
-NSString *const JMRIXMLIORosterRoadName = @"roadName";
-NSString *const JMRIXMLIORosterRoadNumber = @"roadNumber";
-NSString *const JMRIXMLIORosterMFG = @"mfg";
-NSString *const JMRIXMLIORosterModel = @"model";
-NSString *const JMRIXMLIORosterMaxSpeedPTC = @"maxSpeedPct";
-NSString *const JMRIXMLIORosterImageFileName = @"imageFileName";
-NSString *const JMRIXMLIORosterImageIconName = @"imageIconName";
-NSString *const JMRIXMLIORosterFunctions = @"functions";
+NSString *const XMLIORosterDCCAddress = @"dccAddress";
+NSString *const XMLIORosterAddressLength = @"addressLength";
+NSString *const XMLIORosterRoadName = @"roadName";
+NSString *const XMLIORosterRoadNumber = @"roadNumber";
+NSString *const XMLIORosterMFG = @"mfg";
+NSString *const XMLIORosterModel = @"model";
+NSString *const XMLIORosterMaxSpeedPTC = @"maxSpeedPct";
+NSString *const XMLIORosterImageFileName = @"imageFileName";
+NSString *const XMLIORosterImageIconName = @"imageIconName";
+NSString *const XMLIORosterFunctions = @"functions";
 
-NSString *const JMRIXMLIOThrottleAddress = @"address";
-NSString *const JMRIXMLIOThrottleForward = @"forward";
-NSString *const JMRIXMLIOThrottleSpeed = @"speed";
-NSString *const JMRIXMLIOThrottleF0 = @"F0";
-NSString *const JMRIXMLIOThrottleF1 = @"F1";
-NSString *const JMRIXMLIOThrottleF2 = @"F2";
-NSString *const JMRIXMLIOThrottleF3 = @"F3";
-NSString *const JMRIXMLIOThrottleF4 = @"F4";
-NSString *const JMRIXMLIOThrottleF5 = @"F5";
-NSString *const JMRIXMLIOThrottleF6 = @"F6";
-NSString *const JMRIXMLIOThrottleF7 = @"F7";
-NSString *const JMRIXMLIOThrottleF8 = @"F8";
-NSString *const JMRIXMLIOThrottleF9 = @"F9";
-NSString *const JMRIXMLIOThrottleF10 = @"F10";
-NSString *const JMRIXMLIOThrottleF11 = @"F11";
-NSString *const JMRIXMLIOThrottleF12 = @"F12";
+NSString *const XMLIOThrottleAddress = @"address";
+NSString *const XMLIOThrottleForward = @"forward";
+NSString *const XMLIOThrottleSpeed = @"speed";
+NSString *const XMLIOThrottleF0 = @"F0";
+NSString *const XMLIOThrottleF1 = @"F1";
+NSString *const XMLIOThrottleF2 = @"F2";
+NSString *const XMLIOThrottleF3 = @"F3";
+NSString *const XMLIOThrottleF4 = @"F4";
+NSString *const XMLIOThrottleF5 = @"F5";
+NSString *const XMLIOThrottleF6 = @"F6";
+NSString *const XMLIOThrottleF7 = @"F7";
+NSString *const XMLIOThrottleF8 = @"F8";
+NSString *const XMLIOThrottleF9 = @"F9";
+NSString *const XMLIOThrottleF10 = @"F10";
+NSString *const XMLIOThrottleF11 = @"F11";
+NSString *const XMLIOThrottleF12 = @"F12";
 
 // Well known sensor and memory names
-NSString *const JMRIXMLIOMemoryCurrentTime = @"IMCURRENTTIME";
-NSString *const JMRIXMLIOMemoryRateFactor = @"IMRATEFACTOR";
-NSString *const JMRIXMLIOMetadataJMRIVersion = @"JMRIVERSION";
-NSString *const JMRIXMLIOMetadataJVMVendor = @"JVMVENDOR";
-NSString *const JMRIXMLIOMetadataJVMVersion = @"JVMVERSION";
-NSString *const JMRIXMLIOSensorClockRunning = @"ISCLOCKRUNNING";
+NSString *const XMLIOMemoryCurrentTime = @"IMCURRENTTIME";
+NSString *const XMLIOMemoryRateFactor = @"IMRATEFACTOR";
+NSString *const XMLIOMetadataJMRIVersion = @"JMRIVERSION";
+NSString *const XMLIOMetadataJVMVendor = @"JVMVENDOR";
+NSString *const XMLIOMetadataJVMVersion = @"JVMVERSION";
+NSString *const XMLIOSensorClockRunning = @"ISCLOCKRUNNING";
 
 // NSNotification posting
-NSString *const JMRIXMLIOServiceDidListItems = @"JMRIXMLIOServiceDidListItems";
-NSString *const JMRIXMLIOServiceDidReadItem = @"JMRIXMLIOServiceDidReadItem";
-NSString *const JMRIXMLIOServiceDidWriteItem = @"JMRIXMLIOServiceDidWriteItem";
-NSString *const JMRIXMLIOItemsListKey = @"JMRIXMLIOItemsListKey";
-NSString *const JMRIXMLIOItemKey = @"JMRIXMLIOItemKey";
-NSString *const JMRIXMLIOItemNameKey = @"JMRIXMLIOItemNameKey";
-NSString *const JMRIXMLIOItemTypeKey = @"JMRIXMLIOItemTypeKey";
-NSString *const JMRIXMLIOItemValueKey = @"JMRIXMLIOItemValueKey";
+NSString *const XMLIOServiceDidListItems = @"XMLIOServiceDidListItems";
+NSString *const XMLIOServiceDidReadItem = @"XMLIOServiceDidReadItem";
+NSString *const XMLIOServiceDidWriteItem = @"XMLIOServiceDidWriteItem";
+NSString *const XMLIOItemsListKey = @"XMLIOItemsListKey";
+NSString *const XMLIOItemKey = @"XMLIOItemKey";
+NSString *const XMLIOItemNameKey = @"XMLIOItemNameKey";
+NSString *const XMLIOItemTypeKey = @"XMLIOItemTypeKey";
+NSString *const XMLIOItemValueKey = @"XMLIOItemValueKey";
 
 #pragma mark -
 #pragma mark Private interface
 
-@interface JMRIXMLIOService () <JMRIXMLIOServiceHelperDelegate>
+@interface XMLIOService () <XMLIOServiceHelperDelegate>
 
 - (void)conductOperation:(NSUInteger)operation 
 		   withXMLString:(NSString *)query 
@@ -95,7 +95,7 @@ NSString *const JMRIXMLIOItemValueKey = @"JMRIXMLIOItemValueKey";
 
 #pragma mark -
 
-@implementation JMRIXMLIOService
+@implementation XMLIOService
 
 #pragma mark -
 #pragma mark Properties
@@ -121,7 +121,7 @@ NSString *const JMRIXMLIOItemValueKey = @"JMRIXMLIOItemValueKey";
 
 - (BOOL)testConnection {
 	if (self.port) {
-		[self readItem:JMRIXMLIOMetadataJMRIVersion ofType:JMRIXMLIOTypeMetadata];
+		[self readItem:XMLIOMetadataJMRIVersion ofType:XMLIOTypeMetadata];
 		return YES;
 	}
 	return NO;
@@ -144,7 +144,7 @@ NSString *const JMRIXMLIOItemValueKey = @"JMRIXMLIOItemValueKey";
 		if (self.logTraffic) {
 			NSLog(@"Sending %@ to %@", [NSString stringWithUTF8String:[[request HTTPBody] bytes]], self.url);
 		}
-		JMRIXMLIOServiceHelper *helper = [[JMRIXMLIOServiceHelper alloc] init];
+		XMLIOServiceHelper *helper = [[XMLIOServiceHelper alloc] init];
 		helper.request = request;
 		helper.delegate = self;
 		helper.name = aName;
@@ -155,44 +155,44 @@ NSString *const JMRIXMLIOItemValueKey = @"JMRIXMLIOItemValueKey";
 		if (connection) {
 			connections++;
 			if (self.logTraffic) {
-				NSLog(@"JMRIXMLIOService opened new connection. %i connections are open.", connections);
+				NSLog(@"XMLIOService opened new connection. %i connections are open.", connections);
 			}
-			if ([self.delegate respondsToSelector:@selector(JMRIXMLIOService:didConnectWithRequest:)]) {
-				[self.delegate JMRIXMLIOService:self didConnectWithRequest:request];
+			if ([self.delegate respondsToSelector:@selector(XMLIOService:didConnectWithRequest:)]) {
+				[self.delegate XMLIOService:self didConnectWithRequest:request];
 			}
 		} else { // failed to create NSURLConnection object
-			[self.delegate JMRIXMLIOService:self didFailWithError:[NSError errorWithDomain:@"JMRIErrorDomain" code:1027 userInfo:nil]];
+			[self.delegate XMLIOService:self didFailWithError:[NSError errorWithDomain:@"JMRIErrorDomain" code:1027 userInfo:nil]];
 		}
 	} else if (!self.url) { // did not resolve
-		[self.delegate JMRIXMLIOService:self didFailWithError:[NSError errorWithDomain:@"JMRIErrorDomain" code:1025 userInfo:nil]];
+		[self.delegate XMLIOService:self didFailWithError:[NSError errorWithDomain:@"JMRIErrorDomain" code:1025 userInfo:nil]];
 	} else { // open connection
-		[self.delegate JMRIXMLIOService:self didFailWithError:[NSError errorWithDomain:@"JMRIErrorDomain" code:1026 userInfo:nil]];
+		[self.delegate XMLIOService:self didFailWithError:[NSError errorWithDomain:@"JMRIErrorDomain" code:1026 userInfo:nil]];
 	}
 }
 
 - (void)list:(NSString *)type {
-		[self conductOperation:JMRIXMLIOOperationList
+		[self conductOperation:XMLIOOperationList
 				 withXMLString:[NSString stringWithFormat:@"<list><type>%@</type></list>", type]
 					  withType:type
 					  withName:nil];
 }
 
 - (void)readItem:(NSString *)name ofType:(NSString *)type {
-	[self conductOperation:JMRIXMLIOOperationRead
+	[self conductOperation:XMLIOOperationRead
 			 withXMLString:[NSString stringWithFormat:@"<item><type>%@</type><name>%@</name></item>", type, name]
 				  withType:type
 				  withName:name];
 }
 
 - (void)readItem:(NSString *)name ofType:(NSString *)type initialValue:(NSString *)value {
-	[self conductOperation:JMRIXMLIOOperationRead
+	[self conductOperation:XMLIOOperationRead
 			 withXMLString:[NSString stringWithFormat:@"<item><type>%@</type><name>%@</name><value>%@</value></item>", type, name, value]
 				  withType:type
 				  withName:name];
 }
 
 - (void)writeItem:(NSString *)name ofType:(NSString *)type value:(NSString *)value {
-	[self conductOperation:JMRIXMLIOOperationWrite
+	[self conductOperation:XMLIOOperationWrite
 			 withXMLString:[NSString stringWithFormat:@"<item><type>%@</type><name>%@</name><set>%@</set></item>", type, name, value]
 				  withType:type
 				  withName:name];
@@ -216,85 +216,85 @@ NSString *const JMRIXMLIOItemValueKey = @"JMRIXMLIOItemValueKey";
 #pragma mark -
 #pragma mark JMRI XMLIO service helper delegate
 
-- (void)JMRIXMLIOServiceHelper:(JMRIXMLIOServiceHelper *)helper didFailWithError:(NSError *)error {
+- (void)XMLIOServiceHelper:(XMLIOServiceHelper *)helper didFailWithError:(NSError *)error {
 	connections--;
 	if ([error code] == NSURLErrorTimedOut &&
 		[monitoredItems containsObject:[helper.name stringByAppendingString:helper.type]]) {
 		[self readItem:helper.name ofType:helper.type];
 	}
-	if ([self.delegate respondsToSelector:@selector(JMRIXMLIOService:didFailWithError:)]) {
-		[self.delegate JMRIXMLIOService:self didFailWithError:error];
+	if ([self.delegate respondsToSelector:@selector(XMLIOService:didFailWithError:)]) {
+		[self.delegate XMLIOService:self didFailWithError:error];
 	}
 	if (self.logTraffic) {
-		NSLog(@"JMRIXMLIOService connection failed. %i connections remain open.", connections);
+		NSLog(@"XMLIOService connection failed. %i connections remain open.", connections);
 	}
 }
 
-- (void)JMRIXMLIOServiceHelper:(JMRIXMLIOServiceHelper *)helper didListItems:(NSArray *)items ofType:(NSString *)type {
-	if ([self.delegate respondsToSelector:@selector(JMRIXMLIOService:didListItems:ofType:)]) {
-		[self.delegate JMRIXMLIOService:self didListItems:items ofType:type];
+- (void)XMLIOServiceHelper:(XMLIOServiceHelper *)helper didListItems:(NSArray *)items ofType:(NSString *)type {
+	if ([self.delegate respondsToSelector:@selector(XMLIOService:didListItems:ofType:)]) {
+		[self.delegate XMLIOService:self didListItems:items ofType:type];
 	}
-	[[NSNotificationCenter defaultCenter] postNotificationName:JMRIXMLIOServiceDidListItems
+	[[NSNotificationCenter defaultCenter] postNotificationName:XMLIOServiceDidListItems
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
-																items, JMRIXMLIOItemsListKey,
-																type, JMRIXMLIOItemTypeKey,
+																items, XMLIOItemsListKey,
+																type, XMLIOItemTypeKey,
 																nil]];
 }
 
-- (void)JMRIXMLIOServiceHelper:(JMRIXMLIOServiceHelper *)helper didReadItem:(JMRIXMLIOItem *)item withName:(NSString *)name ofType:(NSString *)type withValue:(NSString *)value {
-	if ([self.delegate respondsToSelector:@selector(JMRIXMLIOService:didReadItem:withName:ofType:withValue:)]) {
-		[self.delegate JMRIXMLIOService:self didReadItem:item withName:name ofType:type withValue:value];
+- (void)XMLIOServiceHelper:(XMLIOServiceHelper *)helper didReadItem:(XMLIOItem *)item withName:(NSString *)name ofType:(NSString *)type withValue:(NSString *)value {
+	if ([self.delegate respondsToSelector:@selector(XMLIOService:didReadItem:withName:ofType:withValue:)]) {
+		[self.delegate XMLIOService:self didReadItem:item withName:name ofType:type withValue:value];
 	}
 	if ([monitoredItems containsObject:[name stringByAppendingString:type]]) {
 		[self readItem:name ofType:type initialValue:value];
 	}
 	if (value) {
-		[[NSNotificationCenter defaultCenter] postNotificationName:JMRIXMLIOServiceDidReadItem
+		[[NSNotificationCenter defaultCenter] postNotificationName:XMLIOServiceDidReadItem
 															object:self
 														  userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
-																	item, JMRIXMLIOItemKey,
-																	name, JMRIXMLIOItemNameKey,
-																	type, JMRIXMLIOItemTypeKey,
-																	value, JMRIXMLIOItemValueKey,
+																	item, XMLIOItemKey,
+																	name, XMLIOItemNameKey,
+																	type, XMLIOItemTypeKey,
+																	value, XMLIOItemValueKey,
 																	nil]];
 	}
-    if ([name isEqualToString:JMRIXMLIOMetadataJMRIVersion] && value) {
+    if ([name isEqualToString:XMLIOMetadataJMRIVersion] && value) {
         version_ = value;
     }
 }
 
-- (void)JMRIXMLIOServiceHelper:(JMRIXMLIOServiceHelper *)helper didWriteItem:(JMRIXMLIOItem *)item withName:(NSString *)name ofType:(NSString *)type withValue:(NSString *)value {
-	if ([self.delegate respondsToSelector:@selector(JMRIXMLIOService:didWriteItem:ofType:withValue:)]) {
-		[self.delegate JMRIXMLIOService:self didWriteItem:item withName:name ofType:type withValue:value];
+- (void)XMLIOServiceHelper:(XMLIOServiceHelper *)helper didWriteItem:(XMLIOItem *)item withName:(NSString *)name ofType:(NSString *)type withValue:(NSString *)value {
+	if ([self.delegate respondsToSelector:@selector(XMLIOService:didWriteItem:ofType:withValue:)]) {
+		[self.delegate XMLIOService:self didWriteItem:item withName:name ofType:type withValue:value];
 	}
 	if (value) {
-		[[NSNotificationCenter defaultCenter] postNotificationName:JMRIXMLIOServiceDidWriteItem
+		[[NSNotificationCenter defaultCenter] postNotificationName:XMLIOServiceDidWriteItem
 															object:self
 														  userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
-																	item, JMRIXMLIOItemKey,
-																	name, JMRIXMLIOItemNameKey,
-																	type, JMRIXMLIOItemTypeKey,
-																	value, JMRIXMLIOItemValueKey,
+																	item, XMLIOItemKey,
+																	name, XMLIOItemNameKey,
+																	type, XMLIOItemTypeKey,
+																	value, XMLIOItemValueKey,
 																	nil]];
-		[[NSNotificationCenter defaultCenter] postNotificationName:JMRIXMLIOServiceDidReadItem
+		[[NSNotificationCenter defaultCenter] postNotificationName:XMLIOServiceDidReadItem
 															object:self
 														  userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
-																	item, JMRIXMLIOItemKey,
-																	name, JMRIXMLIOItemNameKey,
-																	type, JMRIXMLIOItemTypeKey,
-																	value, JMRIXMLIOItemValueKey,
+																	item, XMLIOItemKey,
+																	name, XMLIOItemNameKey,
+																	type, XMLIOItemTypeKey,
+																	value, XMLIOItemValueKey,
 																	nil]];
 	}
 }
 
-- (void)JMRIXMLIOServiceHelperDidFinishLoading:(JMRIXMLIOServiceHelper *)helper {
+- (void)XMLIOServiceHelperDidFinishLoading:(XMLIOServiceHelper *)helper {
 	connections--;
-	if ([self.delegate respondsToSelector:@selector(JMRIXMLIOServiceDidFinishLoading:)]) {
-		[self.delegate JMRIXMLIOServiceDidFinishLoading:self];
+	if ([self.delegate respondsToSelector:@selector(XMLIOServiceDidFinishLoading:)]) {
+		[self.delegate XMLIOServiceDidFinishLoading:self];
 	}
 	if (self.logTraffic) {
-		NSLog(@"JMRIXMLIOService has just closed a connection. %i connections remain open.", connections);
+		NSLog(@"XMLIOService has just closed a connection. %i connections remain open.", connections);
 	}
 }
 

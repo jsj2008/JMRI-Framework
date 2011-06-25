@@ -10,7 +10,7 @@
  THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 //
-//  JMRIXMLIOObject.h
+//  XMLIOObject.h
 //  JMRI Framework
 //
 //  Created by Randall Wood on 31/5/2011.
@@ -19,15 +19,15 @@
 #import <Foundation/Foundation.h>
 
 
-@interface JMRIXMLIOObject : NSObject {
+@interface XMLIOObject : NSObject {
 
 }
 
-// JMRIXMLIOObject contains properties needed to parse XML correctly
+// XMLIOObject contains properties needed to parse XML correctly
 // Subclasses contain properties specific to the subclass
 @property (retain) NSString *XMLName;
 @property (retain) NSString *text;
-@property (retain) JMRIXMLIOObject *parent;
+@property (retain) XMLIOObject *parent;
 @property (retain) NSMutableArray *children;
 @property (retain) NSMutableDictionary *attributes;
 

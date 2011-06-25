@@ -10,7 +10,7 @@
  THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 //
-//  JMRIXMLIOServiceHelper.m
+//  XMLIOServiceHelper.m
 //  JMRI Framework
 //
 //  Created by Randall Wood on 14/5/2011.
@@ -23,19 +23,19 @@
 #import "JMRIXMLIOThrottle.h"
 
 // XMLIO Types
-NSString *const JMRIXMLIOXMLXMLIO = @"xmlio";
-NSString *const JMRIXMLIOXMLItem = @"item";
-NSString *const JMRIXMLIOXMLThrottle = @"throttle";
+NSString *const XMLIOXMLXMLIO = @"xmlio";
+NSString *const XMLIOXMLItem = @"item";
+NSString *const XMLIOXMLThrottle = @"throttle";
 
 // XMLIO Roster elements that are implemented differently in the Objective-C classes
-NSString *const JMRIXMLIORosterFunctionLabels = @"functionLabels";
-NSString *const JMRIXMLIORosterFunctionLockables = @"functionLockables";
+NSString *const XMLIORosterFunctionLabels = @"functionLabels";
+NSString *const XMLIORosterFunctionLockables = @"functionLockables";
 
 // Javaisms
 NSString *const JavaYES = @"true"; // java.lang.Boolean.toString returns "true" for YES
 NSString *const JavaNO = @"false"; // java.lang.Boolean.toString returns "false" for NO
 
-@implementation JMRIXMLIOServiceHelper
+@implementation XMLIOServiceHelper
 
 #pragma mark -
 #pragma mark Properties
@@ -74,8 +74,8 @@ NSString *const JavaNO = @"false"; // java.lang.Boolean.toString returns "false"
     NSLog(@"Connection failed! Error - %@ %@",
           [error localizedDescription],
           [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
-	if ([self.delegate respondsToSelector:@selector(JMRIXMLIOServiceHelper:didFailWithError:)]) {
-		[self.delegate JMRIXMLIOServiceHelper:self didFailWithError:error];
+	if ([self.delegate respondsToSelector:@selector(XMLIOServiceHelper:didFailWithError:)]) {
+		[self.delegate XMLIOServiceHelper:self didFailWithError:error];
 	}
 	// connection is autoreleased, so ignore it.
 }
@@ -85,8 +85,8 @@ NSString *const JavaNO = @"false"; // java.lang.Boolean.toString returns "false"
 	if ([self.delegate logTraffic]) {
 		NSLog(@"Received: %@", [NSString stringWithUTF8String:[connectionData bytes]]);
 	}
-	if ([self.delegate respondsToSelector:@selector(JMRIXMLIOServiceHelperDidFinishLoading:)]) {
-		[self.delegate JMRIXMLIOServiceHelperDidFinishLoading:self];
+	if ([self.delegate respondsToSelector:@selector(XMLIOServiceHelperDidFinishLoading:)]) {
+		[self.delegate XMLIOServiceHelperDidFinishLoading:self];
 	}
 	@synchronized(parser) {
 		parser = [[NSXMLParser alloc] initWithData:connectionData];
@@ -111,19 +111,19 @@ NSString *const JavaNO = @"false"; // java.lang.Boolean.toString returns "false"
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
 	switch (operation) {
-		case JMRIXMLIOOperationList:
-			if ([self.delegate respondsToSelector:@selector(JMRIXMLIOServiceHelper:didListItems:ofType:)]) {
-				[self.delegate JMRIXMLIOServiceHelper:self didListItems:[items allValues] ofType:type];
+		case XMLIOOperationList:
+			if ([self.delegate respondsToSelector:@selector(XMLIOServiceHelper:didListItems:ofType:)]) {
+				[self.delegate XMLIOServiceHelper:self didListItems:[items allValues] ofType:type];
 			}
 			break;
-		case JMRIXMLIOOperationRead:
-			if ([self.delegate respondsToSelector:@selector(JMRIXMLIOServiceHelper:didReadItem:withName:ofType:withValue:)]) {
-				[self.delegate JMRIXMLIOServiceHelper:self didReadItem:[items objectForKey:name] withName:name ofType:type withValue:[[items objectForKey:name] valueForKey:JMRIXMLIOItemValue]];
+		case XMLIOOperationRead:
+			if ([self.delegate respondsToSelector:@selector(XMLIOServiceHelper:didReadItem:withName:ofType:withValue:)]) {
+				[self.delegate XMLIOServiceHelper:self didReadItem:[items objectForKey:name] withName:name ofType:type withValue:[[items objectForKey:name] valueForKey:XMLIOItemValue]];
 			}
 			break;
-		case JMRIXMLIOOperationWrite:
-			if ([self.delegate respondsToSelector:@selector(JMRIXMLIOServiceHelper:didWriteItem:ofType:withValue:)]) {
-				[self.delegate JMRIXMLIOServiceHelper:self didWriteItem:[items objectForKey:name] withName:name ofType:type withValue:[[items objectForKey:name] valueForKey:JMRIXMLIOItemValue]];
+		case XMLIOOperationWrite:
+			if ([self.delegate respondsToSelector:@selector(XMLIOServiceHelper:didWriteItem:ofType:withValue:)]) {
+				[self.delegate XMLIOServiceHelper:self didWriteItem:[items objectForKey:name] withName:name ofType:type withValue:[[items objectForKey:name] valueForKey:XMLIOItemValue]];
 			}
 			break;
 	}
@@ -131,18 +131,18 @@ NSString *const JavaNO = @"false"; // java.lang.Boolean.toString returns "false"
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict {
     if (rootElement == nil) {
-        JMRIXMLIOObject *root = [[JMRIXMLIOObject alloc] init];
+        XMLIOObject *root = [[XMLIOObject alloc] init];
         rootElement = root;
         currentElement = root;
         [root release];
     } else {
-        JMRIXMLIOObject *newElement;
-        if ([elementName isEqualToString:JMRIXMLIOXMLItem]) {
-            newElement = [[JMRIXMLIOItem alloc] init];
-        } else if ([elementName isEqualToString:JMRIXMLIOXMLThrottle]) {
-            newElement = [[JMRIXMLIOThrottle alloc] init];
+        XMLIOObject *newElement;
+        if ([elementName isEqualToString:XMLIOXMLItem]) {
+            newElement = [[XMLIOItem alloc] init];
+        } else if ([elementName isEqualToString:XMLIOXMLThrottle]) {
+            newElement = [[XMLIOThrottle alloc] init];
         } else {
-            newElement = [[JMRIXMLIOObject alloc] init];
+            newElement = [[XMLIOObject alloc] init];
         }
         newElement.parent = currentElement;
         [currentElement.children addObject:newElement];
@@ -158,32 +158,32 @@ NSString *const JavaNO = @"false"; // java.lang.Boolean.toString returns "false"
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
     if (currentElement) {
         if (currentElement.parent) {
-            JMRIXMLIOObject *parent;
-            if ([currentElement.parent isMemberOfClass:[JMRIXMLIOThrottle class]]) {
-                parent = (JMRIXMLIOThrottle *)currentElement.parent;
+            XMLIOObject *parent;
+            if ([currentElement.parent isMemberOfClass:[XMLIOThrottle class]]) {
+                parent = (XMLIOThrottle *)currentElement.parent;
             } else {
-                parent = (JMRIXMLIOItem *)currentElement.parent;
+                parent = (XMLIOItem *)currentElement.parent;
             }
-            if ([currentElement.parent isKindOfClass:[JMRIXMLIOObject class]]) {
-                if ([currentElement.XMLName isEqualToString:JMRIXMLIORosterDCCAddress]) {
-                    [(JMRIXMLIORoster *)parent setDccAddress:[currentElement.text integerValue]];
-                } else if ([currentElement.XMLName isEqualToString:JMRIXMLIORosterRoadNumber]) {
-                    [(JMRIXMLIORoster *)parent setRoadNumber:[currentElement.text integerValue]];
-                } else if ([currentElement.XMLName isEqualToString:JMRIXMLIORosterMaxSpeedPct]) {
-                    [(JMRIXMLIORoster *)parent setMaxSpeedPct:[currentElement.text floatValue]];
-                } else if ([currentElement.XMLName isEqualToString:JMRIXMLIOItemInverted]) {
-                    [(JMRIXMLIOItem *)parent setInverted:[currentElement.text isEqualToString:JavaYES]];
-                } else if (![currentElement.XMLName isEqualToString:JMRIXMLIORosterFunctionLabels] &&
-                    ![currentElement.XMLName isEqualToString:JMRIXMLIORosterFunctionLockables]) {
+            if ([currentElement.parent isKindOfClass:[XMLIOObject class]]) {
+                if ([currentElement.XMLName isEqualToString:XMLIORosterDCCAddress]) {
+                    [(XMLIORoster *)parent setDccAddress:[currentElement.text integerValue]];
+                } else if ([currentElement.XMLName isEqualToString:XMLIORosterRoadNumber]) {
+                    [(XMLIORoster *)parent setRoadNumber:[currentElement.text integerValue]];
+                } else if ([currentElement.XMLName isEqualToString:XMLIORosterMaxSpeedPct]) {
+                    [(XMLIORoster *)parent setMaxSpeedPct:[currentElement.text floatValue]];
+                } else if ([currentElement.XMLName isEqualToString:XMLIOItemInverted]) {
+                    [(XMLIOItem *)parent setInverted:[currentElement.text isEqualToString:JavaYES]];
+                } else if (![currentElement.XMLName isEqualToString:XMLIORosterFunctionLabels] &&
+                    ![currentElement.XMLName isEqualToString:XMLIORosterFunctionLockables]) {
                     [parent setValue:currentElement.text forKey:elementName];
                 }
-            } else if ([parent.XMLName isEqualToString:JMRIXMLIORosterFunctionLabels] ||
-                       [parent.XMLName isEqualToString:JMRIXMLIORosterFunctionLockables]) {
-                JMRIXMLIORoster *roster = (JMRIXMLIORoster *)parent.parent;
+            } else if ([parent.XMLName isEqualToString:XMLIORosterFunctionLabels] ||
+                       [parent.XMLName isEqualToString:XMLIORosterFunctionLockables]) {
+                XMLIORoster *roster = (XMLIORoster *)parent.parent;
                 NSUInteger i = [[elementName substringFromIndex:1] integerValue];
                 NSString *label = [roster labelForFunction:i];
                 BOOL lockable = [roster lockableForFunction:i];
-                if ([parent.XMLName isEqualToString:JMRIXMLIORosterFunctionLabels]) {
+                if ([parent.XMLName isEqualToString:XMLIORosterFunctionLabels]) {
                     label = currentElement.text;
                 } else {
                     lockable = [currentElement.text boolValue];
@@ -196,11 +196,11 @@ NSString *const JavaNO = @"false"; // java.lang.Boolean.toString returns "false"
                                                                         nil]];
             }
             if (rootElement == currentElement.parent) {
-                [items setObject:currentElement forKey:[(JMRIXMLIOItem *)currentElement name]];
+                [items setObject:currentElement forKey:[(XMLIOItem *)currentElement name]];
             }
         }
-        if ([currentElement isMemberOfClass:[JMRIXMLIORoster class]]) {
-            [(JMRIXMLIORoster *)currentElement setUserName:[[(JMRIXMLIORoster *)currentElement roadName] stringByAppendingFormat:@" %u", [(JMRIXMLIORoster *)currentElement roadNumber], nil]];
+        if ([currentElement isMemberOfClass:[XMLIORoster class]]) {
+            [(XMLIORoster *)currentElement setUserName:[[(XMLIORoster *)currentElement roadName] stringByAppendingFormat:@" %u", [(XMLIORoster *)currentElement roadNumber], nil]];
         }
         currentElement = currentElement.parent;
     }
@@ -222,8 +222,8 @@ NSString *const JavaNO = @"false"; // java.lang.Boolean.toString returns "false"
 		  [[parser parserError] localizedDescription],
 		  [parser lineNumber],
 		  [parser columnNumber]);
-	if ([self.delegate respondsToSelector:@selector(JMRIXMLIOServiceHelper:didFailWithError:)]) {
-		[self.delegate JMRIXMLIOServiceHelper:self didFailWithError:parseError];
+	if ([self.delegate respondsToSelector:@selector(XMLIOServiceHelper:didFailWithError:)]) {
+		[self.delegate XMLIOServiceHelper:self didFailWithError:parseError];
 	}
 }
 

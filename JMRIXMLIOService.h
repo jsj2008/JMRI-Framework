@@ -10,7 +10,7 @@
  THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 //
-//  JMRIXMLIOService.h
+//  XMLIOService.h
 //  NScaleApp
 //
 //  Created by Randall Wood on 4/5/2011.
@@ -20,96 +20,96 @@
 #import "JMRIXMLIOItem.h"
 
 // JMRI XMLIO item types
-extern NSString *const JMRIXMLIOTypeMemory;
-extern NSString *const JMRIXMLIOTypeMetadata;
-extern NSString *const JMRIXMLIOTypePanel;
-extern NSString *const JMRIXMLIOTypePower;
-extern NSString *const JMRIXMLIOTypeRoster;
-extern NSString *const JMRIXMLIOTypeRoute;
-extern NSString *const JMRIXMLIOTypeSensor;
-extern NSString *const JMRIXMLIOTypeTurnout;
+extern NSString *const XMLIOTypeMemory;
+extern NSString *const XMLIOTypeMetadata;
+extern NSString *const XMLIOTypePanel;
+extern NSString *const XMLIOTypePower;
+extern NSString *const XMLIOTypeRoster;
+extern NSString *const XMLIOTypeRoute;
+extern NSString *const XMLIOTypeSensor;
+extern NSString *const XMLIOTypeTurnout;
 
 // JMRI XMLIO item attributes
-extern NSString *const JMRIXMLIOItemComment;
-extern NSString *const JMRIXMLIOItemInverted;
-extern NSString *const JMRIXMLIOItemName;
-extern NSString *const JMRIXMLIOItemType;
-extern NSString *const JMRIXMLIOItemUserName;
-extern NSString *const JMRIXMLIOItemValue;
+extern NSString *const XMLIOItemComment;
+extern NSString *const XMLIOItemInverted;
+extern NSString *const XMLIOItemName;
+extern NSString *const XMLIOItemType;
+extern NSString *const XMLIOItemUserName;
+extern NSString *const XMLIOItemValue;
 
 // JMRI XMLIO roster attributes
-extern NSString *const JMRIXMLIORosterDCCAddress;
-extern NSString *const JMRIXMLIORosterAddressLength;
-extern NSString *const JMRIXMLIORosterRoadName;
-extern NSString *const JMRIXMLIORosterRoadNumber;
-extern NSString *const JMRIXMLIORosterMFG;
-extern NSString *const JMRIXMLIORosterModel;
-extern NSString *const JMRIXMLIORosterMaxSpeedPct;
-extern NSString *const JMRIXMLIORosterImageFileName;
-extern NSString *const JMRIXMLIORosterImageIconName;
-extern NSString *const JMRIXMLIORosterFunctions;
+extern NSString *const XMLIORosterDCCAddress;
+extern NSString *const XMLIORosterAddressLength;
+extern NSString *const XMLIORosterRoadName;
+extern NSString *const XMLIORosterRoadNumber;
+extern NSString *const XMLIORosterMFG;
+extern NSString *const XMLIORosterModel;
+extern NSString *const XMLIORosterMaxSpeedPct;
+extern NSString *const XMLIORosterImageFileName;
+extern NSString *const XMLIORosterImageIconName;
+extern NSString *const XMLIORosterFunctions;
 
 // JMRI XMLIO throttle attributes
-extern NSString *const JMRIXMLIOThrottleAddress;
-extern NSString *const JMRIXMLIOThrottleForward;
-extern NSString *const JMRIXMLIOThrottleSpeed;
-extern NSString *const JMRIXMLIOThrottleF0;
-extern NSString *const JMRIXMLIOThrottleF1;
-extern NSString *const JMRIXMLIOThrottleF2;
-extern NSString *const JMRIXMLIOThrottleF3;
-extern NSString *const JMRIXMLIOThrottleF4;
-extern NSString *const JMRIXMLIOThrottleF5;
-extern NSString *const JMRIXMLIOThrottleF6;
-extern NSString *const JMRIXMLIOThrottleF7;
-extern NSString *const JMRIXMLIOThrottleF8;
-extern NSString *const JMRIXMLIOThrottleF9;
-extern NSString *const JMRIXMLIOThrottleF10;
-extern NSString *const JMRIXMLIOThrottleF11;
-extern NSString *const JMRIXMLIOThrottleF12;
+extern NSString *const XMLIOThrottleAddress;
+extern NSString *const XMLIOThrottleForward;
+extern NSString *const XMLIOThrottleSpeed;
+extern NSString *const XMLIOThrottleF0;
+extern NSString *const XMLIOThrottleF1;
+extern NSString *const XMLIOThrottleF2;
+extern NSString *const XMLIOThrottleF3;
+extern NSString *const XMLIOThrottleF4;
+extern NSString *const XMLIOThrottleF5;
+extern NSString *const XMLIOThrottleF6;
+extern NSString *const XMLIOThrottleF7;
+extern NSString *const XMLIOThrottleF8;
+extern NSString *const XMLIOThrottleF9;
+extern NSString *const XMLIOThrottleF10;
+extern NSString *const XMLIOThrottleF11;
+extern NSString *const XMLIOThrottleF12;
 
 // JMRI XMLIO common names
-extern NSString *const JMRIXMLIOMemoryCurrentTime;
-extern NSString *const JMRIXMLIOMemoryRateFactor;
-extern NSString *const JMRIXMLIOMetadataJMRIVersion;
-extern NSString *const JMRIXMLIOMetadataJVMVendor;
-extern NSString *const JMRIXMLIOMetadataJVMVersion;
-extern NSString *const JMRIXMLIOSensorClockRunning;
+extern NSString *const XMLIOMemoryCurrentTime;
+extern NSString *const XMLIOMemoryRateFactor;
+extern NSString *const XMLIOMetadataJMRIVersion;
+extern NSString *const XMLIOMetadataJVMVendor;
+extern NSString *const XMLIOMetadataJVMVersion;
+extern NSString *const XMLIOSensorClockRunning;
 
 // NSNotification userInfo keys
-extern NSString *const JMRIXMLIOServiceDidListItems;
-extern NSString *const JMRIXMLIOServiceDidReadItem;
-extern NSString *const JMRIXMLIOServiceDidWriteItem;
-extern NSString *const JMRIXMLIOItemsListKey;
-extern NSString *const JMRIXMLIOItemKey;
-extern NSString *const JMRIXMLIOItemNameKey;
-extern NSString *const JMRIXMLIOItemTypeKey;
-extern NSString *const JMRIXMLIOItemValueKey;
+extern NSString *const XMLIOServiceDidListItems;
+extern NSString *const XMLIOServiceDidReadItem;
+extern NSString *const XMLIOServiceDidWriteItem;
+extern NSString *const XMLIOItemsListKey;
+extern NSString *const XMLIOItemKey;
+extern NSString *const XMLIOItemNameKey;
+extern NSString *const XMLIOItemTypeKey;
+extern NSString *const XMLIOItemValueKey;
 
 typedef enum {
-	JMRIXMLIOOperationNone = 0,
-	JMRIXMLIOOperationList,
-	JMRIXMLIOOperationRead,
-	JMRIXMLIOOperationWrite,
-	JMRIXMLIOOperationTest
-} JMRIXMLIOOperationType;
+	XMLIOOperationNone = 0,
+	XMLIOOperationList,
+	XMLIOOperationRead,
+	XMLIOOperationWrite,
+	XMLIOOperationTest
+} XMLIOOperationType;
 
 typedef enum {
-	JMRIXMLIOItemStateUnknown = 0,
-	JMRIXMLIOItemStateActive = 2,
-	JMRIXMLIOItemStateInactive = 4,
-	JMRIXMLIOItemStateInconsistent = 8
-} JMRIXMLIOItemStates;
+	XMLIOItemStateUnknown = 0,
+	XMLIOItemStateActive = 2,
+	XMLIOItemStateInactive = 4,
+	XMLIOItemStateInconsistent = 8
+} XMLIOItemStates;
 
 typedef enum {
-	JMRIXMLIOPowerStateUnknown = 0,
-	JMRIXMLIOPowerStateOn = 2,
-	JMRIXMLIOPowerStateOff = 4
-} JMRIXMLIOPowerStates;
+	XMLIOPowerStateUnknown = 0,
+	XMLIOPowerStateOn = 2,
+	XMLIOPowerStateOff = 4
+} XMLIOPowerStates;
 
-@protocol JMRIXMLIOServiceDelegate;
-@protocol JMRIXMLIOServiceHelperDelegate;
+@protocol XMLIOServiceDelegate;
+@protocol XMLIOServiceHelperDelegate;
 
-@interface JMRIXMLIOService : JMRINetService {
+@interface XMLIOService : JMRINetService {
 
 	NSUInteger connections;
 	NSMutableSet *monitoredItems;
@@ -140,20 +140,20 @@ typedef enum {
 #pragma mark -
 #pragma mark Delegate protocol
 
-@protocol JMRIXMLIOServiceDelegate <JMRINetServiceDelegate>
+@protocol XMLIOServiceDelegate <JMRINetServiceDelegate>
 
 #pragma mark Required Methods
 
 @required
-- (void)JMRIXMLIOService:(JMRIXMLIOService *)service didFailWithError:(NSError *)error;
+- (void)XMLIOService:(XMLIOService *)service didFailWithError:(NSError *)error;
 
 #pragma mark Optional Methods
 
 @optional
-- (void)JMRIXMLIOService:(JMRIXMLIOService *)service didListItems:(NSArray *)items ofType:(NSString *)type;
-- (void)JMRIXMLIOService:(JMRIXMLIOService *)service didReadItem:(JMRIXMLIOItem *)item withName:(NSString *)name ofType:(NSString *)type withValue:(NSString *)value;
-- (void)JMRIXMLIOService:(JMRIXMLIOService *)service didWriteItem:(JMRIXMLIOItem *)item withName:(NSString *)name ofType:(NSString *)type withValue:(NSString *)value;
-- (void)JMRIXMLIOService:(JMRIXMLIOService *)service didConnectWithRequest:(NSURLRequest *)request;
-- (void)JMRIXMLIOServiceDidFinishLoading:(JMRIXMLIOService *)service;
+- (void)XMLIOService:(XMLIOService *)service didListItems:(NSArray *)items ofType:(NSString *)type;
+- (void)XMLIOService:(XMLIOService *)service didReadItem:(XMLIOItem *)item withName:(NSString *)name ofType:(NSString *)type withValue:(NSString *)value;
+- (void)XMLIOService:(XMLIOService *)service didWriteItem:(XMLIOItem *)item withName:(NSString *)name ofType:(NSString *)type withValue:(NSString *)value;
+- (void)XMLIOService:(XMLIOService *)service didConnectWithRequest:(NSURLRequest *)request;
+- (void)XMLIOServiceDidFinishLoading:(XMLIOService *)service;
 
 @end

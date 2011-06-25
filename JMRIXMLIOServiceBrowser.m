@@ -10,7 +10,7 @@
  THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 //
-//  JMRIXMLIOServiceBrowser.m
+//  XMLIOServiceBrowser.m
 //  JMRI Framework
 //
 //  Created by Randall Wood on 11/5/2011.
@@ -19,7 +19,7 @@
 #import "JMRIXMLIOServiceBrowser.h"
 #import "JMRIXMLIOService.h"
 
-@implementation JMRIXMLIOServiceBrowser
+@implementation XMLIOServiceBrowser
 
 - (void)searchForServices {
 	if (self.searching) {
@@ -29,14 +29,14 @@
 }
 
 - (void)addServiceWithAddress:(NSString *)address withPort:(NSInteger)port {
-	JMRIXMLIOService *service = [[[JMRIXMLIOService alloc] initWithAddress:address withPort:port] autorelease];
+	XMLIOService *service = [[[XMLIOService alloc] initWithAddress:address withPort:port] autorelease];
 	[self.services addObject:service];
 }
 /*
 - (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser didFindService:(NSNetService *)aNetService moreComing:(BOOL)moreComing {
 	if (![self containsService:aNetService]) {
-		JMRIXMLIOService *service;
-		service = [[[JMRIXMLIOService alloc] initWithNetService:aNetService] autorelease];
+		XMLIOService *service;
+		service = [[[XMLIOService alloc] initWithNetService:aNetService] autorelease];
 		[self.services addObject:service];
 		if ([self.delegate respondsToSelector:@selector(JMRIServiceBrowser:didFindService:moreComing:)]) {
 			[self.delegate JMRIServiceBrowser:self didFindService:service moreComing:moreComing];
@@ -48,11 +48,11 @@
 - (void)netServiceDidResolveAddress:(NSNetService *)sender {
     // replace with NSDictionary of txtRecordData when path=index.html is not constant and other meaningful data is published
     NSDictionary *txtRecords = [NSNetService dictionaryFromTXTRecordData:[sender TXTRecordData]];
-	NSLog(@"JMRIXMLIOService TXT Record: %@", txtRecords);
+	NSLog(@"XMLIOService TXT Record: %@", txtRecords);
     // the test for path=index.html should hopefully be only temporary && JMRI post 2.12 should have a jmri=version instead
     if ([txtRecords objectForKey:@"path"] &&
         ![self containsService:sender]) {
-		JMRIXMLIOService *service = [[[JMRIXMLIOService alloc] initWithNetService:sender] autorelease];
+		XMLIOService *service = [[[XMLIOService alloc] initWithNetService:sender] autorelease];
 		[self.services addObject:service];
 		if ([self.delegate respondsToSelector:@selector(JMRIServiceBrowser:didFindService:moreComing:)]) {
 			[self.delegate JMRIServiceBrowser:self didFindService:service moreComing:_searching];
