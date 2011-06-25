@@ -39,7 +39,7 @@
 @property (nonatomic) NSUInteger dccAddress;
 @property (nonatomic, retain) NSString* addressLength;
 @property (nonatomic, retain) NSString* roadName;
-@property (nonatomic, retain) NSString* roadNumber;
+@property (nonatomic) NSUInteger roadNumber;
 @property (nonatomic, retain) NSString* mfg;
 @property (nonatomic, retain) NSString* model;
 @property (nonatomic, retain) NSString* maxSpeedPct;

@@ -60,7 +60,7 @@
 		self.dccAddress = 0;
 		self.addressLength = nil;
 		self.roadName = nil;
-		self.roadNumber = nil;
+		self.roadNumber = 0;
 		self.mfg = nil;
 		self.model = nil;
 		self.maxSpeedPct = nil;
@@ -78,7 +78,6 @@
 	self.comment = nil;
 	self.addressLength = nil;
 	self.roadName = nil;
-	self.roadNumber = nil;
 	self.mfg = nil;
 	self.model = nil;
 	self.maxSpeedPct = nil;

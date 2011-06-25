@@ -167,6 +167,8 @@ NSString *const JavaNO = @"false"; // java.lang.Boolean.toString returns "false"
             if ([currentElement.parent isKindOfClass:[JMRIXMLIOObject class]]) {
                 if ([currentElement.XMLName isEqualToString:JMRIXMLIORosterDCCAddress]) {
                     [(JMRIXMLIORoster *)parent setDccAddress:[currentElement.text integerValue]];
+                } else if ([currentElement.XMLName isEqualToString:JMRIXMLIORosterRoadNumber]) {
+                    [(JMRIXMLIORoster *)parent setRoadNumber:[currentElement.text integerValue]];
                 } else if ([currentElement.XMLName isEqualToString:JMRIXMLIOItemInverted]) {
                     [(JMRIXMLIOItem *)parent setInverted:[currentElement.text isEqualToString:JavaYES]];
                 } else if (![currentElement.XMLName isEqualToString:JMRIXMLIORosterFunctionLabels] &&
