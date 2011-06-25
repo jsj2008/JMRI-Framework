@@ -21,6 +21,8 @@
 
 @interface XMLIORoster : XMLIOItem {
 
+    NSMutableArray *functions;
+    
 }
 
 - (BOOL)lockableForFunction:(NSInteger)function;

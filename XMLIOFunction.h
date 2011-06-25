@@ -11,9 +11,15 @@
 
 @interface XMLIOFunction : NSObject {
     
+    NSUInteger identifier_;
+    NSString *key_;
+    NSString *label;
+    BOOL lockable;
+    NSUInteger state;
+    
 }
 
-- (id)initWithIdentifier:(NSUInteger)identifier;
+- (id)initWithFunctionIdentifier:(NSUInteger)identifier;
 
 @property (readonly) NSUInteger identifier;
 @property (readonly, retain) NSString* key;

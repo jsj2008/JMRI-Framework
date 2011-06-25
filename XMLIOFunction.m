@@ -17,7 +17,7 @@
 @synthesize lockable;
 @synthesize state;
 
-- (id)initWithIdentifier:(NSUInteger)identifier {
+- (id)initWithFunctionIdentifier:(NSUInteger)identifier {
     if ((self = [super init])) {
         identifier_ = identifier;
         key_ = [NSString stringWithFormat:@"F%lu", (unsigned long)self.identifier, nil];

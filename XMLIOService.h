@@ -113,6 +113,7 @@ typedef enum {
 
 	NSUInteger connections;
 	NSMutableSet *monitoredItems;
+    NSString *XMLIOPath;
 
 }
 

@@ -117,7 +117,7 @@
 #pragma mark -
 #pragma mark Object properties
 
-@synthesize delegate = _delegate;
+@synthesize delegate;
 @synthesize service = _service;
 @synthesize logTraffic;
 @synthesize timeoutInterval;

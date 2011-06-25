@@ -21,6 +21,23 @@
 
 @interface XMLIOItem : XMLIOObject {
 
+    NSString *name;
+    NSString *type;
+    NSString *userName;
+    NSString *value;
+    NSString *comment;
+    BOOL inverted;
+    
+    NSUInteger dccAddress;
+    NSString *addressLength;
+    NSString *roadName;
+    NSUInteger roadNumber;
+    NSString *mfg;
+    NSString *model;
+    float maxSpeedPct;
+    NSString *imageFileName;
+    NSString *imageIconName;
+
 }
 
 - (NSComparisonResult)localizedCaseInsensitiveCompareByUserName:(XMLIOItem*)item;

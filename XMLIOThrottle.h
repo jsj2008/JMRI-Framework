@@ -17,27 +17,45 @@
 //
 
 #import "XMLIOObject.h"
+#import "XMLIOFunction.h"
 
 
 @interface XMLIOThrottle : XMLIOObject {
 
+    NSString *address;
+    NSString *forward;
+    NSString *speed;
+    XMLIOFunction *F0;
+    XMLIOFunction *F1;
+    XMLIOFunction *F2;
+    XMLIOFunction *F3;
+    XMLIOFunction *F4;
+    XMLIOFunction *F5;
+    XMLIOFunction *F6;
+    XMLIOFunction *F7;
+    XMLIOFunction *F8;
+    XMLIOFunction *F9;
+    XMLIOFunction *F10;
+    XMLIOFunction *F11;
+    XMLIOFunction *F12;
+    
 }
 
 @property (nonatomic, retain) NSString *address;
 @property (nonatomic, retain) NSString *forward;
 @property (nonatomic, retain) NSString *speed;
-@property (nonatomic, retain) NSString *F0;
-@property (nonatomic, retain) NSString *F1;
-@property (nonatomic, retain) NSString *F2;
-@property (nonatomic, retain) NSString *F3;
-@property (nonatomic, retain) NSString *F4;
-@property (nonatomic, retain) NSString *F5;
-@property (nonatomic, retain) NSString *F6;
-@property (nonatomic, retain) NSString *F7;
-@property (nonatomic, retain) NSString *F8;
-@property (nonatomic, retain) NSString *F9;
-@property (nonatomic, retain) NSString *F10;
-@property (nonatomic, retain) NSString *F11;
-@property (nonatomic, retain) NSString *F12;
+@property (nonatomic, retain) XMLIOFunction *F0;
+@property (nonatomic, retain) XMLIOFunction *F1;
+@property (nonatomic, retain) XMLIOFunction *F2;
+@property (nonatomic, retain) XMLIOFunction *F3;
+@property (nonatomic, retain) XMLIOFunction *F4;
+@property (nonatomic, retain) XMLIOFunction *F5;
+@property (nonatomic, retain) XMLIOFunction *F6;
+@property (nonatomic, retain) XMLIOFunction *F7;
+@property (nonatomic, retain) XMLIOFunction *F8;
+@property (nonatomic, retain) XMLIOFunction *F9;
+@property (nonatomic, retain) XMLIOFunction *F10;
+@property (nonatomic, retain) XMLIOFunction *F11;
+@property (nonatomic, retain) XMLIOFunction *F12;
 
 @end

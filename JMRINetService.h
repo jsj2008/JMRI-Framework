@@ -23,6 +23,7 @@
 
 	NSNetService *_service;
 	id delegate;
+    NSTimeInterval timeoutInterval;
 	BOOL logTraffic;
 	NSString *manualAddress;
 	NSInteger manualPort;

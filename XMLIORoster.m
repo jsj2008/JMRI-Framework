@@ -21,13 +21,13 @@
 
 @implementation XMLIORoster
 
-@synthesize functions = functions_;
+@synthesize functions;
 
 - (id)init {
 	if ((self = [super init])) {
         self.functions = [NSMutableArray arrayWithCapacity:13];
         for (NSUInteger i = 0; i < [self.functions count]; i++) {
-            [self.functions insertObject:[[XMLIOFunction alloc] initWithIdentifier:i] atIndex:i];
+            [self.functions insertObject:[[XMLIOFunction alloc] initWithFunctionIdentifier:i] atIndex:i];
         }
 	}
 	return self;

@@ -100,7 +100,7 @@ NSString *const XMLIOItemValueKey = @"XMLIOItemValueKey";
 #pragma mark -
 #pragma mark Properties
 
-@synthesize XMLIOPath = _XMLIOPath;
+@synthesize XMLIOPath;
 
 - (BOOL)openConnection {
 	return (connections);

@@ -21,6 +21,12 @@
 
 @interface XMLIOObject : NSObject {
 
+    NSString *XMLName;
+    NSString *text;
+    XMLIOObject *parent;
+    NSMutableArray *children;
+    NSMutableDictionary *attributes;
+    
 }
 
 // XMLIOObject contains properties needed to parse XML correctly
