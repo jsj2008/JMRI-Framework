@@ -16,7 +16,7 @@
 //  Created by Randall Wood on 31/5/2011.
 //
 
-#import "JMRIXMLIORoster.h"
+#import "XMLIORoster.h"
 
 @implementation XMLIORoster
 

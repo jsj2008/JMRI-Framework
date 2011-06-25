@@ -16,11 +16,11 @@
 //  Created by Randall Wood on 14/5/2011.
 //
 
-#import "JMRIXMLIOServiceHelper.h"
-#import "JMRIXMLIOService.h"
-#import "JMRIXMLIOItem.h"
-#import "JMRIXMLIORoster.h"
-#import "JMRIXMLIOThrottle.h"
+#import "XMLIOServiceHelper.h"
+#import "XMLIOService.h"
+#import "XMLIOItem.h"
+#import "XMLIORoster.h"
+#import "XMLIOThrottle.h"
 
 // XMLIO Types
 NSString *const XMLIOXMLXMLIO = @"xmlio";

@@ -16,7 +16,7 @@
 //  Created by Randall Wood on 31/5/2011.
 //
 
-#import "JMRIXMLIOThrottle.h"
+#import "XMLIOThrottle.h"
 
 
 @implementation XMLIOThrottle

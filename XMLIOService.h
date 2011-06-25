@@ -17,7 +17,7 @@
 //
 
 #import "JMRINetService.h"
-#import "JMRIXMLIOItem.h"
+#import "XMLIOItem.h"
 
 // JMRI XMLIO item types
 extern NSString *const XMLIOTypeMemory;

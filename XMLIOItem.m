@@ -16,8 +16,8 @@
 //  Created by Randall Wood on 26/5/2011.
 //
 
-#import "JMRIXMLIOItem.h"
-#import "JMRIXMLIOService.h"
+#import "XMLIOItem.h"
+#import "XMLIOService.h"
 
 @implementation XMLIOItem
 

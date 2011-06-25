@@ -17,7 +17,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "JMRIXMLIOItem.h"
+#import "XMLIOItem.h"
 
 @interface XMLIORoster : XMLIOItem {
 

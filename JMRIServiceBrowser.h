@@ -17,7 +17,7 @@
 //
 
 #import "JMRIWiThrottleService.h"
-#import "JMRIXMLIOService.h"
+#import "XMLIOService.h"
 #import "NSArray+JMRIExtensions.h"
 
 extern NSString *const JMRIServiceTypeWiThrottle;

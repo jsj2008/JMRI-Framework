@@ -16,8 +16,8 @@
 //  Created by Randall Wood on 11/5/2011.
 //
 
-#import "JMRIXMLIOServiceBrowser.h"
-#import "JMRIXMLIOService.h"
+#import "XMLIOServiceBrowser.h"
+#import "XMLIOService.h"
 
 @implementation XMLIOServiceBrowser
 

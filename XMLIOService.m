@@ -16,8 +16,8 @@
 //  Created by Randall Wood on 4/5/2011.
 //
 
-#import "JMRIXMLIOService.h"
-#import "JMRIXMLIOServiceHelper.h"
+#import "XMLIOService.h"
+#import "XMLIOServiceHelper.h"
 
 NSString *const XMLIOTypeMemory = @"memory";
 NSString *const XMLIOTypeMetadata = @"metadata";
