@@ -42,6 +42,10 @@
 		488859521375B1F4001EAD5B /* JMRIServiceBrowser.h in Sources */ = {isa = PBXBuildFile; fileRef = 4888594E1375B1F4001EAD5B /* JMRIServiceBrowser.h */; };
 		488859531375B1F4001EAD5B /* JMRIServiceBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4888594F1375B1F4001EAD5B /* JMRIServiceBrowser.m */; };
 		488859541375B202001EAD5B /* JMRIServiceBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 4888594E1375B1F4001EAD5B /* JMRIServiceBrowser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		48DA6CD713B63E5800E3643D /* XMLIOFunction.h in Headers */ = {isa = PBXBuildFile; fileRef = 48DA6CD513B63E5800E3643D /* XMLIOFunction.h */; };
+		48DA6CD813B63E5800E3643D /* XMLIOFunction.h in Headers */ = {isa = PBXBuildFile; fileRef = 48DA6CD513B63E5800E3643D /* XMLIOFunction.h */; };
+		48DA6CD913B63E5800E3643D /* XMLIOFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DA6CD613B63E5800E3643D /* XMLIOFunction.m */; };
+		48DA6CDA13B63E5800E3643D /* XMLIOFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DA6CD613B63E5800E3643D /* XMLIOFunction.m */; };
 		48E71B6B139490E7003AB481 /* XMLIORoster.h in Sources */ = {isa = PBXBuildFile; fileRef = 48E71B69139490E7003AB481 /* XMLIORoster.h */; };
 		48E71B6C139490E7003AB481 /* XMLIORoster.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E71B6A139490E7003AB481 /* XMLIORoster.m */; };
 		48E71B6D139490E7003AB481 /* XMLIORoster.h in Headers */ = {isa = PBXBuildFile; fileRef = 48E71B69139490E7003AB481 /* XMLIORoster.h */; };
@@ -79,6 +83,8 @@
 		4888594E1375B1F4001EAD5B /* JMRIServiceBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; lineEnding = 0; path = JMRIServiceBrowser.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4888594F1375B1F4001EAD5B /* JMRIServiceBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = JMRIServiceBrowser.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		48AB635413A4EBBF002DB6AE /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		48DA6CD513B63E5800E3643D /* XMLIOFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLIOFunction.h; sourceTree = "<group>"; };
+		48DA6CD613B63E5800E3643D /* XMLIOFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLIOFunction.m; sourceTree = "<group>"; };
 		48E71B69139490E7003AB481 /* XMLIORoster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = XMLIORoster.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		48E71B6A139490E7003AB481 /* XMLIORoster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XMLIORoster.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		48F65A1013796DEF0086D4E3 /* JMRINetService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; lineEnding = 0; path = JMRINetService.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -164,6 +170,8 @@
 		483C5718138E131200245381 /* XMLIO */ = {
 			isa = PBXGroup;
 			children = (
+				48DA6CD513B63E5800E3643D /* XMLIOFunction.h */,
+				48DA6CD613B63E5800E3643D /* XMLIOFunction.m */,
 				483C571B138E139E00245381 /* XMLIOItem.h */,
 				483C571C138E139E00245381 /* XMLIOItem.m */,
 				4884955B1395653B0086790D /* XMLIOObject.h */,
@@ -200,6 +208,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48DA6CD813B63E5800E3643D /* XMLIOFunction.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,6 +228,7 @@
 				48F65A80137984C40086D4E3 /* JMRIWiThrottleService.h in Headers */,
 				487F9379137509BB00FF9DBA /* XMLIOService.h in Headers */,
 				AA747D9F0F9514B9006C5449 /* Framework_Prefix.pch in Headers */,
+				48DA6CD713B63E5800E3643D /* XMLIOFunction.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,6 +334,7 @@
 				4884955E1395653B0086790D /* XMLIOObject.m in Sources */,
 				48849565139565860086790D /* XMLIOThrottle.h in Sources */,
 				48849566139565860086790D /* XMLIOThrottle.m in Sources */,
+				48DA6CDA13B63E5800E3643D /* XMLIOFunction.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,6 +354,7 @@
 				48E71B6E139490E7003AB481 /* XMLIORoster.m in Sources */,
 				488495601395653B0086790D /* XMLIOObject.m in Sources */,
 				48849568139565860086790D /* XMLIOThrottle.m in Sources */,
+				48DA6CD913B63E5800E3643D /* XMLIOFunction.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

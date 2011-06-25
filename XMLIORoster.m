@@ -17,6 +17,7 @@
 //
 
 #import "XMLIORoster.h"
+#import "XMLIOFunction.h"
 
 @implementation XMLIORoster
 
@@ -26,12 +27,7 @@
 	if ((self = [super init])) {
         self.functions = [NSMutableArray arrayWithCapacity:13];
         for (NSUInteger i = 0; i < [self.functions count]; i++) {
-            [self.functions insertObject:[NSDictionary dictionaryWithObjectsAndKeys:
-                                             [@"F" stringByAppendingString:[[NSNumber numberWithUnsignedInteger:i] stringValue]], 
-                                             @"label",
-                                             [NSNumber numberWithBool:YES],
-                                             @"lockable",
-                                             nil] atIndex:i];
+            [self.functions insertObject:[[XMLIOFunction alloc] initWithIdentifier:i] atIndex:i];
         }
 	}
 	return self;

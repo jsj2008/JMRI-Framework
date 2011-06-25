@@ -18,6 +18,7 @@
 
 #import "XMLIOServiceHelper.h"
 #import "XMLIOService.h"
+#import "XMLIOFunction.h"
 #import "XMLIOItem.h"
 #import "XMLIORoster.h"
 #import "XMLIOThrottle.h"
@@ -181,20 +182,13 @@ NSString *const JavaNO = @"false"; // java.lang.Boolean.toString returns "false"
                        [parent.XMLName isEqualToString:XMLIORosterFunctionLockables]) {
                 XMLIORoster *roster = (XMLIORoster *)parent.parent;
                 NSUInteger i = [[elementName substringFromIndex:1] integerValue];
-                NSString *label = [roster labelForFunction:i];
-                BOOL lockable = [roster lockableForFunction:i];
+                XMLIOFunction *f = [roster.functions objectAtIndex:i];
                 if ([parent.XMLName isEqualToString:XMLIORosterFunctionLabels]) {
-                    label = currentElement.text;
+                    f.label = currentElement.text;
                 } else {
-                    lockable = [currentElement.text boolValue];
+                    f.lockable = [currentElement.text isEqualToString:JavaYES];
                 }
-                [roster.functions replaceObjectAtIndex:i withObject:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                                        label,
-                                                                        @"label",
-                                                                        [NSNumber numberWithBool:lockable],
-                                                                        @"lockable",
-                                                                        nil]];
-            }
+             }
             if (rootElement == currentElement.parent) {
                 [items setObject:currentElement forKey:[(XMLIOItem *)currentElement name]];
             }
