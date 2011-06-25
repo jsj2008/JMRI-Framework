@@ -42,7 +42,7 @@
 @property (nonatomic) NSUInteger roadNumber;
 @property (nonatomic, retain) NSString* mfg;
 @property (nonatomic, retain) NSString* model;
-@property (nonatomic, retain) NSString* maxSpeedPct;
+@property (nonatomic) float maxSpeedPct;
 @property (nonatomic, retain) NSString* imageFileName;
 @property (nonatomic, retain) NSString* imageIconName;
 

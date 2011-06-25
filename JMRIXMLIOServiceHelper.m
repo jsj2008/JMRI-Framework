@@ -169,6 +169,8 @@ NSString *const JavaNO = @"false"; // java.lang.Boolean.toString returns "false"
                     [(JMRIXMLIORoster *)parent setDccAddress:[currentElement.text integerValue]];
                 } else if ([currentElement.XMLName isEqualToString:JMRIXMLIORosterRoadNumber]) {
                     [(JMRIXMLIORoster *)parent setRoadNumber:[currentElement.text integerValue]];
+                } else if ([currentElement.XMLName isEqualToString:JMRIXMLIORosterMaxSpeedPct]) {
+                    [(JMRIXMLIORoster *)parent setMaxSpeedPct:[currentElement.text floatValue]];
                 } else if ([currentElement.XMLName isEqualToString:JMRIXMLIOItemInverted]) {
                     [(JMRIXMLIOItem *)parent setInverted:[currentElement.text isEqualToString:JavaYES]];
                 } else if (![currentElement.XMLName isEqualToString:JMRIXMLIORosterFunctionLabels] &&

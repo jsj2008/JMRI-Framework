@@ -63,7 +63,7 @@
 		self.roadNumber = 0;
 		self.mfg = nil;
 		self.model = nil;
-		self.maxSpeedPct = nil;
+		self.maxSpeedPct = 0.0;
 		self.imageFileName = nil;
 		self.imageIconName = nil;
 	}
@@ -80,7 +80,6 @@
 	self.roadName = nil;
 	self.mfg = nil;
 	self.model = nil;
-	self.maxSpeedPct = nil;
 	self.imageFileName = nil;
 	self.imageIconName = nil;
 	[super dealloc];
