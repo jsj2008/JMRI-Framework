@@ -176,14 +176,14 @@ NSString *const JavaNO = @"false"; // java.lang.Boolean.toString returns "false"
                        [parent.XMLName isEqualToString:JMRIXMLIORosterFunctionLockables]) {
                 JMRIXMLIORoster *roster = (JMRIXMLIORoster *)parent.parent;
                 NSUInteger i = [[elementName substringFromIndex:1] integerValue];
-                NSString *label = [roster labelForFunctionKey:i];
-                BOOL lockable = [roster lockableForFunctionKey:i];
+                NSString *label = [roster labelForFunction:i];
+                BOOL lockable = [roster lockableForFunction:i];
                 if ([parent.XMLName isEqualToString:JMRIXMLIORosterFunctionLabels]) {
                     label = currentElement.text;
                 } else {
                     lockable = [currentElement.text boolValue];
                 }
-                [roster.functionKeys replaceObjectAtIndex:i withObject:[NSDictionary dictionaryWithObjectsAndKeys:
+                [roster.functions replaceObjectAtIndex:i withObject:[NSDictionary dictionaryWithObjectsAndKeys:
                                                                         label,
                                                                         @"label",
                                                                         [NSNumber numberWithBool:lockable],

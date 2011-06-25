@@ -47,7 +47,7 @@ extern NSString *const JMRIXMLIORosterModel;
 extern NSString *const JMRIXMLIORosterMaxSpeedPct;
 extern NSString *const JMRIXMLIORosterImageFileName;
 extern NSString *const JMRIXMLIORosterImageIconName;
-extern NSString *const JMRIXMLIORosterFunctionKeys;
+extern NSString *const JMRIXMLIORosterFunctions;
 
 // JMRI XMLIO throttle attributes
 extern NSString *const JMRIXMLIOThrottleAddress;

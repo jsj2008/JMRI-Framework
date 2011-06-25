@@ -44,7 +44,7 @@ NSString *const JMRIXMLIORosterModel = @"model";
 NSString *const JMRIXMLIORosterMaxSpeedPTC = @"maxSpeedPct";
 NSString *const JMRIXMLIORosterImageFileName = @"imageFileName";
 NSString *const JMRIXMLIORosterImageIconName = @"imageIconName";
-NSString *const JMRIXMLIORosterFunctionKeys = @"functionKeys";
+NSString *const JMRIXMLIORosterFunctions = @"functions";
 
 NSString *const JMRIXMLIOThrottleAddress = @"address";
 NSString *const JMRIXMLIOThrottleForward = @"forward";

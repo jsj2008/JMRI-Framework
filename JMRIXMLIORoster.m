@@ -20,13 +20,13 @@
 
 @implementation JMRIXMLIORoster
 
-@synthesize functionKeys = functionKeys_;
+@synthesize functions = functions_;
 
 - (id)init {
 	if ((self = [super init])) {
-        self.functionKeys = [NSMutableArray arrayWithCapacity:13];
-        for (NSUInteger i = 0; i < [self.functionKeys count]; i++) {
-            [self.functionKeys insertObject:[NSDictionary dictionaryWithObjectsAndKeys:
+        self.functions = [NSMutableArray arrayWithCapacity:13];
+        for (NSUInteger i = 0; i < [self.functions count]; i++) {
+            [self.functions insertObject:[NSDictionary dictionaryWithObjectsAndKeys:
                                              [@"F" stringByAppendingString:[[NSNumber numberWithUnsignedInteger:i] stringValue]], 
                                              @"label",
                                              [NSNumber numberWithBool:YES],
@@ -37,16 +37,16 @@
 	return self;
 }
 
-- (NSString *)labelForFunctionKey:(NSInteger)key {
-    return [[self.functionKeys objectAtIndex:key] objectForKey:@"label"];
+- (NSString *)labelForFunction:(NSInteger)function {
+    return [[self.functions objectAtIndex:function] objectForKey:@"label"];
 }
 
-- (BOOL)lockableForFunctionKey:(NSInteger)key {
-    return [[[self.functionKeys objectAtIndex:key] objectForKey:@"lockable"] boolValue];
+- (BOOL)lockableForFunction:(NSInteger)function {
+    return [[[self.functions objectAtIndex:function] objectForKey:@"lockable"] boolValue];
 }
 
 - (void)dealloc {
-    self.functionKeys = nil;
+    self.functions = nil;
 	[super dealloc];
 }
 

@@ -23,9 +23,9 @@
 
 }
 
-- (BOOL)lockableForFunctionKey:(NSInteger)key;
-- (NSString *)labelForFunctionKey:(NSInteger)key;
+- (BOOL)lockableForFunction:(NSInteger)function;
+- (NSString *)labelForFunction:(NSInteger)function;
 
-@property (retain) NSMutableArray* functionKeys;
+@property (retain) NSMutableArray* functions;
 
 @end
