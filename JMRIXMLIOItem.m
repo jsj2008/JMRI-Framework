@@ -37,8 +37,6 @@
 @synthesize maxSpeedPct;
 @synthesize imageFileName;
 @synthesize imageIconName;
-@synthesize functionLabels;
-@synthesize functionLockables;
 
 - (NSComparisonResult)localizedCaseInsensitiveCompareByUserName:(JMRIXMLIOItem *)item {
 	if (self.userName && item.userName) {
@@ -68,8 +66,6 @@
 		self.maxSpeedPct = nil;
 		self.imageFileName = nil;
 		self.imageIconName = nil;
-		self.functionLabels = nil;
-		self.functionLockables = nil;
 	}
 	return self;
 }
@@ -90,8 +86,6 @@
 	self.maxSpeedPct = nil;
 	self.imageFileName = nil;
 	self.imageIconName = nil;
-	self.functionLabels = nil;
-	self.functionLockables = nil;
 	[super dealloc];
 }
 

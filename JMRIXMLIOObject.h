@@ -23,4 +23,12 @@
 
 }
 
+// JMRIXMLIOObject contains properties needed to parse XML correctly
+// Subclasses contain properties specific to the subclass
+@property (retain) NSString *XMLName;
+@property (retain) NSString *text;
+@property (retain) JMRIXMLIOObject *parent;
+@property (retain) NSMutableArray *children;
+@property (retain) NSMutableDictionary *attributes;
+
 @end

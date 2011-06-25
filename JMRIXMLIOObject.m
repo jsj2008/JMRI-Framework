@@ -21,4 +21,27 @@
 
 @implementation JMRIXMLIOObject
 
+@synthesize XMLName;
+@synthesize text;
+@synthesize parent;
+@synthesize children;
+@synthesize attributes;
+
+- (id)init {
+    if ((self = [super init])) {
+        self.children = [NSMutableArray arrayWithCapacity:0];
+        self.attributes = [NSMutableDictionary dictionaryWithCapacity:0];
+    }
+    return self;
+}
+
+- (void)dealloc {
+    self.XMLName = nil;
+    self.text = nil;
+    self.parent = nil;
+    self.children = nil;
+    self.attributes = nil;
+    [super dealloc];
+}
+
 @end

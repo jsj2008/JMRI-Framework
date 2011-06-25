@@ -25,8 +25,8 @@
 	id delegate;
 	NSMutableData* connectionData;
 	NSMutableDictionary* items;
-	JMRIXMLIOObject* currentItem;
-	NSMutableString* currentValue;
+    JMRIXMLIOObject* rootElement;
+    JMRIXMLIOObject* currentElement;
 	NSUInteger operation;
 	NSString *type;
 	NSString *name;

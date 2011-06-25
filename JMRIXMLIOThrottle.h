@@ -16,10 +16,10 @@
 //  Created by Randall Wood on 31/5/2011.
 //
 
-#import <Foundation/Foundation.h>
+#import "JMRIXMLIOObject.h"
 
 
-@interface JMRIXMLIOThrottle : NSObject {
+@interface JMRIXMLIOThrottle : JMRIXMLIOObject {
 
 }
 

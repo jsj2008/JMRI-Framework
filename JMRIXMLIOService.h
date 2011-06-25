@@ -30,10 +30,24 @@ extern NSString *const JMRIXMLIOTypeSensor;
 extern NSString *const JMRIXMLIOTypeTurnout;
 
 // JMRI XMLIO item attributes
+extern NSString *const JMRIXMLIOItemComment;
+extern NSString *const JMRIXMLIOItemInverted;
 extern NSString *const JMRIXMLIOItemName;
 extern NSString *const JMRIXMLIOItemType;
 extern NSString *const JMRIXMLIOItemUserName;
 extern NSString *const JMRIXMLIOItemValue;
+
+// JMRI XMLIO roster attributes
+extern NSString *const JMRIXMLIORosterDCCAddress;
+extern NSString *const JMRIXMLIORosterAddressLength;
+extern NSString *const JMRIXMLIORosterRoadName;
+extern NSString *const JMRIXMLIORosterRoadNumber;
+extern NSString *const JMRIXMLIORosterMFG;
+extern NSString *const JMRIXMLIORosterModel;
+extern NSString *const JMRIXMLIORosterMaxSpeedPct;
+extern NSString *const JMRIXMLIORosterImageFileName;
+extern NSString *const JMRIXMLIORosterImageIconName;
+extern NSString *const JMRIXMLIORosterFunctionKeys;
 
 // JMRI XMLIO throttle attributes
 extern NSString *const JMRIXMLIOThrottleAddress;

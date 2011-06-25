@@ -27,8 +27,8 @@
 
 # pragma mark Standard properties
 
-@property (nonatomic, retain) NSString* type;
 @property (nonatomic, retain) NSString* name;
+@property (nonatomic, retain) NSString* type;
 @property (nonatomic, retain) NSString* userName;
 @property (nonatomic, retain) NSString* value;
 @property (nonatomic, retain) NSString* comment;
@@ -45,7 +45,5 @@
 @property (nonatomic, retain) NSString* maxSpeedPct;
 @property (nonatomic, retain) NSString* imageFileName;
 @property (nonatomic, retain) NSString* imageIconName;
-@property (nonatomic, retain) NSString* functionLabels;
-@property (nonatomic, retain) NSString* functionLockables;
 
 @end

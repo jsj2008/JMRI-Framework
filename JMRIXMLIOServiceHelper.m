@@ -19,11 +19,14 @@
 #import "JMRIXMLIOServiceHelper.h"
 #import "JMRIXMLIOService.h"
 #import "JMRIXMLIOItem.h"
+#import "JMRIXMLIORoster.h"
 #import "JMRIXMLIOThrottle.h"
 
 NSString *const JMRIXMLIOXMLXMLIO = @"xmlio";
 NSString *const JMRIXMLIOXMLItem = @"item";
 NSString *const JMRIXMLIOXMLThrottle = @"throttle";
+NSString *const JMRIXMLIORosterFunctionLabels = @"functionLabels";
+NSString *const JMRIXMLIORosterFunctionLockables = @"functionLockables";
 
 @implementation JMRIXMLIOServiceHelper
 
@@ -92,6 +95,13 @@ NSString *const JMRIXMLIOXMLThrottle = @"throttle";
 #pragma mark -
 #pragma mark XML parser delegate
 
+- (void)parserDidStartDocument:(NSXMLParser *)parser {
+    if (items) {
+        [items release];
+    }
+    items = [NSMutableDictionary dictionaryWithCapacity:0];
+}
+
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
 	switch (operation) {
 		case JMRIXMLIOOperationList:
@@ -112,53 +122,80 @@ NSString *const JMRIXMLIOXMLThrottle = @"throttle";
 	}
 }
 
-- (void)parserDidStartDocument:(NSXMLParser *)parser {
-	if (items) {
-		[items release];
-	}
-	items = [[NSMutableDictionary alloc] initWithCapacity:0];		
-}
-
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict {
-	if ([elementName isEqualToString:JMRIXMLIOXMLItem]) {
-		if (currentItem) {
-			[currentItem release];
-		}
-		currentItem = [[JMRIXMLIOItem alloc] init];
-	} else if ([elementName isEqualToString:JMRIXMLIOXMLThrottle]) {
-		if (currentItem) {
-			[currentItem release];
-		}
-		currentItem = [[JMRIXMLIOThrottle alloc] init];
-	} else {
-		[currentItem setValue:nil forKey:elementName];
-		currentValue = [[NSMutableString alloc] initWithCapacity:0];
-	}
+    if (rootElement == nil) {
+        JMRIXMLIOObject *root = [[JMRIXMLIOObject alloc] init];
+        rootElement = root;
+        currentElement = root;
+        [root release];
+    } else {
+        JMRIXMLIOObject *newElement;
+        if ([elementName isEqualToString:JMRIXMLIOXMLItem]) {
+            newElement = [[JMRIXMLIOItem alloc] init];
+        } else if ([elementName isEqualToString:JMRIXMLIOXMLThrottle]) {
+            newElement = [[JMRIXMLIOThrottle alloc] init];
+        } else {
+            newElement = [[JMRIXMLIOObject alloc] init];
+        }
+        newElement.parent = currentElement;
+        [currentElement.children addObject:newElement];
+        currentElement = newElement;
+        [newElement release];
+    }
+    currentElement.XMLName = elementName;
+    if ([attributeDict count]) {
+        [currentElement.attributes addEntriesFromDictionary:attributeDict];
+    }
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
-	if ([elementName isEqualToString:JMRIXMLIOXMLXMLIO]) {
-	} else if ([elementName isEqualToString:JMRIXMLIOXMLItem]) {
-		[items setValue:currentItem forKey:[currentItem valueForKey:JMRIXMLIOItemName]];
-		[currentItem release];
-		currentItem = nil;
-	} else if ([elementName isEqualToString:JMRIXMLIOXMLItem]) {
-		[items setValue:currentItem forKey:[currentItem valueForKey:JMRIXMLIOThrottleAddress]];
-		[currentItem release];
-		currentItem = nil;
-	} else {
-		if ([currentValue length] > 0) {
-			[currentItem setValue:currentValue forKey:elementName];
-		}
-		[currentValue release];
-		currentValue = nil;
-	}
+    if (currentElement) {
+        if (currentElement.parent) {
+            JMRIXMLIOObject *parent;
+            if ([currentElement.parent isMemberOfClass:[JMRIXMLIOThrottle class]]) {
+                parent = (JMRIXMLIOThrottle *)currentElement.parent;
+            } else {
+                parent = (JMRIXMLIOItem *)currentElement.parent;
+            }
+            if ([currentElement.parent isKindOfClass:[JMRIXMLIOObject class]] &&
+                ![currentElement.XMLName isEqualToString:JMRIXMLIORosterFunctionLabels] &&
+                ![currentElement.XMLName isEqualToString:JMRIXMLIORosterFunctionLockables]) {
+                [parent setValue:currentElement.text forKey:elementName];
+            } else if ([parent.XMLName isEqualToString:JMRIXMLIORosterFunctionLabels] ||
+                       [parent.XMLName isEqualToString:JMRIXMLIORosterFunctionLockables]) {
+                JMRIXMLIORoster *roster = (JMRIXMLIORoster *)parent.parent;
+                NSUInteger i = [[elementName substringFromIndex:1] integerValue];
+                NSString *label = [roster labelForFunctionKey:i];
+                BOOL lockable = [roster lockableForFunctionKey:i];
+                if ([parent.XMLName isEqualToString:JMRIXMLIORosterFunctionLabels]) {
+                    label = currentElement.text;
+                } else {
+                    lockable = [currentElement.text boolValue];
+                }
+                [roster.functionKeys replaceObjectAtIndex:i withObject:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                        label,
+                                                                        @"label",
+                                                                        [NSNumber numberWithBool:lockable],
+                                                                        @"lockable",
+                                                                        nil]];
+            }
+            if (rootElement == currentElement.parent) {
+                [items setObject:currentElement forKey:[(JMRIXMLIOItem *)currentElement name]];
+            }
+        }
+        
+        currentElement = currentElement.parent;
+    }
 }
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
-	if (currentValue) {
-		[currentValue appendString:string];
-	}
+    if (currentElement) {
+        if (!currentElement.text) {
+            currentElement.text = string;
+        } else {
+            currentElement.text = [currentElement.text stringByAppendingString:string];
+        }
+    }
 }
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {

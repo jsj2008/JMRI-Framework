@@ -28,10 +28,23 @@ NSString *const JMRIXMLIOTypeRoute = @"route";
 NSString *const JMRIXMLIOTypeSensor = @"sensor";
 NSString *const JMRIXMLIOTypeTurnout = @"turnout";
 
+NSString *const JMRIXMLIOItemComment = @"comment";
+NSString *const JMRIXMLIOItemInverted = @"inverted";
 NSString *const JMRIXMLIOItemName = @"name";
 NSString *const JMRIXMLIOItemType = @"type";
 NSString *const JMRIXMLIOItemUserName = @"userName";
 NSString *const JMRIXMLIOItemValue = @"value";
+
+NSString *const JMRIXMLIORosterDCCAddress = @"dccAddress";
+NSString *const JMRIXMLIORosterAddressLength = @"addressLength";
+NSString *const JMRIXMLIORosterRoadName = @"roadName";
+NSString *const JMRIXMLIORosterRoadNumber = @"roadNumber";
+NSString *const JMRIXMLIORosterMFG = @"mfg";
+NSString *const JMRIXMLIORosterModel = @"model";
+NSString *const JMRIXMLIORosterMaxSpeedPTC = @"maxSpeedPct";
+NSString *const JMRIXMLIORosterImageFileName = @"imageFileName";
+NSString *const JMRIXMLIORosterImageIconName = @"imageIconName";
+NSString *const JMRIXMLIORosterFunctionKeys = @"functionKeys";
 
 NSString *const JMRIXMLIOThrottleAddress = @"address";
 NSString *const JMRIXMLIOThrottleForward = @"forward";
