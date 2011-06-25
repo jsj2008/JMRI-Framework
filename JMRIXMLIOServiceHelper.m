@@ -195,6 +195,9 @@ NSString *const JavaNO = @"false"; // java.lang.Boolean.toString returns "false"
                 [items setObject:currentElement forKey:[(JMRIXMLIOItem *)currentElement name]];
             }
         }
+        if ([currentElement isMemberOfClass:[JMRIXMLIORoster class]]) {
+            [(JMRIXMLIORoster *)currentElement setUserName:[[(JMRIXMLIORoster *)currentElement roadName] stringByAppendingFormat:@" %u", [(JMRIXMLIORoster *)currentElement roadNumber], nil]];
+        }
         currentElement = currentElement.parent;
     }
 }
