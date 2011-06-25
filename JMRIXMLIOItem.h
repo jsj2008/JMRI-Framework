@@ -36,7 +36,7 @@
 
 #pragma mark Roster properties
 
-@property (nonatomic, retain) NSString* dccAddress;
+@property (nonatomic) NSUInteger dccAddress;
 @property (nonatomic, retain) NSString* addressLength;
 @property (nonatomic, retain) NSString* roadName;
 @property (nonatomic, retain) NSString* roadNumber;

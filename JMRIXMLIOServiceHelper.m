@@ -165,12 +165,13 @@ NSString *const JavaNO = @"false"; // java.lang.Boolean.toString returns "false"
                 parent = (JMRIXMLIOItem *)currentElement.parent;
             }
             if ([currentElement.parent isKindOfClass:[JMRIXMLIOObject class]]) {
-                if (![currentElement.XMLName isEqualToString:JMRIXMLIOItemInverted] &&
-                    ![currentElement.XMLName isEqualToString:JMRIXMLIORosterFunctionLabels] &&
-                    ![currentElement.XMLName isEqualToString:JMRIXMLIORosterFunctionLockables]) {
-                    [parent setValue:currentElement.text forKey:elementName];
+                if ([currentElement.XMLName isEqualToString:JMRIXMLIORosterDCCAddress]) {
+                    [(JMRIXMLIORoster *)parent setDccAddress:[currentElement.text integerValue]];
                 } else if ([currentElement.XMLName isEqualToString:JMRIXMLIOItemInverted]) {
                     [(JMRIXMLIOItem *)parent setInverted:[currentElement.text isEqualToString:JavaYES]];
+                } else if (![currentElement.XMLName isEqualToString:JMRIXMLIORosterFunctionLabels] &&
+                    ![currentElement.XMLName isEqualToString:JMRIXMLIORosterFunctionLockables]) {
+                    [parent setValue:currentElement.text forKey:elementName];
                 }
             } else if ([parent.XMLName isEqualToString:JMRIXMLIORosterFunctionLabels] ||
                        [parent.XMLName isEqualToString:JMRIXMLIORosterFunctionLockables]) {
@@ -194,7 +195,6 @@ NSString *const JavaNO = @"false"; // java.lang.Boolean.toString returns "false"
                 [items setObject:currentElement forKey:[(JMRIXMLIOItem *)currentElement name]];
             }
         }
-        
         currentElement = currentElement.parent;
     }
 }
