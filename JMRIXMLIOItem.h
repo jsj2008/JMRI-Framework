@@ -32,7 +32,7 @@
 @property (nonatomic, retain) NSString* userName;
 @property (nonatomic, retain) NSString* value;
 @property (nonatomic, retain) NSString* comment;
-@property (nonatomic, retain) NSString* inverted;
+@property (nonatomic) BOOL inverted;
 
 #pragma mark Roster properties
 

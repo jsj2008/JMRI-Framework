@@ -22,11 +22,18 @@
 #import "JMRIXMLIORoster.h"
 #import "JMRIXMLIOThrottle.h"
 
+// XMLIO Types
 NSString *const JMRIXMLIOXMLXMLIO = @"xmlio";
 NSString *const JMRIXMLIOXMLItem = @"item";
 NSString *const JMRIXMLIOXMLThrottle = @"throttle";
+
+// XMLIO Roster elements that are implemented differently in the Objective-C classes
 NSString *const JMRIXMLIORosterFunctionLabels = @"functionLabels";
 NSString *const JMRIXMLIORosterFunctionLockables = @"functionLockables";
+
+// Javaisms
+NSString *const JavaYES = @"true"; // java.lang.Boolean.toString returns "true" for YES
+NSString *const JavaNO = @"false"; // java.lang.Boolean.toString returns "false" for NO
 
 @implementation JMRIXMLIOServiceHelper
 
@@ -157,10 +164,14 @@ NSString *const JMRIXMLIORosterFunctionLockables = @"functionLockables";
             } else {
                 parent = (JMRIXMLIOItem *)currentElement.parent;
             }
-            if ([currentElement.parent isKindOfClass:[JMRIXMLIOObject class]] &&
-                ![currentElement.XMLName isEqualToString:JMRIXMLIORosterFunctionLabels] &&
-                ![currentElement.XMLName isEqualToString:JMRIXMLIORosterFunctionLockables]) {
-                [parent setValue:currentElement.text forKey:elementName];
+            if ([currentElement.parent isKindOfClass:[JMRIXMLIOObject class]]) {
+                if (![currentElement.XMLName isEqualToString:JMRIXMLIOItemInverted] &&
+                    ![currentElement.XMLName isEqualToString:JMRIXMLIORosterFunctionLabels] &&
+                    ![currentElement.XMLName isEqualToString:JMRIXMLIORosterFunctionLockables]) {
+                    [parent setValue:currentElement.text forKey:elementName];
+                } else if ([currentElement.XMLName isEqualToString:JMRIXMLIOItemInverted]) {
+                    [(JMRIXMLIOItem *)parent setInverted:[currentElement.text isEqualToString:JavaYES]];
+                }
             } else if ([parent.XMLName isEqualToString:JMRIXMLIORosterFunctionLabels] ||
                        [parent.XMLName isEqualToString:JMRIXMLIORosterFunctionLockables]) {
                 JMRIXMLIORoster *roster = (JMRIXMLIORoster *)parent.parent;

@@ -56,7 +56,7 @@
 		self.userName = nil;
 		self.value = nil;
 		self.comment = nil;
-		self.inverted = nil;
+		self.inverted = NO;
 		self.dccAddress = nil;
 		self.addressLength = nil;
 		self.roadName = nil;
@@ -76,7 +76,6 @@
 	self.userName = nil;
 	self.value = nil;
 	self.comment = nil;
-	self.inverted = nil;
 	self.dccAddress = nil;
 	self.addressLength = nil;
 	self.roadName = nil;
