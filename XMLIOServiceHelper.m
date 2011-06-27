@@ -89,8 +89,8 @@ NSString *const JavaNO = @"false"; // java.lang.Boolean.toString returns "false"
 	if ([self.delegate respondsToSelector:@selector(XMLIOServiceHelperDidFinishLoading:)]) {
 		[self.delegate XMLIOServiceHelperDidFinishLoading:self];
 	}
+    parser = [[NSXMLParser alloc] initWithData:connectionData];
 	@synchronized(parser) {
-		parser = [[NSXMLParser alloc] initWithData:connectionData];
 		[connectionData release];
 		connectionData = nil;
 		[parser setDelegate:self];
