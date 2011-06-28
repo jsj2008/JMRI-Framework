@@ -17,7 +17,7 @@
 //
 
 #import "XMLIOThrottle.h"
-
+#import "XMLIOService.h"
 
 @implementation XMLIOThrottle
 
@@ -38,9 +38,15 @@
 @synthesize F11;
 @synthesize F12;
 
-- (id)initWithAddress:(NSUInteger)address {
+@synthesize service = service_;
+
+- (id)initWithAddress:(NSUInteger)address withService:(XMLIOService *)service {
     if ((self = [super init])) {
         address_ = address;
+        self.service = service;
+        if (service) {
+            [service sendThrottle:address commands:nil];
+        }
     }
     return self;
 }

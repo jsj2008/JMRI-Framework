@@ -19,6 +19,7 @@
 #import "XMLIOObject.h"
 #import "XMLIOFunction.h"
 
+@class XMLIOService;
 
 @interface XMLIOThrottle : XMLIOObject {
 
@@ -39,9 +40,11 @@
     XMLIOFunction *F11;
     XMLIOFunction *F12;
     
+    XMLIOService *service_;
+    
 }
 
-- (id)initWithAddress:(NSUInteger)address;
+- (id)initWithAddress:(NSUInteger)address withService:(XMLIOService *)service;
 
 @property (readonly) NSUInteger address;
 @property (nonatomic, retain) NSString *forward;
@@ -59,5 +62,7 @@
 @property (nonatomic, retain) XMLIOFunction *F10;
 @property (nonatomic, retain) XMLIOFunction *F11;
 @property (nonatomic, retain) XMLIOFunction *F12;
+
+@property (nonatomic, retain) XMLIOService *service;
 
 @end
