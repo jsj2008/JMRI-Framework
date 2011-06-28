@@ -44,7 +44,9 @@
 }
 
 - (XMLIOThrottle *)throttleWithService:(XMLIOService *)service {
-    return [[XMLIOThrottle alloc] initWithAddress:self.dccAddress withService:service];
+    XMLIOThrottle *throttle = [[[XMLIOThrottle alloc] initWithAddress:self.dccAddress withService:service] autorelease];
+    [throttle setFunctions:self.functions];
+    return throttle;
 }
 
 - (void)dealloc {
