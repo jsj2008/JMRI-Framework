@@ -42,7 +42,7 @@
 
 - (id)initWithAddress:(NSUInteger)address withService:(XMLIOService *)service {
     if ((self = [super init])) {
-        address_ = address;
+        self.address = address;
         self.service = service;
         if (service) {
             [service sendThrottle:address commands:nil];

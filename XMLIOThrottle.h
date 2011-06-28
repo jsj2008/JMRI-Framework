@@ -47,7 +47,7 @@
 - (id)initWithAddress:(NSUInteger)address withService:(XMLIOService *)service;
 - (void)setFunctions:(NSArray *)functions;
 
-@property (readonly) NSUInteger address;
+@property (nonatomic) NSUInteger address;
 @property (nonatomic, retain) NSString *forward;
 @property (nonatomic, retain) NSString *speed;
 @property (nonatomic, retain) XMLIOFunction *F0;
