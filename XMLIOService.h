@@ -28,6 +28,8 @@ extern NSString *const XMLIOTypeRoster;
 extern NSString *const XMLIOTypeRoute;
 extern NSString *const XMLIOTypeSensor;
 extern NSString *const XMLIOTypeTurnout;
+// JMRI XMLIO throttle type
+extern NSString *const XMLIOTypeThrottle;
 
 // JMRI XMLIO item attributes
 extern NSString *const XMLIOItemComment;
@@ -90,6 +92,7 @@ typedef enum {
 	XMLIOOperationList,
 	XMLIOOperationRead,
 	XMLIOOperationWrite,
+    XMLIOOperationThrottle,
 	XMLIOOperationTest
 } XMLIOOperationType;
 
@@ -124,6 +127,7 @@ typedef enum {
 - (void)readItem:(NSString *)name ofType:(NSString *)type;
 - (void)readItem:(NSString *)name ofType:(NSString *)type initialValue:(NSString *)value;
 - (void)writeItem:(NSString *)name ofType:(NSString *)type value:(NSString *)value;
+- (void)sendThrottle:(NSUInteger)address commands:(NSDictionary *)commands;
 
 - (void)startMonitoring:(NSString *)name ofType:(NSString *)type;
 - (void)stopMonitoring:(NSString *)name ofType:(NSString *)type;

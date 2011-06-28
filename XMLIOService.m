@@ -28,6 +28,8 @@ NSString *const XMLIOTypeRoute = @"route";
 NSString *const XMLIOTypeSensor = @"sensor";
 NSString *const XMLIOTypeTurnout = @"turnout";
 
+NSString *const XMLIOTypeThrottle = @"throttle";
+
 NSString *const XMLIOItemComment = @"comment";
 NSString *const XMLIOItemInverted = @"inverted";
 NSString *const XMLIOItemName = @"name";
@@ -196,6 +198,19 @@ NSString *const XMLIOItemValueKey = @"XMLIOItemValueKey";
 			 withXMLString:[NSString stringWithFormat:@"<item><type>%@</type><name>%@</name><set>%@</set></item>", type, name, value]
 				  withType:type
 				  withName:name];
+}
+
+- (void)sendThrottle:(NSUInteger)address commands:(NSDictionary *)commands {
+    NSMutableString *s = [NSMutableString stringWithFormat:@"<address>%lu</address>", address];
+    if (commands) {
+        for (NSString *key in commands) {
+            [s appendFormat:@"<%@>%@</%@>", key, [commands objectForKey:key], key];
+        }
+    }
+    [self conductOperation:XMLIOOperationThrottle 
+             withXMLString:s 
+                  withType:XMLIOTypeThrottle
+                  withName:[[NSNumber numberWithUnsignedInteger:address] stringValue]];
 }
 
 - (void)startMonitoring:(NSString *)name ofType:(NSString *)type {
