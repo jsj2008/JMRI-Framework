@@ -18,6 +18,7 @@
 
 #import "XMLIORoster.h"
 #import "XMLIOFunction.h"
+#import "XMLIOService.h"
 #import "XMLIOThrottle.h"
 
 @implementation XMLIORoster
@@ -42,8 +43,8 @@
     return [[[self.functions objectAtIndex:function] objectForKey:@"lockable"] boolValue];
 }
 
-- (XMLIOThrottle *)throttle {
-    return [[XMLIOThrottle alloc] initWithAddress:self.dccAddress];
+- (XMLIOThrottle *)throttleWithService:(XMLIOService *)service {
+    return [[XMLIOThrottle alloc] initWithAddress:self.dccAddress withService:service];
 }
 
 - (void)dealloc {
