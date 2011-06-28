@@ -51,4 +51,10 @@
     return self;
 }
 
+- (void)setFunctions:(NSArray *)functions {
+    for (NSUInteger i = 0; i < 13; i++) {
+        [self setValue:([functions count] > i) ? [functions objectAtIndex:i] : [[XMLIOFunction alloc] initWithFunctionIdentifier:i] forKey:[NSString stringWithFormat:@"F%lu", i]];
+    }
+}
+
 @end
