@@ -21,7 +21,7 @@
 
 @implementation XMLIOThrottle
 
-@synthesize address;
+@synthesize address = address_;
 @synthesize forward;
 @synthesize speed;
 @synthesize F0;
@@ -37,5 +37,12 @@
 @synthesize F10;
 @synthesize F11;
 @synthesize F12;
+
+- (id)initWithAddress:(NSUInteger)address {
+    if ((self = [super init])) {
+        address_ = address;
+    }
+    return self;
+}
 
 @end

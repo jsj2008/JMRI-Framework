@@ -22,7 +22,7 @@
 
 @interface XMLIOThrottle : XMLIOObject {
 
-    NSString *address;
+    NSUInteger address_;
     NSString *forward;
     NSString *speed;
     XMLIOFunction *F0;
@@ -41,7 +41,9 @@
     
 }
 
-@property (nonatomic, retain) NSString *address;
+- (id)initWithAddress:(NSUInteger)address;
+
+@property (readonly) NSUInteger address;
 @property (nonatomic, retain) NSString *forward;
 @property (nonatomic, retain) NSString *speed;
 @property (nonatomic, retain) XMLIOFunction *F0;

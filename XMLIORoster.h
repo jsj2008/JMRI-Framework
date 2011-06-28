@@ -19,6 +19,8 @@
 #import <Foundation/Foundation.h>
 #import "XMLIOItem.h"
 
+@class XMLIOThrottle;
+
 @interface XMLIORoster : XMLIOItem {
 
     NSMutableArray *functions;
@@ -27,6 +29,8 @@
 
 - (BOOL)lockableForFunction:(NSInteger)function;
 - (NSString *)labelForFunction:(NSInteger)function;
+
+- (XMLIOThrottle *)throttle;
 
 @property (retain) NSMutableArray* functions;
 
