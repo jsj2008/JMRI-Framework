@@ -165,6 +165,7 @@ NSString *const JavaNO = @"false"; // java.lang.Boolean.toString returns "false"
     if (currentElement) {
         if (currentElement.parent) {
             XMLIOObject *parent;
+            XMLIOFunction *f;
             if ([currentElement.parent isMemberOfClass:[XMLIOThrottle class]]) {
                 parent = (XMLIOThrottle *)currentElement.parent;
             } else {
@@ -181,6 +182,10 @@ NSString *const JavaNO = @"false"; // java.lang.Boolean.toString returns "false"
                     [(XMLIOItem *)parent setInverted:[currentElement.text isEqualToString:JavaYES]];
                 } else if ([currentElement.XMLName isEqualToString:XMLIOThrottleAddress]) {
                     [(XMLIOThrottle *)parent setAddress:[currentElement.text integerValue]];
+                } else if ([[currentElement.XMLName substringToIndex:1] isEqualToString:@"F"]) {
+                    f = [[XMLIOFunction alloc] initWithFunctionIdentifier:[[currentElement.XMLName substringFromIndex:1] integerValue]];
+                    [(XMLIOThrottle *)parent setValue:f forKey:currentElement.XMLName];
+                    [f release];
                 } else if (![currentElement.XMLName isEqualToString:XMLIORosterFunctionLabels] &&
                     ![currentElement.XMLName isEqualToString:XMLIORosterFunctionLockables]) {
                     [parent setValue:currentElement.text forKey:elementName];
@@ -189,7 +194,7 @@ NSString *const JavaNO = @"false"; // java.lang.Boolean.toString returns "false"
                        [parent.XMLName isEqualToString:XMLIORosterFunctionLockables]) {
                 XMLIORoster *roster = (XMLIORoster *)parent.parent;
                 NSUInteger i = [[elementName substringFromIndex:1] integerValue];
-                XMLIOFunction *f = [roster.functions objectAtIndex:i];
+                f = [roster.functions objectAtIndex:i];
                 if ([parent.XMLName isEqualToString:XMLIORosterFunctionLabels]) {
                     f.label = currentElement.text;
                 } else {

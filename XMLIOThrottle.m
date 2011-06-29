@@ -47,6 +47,10 @@
         if (service) {
             [service sendThrottle:address commands:nil];
         }
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(updateWithNotification:)
+                                                     name:XMLIOServiceDidGetThrottle 
+                                                   object:service];
     }
     return self;
 }
@@ -55,6 +59,78 @@
     for (NSUInteger i = 0; i < 13; i++) {
         [self setValue:([functions count] > i) ? [functions objectAtIndex:i] : [[XMLIOFunction alloc] initWithFunctionIdentifier:i] forKey:[NSString stringWithFormat:@"F%lu", i]];
     }
+}
+
+- (void)updateFromThrottle:(XMLIOThrottle *)throttle {
+    if (throttle.address == self.address) {
+        if (throttle.speed) {
+            self.speed = throttle.speed;
+        }
+        if (throttle.forward) {
+            self.forward = throttle.forward;
+        }
+        if (throttle.F0) {
+            self.F0.state = throttle.F0.state;
+        }
+        if (throttle.F1) {
+            self.F1.state = throttle.F1.state;
+        }
+        if (throttle.F2) {
+            self.F2.state = throttle.F2.state;
+        }
+        if (throttle.F3) {
+            self.F3.state = throttle.F3.state;
+        }
+        if (throttle.F4) {
+            self.F4.state = throttle.F4.state;
+        }
+        if (throttle.F5) {
+            self.F5.state = throttle.F5.state;
+        }
+        if (throttle.F6) {
+            self.F6.state = throttle.F6.state;
+        }
+        if (throttle.F7) {
+            self.F7.state = throttle.F7.state;
+        }
+        if (throttle.F8) {
+            self.F8.state = throttle.F8.state;
+        }
+        if (throttle.F9) {
+            self.F9.state = throttle.F9.state;
+        }
+        if (throttle.F10) {
+            self.F10.state = throttle.F10.state;
+        }
+        if (throttle.F11) {
+            self.F11.state = throttle.F11.state;
+        }
+        if (throttle.F12) {
+            self.F12.state = throttle.F12.state;
+        }
+    }
+}
+
+- (void)updateWithNotification:(NSNotification *)notification {
+    [self updateFromThrottle:[[notification userInfo] objectForKey:XMLIOThrottleKey]];
+}
+
+- (void)dealloc {
+    self.F0 = nil;
+    self.F1 = nil;
+    self.F2 = nil;
+    self.F3 = nil;
+    self.F4 = nil;
+    self.F5 = nil;
+    self.F6 = nil;
+    self.F7 = nil;
+    self.F8 = nil;
+    self.F9 = nil;
+    self.F10 = nil;
+    self.F11 = nil;
+    self.F12 = nil;
+    self.service = nil;
+    [super dealloc];
 }
 
 @end

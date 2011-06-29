@@ -46,6 +46,8 @@
 
 - (id)initWithAddress:(NSUInteger)address withService:(XMLIOService *)service;
 - (void)setFunctions:(NSArray *)functions;
+- (void)updateFromThrottle:(XMLIOThrottle *)throttle;
+- (void)updateWithNotification:(NSNotification *)notification;
 
 @property (nonatomic) NSUInteger address;
 @property (nonatomic, retain) NSString *forward;
