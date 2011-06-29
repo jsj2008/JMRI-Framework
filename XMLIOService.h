@@ -81,11 +81,13 @@ extern NSString *const XMLIOSensorClockRunning;
 extern NSString *const XMLIOServiceDidListItems;
 extern NSString *const XMLIOServiceDidReadItem;
 extern NSString *const XMLIOServiceDidWriteItem;
+extern NSString *const XMLIOServiceDidGetThrottle;
 extern NSString *const XMLIOItemsListKey;
 extern NSString *const XMLIOItemKey;
 extern NSString *const XMLIOItemNameKey;
 extern NSString *const XMLIOItemTypeKey;
 extern NSString *const XMLIOItemValueKey;
+extern NSString *const XMLIOThrottleKey;
 
 typedef enum {
 	XMLIOOperationNone = 0,
@@ -111,6 +113,8 @@ typedef enum {
 
 @protocol XMLIOServiceDelegate;
 @protocol XMLIOServiceHelperDelegate;
+
+@class XMLIOThrottle;
 
 @interface XMLIOService : JMRINetService {
 
@@ -158,6 +162,7 @@ typedef enum {
 - (void)XMLIOService:(XMLIOService *)service didListItems:(NSArray *)items ofType:(NSString *)type;
 - (void)XMLIOService:(XMLIOService *)service didReadItem:(XMLIOItem *)item withName:(NSString *)name ofType:(NSString *)type withValue:(NSString *)value;
 - (void)XMLIOService:(XMLIOService *)service didWriteItem:(XMLIOItem *)item withName:(NSString *)name ofType:(NSString *)type withValue:(NSString *)value;
+- (void)XMLIOService:(XMLIOService *)service didGetThrottle:(XMLIOThrottle *)throttle withAddress:(NSUInteger)address;
 - (void)XMLIOService:(XMLIOService *)service didConnectWithRequest:(NSURLRequest *)request;
 - (void)XMLIOServiceDidFinishLoading:(XMLIOService *)service;
 

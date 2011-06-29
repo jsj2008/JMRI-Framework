@@ -19,6 +19,7 @@
 #import <Foundation/Foundation.h>
 
 @class XMLIOObject;
+@class XMLIOThrottle;
 
 @interface XMLIOServiceHelper : NSObject <NSXMLParserDelegate> {
 
@@ -56,5 +57,6 @@
 - (void)XMLIOServiceHelper:(XMLIOServiceHelper *)helper didReadItem:(XMLIOObject *)item withName:(NSString *)name ofType:(NSString *)type withValue:(NSString *)value;
 - (void)XMLIOServiceHelper:(XMLIOServiceHelper *)helper didWriteItem:(XMLIOObject *)item withName:(NSString *)name ofType:(NSString *)type withValue:(NSString *)value;
 - (void)XMLIOServiceHelperDidFinishLoading:(XMLIOServiceHelper *)helper;
+- (void)XMLIOServiceHelper:(XMLIOServiceHelper *)helper didGetThrottle:(XMLIOThrottle *)throttle atAddress:(NSUInteger)address;
 
 @end

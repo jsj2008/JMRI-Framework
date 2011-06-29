@@ -126,6 +126,11 @@ NSString *const JavaNO = @"false"; // java.lang.Boolean.toString returns "false"
 			if ([self.delegate respondsToSelector:@selector(XMLIOServiceHelper:didWriteItem:ofType:withValue:)]) {
 				[self.delegate XMLIOServiceHelper:self didWriteItem:[items objectForKey:name] withName:name ofType:type withValue:[[items objectForKey:name] valueForKey:XMLIOItemValue]];
 			}
+            break;
+        case XMLIOOperationThrottle:
+            if ([self.delegate respondsToSelector:@selector(XMLIOServiceHelper:didGetThrottle:atAddress:)]) {
+                [self.delegate XMLIOServiceHelper:self didGetThrottle:[items objectForKey:name] atAddress:[name integerValue]];
+            }
 			break;
 	}
 }
@@ -174,6 +179,8 @@ NSString *const JavaNO = @"false"; // java.lang.Boolean.toString returns "false"
                     [(XMLIORoster *)parent setMaxSpeedPct:[currentElement.text floatValue]];
                 } else if ([currentElement.XMLName isEqualToString:XMLIOItemInverted]) {
                     [(XMLIOItem *)parent setInverted:[currentElement.text isEqualToString:JavaYES]];
+                } else if ([currentElement.XMLName isEqualToString:XMLIOThrottleAddress]) {
+                    [(XMLIOThrottle *)parent setAddress:[currentElement.text integerValue]];
                 } else if (![currentElement.XMLName isEqualToString:XMLIORosterFunctionLabels] &&
                     ![currentElement.XMLName isEqualToString:XMLIORosterFunctionLockables]) {
                     [parent setValue:currentElement.text forKey:elementName];
@@ -190,7 +197,11 @@ NSString *const JavaNO = @"false"; // java.lang.Boolean.toString returns "false"
                 }
              }
             if (rootElement == currentElement.parent) {
-                [items setObject:currentElement forKey:[(XMLIOItem *)currentElement name]];
+                if ([currentElement isKindOfClass:[XMLIOThrottle class]]) {
+                    [items setObject:currentElement forKey:name];
+                } else {
+                    [items setObject:currentElement forKey:[(XMLIOItem *)currentElement name]];
+                }
             }
         }
         if ([currentElement isMemberOfClass:[XMLIORoster class]]) {

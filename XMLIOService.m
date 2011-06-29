@@ -18,6 +18,7 @@
 
 #import "XMLIOService.h"
 #import "XMLIOServiceHelper.h"
+#import "XMLIOThrottle.h"
 
 NSString *const XMLIOTypeMemory = @"memory";
 NSString *const XMLIOTypeMetadata = @"metadata";
@@ -77,11 +78,13 @@ NSString *const XMLIOSensorClockRunning = @"ISCLOCKRUNNING";
 NSString *const XMLIOServiceDidListItems = @"XMLIOServiceDidListItems";
 NSString *const XMLIOServiceDidReadItem = @"XMLIOServiceDidReadItem";
 NSString *const XMLIOServiceDidWriteItem = @"XMLIOServiceDidWriteItem";
+NSString *const XMLIOServiceDidGetThrottle = @"XMLIOServiceDidGetThrottle";
 NSString *const XMLIOItemsListKey = @"XMLIOItemsListKey";
 NSString *const XMLIOItemKey = @"XMLIOItemKey";
 NSString *const XMLIOItemNameKey = @"XMLIOItemNameKey";
 NSString *const XMLIOItemTypeKey = @"XMLIOItemTypeKey";
 NSString *const XMLIOItemValueKey = @"XMLIOItemValueKey";
+NSString *const XMLIOThrottleKey = @"XMLIOThrottleKey";
 
 #pragma mark -
 #pragma mark Private interface
@@ -301,6 +304,18 @@ NSString *const XMLIOItemValueKey = @"XMLIOItemValueKey";
 																	value, XMLIOItemValueKey,
 																	nil]];
 	}
+}
+
+- (void)XMLIOServiceHelper:(XMLIOServiceHelper *)helper didGetThrottle:(XMLIOThrottle *)throttle atAddress:(NSUInteger)address {
+    if ([self.delegate respondsToSelector:@selector(XMLIOService:didGetThrottle:withAddress:)]) {
+        [self.delegate XMLIOService:self didGetThrottle:throttle withAddress:address];
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:XMLIOServiceDidGetThrottle
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                throttle, XMLIOThrottleKey,
+                                                                [NSNumber numberWithUnsignedInteger:address], XMLIOThrottleAddress,
+                                                                nil]];
 }
 
 - (void)XMLIOServiceHelperDidFinishLoading:(XMLIOServiceHelper *)helper {
