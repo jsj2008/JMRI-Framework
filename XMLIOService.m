@@ -341,12 +341,6 @@ NSString *const XMLIOThrottleKey = @"XMLIOThrottleKey";
 		connections = 0;
 		monitoredItems = [[NSMutableSet alloc] initWithCapacity:0];
 		self.XMLIOPath = @"xmlio";
-        NSDictionary *txtRecords = [NSNetService dictionaryFromTXTRecordData:[service TXTRecordData]];
-        version_ = ([txtRecords objectForKey:JMRITXTRecordKeyJMRI]);
-        if (!version_) {
-            version_ = @"2.10";
-            [self readItem:XMLIOMetadataJMRIVersion ofType:XMLIOTypeMetadata];
-        }
 	}
 	return self;
 }
@@ -356,7 +350,6 @@ NSString *const XMLIOThrottleKey = @"XMLIOThrottleKey";
 		connections = 0;
 		monitoredItems = [[NSMutableSet alloc] initWithCapacity:0];
 		self.XMLIOPath = @"xmlio";
-        [self readItem:XMLIOMetadataJMRIVersion ofType:XMLIOTypeMetadata];
 	}
 	return self;
 }
