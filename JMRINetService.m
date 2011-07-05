@@ -154,7 +154,7 @@ NSString *const JMRITXTRecordKeyJMRI = @"jmri";
 
 - (NSString *)name {
 	if (self.service) {
-		return [self.service name];
+		return ([[self.service name] hasPrefix:@"JMRI on "]) ? [[self.service name] substringFromIndex:8] : [self.service name];
 	}
 	return manualAddress;
 }
