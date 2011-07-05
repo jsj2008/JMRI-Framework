@@ -145,7 +145,7 @@ NSString *const JMRITXTRecordKeyJMRI = @"jmri";
 	return nil;
 }
 
-- (NSString *)hostname {
+- (NSString *)hostName {
 	if (self.service) {
 		return [self.service hostName];
 	}

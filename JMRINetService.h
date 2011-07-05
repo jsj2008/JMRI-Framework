@@ -64,7 +64,7 @@ extern NSString *const JMRITXTRecordKeyJMRI;
 
 @property (retain, readonly) NSArray *addresses;
 @property (retain, readonly) NSString *domain;
-@property (retain, readonly) NSString *hostname;
+@property (retain, readonly) NSString *hostName;
 @property (retain, readonly) NSString *name;
 @property (readonly) NSInteger port;
 
