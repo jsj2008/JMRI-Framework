@@ -139,7 +139,7 @@ NSString *const JavaNO = @"false"; // java.lang.Boolean.toString returns "false"
     if (rootElement == nil) {
         XMLIOObject *root = [[XMLIOObject alloc] init];
         rootElement = root;
-        currentElement = root;
+        currentElement = [root retain];
         [root release];
     } else {
         XMLIOObject *newElement;
@@ -171,36 +171,38 @@ NSString *const JavaNO = @"false"; // java.lang.Boolean.toString returns "false"
             } else {
                 parent = (XMLIOItem *)currentElement.parent;
             }
-            if ([currentElement.parent isKindOfClass:[XMLIOObject class]]) {
-                if ([currentElement.XMLName isEqualToString:XMLIORosterDCCAddress]) {
-                    [(XMLIORoster *)parent setDccAddress:[currentElement.text integerValue]];
-                } else if ([currentElement.XMLName isEqualToString:XMLIORosterRoadNumber]) {
-                    [(XMLIORoster *)parent setRoadNumber:[currentElement.text integerValue]];
-                } else if ([currentElement.XMLName isEqualToString:XMLIORosterMaxSpeedPct]) {
-                    [(XMLIORoster *)parent setMaxSpeedPct:[currentElement.text floatValue]];
-                } else if ([currentElement.XMLName isEqualToString:XMLIOItemInverted]) {
-                    [(XMLIOItem *)parent setInverted:[currentElement.text isEqualToString:JavaYES]];
-                } else if ([currentElement.XMLName isEqualToString:XMLIOThrottleAddress]) {
-                    [(XMLIOThrottle *)parent setAddress:[currentElement.text integerValue]];
-                } else if ([[currentElement.XMLName substringToIndex:1] isEqualToString:@"F"]) {
-                    f = [[XMLIOFunction alloc] initWithFunctionIdentifier:[[currentElement.XMLName substringFromIndex:1] integerValue]];
-                    [(XMLIOThrottle *)parent setValue:f forKey:currentElement.XMLName];
-                    [f release];
-                } else if (![currentElement.XMLName isEqualToString:XMLIORosterFunctionLabels] &&
-                    ![currentElement.XMLName isEqualToString:XMLIORosterFunctionLockables]) {
-                    [parent setValue:currentElement.text forKey:elementName];
+            if (currentElement.parent != rootElement) {
+                if ([currentElement.parent isKindOfClass:[XMLIOObject class]]) {
+                    if ([currentElement.XMLName isEqualToString:XMLIORosterDCCAddress]) {
+                        [(XMLIORoster *)parent setDccAddress:[currentElement.text integerValue]];
+                    } else if ([currentElement.XMLName isEqualToString:XMLIORosterRoadNumber]) {
+                        [(XMLIORoster *)parent setRoadNumber:[currentElement.text integerValue]];
+                    } else if ([currentElement.XMLName isEqualToString:XMLIORosterMaxSpeedPct]) {
+                        [(XMLIORoster *)parent setMaxSpeedPct:[currentElement.text floatValue]];
+                    } else if ([currentElement.XMLName isEqualToString:XMLIOItemInverted]) {
+                        [(XMLIOItem *)parent setInverted:[currentElement.text isEqualToString:JavaYES]];
+                    } else if ([currentElement.XMLName isEqualToString:XMLIOThrottleAddress]) {
+                        [(XMLIOThrottle *)parent setAddress:[currentElement.text integerValue]];
+                    } else if ([[currentElement.XMLName substringToIndex:1] isEqualToString:@"F"]) {
+                        f = [[XMLIOFunction alloc] initWithFunctionIdentifier:[[currentElement.XMLName substringFromIndex:1] integerValue]];
+                        [(XMLIOThrottle *)parent setValue:f forKey:currentElement.XMLName];
+                        [f release];
+                    } else if (![currentElement.XMLName isEqualToString:XMLIORosterFunctionLabels] &&
+                               ![currentElement.XMLName isEqualToString:XMLIORosterFunctionLockables]) {
+                        [parent setValue:currentElement.text forKey:elementName];
+                    }
+                } else if ([parent.XMLName isEqualToString:XMLIORosterFunctionLabels] ||
+                           [parent.XMLName isEqualToString:XMLIORosterFunctionLockables]) {
+                    XMLIORoster *roster = (XMLIORoster *)parent.parent;
+                    NSUInteger i = [[elementName substringFromIndex:1] integerValue];
+                    f = [roster.functions objectAtIndex:i];
+                    if ([parent.XMLName isEqualToString:XMLIORosterFunctionLabels]) {
+                        f.label = currentElement.text;
+                    } else {
+                        f.lockable = [currentElement.text isEqualToString:JavaYES];
+                    }
                 }
-            } else if ([parent.XMLName isEqualToString:XMLIORosterFunctionLabels] ||
-                       [parent.XMLName isEqualToString:XMLIORosterFunctionLockables]) {
-                XMLIORoster *roster = (XMLIORoster *)parent.parent;
-                NSUInteger i = [[elementName substringFromIndex:1] integerValue];
-                f = [roster.functions objectAtIndex:i];
-                if ([parent.XMLName isEqualToString:XMLIORosterFunctionLabels]) {
-                    f.label = currentElement.text;
-                } else {
-                    f.lockable = [currentElement.text isEqualToString:JavaYES];
-                }
-             }
+            }
             if (rootElement == currentElement.parent) {
                 if ([currentElement isKindOfClass:[XMLIOThrottle class]]) {
                     [items setObject:currentElement forKey:name];
