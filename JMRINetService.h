@@ -19,6 +19,8 @@
 #import <Foundation/Foundation.h>
 #import "NSArray+JMRIExtensions.h"
 
+extern NSString *const JMRITXTRecordKeyJMRI;
+
 @interface JMRINetService : NSObject <NSNetServiceDelegate> {
 
 	NSNetService *_service;

@@ -18,6 +18,7 @@
 
 #import "JMRINetService.h"
 
+NSString *const JMRITXTRecordKeyJMRI = @"jmri";
 
 @implementation JMRINetService
 
