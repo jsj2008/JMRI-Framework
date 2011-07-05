@@ -118,7 +118,7 @@ NSString *const XMLIOThrottleKey = @"XMLIOThrottleKey";
 	if (![self.XMLIOPath hasPrefix:@"/"]) {
 		self.XMLIOPath = [@"/" stringByAppendingString:self.XMLIOPath];
 	}
-	return [[NSURL URLWithString:[NSString stringWithFormat:@"http://%@:%i%@", self.hostname, self.port, self.XMLIOPath, nil]] absoluteURL];
+	return [[NSURL URLWithString:[NSString stringWithFormat:@"http://%@:%i%@", self.hostName, self.port, self.XMLIOPath, nil]] absoluteURL];
 }
 
 #pragma mark -
