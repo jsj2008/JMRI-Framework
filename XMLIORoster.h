@@ -24,15 +24,11 @@
 
 @interface XMLIORoster : XMLIOItem {
 
-    NSMutableArray *functions;
-    
 }
 
 - (BOOL)lockableForFunction:(NSInteger)function;
 - (NSString *)labelForFunction:(NSInteger)function;
 
 - (XMLIOThrottle *)throttleWithService:(XMLIOService *)service;
-
-@property (retain) NSMutableArray* functions;
 
 @end

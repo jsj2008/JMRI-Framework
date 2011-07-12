@@ -23,8 +23,6 @@
 
 @implementation XMLIORoster
 
-@synthesize functions;
-
 - (id)init {
 	if ((self = [super init])) {
         self.functions = [NSMutableArray arrayWithCapacity:13];

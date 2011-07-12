@@ -18,6 +18,7 @@
 
 #import "XMLIOItem.h"
 #import "XMLIOService.h"
+#import "XMLIOFunction.h"
 
 @implementation XMLIOItem
 
@@ -37,6 +38,7 @@
 @synthesize maxSpeedPct;
 @synthesize imageFileName;
 @synthesize imageIconName;
+@synthesize functions;
 
 - (NSComparisonResult)localizedCaseInsensitiveCompareByUserName:(XMLIOItem *)item {
 	if (self.userName && item.userName) {
@@ -50,6 +52,7 @@
 }
 
 - (id)init {
+    XMLIOFunction *f;
 	if ((self = [super init])) {
 		self.name = nil;
 		self.type = nil;
@@ -66,6 +69,12 @@
 		self.maxSpeedPct = 0.0;
 		self.imageFileName = nil;
 		self.imageIconName = nil;
+        self.functions = [NSMutableArray arrayWithCapacity:13];
+        for (NSUInteger i = 0; i < 13; i++) {
+            f = [[XMLIOFunction alloc] initWithFunctionIdentifier:i];
+            [self.functions insertObject:f atIndex:i];
+            [f release];
+        }
 	}
 	return self;
 }

@@ -37,7 +37,8 @@
     float maxSpeedPct;
     NSString *imageFileName;
     NSString *imageIconName;
-
+    NSMutableArray *functions;
+    
 }
 
 - (NSComparisonResult)localizedCaseInsensitiveCompareByUserName:(XMLIOItem*)item;
@@ -62,5 +63,6 @@
 @property (nonatomic) float maxSpeedPct;
 @property (nonatomic, retain) NSString* imageFileName;
 @property (nonatomic, retain) NSString* imageIconName;
+@property (retain) NSMutableArray* functions;
 
 @end
