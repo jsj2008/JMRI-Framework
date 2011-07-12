@@ -12,7 +12,6 @@
 @implementation XMLIOFunction
 
 @synthesize identifier = identifier_;
-@synthesize key = key_;
 @synthesize label;
 @synthesize lockable;
 @synthesize state;
@@ -20,7 +19,6 @@
 - (id)initWithFunctionIdentifier:(NSUInteger)identifier {
     if ((self = [super init])) {
         identifier_ = identifier;
-        key_ = [NSString stringWithFormat:@"F%lu", (unsigned long)self.identifier, nil];
         self.label = self.key;
         self.lockable = YES;
         self.state = XMLIOItemStateUnknown;
@@ -28,8 +26,11 @@
     return self;
 }
 
+- (NSString *)key {
+    return [NSString stringWithFormat:@"F%lu", (unsigned long)self.identifier];
+}
+
 - (void)dealloc {
-    [key_ release];
     self.label = nil;
     [super dealloc];
 }
