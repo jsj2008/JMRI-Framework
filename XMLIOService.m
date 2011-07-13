@@ -48,6 +48,7 @@ NSString *const XMLIORosterMaxSpeedPct = @"maxSpeedPct";
 NSString *const XMLIORosterImageFileName = @"imageFileName";
 NSString *const XMLIORosterImageIconName = @"imageIconName";
 NSString *const XMLIORosterFunctions = @"functions";
+NSUInteger const XMLIORosterMaxFunctions = 13;
 
 NSString *const XMLIOThrottleAddress = @"address";
 NSString *const XMLIOThrottleForward = @"forward";
@@ -121,6 +122,10 @@ NSString *const XMLIOThrottleKey = @"XMLIOThrottleKey";
 	return [[NSURL URLWithString:[NSString stringWithFormat:@"http://%@:%i%@", self.hostName, self.port, self.XMLIOPath, nil]] absoluteURL];
 }
 
+- (BOOL)useAttributeProtocol {
+    return ([self.version compare:@"2.13.1" options:NSNumericSearch] != NSOrderedDescending);
+}
+
 #pragma mark -
 #pragma mark JMRI net service methods
 
@@ -176,31 +181,59 @@ NSString *const XMLIOThrottleKey = @"XMLIOThrottleKey";
 }
 
 - (void)list:(NSString *)type {
+    if (self.useAttributeProtocol) {
+        [self conductOperation:XMLIOOperationList
+                 withXMLString:[NSString stringWithFormat:@"<list type=\"%@\" />", type]
+                      withType:type
+                      withName:nil];
+    } else {
 		[self conductOperation:XMLIOOperationList
 				 withXMLString:[NSString stringWithFormat:@"<list><type>%@</type></list>", type]
 					  withType:type
 					  withName:nil];
+    }
 }
 
 - (void)readItem:(NSString *)name ofType:(NSString *)type {
-	[self conductOperation:XMLIOOperationRead
-			 withXMLString:[NSString stringWithFormat:@"<item><type>%@</type><name>%@</name></item>", type, name]
-				  withType:type
-				  withName:name];
+    if (self.useAttributeProtocol) {
+        [self conductOperation:XMLIOOperationRead
+                 withXMLString:[NSString stringWithFormat:@"<item type=\"%@\" name=\"%@\" />", type, name]
+                      withType:type
+                      withName:name];
+    } else {
+        [self conductOperation:XMLIOOperationRead
+                 withXMLString:[NSString stringWithFormat:@"<item><type>%@</type><name>%@</name></item>", type, name]
+                      withType:type
+                      withName:name];
+    }
 }
 
 - (void)readItem:(NSString *)name ofType:(NSString *)type initialValue:(NSString *)value {
-	[self conductOperation:XMLIOOperationRead
-			 withXMLString:[NSString stringWithFormat:@"<item><type>%@</type><name>%@</name><value>%@</value></item>", type, name, value]
-				  withType:type
-				  withName:name];
+    if (self.useAttributeProtocol) {
+        [self conductOperation:XMLIOOperationRead
+                 withXMLString:[NSString stringWithFormat:@"<item type=\"%@\" name=\"%@\" value=\"%@\" />", type, name, value]
+                      withType:type
+                      withName:name];
+    } else {
+        [self conductOperation:XMLIOOperationRead
+                 withXMLString:[NSString stringWithFormat:@"<item><type>%@</type><name>%@</name><value>%@</value></item>", type, name, value]
+                      withType:type
+                      withName:name];
+    }
 }
 
 - (void)writeItem:(NSString *)name ofType:(NSString *)type value:(NSString *)value {
-	[self conductOperation:XMLIOOperationWrite
-			 withXMLString:[NSString stringWithFormat:@"<item><type>%@</type><name>%@</name><set>%@</set></item>", type, name, value]
-				  withType:type
-				  withName:name];
+    if (self.useAttributeProtocol) {
+        [self conductOperation:XMLIOOperationWrite
+                 withXMLString:[NSString stringWithFormat:@"<item type=\"%@\" name=\"%@\" set=\"%@\" />", type, name, value]
+                      withType:type
+                      withName:name];
+    } else {
+        [self conductOperation:XMLIOOperationWrite
+                 withXMLString:[NSString stringWithFormat:@"<item><type>%@</type><name>%@</name><set>%@</set></item>", type, name, value]
+                      withType:type
+                      withName:name];
+    }
 }
 
 - (void)sendThrottle:(NSUInteger)address commands:(NSDictionary *)commands {

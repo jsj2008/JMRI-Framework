@@ -25,7 +25,7 @@
 
 - (id)init {
 	if ((self = [super init])) {
-        self.functions = [NSMutableArray arrayWithCapacity:13];
+        self.functions = [NSMutableArray arrayWithCapacity:XMLIORosterMaxFunctions];
         for (NSUInteger i = 0; i < [self.functions count]; i++) {
             [self.functions insertObject:[[[XMLIOFunction alloc] initWithFunctionIdentifier:i] autorelease] atIndex:i];
         }

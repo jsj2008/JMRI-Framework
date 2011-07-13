@@ -46,10 +46,9 @@
 */
 
 - (void)netServiceDidResolveAddress:(NSNetService *)sender {
-    // replace with NSDictionary of txtRecordData when path=index.html is not constant and other meaningful data is published
     NSDictionary *txtRecords = [NSNetService dictionaryFromTXTRecordData:[sender TXTRecordData]];
 	NSLog(@"XMLIOService TXT Record: %@", txtRecords);
-    // the test for path=index.html should hopefully be only temporary && JMRI post 2.12 should have a jmri=version instead
+    // the test for path=index.html should hopefully be only temporary && JMRI post 2.13 should have a jmri=version instead
     if (([txtRecords objectForKey:JMRITXTRecordKeyJMRI] || [txtRecords objectForKey:@"path"]) &&
         ![self containsService:sender]) {
 		XMLIOService *service = [[[XMLIOService alloc] initWithNetService:sender] autorelease];

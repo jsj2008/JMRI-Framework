@@ -18,6 +18,7 @@
 
 #import "JMRINetService.h"
 #import "XMLIOItem.h"
+#import "XMLIOServiceHelper.h"
 
 // JMRI XMLIO item types
 extern NSString *const XMLIOTypeMemory;
@@ -50,6 +51,7 @@ extern NSString *const XMLIORosterMaxSpeedPct;
 extern NSString *const XMLIORosterImageFileName;
 extern NSString *const XMLIORosterImageIconName;
 extern NSString *const XMLIORosterFunctions;
+extern NSUInteger const XMLIORosterMaxFunctions;    // Maximum number of Functions handled by XMLIO
 
 // JMRI XMLIO throttle attributes
 extern NSString *const XMLIOThrottleAddress;
@@ -116,7 +118,7 @@ typedef enum {
 
 @class XMLIOThrottle;
 
-@interface XMLIOService : JMRINetService {
+@interface XMLIOService : JMRINetService <XMLIOServiceHelperDelegate> {
 
 	NSUInteger connections;
 	NSMutableSet *monitoredItems;
@@ -143,6 +145,7 @@ typedef enum {
 @property (readonly, retain) NSURL* url;
 @property (readonly) BOOL openConnection;
 @property (nonatomic, retain) NSString* XMLIOPath;
+@property (readonly) BOOL useAttributeProtocol;
 
 @end
 

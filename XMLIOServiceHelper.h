@@ -20,10 +20,11 @@
 
 @class XMLIOObject;
 @class XMLIOThrottle;
+@class XMLIOService;
 
 @interface XMLIOServiceHelper : NSObject <NSXMLParserDelegate> {
 
-	id delegate;
+	XMLIOService *delegate;
 	NSMutableData* connectionData;
 	NSMutableDictionary* items;
     XMLIOObject* rootElement;
@@ -35,7 +36,7 @@
 
 }
 
-@property (retain) id delegate;
+@property (retain) XMLIOService *delegate;
 @property NSUInteger operation;
 @property (retain) NSString *name;
 @property (retain) NSString *type;

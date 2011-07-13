@@ -27,7 +27,8 @@
     NSString *value;
     NSString *comment;
     BOOL inverted;
-    
+
+    // roster-only elements are needed in XMLIOItem for JMRI < 2.13.1
     NSUInteger dccAddress;
     NSString *addressLength;
     NSString *roadName;
