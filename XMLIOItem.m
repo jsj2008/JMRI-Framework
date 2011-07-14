@@ -69,8 +69,8 @@
 		self.maxSpeedPct = 0.0;
 		self.imageFileName = nil;
 		self.imageIconName = nil;
-        self.functions = [NSMutableArray arrayWithCapacity:13];
-        for (NSUInteger i = 0; i < 13; i++) {
+        self.functions = [NSMutableArray arrayWithCapacity:XMLIORosterMaxFunctions];
+        for (NSUInteger i = 0; i < XMLIORosterMaxFunctions; i++) {
             f = [[XMLIOFunction alloc] initWithFunctionIdentifier:i];
             [self.functions insertObject:f atIndex:i];
             [f release];
