@@ -27,10 +27,14 @@ NSString *const JMRITXTRecordKeyJMRI = @"jmri";
 
 - (id)initWithNetService:(NSNetService *)service {
 	if ((self = [super init])) {
+        NSDictionary *txtRecords = [NSNetService dictionaryFromTXTRecordData:[service TXTRecordData]];
 		self.service = service;
 		[self.service setDelegate:self];
 		self.logTraffic = NO;
 		self.timeoutInterval = 60;
+        if ([txtRecords objectForKey:JMRITXTRecordKeyJMRI]) {
+            version_ = [NSString stringWithUTF8String:[[txtRecords objectForKey:JMRITXTRecordKeyJMRI] bytes]];
+        }
 	}
 	return self;
 }
