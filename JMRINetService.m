@@ -33,7 +33,7 @@ NSString *const JMRITXTRecordKeyJMRI = @"jmri";
 		self.logTraffic = NO;
 		self.timeoutInterval = 60;
         if ([txtRecords objectForKey:JMRITXTRecordKeyJMRI]) {
-            version_ = [NSString stringWithUTF8String:[[txtRecords objectForKey:JMRITXTRecordKeyJMRI] bytes]];
+            version_ = [[NSString alloc] initWithUTF8String:[[txtRecords objectForKey:JMRITXTRecordKeyJMRI] bytes]];
         }
 	}
 	return self;
