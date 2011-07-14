@@ -26,7 +26,7 @@
 - (id)init {
 	if ((self = [super init])) {
         self.functions = [NSMutableArray arrayWithCapacity:XMLIORosterMaxFunctions];
-        for (NSUInteger i = 0; i < [self.functions count]; i++) {
+        for (NSUInteger i = 0; i < XMLIORosterMaxFunctions; i++) {
             [self.functions insertObject:[[[XMLIOFunction alloc] initWithFunctionIdentifier:i] autorelease] atIndex:i];
         }
 	}
@@ -34,11 +34,11 @@
 }
 
 - (NSString *)labelForFunction:(NSInteger)function {
-    return [[self.functions objectAtIndex:function] objectForKey:@"label"];
+    return [(XMLIOFunction *)[self.functions objectAtIndex:function] label];
 }
 
 - (BOOL)lockableForFunction:(NSInteger)function {
-    return [[[self.functions objectAtIndex:function] objectForKey:@"lockable"] boolValue];
+    return [(XMLIOFunction *)[self.functions objectAtIndex:function] lockable];
 }
 
 - (XMLIOThrottle *)throttleWithService:(XMLIOService *)service {
