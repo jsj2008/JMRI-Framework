@@ -123,7 +123,7 @@ NSString *const XMLIOThrottleKey = @"XMLIOThrottleKey";
 }
 
 - (BOOL)useAttributeProtocol {
-    return ([self.version compare:@"2.13.1" options:NSNumericSearch] != NSOrderedDescending);
+    return ([self.version compare:@"2.13.1" options:NSNumericSearch] != NSOrderedAscending);
 }
 
 #pragma mark -
@@ -197,7 +197,7 @@ NSString *const XMLIOThrottleKey = @"XMLIOThrottleKey";
 - (void)readItem:(NSString *)name ofType:(NSString *)type {
     if (self.useAttributeProtocol) {
         [self conductOperation:XMLIOOperationRead
-                 withXMLString:[NSString stringWithFormat:@"<item type=\"%@\" name=\"%@\" />", type, name]
+                 withXMLString:[NSString stringWithFormat:@"<%@ name=\"%@\" />", type, name]
                       withType:type
                       withName:name];
     } else {
@@ -211,7 +211,7 @@ NSString *const XMLIOThrottleKey = @"XMLIOThrottleKey";
 - (void)readItem:(NSString *)name ofType:(NSString *)type initialValue:(NSString *)value {
     if (self.useAttributeProtocol) {
         [self conductOperation:XMLIOOperationRead
-                 withXMLString:[NSString stringWithFormat:@"<item type=\"%@\" name=\"%@\" value=\"%@\" />", type, name, value]
+                 withXMLString:[NSString stringWithFormat:@"<%@ name=\"%@\" value=\"%@\" />", type, name, value]
                       withType:type
                       withName:name];
     } else {
@@ -225,7 +225,7 @@ NSString *const XMLIOThrottleKey = @"XMLIOThrottleKey";
 - (void)writeItem:(NSString *)name ofType:(NSString *)type value:(NSString *)value {
     if (self.useAttributeProtocol) {
         [self conductOperation:XMLIOOperationWrite
-                 withXMLString:[NSString stringWithFormat:@"<item type=\"%@\" name=\"%@\" set=\"%@\" />", type, name, value]
+                 withXMLString:[NSString stringWithFormat:@"<%@ name=\"%@\" set=\"%@\" />", type, name, value]
                       withType:type
                       withName:name];
     } else {

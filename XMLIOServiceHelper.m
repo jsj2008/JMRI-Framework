@@ -148,7 +148,7 @@ NSString *const JavaNO = @"false"; // java.lang.Boolean.toString returns "false"
         [root release];
     } else {
         XMLIOObject *newElement;
-        if ([[attributeDict valueForKey:XMLIOItemType] isEqualToString:XMLIOTypeRoster]) {
+        if ([elementName isEqualToString:XMLIOTypeRoster]) {
             newElement = [[XMLIORoster alloc] init];
             [(XMLIORoster *)newElement setDccAddress:[[attributeDict objectForKey:XMLIORosterDCCAddress] integerValue]];
             [(XMLIORoster *)newElement setAddressLength:[attributeDict objectForKey:XMLIORosterAddressLength]];
@@ -162,9 +162,15 @@ NSString *const JavaNO = @"false"; // java.lang.Boolean.toString returns "false"
             [(XMLIORoster *)newElement setRoadName:[attributeDict objectForKey:XMLIORosterRoadName]];
             [(XMLIORoster *)newElement setRoadNumber:[[attributeDict objectForKey:XMLIORosterRoadNumber] integerValue]];
             [(XMLIORoster *)newElement setType:XMLIOTypeRoster];
-        } else if ([elementName isEqualToString:XMLIOXMLItem]) {
+        } else if ([elementName isEqualToString:XMLIOTypeMemory] ||
+                   [elementName isEqualToString:XMLIOTypeMetadata] ||
+                   [elementName isEqualToString:XMLIOTypePanel] ||
+                   [elementName isEqualToString:XMLIOTypePower] ||
+                   [elementName isEqualToString:XMLIOTypeRoute] ||
+                   [elementName isEqualToString:XMLIOTypeSensor] ||
+                   [elementName isEqualToString:XMLIOTypeTurnout]) {
             newElement = [[XMLIOItem alloc] init];
-            [(XMLIOItem *)newElement setType:[attributeDict objectForKey:XMLIOItemType]];
+            [(XMLIOItem *)newElement setType:elementName];
             [(XMLIOItem *)newElement setName:[attributeDict objectForKey:XMLIOItemName]];
             [(XMLIOItem *)newElement setUserName:[attributeDict objectForKey:XMLIOItemUserName]];
             [(XMLIOItem *)newElement setValue:[attributeDict objectForKey:XMLIOItemValue]];
@@ -178,6 +184,8 @@ NSString *const JavaNO = @"false"; // java.lang.Boolean.toString returns "false"
             f.label = [attributeDict objectForKey:XMLIORosterFunctionLabel];
             f.lockable = [[attributeDict objectForKey:XMLIORosterFunctionLockable] isEqualToString:JavaYES];
             newElement = [[XMLIOObject alloc] init];
+        } else if ([elementName isEqualToString:XMLIOXMLItem]) {
+            newElement = [[XMLIOItem alloc] init];
         } else {
             newElement = [[XMLIOObject alloc] init];
         }
@@ -195,19 +203,19 @@ NSString *const JavaNO = @"false"; // java.lang.Boolean.toString returns "false"
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
     if (self.delegate.useAttributeProtocol) {
         if (currentElement) {
-            currentElement = currentElement.parent;
-        }
-        if (currentElement.parent) {
-            if (rootElement == currentElement.parent) {
-                if ([currentElement isKindOfClass:[XMLIOThrottle class]]) {
-                    [items setObject:currentElement forKey:name];
-                } else {
-                    [items setObject:currentElement forKey:[(XMLIOItem *)currentElement name]];
+            if ([currentElement isMemberOfClass:[XMLIORoster class]]) {
+                [(XMLIORoster *)currentElement setUserName:[[(XMLIORoster *)currentElement roadName] stringByAppendingFormat:@" %u", [(XMLIORoster *)currentElement roadNumber]]];
+            }
+            if (currentElement.parent) {
+                if (rootElement == currentElement.parent) {
+                    if ([currentElement isKindOfClass:[XMLIOThrottle class]]) {
+                        [items setObject:currentElement forKey:name];
+                    } else {
+                        [items setObject:currentElement forKey:[(XMLIOItem *)currentElement name]];
+                    }
                 }
             }
-        }
-        if ([currentElement isMemberOfClass:[XMLIORoster class]]) {
-            [(XMLIORoster *)currentElement setUserName:[[(XMLIORoster *)currentElement roadName] stringByAppendingFormat:@" %u", [(XMLIORoster *)currentElement roadNumber]]];
+            currentElement = currentElement.parent;
         }
     } else {
         if (currentElement) {
