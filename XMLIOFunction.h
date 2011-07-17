@@ -14,11 +14,12 @@
     NSUInteger identifier_;
     NSString *label;
     BOOL lockable;
-    NSUInteger state;
+    NSUInteger state_;
     
 }
 
 - (id)initWithFunctionIdentifier:(NSUInteger)identifier;
+- (id)initWithBooleanState:(BOOL)state;
 
 @property (readonly) NSUInteger identifier;
 @property (readonly, retain) NSString* key;

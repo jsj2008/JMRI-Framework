@@ -14,7 +14,7 @@
 @synthesize identifier = identifier_;
 @synthesize label;
 @synthesize lockable;
-@synthesize state;
+@synthesize state = state_;
 
 - (id)initWithFunctionIdentifier:(NSUInteger)identifier {
     if ((self = [super init])) {
@@ -22,6 +22,14 @@
         self.label = self.key;
         self.lockable = YES;
         self.state = XMLIOItemStateUnknown;
+    }
+    return self;
+}
+
+- (id)initWithBooleanState:(BOOL)state {
+    if ((self = [super init])) {
+        identifier_ = NSNotFound;
+        self.state = (state) ? XMLIOItemStateActive : XMLIOItemStateInactive;
     }
     return self;
 }
