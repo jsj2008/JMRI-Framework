@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+@class XMLIOThrottle;
 
 @interface XMLIOFunction : NSObject {
     
@@ -15,6 +16,7 @@
     NSString *label;
     BOOL lockable;
     NSUInteger state_;
+    XMLIOThrottle *throttle_;
     
 }
 
@@ -26,5 +28,6 @@
 @property (nonatomic, retain) NSString* label;
 @property (nonatomic) BOOL lockable;
 @property (nonatomic) NSUInteger state;
+@property (nonatomic, retain) XMLIOThrottle* throttle;
 
 @end

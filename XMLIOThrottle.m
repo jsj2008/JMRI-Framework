@@ -39,30 +39,39 @@
 @synthesize F12;
 
 @synthesize service = service_;
+@synthesize shouldSendUpdate;
 
 - (id)initWithAddress:(NSUInteger)address withService:(XMLIOService *)service {
+    if (!service) {
+        return nil;
+    }
     if ((self = [super init])) {
+        self.shouldSendUpdate = YES;
         self.address = address;
         self.service = service;
-        if (service) {
-            [service sendThrottle:address commands:nil];
+        [service sendThrottle:address commands:nil];
+        [service.throttles setObject:self forKey:[[NSNumber numberWithInteger:address] stringValue]];
+        if (!service.useAttributeProtocol) {
+            [[NSNotificationCenter defaultCenter] addObserver:self
+                                                     selector:@selector(updateWithNotification:)
+                                                         name:XMLIOServiceDidGetThrottle 
+                                                       object:service];
         }
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(updateWithNotification:)
-                                                     name:XMLIOServiceDidGetThrottle 
-                                                   object:service];
     }
     return self;
 }
 
 - (void)setFunctions:(NSArray *)functions {
     for (NSUInteger i = 0; i < 13; i++) {
-        [self setValue:([functions count] > i) ? [functions objectAtIndex:i] : [[XMLIOFunction alloc] initWithFunctionIdentifier:i] forKey:[NSString stringWithFormat:@"F%lu", i]];
+        XMLIOFunction *f = ([functions count] > i) ? [functions objectAtIndex:i] : [[XMLIOFunction alloc] initWithFunctionIdentifier:i];
+        f.throttle = self;
+        [self setValue:f forKey:[NSString stringWithFormat:@"F%lu", i]];
     }
 }
 
 - (void)updateFromThrottle:(XMLIOThrottle *)throttle {
     if (throttle.address == self.address) {
+        self.shouldSendUpdate = NO;
         if (throttle.speed) {
             self.speed = throttle.speed;
         }
@@ -108,6 +117,7 @@
         if (throttle.F12) {
             self.F12.state = throttle.F12.state;
         }
+        self.shouldSendUpdate = YES;
     }
 }
 

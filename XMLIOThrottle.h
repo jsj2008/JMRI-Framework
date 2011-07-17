@@ -41,6 +41,7 @@
     XMLIOFunction *F12;
     
     XMLIOService *service_;
+    BOOL shouldSendUpdate;
     
 }
 
@@ -67,5 +68,6 @@
 @property (nonatomic, retain) XMLIOFunction *F12;
 
 @property (nonatomic, retain) XMLIOService *service;
+@property (nonatomic) BOOL shouldSendUpdate;
 
 @end

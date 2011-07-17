@@ -15,6 +15,7 @@
 @synthesize label;
 @synthesize lockable;
 @synthesize state = state_;
+@synthesize throttle = throttle_;
 
 - (id)initWithFunctionIdentifier:(NSUInteger)identifier {
     if ((self = [super init])) {
@@ -22,6 +23,7 @@
         self.label = self.key;
         self.lockable = YES;
         self.state = XMLIOItemStateUnknown;
+        self.throttle = nil;
     }
     return self;
 }
@@ -40,6 +42,7 @@
 
 - (void)dealloc {
     self.label = nil;
+    self.throttle = nil;
     [super dealloc];
 }
 

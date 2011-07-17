@@ -177,7 +177,30 @@ NSString *const JavaNO = @"false"; // java.lang.Boolean.toString returns "false"
             [(XMLIOItem *)newElement setComment:[attributeDict objectForKey:XMLIOItemComment]];
             [(XMLIOItem *)newElement setInverted:[[attributeDict objectForKey:XMLIOItemInverted] isEqualToString:JavaYES]];
         } else if ([elementName isEqualToString:XMLIOXMLThrottle]) {
-            newElement = [[XMLIOThrottle alloc] init];
+            if (self.delegate.useAttributeProtocol) {
+                XMLIOThrottle *t = [self.delegate.throttles objectForKey:[attributeDict objectForKey:XMLIOThrottleAddress]];
+                t.shouldSendUpdate = NO;
+                t.forward = [[attributeDict objectForKey:XMLIOThrottleForward] isEqualToString:JavaYES];
+                t.speed = [[attributeDict objectForKey:XMLIOThrottleSpeed] floatValue];
+                t.F0.state = ([[attributeDict objectForKey:XMLIOThrottleF0] isEqualToString:JavaYES]) ? XMLIOItemStateActive : XMLIOItemStateInactive;
+                t.F1.state = ([[attributeDict objectForKey:XMLIOThrottleF1] isEqualToString:JavaYES]) ? XMLIOItemStateActive : XMLIOItemStateInactive;
+                t.F2.state = ([[attributeDict objectForKey:XMLIOThrottleF2] isEqualToString:JavaYES]) ? XMLIOItemStateActive : XMLIOItemStateInactive;
+                t.F3.state = ([[attributeDict objectForKey:XMLIOThrottleF3] isEqualToString:JavaYES]) ? XMLIOItemStateActive : XMLIOItemStateInactive;
+                t.F4.state = ([[attributeDict objectForKey:XMLIOThrottleF4] isEqualToString:JavaYES]) ? XMLIOItemStateActive : XMLIOItemStateInactive;
+                t.F5.state = ([[attributeDict objectForKey:XMLIOThrottleF5] isEqualToString:JavaYES]) ? XMLIOItemStateActive : XMLIOItemStateInactive;
+                t.F6.state = ([[attributeDict objectForKey:XMLIOThrottleF6] isEqualToString:JavaYES]) ? XMLIOItemStateActive : XMLIOItemStateInactive;
+                t.F7.state = ([[attributeDict objectForKey:XMLIOThrottleF7] isEqualToString:JavaYES]) ? XMLIOItemStateActive : XMLIOItemStateInactive;
+                t.F8.state = ([[attributeDict objectForKey:XMLIOThrottleF8] isEqualToString:JavaYES]) ? XMLIOItemStateActive : XMLIOItemStateInactive;
+                t.F9.state = ([[attributeDict objectForKey:XMLIOThrottleF9] isEqualToString:JavaYES]) ? XMLIOItemStateActive : XMLIOItemStateInactive;
+                t.F10.state = ([[attributeDict objectForKey:XMLIOThrottleF10] isEqualToString:JavaYES]) ? XMLIOItemStateActive : XMLIOItemStateInactive;
+                t.F11.state = ([[attributeDict objectForKey:XMLIOThrottleF11] isEqualToString:JavaYES]) ? XMLIOItemStateActive : XMLIOItemStateInactive;
+                t.F12.state = ([[attributeDict objectForKey:XMLIOThrottleF12] isEqualToString:JavaYES]) ? XMLIOItemStateActive : XMLIOItemStateInactive;
+                t.shouldSendUpdate = YES;
+                newElement = t;
+                // its an error to have requested a throttle that does not already exist
+            } else {
+                newElement = [[XMLIOThrottle alloc] init];
+            }
         } else if ([elementName isEqualToString:XMLIOXMLFunction]) {
             NSUInteger i = [[[attributeDict objectForKey:XMLIOItemName] substringFromIndex:1] integerValue];
             XMLIOFunction *f = [[(XMLIORoster *)currentElement functions] objectAtIndex:i];

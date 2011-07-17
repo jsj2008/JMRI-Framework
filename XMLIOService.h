@@ -123,6 +123,7 @@ typedef enum {
 	NSUInteger connections;
 	NSMutableSet *monitoredItems;
     NSString *XMLIOPath;
+    NSMutableDictionary *throttles;
 
 }
 
@@ -144,8 +145,9 @@ typedef enum {
 
 @property (readonly, retain) NSURL* url;
 @property (readonly) BOOL openConnection;
-@property (nonatomic, retain) NSString* XMLIOPath;
 @property (readonly) BOOL useAttributeProtocol;
+@property (nonatomic, retain) NSString* XMLIOPath;
+@property (nonatomic, retain) NSMutableDictionary* throttles;
 
 @end
 

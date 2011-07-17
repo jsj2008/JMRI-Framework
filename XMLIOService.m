@@ -107,6 +107,7 @@ NSString *const XMLIOThrottleKey = @"XMLIOThrottleKey";
 #pragma mark Properties
 
 @synthesize XMLIOPath;
+@synthesize throttles;
 
 - (BOOL)openConnection {
 	return (connections);
@@ -373,6 +374,7 @@ NSString *const XMLIOThrottleKey = @"XMLIOThrottleKey";
 	if ((self = [super initWithNetService:service])) {
 		connections = 0;
 		monitoredItems = [[NSMutableSet alloc] initWithCapacity:0];
+        throttles = [[NSMutableDictionary alloc] initWithCapacity:0];
 		self.XMLIOPath = @"xmlio";
 	}
 	return self;
@@ -382,6 +384,7 @@ NSString *const XMLIOThrottleKey = @"XMLIOThrottleKey";
 	if ((self = [super initWithAddress:address withPort:port])) {
 		connections = 0;
 		monitoredItems = [[NSMutableSet alloc] initWithCapacity:0];
+        throttles = [[NSMutableDictionary alloc] initWithCapacity:0];
 		self.XMLIOPath = @"xmlio";
 	}
 	return self;
@@ -389,6 +392,7 @@ NSString *const XMLIOThrottleKey = @"XMLIOThrottleKey";
 
 - (void)dealloc {
 	[monitoredItems release];
+    [throttles release];
 	self.XMLIOPath = nil;
 	[super dealloc];
 }
