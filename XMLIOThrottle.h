@@ -24,8 +24,8 @@
 @interface XMLIOThrottle : XMLIOObject {
 
     NSUInteger address_;
-    NSString *forward;
-    NSString *speed;
+    BOOL forward;
+    float speed;
     XMLIOFunction *F0;
     XMLIOFunction *F1;
     XMLIOFunction *F2;
@@ -50,8 +50,8 @@
 - (void)updateWithNotification:(NSNotification *)notification;
 
 @property (nonatomic) NSUInteger address;
-@property (nonatomic, retain) NSString *forward;
-@property (nonatomic, retain) NSString *speed;
+@property (nonatomic) BOOL forward;
+@property (nonatomic) float speed;
 @property (nonatomic, retain) XMLIOFunction *F0;
 @property (nonatomic, retain) XMLIOFunction *F1;
 @property (nonatomic, retain) XMLIOFunction *F2;
