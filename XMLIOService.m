@@ -238,11 +238,23 @@ NSString *const XMLIOThrottleKey = @"XMLIOThrottleKey";
 }
 
 - (void)sendThrottle:(NSUInteger)address commands:(NSDictionary *)commands {
-    NSMutableString *s = [NSMutableString stringWithFormat:@"<address>%lu</address>", address];
-    if (commands) {
-        for (NSString *key in commands) {
-            [s appendFormat:@"<%@>%@</%@>", key, [commands objectForKey:key], key];
+    NSMutableString *s;
+    if (self.useAttributeProtocol) {
+        s = [NSMutableString stringWithFormat:@"<throttle address=\"%lu\"", address];
+        if (commands) {
+            for (NSString *key in commands) {
+                [s appendFormat:@" %@=\"%@\"", key, [commands objectForKey:key]];
+            }
         }
+        [s appendString:@"/>"];
+    } else {
+        s = [NSMutableString stringWithFormat:@"<throttle><address>%lu</address>", address];
+        if (commands) {
+            for (NSString *key in commands) {
+                [s appendFormat:@"<%@>%@</%@>", key, [commands objectForKey:key], key];
+            }
+        }
+        [s appendString:@"</throttle>"];
     }
     [self conductOperation:XMLIOOperationThrottle 
              withXMLString:s 
