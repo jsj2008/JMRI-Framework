@@ -29,7 +29,7 @@ extern NSString *const JMRITXTRecordKeyJMRI;
 	BOOL logTraffic;
 	NSString *manualAddress;
 	NSInteger manualPort;
-    NSString *version_;
+    NSString *version_; // default to 2.10
 
 }
 
