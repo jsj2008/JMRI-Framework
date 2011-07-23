@@ -240,7 +240,7 @@ NSString *const JavaNO = @"false"; // java.lang.Boolean.toString returns "false"
             }
             currentElement = currentElement.parent;
         }
-    } else {
+    } else { // the rest of this method supports JMRI 2.10 and 2.12
         if (currentElement) {
             if (currentElement.parent) {
                 XMLIOObject *parent;
@@ -282,6 +282,18 @@ NSString *const JavaNO = @"false"; // java.lang.Boolean.toString returns "false"
                             }
                         }
                     }
+                }
+                NSLog(@"Here I be");
+                if ([currentElement isMemberOfClass:[XMLIOItem class]] && [[(XMLIOItem *)currentElement type] isEqualToString:XMLIOTypeRoster]) {
+                    NSLog(@"Here I be again");
+                    XMLIORoster *rosterElement = [[XMLIORoster alloc] initWithItem:(XMLIOItem *)currentElement];
+                    rosterElement.children = currentElement.children;
+                    rosterElement.parent = currentElement.parent;
+                    [rosterElement.parent.children addObject:rosterElement];
+                    [rosterElement.parent.children removeObject:currentElement];
+                    [currentElement release];
+                    currentElement = rosterElement;
+                    [rosterElement release];
                 }
                 if (rootElement == currentElement.parent) {
                     if ([currentElement isKindOfClass:[XMLIOThrottle class]]) {
