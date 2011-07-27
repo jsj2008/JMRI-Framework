@@ -268,7 +268,6 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 
 - (void)stopThrottle:(NSUInteger)address {
     [self sendThrottle:address commands:[NSDictionary dictionaryWithObject:@"0" forKey:XMLIOThrottleSpeed]];
-    [self.throttles removeObjectForKey:[[NSNumber numberWithInteger:address] stringValue]];
 }
 
 - (void)stopAllThrottles {
