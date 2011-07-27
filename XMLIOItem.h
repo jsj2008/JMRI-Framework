@@ -21,7 +21,7 @@
 
 @interface XMLIOItem : XMLIOObject {
 
-    NSString *name;
+    NSString *systemName;
     NSString *type;
     NSString *userName;
     NSString *value;

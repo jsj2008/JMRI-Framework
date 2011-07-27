@@ -22,7 +22,7 @@
 
 @implementation XMLIOItem
 
-@synthesize name;
+@synthesize name = systemName;
 @synthesize type;
 @synthesize userName;
 @synthesize value;
