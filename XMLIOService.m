@@ -87,6 +87,10 @@ NSString *const XMLIOItemTypeKey = @"XMLIOItemTypeKey";
 NSString *const XMLIOItemValueKey = @"XMLIOItemValueKey";
 NSString *const XMLIOThrottleKey = @"XMLIOThrottleKey";
 
+// Javaisms
+NSString *const XMLIOBooleanYES = @"true"; // java.lang.Boolean.toString returns "true" for YES
+NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns "false" for NO
+
 #pragma mark -
 #pragma mark Private interface
 
@@ -260,6 +264,17 @@ NSString *const XMLIOThrottleKey = @"XMLIOThrottleKey";
              withXMLString:s 
                   withType:XMLIOTypeThrottle
                   withName:[[NSNumber numberWithUnsignedInteger:address] stringValue]];
+}
+
+- (void)stopThrottle:(NSUInteger)address {
+    [self sendThrottle:address commands:[NSDictionary dictionaryWithObject:@"0" forKey:XMLIOThrottleSpeed]];
+    [self.throttles removeObjectForKey:[[NSNumber numberWithInteger:address] stringValue]];
+}
+
+- (void)stopAllThrottles {
+    for (NSString *address in self.throttles) {
+        [self stopThrottle:[address integerValue]];
+    }
 }
 
 - (void)startMonitoring:(NSString *)name ofType:(NSString *)type {

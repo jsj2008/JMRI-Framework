@@ -91,6 +91,10 @@ extern NSString *const XMLIOItemTypeKey;
 extern NSString *const XMLIOItemValueKey;
 extern NSString *const XMLIOThrottleKey;
 
+// JavaISMs
+extern NSString *const XMLIOBooleanYES;
+extern NSString *const XMLIOBooleanNO;
+
 typedef enum {
 	XMLIOOperationNone = 0,
 	XMLIOOperationList,
@@ -135,6 +139,8 @@ typedef enum {
 - (void)readItem:(NSString *)name ofType:(NSString *)type initialValue:(NSString *)value;
 - (void)writeItem:(NSString *)name ofType:(NSString *)type value:(NSString *)value;
 - (void)sendThrottle:(NSUInteger)address commands:(NSDictionary *)commands;
+- (void)stopThrottle:(NSUInteger)address;
+- (void)stopAllThrottles;
 
 - (void)startMonitoring:(NSString *)name ofType:(NSString *)type;
 - (void)stopMonitoring:(NSString *)name ofType:(NSString *)type;
