@@ -277,10 +277,10 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 }
 
 - (void)startMonitoring:(NSString *)name ofType:(NSString *)type {
-	if (![monitoredItems containsObject:[name stringByAppendingString:type]]) {
+	if (![type isEqualToString:XMLIOTypePanel] && ![type isEqualToString:XMLIOTypeRoster] && ![monitoredItems containsObject:[name stringByAppendingString:type]]) {
 		[monitoredItems addObject:[name stringByAppendingString:type]];
 		[self readItem:name ofType:type];
-	}
+    }
 }
 
 - (void)stopMonitoring:(NSString *)name ofType:(NSString *)type {
