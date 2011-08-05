@@ -18,59 +18,82 @@
 
 #import "XMLIOThrottle.h"
 #import "XMLIOService.h"
+#import "XMLIORoster.h"
+
+#define UPDATES_PER_SECOND 5
 
 @implementation XMLIOThrottle
 
-@synthesize address = address_;
-@synthesize forward;
-@synthesize speed;
-@synthesize F0;
-@synthesize F1;
-@synthesize F2;
-@synthesize F3;
-@synthesize F4;
-@synthesize F5;
-@synthesize F6;
-@synthesize F7;
-@synthesize F8;
-@synthesize F9;
-@synthesize F10;
-@synthesize F11;
-@synthesize F12;
+@synthesize forward = forward_;
+@synthesize speed = speed_;
 
 @synthesize service = service_;
+@synthesize roster = roster_;
+@synthesize commands;
+@synthesize lastUpdate;
 @synthesize shouldSendUpdate;
 
-- (id)initWithAddress:(NSUInteger)address withService:(XMLIOService *)service {
-    if (!service) {
+@synthesize address;
+
+- (void)setForward:(BOOL)forward {
+    if (forward != forward_) {
+        forward_ = forward;
+        [self.commands setValue:(forward_) ? XMLIOBooleanYES : XMLIOBooleanNO forKey:XMLIOThrottleForward];
+        [self update];
+    }
+}
+
+- (void)setSpeed:(float)speed {
+    if (speed != speed_) {
+        speed_ = speed;
+        [self.commands setValue:[[NSNumber numberWithFloat:speed] stringValue] forKey:XMLIOThrottleSpeed];
+        [self update];
+    }
+}
+
+- (void)setState:(NSUInteger)state forFunction:(NSUInteger)function {
+    if ([self stateForFunction:function] != state) {
+        XMLIOFunction *f = [self.roster.functions objectAtIndex:function];
+        f.state = state;
+        [self.commands setValue:(state == XMLIOItemStateActive) ? XMLIOBooleanYES : XMLIOBooleanNO forKey:f.key];
+        [self update];
+    }
+}
+
+
+- (NSUInteger)stateForFunction:(NSUInteger)function {
+    if ([self.roster.functions count] > function) {
+        return [[self.roster.functions objectAtIndex:function] state];
+    }
+    return XMLIOItemStateUnknown;
+}
+
+- (id)initWithRoster:(XMLIORoster *)roster withService:(XMLIOService *)service {
+    if (!roster || !service) {
         return nil;
     }
     if ((self = [super init])) {
-        self.shouldSendUpdate = YES;
-        self.address = address;
+        self.lastUpdate = [NSDate date];
+        self.shouldSendUpdate = NO;
+        self.commands = [NSMutableDictionary dictionaryWithCapacity:0];
+        self.roster = roster;
         self.service = service;
-        [service sendThrottle:address commands:nil];
-        [service.throttles setObject:self forKey:[[NSNumber numberWithInteger:address] stringValue]];
         if (!service.useAttributeProtocol) {
             [[NSNotificationCenter defaultCenter] addObserver:self
                                                      selector:@selector(updateWithNotification:)
                                                          name:XMLIOServiceDidGetThrottle 
                                                        object:service];
         }
+        self.shouldSendUpdate = YES;
+        [self.commands removeAllObjects];
+        [service sendThrottle:self.roster.dccAddress commands:nil];
+        [service.throttles setObject:self forKey:[[NSNumber numberWithInteger:self.roster.dccAddress] stringValue]];
     }
     return self;
 }
 
-- (void)setFunctions:(NSArray *)functions {
-    for (NSUInteger i = 0; i < 13; i++) {
-        XMLIOFunction *f = ([functions count] > i) ? [functions objectAtIndex:i] : [[XMLIOFunction alloc] initWithFunctionIdentifier:i];
-        f.throttle = self;
-        [self setValue:f forKey:[NSString stringWithFormat:@"F%lu", i]];
-    }
-}
-
 - (void)updateFromThrottle:(XMLIOThrottle *)throttle {
-    if (throttle.address == self.address) {
+    if (throttle.address == self.roster.dccAddress) {
         self.shouldSendUpdate = NO;
         if (throttle.speed) {
             self.speed = throttle.speed;
@@ -78,44 +101,44 @@
         if (throttle.forward) {
             self.forward = throttle.forward;
         }
-        if (throttle.F0) {
-            self.F0.state = throttle.F0.state;
+        if ([throttle stateForFunction:0]) {
+            [self setState:[throttle stateForFunction:0] forFunction:0];
         }
-        if (throttle.F1) {
-            self.F1.state = throttle.F1.state;
+        if ([throttle stateForFunction:1]) {
+            [self setState:[throttle stateForFunction:1] forFunction:1];
         }
-        if (throttle.F2) {
-            self.F2.state = throttle.F2.state;
+        if ([throttle stateForFunction:2]) {
+            [self setState:[throttle stateForFunction:2] forFunction:2];
         }
-        if (throttle.F3) {
-            self.F3.state = throttle.F3.state;
+        if ([throttle stateForFunction:3]) {
+            [self setState:[throttle stateForFunction:3] forFunction:3];
         }
-        if (throttle.F4) {
-            self.F4.state = throttle.F4.state;
+        if ([throttle stateForFunction:4]) {
+            [self setState:[throttle stateForFunction:4] forFunction:4];
         }
-        if (throttle.F5) {
-            self.F5.state = throttle.F5.state;
+        if ([throttle stateForFunction:5]) {
+            [self setState:[throttle stateForFunction:5] forFunction:5];
         }
-        if (throttle.F6) {
-            self.F6.state = throttle.F6.state;
+        if ([throttle stateForFunction:6]) {
+            [self setState:[throttle stateForFunction:6] forFunction:6];
         }
-        if (throttle.F7) {
-            self.F7.state = throttle.F7.state;
+        if ([throttle stateForFunction:7]) {
+            [self setState:[throttle stateForFunction:7] forFunction:7];
         }
-        if (throttle.F8) {
-            self.F8.state = throttle.F8.state;
+        if ([throttle stateForFunction:8]) {
+            [self setState:[throttle stateForFunction:8] forFunction:8];
         }
-        if (throttle.F9) {
-            self.F9.state = throttle.F9.state;
+        if ([throttle stateForFunction:9]) {
+            [self setState:[throttle stateForFunction:9] forFunction:9];
         }
-        if (throttle.F10) {
-            self.F10.state = throttle.F10.state;
+        if ([throttle stateForFunction:10]) {
+            [self setState:[throttle stateForFunction:10] forFunction:10];
         }
-        if (throttle.F11) {
-            self.F11.state = throttle.F11.state;
+        if ([throttle stateForFunction:11]) {
+            [self setState:[throttle stateForFunction:11] forFunction:11];
         }
-        if (throttle.F12) {
-            self.F12.state = throttle.F12.state;
+        if ([throttle stateForFunction:12]) {
+            [self setState:[throttle stateForFunction:12] forFunction:12];
         }
         self.shouldSendUpdate = YES;
     }
@@ -125,21 +148,21 @@
     [self updateFromThrottle:[[notification userInfo] objectForKey:XMLIOThrottleKey]];
 }
 
+- (void)update {
+    if (self.shouldSendUpdate && [self.lastUpdate timeIntervalSinceNow] < -1.0/UPDATES_PER_SECOND) {
+        [self.service sendThrottle:self.roster.dccAddress
+                          commands:self.commands];
+        self.lastUpdate = [NSDate date];
+        self.commands = nil;
+        self.commands = [NSMutableDictionary dictionaryWithCapacity:0];
+    }
+}
+
 - (void)dealloc {
-    self.F0 = nil;
-    self.F1 = nil;
-    self.F2 = nil;
-    self.F3 = nil;
-    self.F4 = nil;
-    self.F5 = nil;
-    self.F6 = nil;
-    self.F7 = nil;
-    self.F8 = nil;
-    self.F9 = nil;
-    self.F10 = nil;
-    self.F11 = nil;
-    self.F12 = nil;
     self.service = nil;
+    self.lastUpdate = nil;
+    self.commands = nil;
+    self.roster = nil;
     [super dealloc];
 }
 

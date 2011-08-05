@@ -20,54 +20,39 @@
 #import "XMLIOFunction.h"
 
 @class XMLIOService;
+@class XMLIORoster;
 
 @interface XMLIOThrottle : XMLIOObject {
 
-    NSUInteger address_;
-    BOOL forward;
-    float speed;
-    XMLIOFunction *F0;
-    XMLIOFunction *F1;
-    XMLIOFunction *F2;
-    XMLIOFunction *F3;
-    XMLIOFunction *F4;
-    XMLIOFunction *F5;
-    XMLIOFunction *F6;
-    XMLIOFunction *F7;
-    XMLIOFunction *F8;
-    XMLIOFunction *F9;
-    XMLIOFunction *F10;
-    XMLIOFunction *F11;
-    XMLIOFunction *F12;
+    BOOL forward_;
+    float speed_;
     
     XMLIOService *service_;
+    XMLIORoster *roster_;
+    NSMutableDictionary *commands;
+    NSDate *lastUpdate;
     BOOL shouldSendUpdate;
     
+    NSUInteger address; // this property supports 2.10 & 2.12
 }
 
-- (id)initWithAddress:(NSUInteger)address withService:(XMLIOService *)service;
-- (void)setFunctions:(NSArray *)functions;
+- (id)initWithRoster:(XMLIORoster *)roster withService:(XMLIOService *)service;
 - (void)updateFromThrottle:(XMLIOThrottle *)throttle;
 - (void)updateWithNotification:(NSNotification *)notification;
+- (void)update;
 
-@property (nonatomic) NSUInteger address;
+- (void)setState:(NSUInteger)state forFunction:(NSUInteger)function;
+- (NSUInteger)stateForFunction:(NSUInteger)function;
+
 @property (nonatomic) BOOL forward;
 @property (nonatomic) float speed;
-@property (nonatomic, retain) XMLIOFunction *F0;
-@property (nonatomic, retain) XMLIOFunction *F1;
-@property (nonatomic, retain) XMLIOFunction *F2;
-@property (nonatomic, retain) XMLIOFunction *F3;
-@property (nonatomic, retain) XMLIOFunction *F4;
-@property (nonatomic, retain) XMLIOFunction *F5;
-@property (nonatomic, retain) XMLIOFunction *F6;
-@property (nonatomic, retain) XMLIOFunction *F7;
-@property (nonatomic, retain) XMLIOFunction *F8;
-@property (nonatomic, retain) XMLIOFunction *F9;
-@property (nonatomic, retain) XMLIOFunction *F10;
-@property (nonatomic, retain) XMLIOFunction *F11;
-@property (nonatomic, retain) XMLIOFunction *F12;
 
 @property (nonatomic, retain) XMLIOService *service;
+@property (nonatomic, retain) XMLIORoster *roster;
+@property (nonatomic, retain) NSMutableDictionary *commands;
+@property (nonatomic, retain) NSDate *lastUpdate;
 @property (nonatomic) BOOL shouldSendUpdate;
+
+@property (nonatomic) NSUInteger address;
 
 @end

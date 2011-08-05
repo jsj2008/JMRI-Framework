@@ -149,6 +149,9 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 		   withXMLString:(NSString *)query 
 				withType:(NSString *)type
 				withName:(NSString *)aName {
+    if (!self.useAttributeProtocol && operation != XMLIOOperationList && [type isEqualToString:XMLIOTypeMetadata]) {
+        return;
+    }
 	if (self.url) {
 		NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:self.url
 															   cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
