@@ -48,7 +48,7 @@ NSString *const XMLIORosterMaxSpeedPct = @"maxSpeedPct";
 NSString *const XMLIORosterImageFileName = @"imageFileName";
 NSString *const XMLIORosterImageIconName = @"imageIconName";
 NSString *const XMLIORosterFunctions = @"functions";
-NSUInteger const XMLIORosterMaxFunctions = 13;
+NSUInteger const XMLIORosterMaxFunctions = 29; // F0 though F28
 
 NSString *const XMLIOThrottleAddress = @"address";
 NSString *const XMLIOThrottleForward = @"forward";
@@ -136,7 +136,11 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 
 - (BOOL)testConnection {
 	if (self.port) {
-		[self readItem:XMLIOMetadataJMRIVersion ofType:XMLIOTypeMetadata];
+        if (self.useAttributeProtocol) {
+            [self readItem:XMLIOMetadataJMRIVersion ofType:XMLIOTypeMetadata];
+        } else {
+            [self list:XMLIOTypeMetadata];
+        }
 		return YES;
 	}
 	return NO;
