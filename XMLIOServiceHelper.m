@@ -270,7 +270,7 @@ NSString *const XMLIORosterFunctionLockable = @"locakable";
                             }
                         } else if ([parent.XMLName isEqualToString:XMLIORosterFunctionLabels] ||
                                    [parent.XMLName isEqualToString:XMLIORosterFunctionLockables]) {
-                            XMLIOItem *roster = (XMLIOItem *)parent.parent;
+                            XMLIORoster *roster = (XMLIORoster *)parent.parent;
                             NSUInteger i = [[elementName substringFromIndex:1] integerValue];
                             f = [roster.functions objectAtIndex:i];
                             if ([parent.XMLName isEqualToString:XMLIORosterFunctionLabels]) {
