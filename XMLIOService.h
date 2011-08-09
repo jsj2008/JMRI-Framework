@@ -128,6 +128,8 @@ typedef enum {
 	NSMutableSet *monitoredItems;
     NSString *XMLIOPath;
     NSMutableDictionary *throttles;
+    NSUInteger monitoringDelay; // in seconds, provides choke required by 2.12
+    NSUInteger defaultMonitoringDelay; // ensures that any monitoring delay 
 
 }
 
@@ -154,6 +156,7 @@ typedef enum {
 @property (readonly) BOOL useAttributeProtocol;
 @property (nonatomic, retain) NSString* XMLIOPath;
 @property (nonatomic, retain) NSMutableDictionary* throttles;
+@property NSUInteger monitoringDelay;
 
 @end
 

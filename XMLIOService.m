@@ -100,6 +100,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 		   withXMLString:(NSString *)query 
 				withType:(NSString *)type
 				withName:(NSString *)aName;
+- (void)readItemFromTimer:(NSTimer *)timer;
 
 @end
 
@@ -112,6 +113,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 
 @synthesize XMLIOPath;
 @synthesize throttles;
+@synthesize monitoringDelay;
 
 - (BOOL)openConnection {
 	return (connections);
@@ -190,6 +192,12 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 	} else { // open connection
 		[self.delegate XMLIOService:self didFailWithError:[NSError errorWithDomain:@"JMRIErrorDomain" code:1026 userInfo:nil]];
 	}
+}
+
+- (void)readItemFromTimer:(NSTimer *)timer {
+    [self readItem:[[timer userInfo] objectForKey:XMLIOItemNameKey]
+            ofType:[[timer userInfo] objectForKey:XMLIOItemTypeKey]
+      initialValue:[[timer userInfo] objectForKey:XMLIOItemValueKey]];
 }
 
 - (void)list:(NSString *)type {
@@ -335,7 +343,15 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 		[self.delegate XMLIOService:self didReadItem:item withName:name ofType:type withValue:value];
 	}
 	if ([monitoredItems containsObject:[name stringByAppendingString:type]]) {
-		[self readItem:name ofType:type initialValue:value];
+        if (self.monitoringDelay) {
+            [NSTimer scheduledTimerWithTimeInterval:self.monitoringDelay
+                                             target:self
+                                           selector:@selector(readItemFromTimer:)
+                                           userInfo:[NSDictionary dictionaryWithObjectsAndKeys:name,XMLIOItemNameKey, type, XMLIOItemTypeKey, value, XMLIOItemValueKey, nil]
+                                            repeats:NO];
+        } else {
+            [self readItem:name ofType:type initialValue:value];            
+        }
 	}
 	if (value) {
 		[[NSNotificationCenter defaultCenter] postNotificationName:XMLIOServiceDidReadItem
@@ -349,6 +365,10 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 	}
     if ([name isEqualToString:XMLIOMetadataJMRIVersion] && value) {
         version_ = value;
+        if (self.monitoringDelay == defaultMonitoringDelay) {
+            defaultMonitoringDelay = (self.useAttributeProtocol) ? 0 : 5;
+            self.monitoringDelay = defaultMonitoringDelay;
+        }
     }
 }
 
@@ -412,6 +432,8 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 		monitoredItems = [[NSMutableSet alloc] initWithCapacity:0];
         throttles = [[NSMutableDictionary alloc] initWithCapacity:0];
 		self.XMLIOPath = @"xmlio";
+        defaultMonitoringDelay = (self.useAttributeProtocol) ? 0 : 5;
+        self.monitoringDelay = defaultMonitoringDelay;
 	}
 	return self;
 }
@@ -422,6 +444,8 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 		monitoredItems = [[NSMutableSet alloc] initWithCapacity:0];
         throttles = [[NSMutableDictionary alloc] initWithCapacity:0];
 		self.XMLIOPath = @"xmlio";
+        defaultMonitoringDelay = 5;
+        self.monitoringDelay = defaultMonitoringDelay;
 	}
 	return self;
 }
