@@ -35,7 +35,7 @@ NSString *const XMLIORosterFunctionLockables = @"functionLockables";
 // XMLIO 2.13 Roster function attribute names that are properties of XMLIOFunction objects
 NSString *const XMLIOXMLFunction = @"function";
 NSString *const XMLIORosterFunctionLabel = @"label";
-NSString *const XMLIORosterFunctionLockable = @"locakable";
+NSString *const XMLIORosterFunctionLockable = @"lockable";
 
 @implementation XMLIOServiceHelper
 
