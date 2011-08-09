@@ -124,7 +124,7 @@ typedef enum {
 
 @interface XMLIOService : JMRINetService <XMLIOServiceHelperDelegate> {
 
-	NSUInteger connections;
+	NSMutableDictionary *connections;
 	NSMutableSet *monitoredItems;
     NSString *XMLIOPath;
     NSMutableDictionary *throttles;
@@ -147,6 +147,8 @@ typedef enum {
 - (void)startMonitoring:(NSString *)name ofType:(NSString *)type;
 - (void)stopMonitoring:(NSString *)name ofType:(NSString *)type;
 - (void)stopMonitoringAllItems;
+
+- (void)cancelAllConnections;
 
 #pragma mark -
 #pragma mark Properties

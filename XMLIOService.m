@@ -116,7 +116,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 @synthesize monitoringDelay;
 
 - (BOOL)openConnection {
-	return (connections);
+	return ([connections count]);
 }
 
 - (NSURL *)url {
@@ -175,11 +175,11 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 		helper.operation = operation;
 		helper.type = type;
 		NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:helper];
-		[helper release];
+        [helper release];
 		if (connection) {
-			connections++;
+			[connections setObject:connection forKey:[request HTTPBody]];
 			if (self.logTraffic) {
-				NSLog(@"XMLIOService opened new connection. %lu connections are open.", (unsigned long)connections);
+				NSLog(@"XMLIOService opened new connection. %u connections are open.", [connections count]);
 			}
 			if ([self.delegate respondsToSelector:@selector(XMLIOService:didConnectWithRequest:)]) {
 				[self.delegate XMLIOService:self didConnectWithRequest:request];
@@ -239,6 +239,13 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
                  withXMLString:[NSString stringWithFormat:@"<item><type>%@</type><name>%@</name><value>%@</value></item>", type, name, value]
                       withType:type
                       withName:name];
+    }
+    if (self.logTraffic) {
+        NSLog(@"Monitoring: %@", monitoredItems);
+        NSLog(@"Open Requests:");
+        for (NSData *key in [connections allKeys]) {
+            NSLog(@"%@", [NSString stringWithUTF8String:[key bytes]]);
+        }
     }
 }
 
@@ -309,11 +316,18 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 	[monitoredItems removeAllObjects];
 }
 
+- (void)cancelAllConnections {
+    for (NSURLRequest *request in connections) {
+        [[connections objectForKey:request] cancel];
+    }
+    [connections removeAllObjects];
+}
+
 #pragma mark -
 #pragma mark JMRI XMLIO service helper delegate
 
 - (void)XMLIOServiceHelper:(XMLIOServiceHelper *)helper didFailWithError:(NSError *)error {
-	connections--;
+	[connections removeObjectForKey:[helper.request HTTPBody]];
 	if ([error code] == NSURLErrorTimedOut &&
 		[monitoredItems containsObject:[helper.name stringByAppendingString:helper.type]]) {
 		[self readItem:helper.name ofType:helper.type];
@@ -322,7 +336,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 		[self.delegate XMLIOService:self didFailWithError:error];
 	}
 	if (self.logTraffic) {
-		NSLog(@"XMLIOService connection failed. %u connections remain open. Failed with operation: %u (%@, a %@)", connections, helper.operation, helper.name, helper.type);
+		NSLog(@"XMLIOService connection failed. %u connections remain open. Failed with operation: %u (%@, a %@)", [connections count], helper.operation, helper.name, helper.type);
 	}
 }
 
@@ -409,12 +423,12 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 }
 
 - (void)XMLIOServiceHelperDidFinishLoading:(XMLIOServiceHelper *)helper {
-	connections--;
+	[connections removeObjectForKey:[helper.request HTTPBody]];
 	if ([self.delegate respondsToSelector:@selector(XMLIOServiceDidFinishLoading:)]) {
 		[self.delegate XMLIOServiceDidFinishLoading:self];
 	}
 	if (self.logTraffic) {
-		NSLog(@"XMLIOService has just closed a connection. %u connections remain open.", connections);
+		NSLog(@"XMLIOService has just closed a connection. %u connections remain open.", [connections count]);
 	}
 }
 
@@ -428,7 +442,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 
 - (id)initWithNetService:(NSNetService *)service {
 	if ((self = [super initWithNetService:service])) {
-		connections = 0;
+		connections = [[NSMutableDictionary alloc] initWithCapacity:0];
 		monitoredItems = [[NSMutableSet alloc] initWithCapacity:0];
         throttles = [[NSMutableDictionary alloc] initWithCapacity:0];
 		self.XMLIOPath = @"xmlio";
@@ -440,7 +454,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 
 - (id)initWithAddress:(NSString *)address withPort:(NSInteger)port {
 	if ((self = [super initWithAddress:address withPort:port])) {
-		connections = 0;
+		connections = [[NSMutableDictionary alloc] initWithCapacity:0];
 		monitoredItems = [[NSMutableSet alloc] initWithCapacity:0];
         throttles = [[NSMutableDictionary alloc] initWithCapacity:0];
 		self.XMLIOPath = @"xmlio";
