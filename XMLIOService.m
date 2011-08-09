@@ -314,7 +314,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 		[self.delegate XMLIOService:self didFailWithError:error];
 	}
 	if (self.logTraffic) {
-		NSLog(@"XMLIOService connection failed. %lu connections remain open.", (unsigned long)connections);
+		NSLog(@"XMLIOService connection failed. %u connections remain open. Failed with operation: %u (%@, a %@)", connections, helper.operation, helper.name, helper.type);
 	}
 }
 
@@ -394,7 +394,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 		[self.delegate XMLIOServiceDidFinishLoading:self];
 	}
 	if (self.logTraffic) {
-		NSLog(@"XMLIOService has just closed a connection. %lu connections remain open.", (unsigned long)connections);
+		NSLog(@"XMLIOService has just closed a connection. %u connections remain open.", connections);
 	}
 }
 
