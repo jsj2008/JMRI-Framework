@@ -163,7 +163,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 															   cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
 														   timeoutInterval:self.timeoutInterval];
 		[request setHTTPMethod:@"POST"];
-		[request setHTTPBody:[[NSString stringWithFormat:@"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xmlio>%@</xmlio>", query]
+		[request setHTTPBody:[[NSString stringWithFormat:@"<?xml version=\"1.0\" encoding=\"UTF-8\"?><xmlio>%@</xmlio>", query]
 							  dataUsingEncoding:NSUTF8StringEncoding]];
 		if (self.logTraffic) {
 			NSLog(@"Sending %@ to %@", [NSString stringWithUTF8String:[[request HTTPBody] bytes]], self.url);
@@ -304,8 +304,8 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
         ![type isEqualToString:XMLIOTypeMetadata] &&
         ![monitoredItems containsObject:[name stringByAppendingString:type]]) {
 		[monitoredItems addObject:[name stringByAppendingString:type]];
-		[self readItem:name ofType:type];
     }
+    [self readItem:name ofType:type];
 }
 
 - (void)stopMonitoring:(NSString *)name ofType:(NSString *)type {
