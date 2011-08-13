@@ -293,14 +293,12 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
                 }
                 if ([currentElement isMemberOfClass:[XMLIOThrottle class]]) {
                     XMLIOThrottle *throttleElement = [self.delegate.throttles objectForKey:[[NSNumber numberWithInteger:[(XMLIOThrottle *)currentElement address]] stringValue]];
-                    [throttleElement updateFromThrottle:(XMLIOThrottle *)currentElement];
                     throttleElement.children = currentElement.children;
                     throttleElement.parent = currentElement.parent;
                     [throttleElement.parent.children addObject:throttleElement];
                     [throttleElement.parent.children removeObject:currentElement];
-                    [currentElement release];
+                    [throttleElement updateFromThrottle:(XMLIOThrottle *)currentElement];
                     currentElement = throttleElement;
-                    [throttleElement release];                                
                 }
                 if (rootElement == currentElement.parent) {
                     if ([currentElement isKindOfClass:[XMLIOThrottle class]]) {
