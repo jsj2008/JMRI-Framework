@@ -304,8 +304,8 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
         ![type isEqualToString:XMLIOTypeMetadata] &&
         ![monitoredItems containsObject:[name stringByAppendingString:type]]) {
 		[monitoredItems addObject:[name stringByAppendingString:type]];
+        [self readItem:name ofType:type];
     }
-    [self readItem:name ofType:type];
 }
 
 - (void)stopMonitoring:(NSString *)name ofType:(NSString *)type {
