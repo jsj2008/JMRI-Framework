@@ -119,8 +119,10 @@ NSString *const JMRIServiceTypeWiThrottle = @"_withrottle._tcp.";
 	JMRINetService *service;
 	NSInteger index;
 	index = [self indexOfServiceWithName:[aNetService name]];
-	service = [self.services objectAtIndex:index];
-	[self.services removeObjectAtIndex:index];
+    if (index != NSNotFound) {
+        service = [self.services objectAtIndex:index];
+        [self.services removeObjectAtIndex:index];
+    }
 	if ([self.delegate respondsToSelector:@selector(JMRIServiceBrowser:didRemoveService:moreComing:)]) {
 		[self.delegate JMRIServiceBrowser:self didRemoveService:service moreComing:moreComing];
 	}
