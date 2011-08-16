@@ -52,7 +52,6 @@
 }
 
 - (id)init {
-    XMLIOFunction *f;
 	if ((self = [super init])) {
 		self.name = nil;
 		self.type = nil;
@@ -71,9 +70,7 @@
 		self.imageIconName = nil;
         self.functions = [NSMutableArray arrayWithCapacity:XMLIORosterMaxFunctions];
         for (NSUInteger i = 0; i < XMLIORosterMaxFunctions; i++) {
-            f = [[XMLIOFunction alloc] initWithFunctionIdentifier:i];
-            [self.functions insertObject:f atIndex:i];
-            [f release];
+            [self.functions insertObject:[[[XMLIOFunction alloc] initWithFunctionIdentifier:i] autorelease] atIndex:i];
         }
 	}
 	return self;
@@ -91,6 +88,7 @@
 	self.model = nil;
 	self.imageFileName = nil;
 	self.imageIconName = nil;
+    self.functions = nil;
 	[super dealloc];
 }
 
