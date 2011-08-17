@@ -35,7 +35,7 @@ NSString *const JMRITXTRecordKeyJMRI = @"jmri";
         if ([txtRecords objectForKey:JMRITXTRecordKeyJMRI]) {
             version_ = [[NSString alloc] initWithUTF8String:[[txtRecords objectForKey:JMRITXTRecordKeyJMRI] bytes]];
         } else {
-            version_ = @"2.10";
+            version_ = MIN_JMRI_VERSION;
         }
 	}
 	return self;
@@ -48,7 +48,7 @@ NSString *const JMRITXTRecordKeyJMRI = @"jmri";
 		manualAddress = [address retain];
 		manualPort = port;
 		self.timeoutInterval = 60;
-        version_ = @"2.10";
+        version_ = MIN_JMRI_VERSION;
 	}
 	return self;
 }

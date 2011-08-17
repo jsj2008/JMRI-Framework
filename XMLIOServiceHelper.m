@@ -234,7 +234,7 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
             }
             currentElement = currentElement.parent;
         }
-    } else { // the rest of this method supports JMRI 2.10 and 2.12
+    } else { // the rest of this method supports JMRI 2.12
         if (currentElement) {
             if (currentElement.parent) {
                 XMLIOObject *parent;

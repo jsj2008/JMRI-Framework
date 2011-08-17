@@ -36,7 +36,7 @@
 /*
  Copy everything from an XMLIOItem into an XMLIORoster
  
- This method is required to support JMRI 2.10 and 2.12 since its impossible to tell when starting to parse an item element if it contains an XMLIOItem or XMLIORoster object.
+ This method is required to support JMRI 2.12 since its impossible to tell when starting to parse an item element if it contains an XMLIOItem or XMLIORoster object.
  */
 - (id)initWithItem:(XMLIOItem *)item {
     if ((self = [super init])) {

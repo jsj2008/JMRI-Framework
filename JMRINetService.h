@@ -16,6 +16,8 @@
 //  Created by Randall Wood on 10/5/2011.
 //
 
+#define MIN_JMRI_VERSION @"2.12"
+
 #import <Foundation/Foundation.h>
 #import "NSArray+JMRIExtensions.h"
 
@@ -29,7 +31,7 @@ extern NSString *const JMRITXTRecordKeyJMRI;
 	BOOL logTraffic;
 	NSString *manualAddress;
 	NSInteger manualPort;
-    NSString *version_; // default to 2.10
+    NSString *version_;
 
 }
 

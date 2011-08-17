@@ -33,7 +33,7 @@
     NSDate *lastUpdate;
     BOOL shouldSendUpdate;
     
-    NSUInteger address; // this property supports 2.10 & 2.12
+    NSUInteger address; // this property supports 2.12
 }
 
 - (id)initWithRoster:(XMLIORoster *)roster withService:(XMLIOService *)service;

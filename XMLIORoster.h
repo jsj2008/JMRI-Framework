@@ -26,7 +26,7 @@
 
 }
 
-- (id)initWithItem:(XMLIOItem *)item; // this method supports JMRI 2.10 and 2.12 only
+- (id)initWithItem:(XMLIOItem *)item; // this method exists only to support JMRI 2.12
 
 - (BOOL)lockableForFunction:(NSInteger)function;
 - (NSString *)labelForFunction:(NSInteger)function;
