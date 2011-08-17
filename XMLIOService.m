@@ -141,7 +141,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
         if (self.useAttributeProtocol) {
             [self readItem:XMLIOMetadataJMRIVersion ofType:XMLIOTypeMetadata];
         } else {
-            [self list:XMLIOTypeMetadata];
+            [self readItem:XMLIOMemoryCurrentTime ofType:XMLIOTypeMemory];
         }
 		return YES;
 	}
