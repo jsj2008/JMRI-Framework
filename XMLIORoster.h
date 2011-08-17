@@ -21,6 +21,7 @@
 
 @class XMLIOService;
 @class XMLIOThrottle;
+@class XMLIOFunction;
 
 @interface XMLIORoster : XMLIOItem {
 
@@ -30,6 +31,7 @@
 
 - (BOOL)lockableForFunction:(NSInteger)function;
 - (NSString *)labelForFunction:(NSInteger)function;
+- (XMLIOFunction *)functionForKey:(NSString *)key;
 
 - (XMLIOThrottle *)throttleWithService:(XMLIOService *)service;
 

@@ -69,6 +69,10 @@
     return [(XMLIOFunction *)[self.functions objectAtIndex:function] lockable];
 }
 
+- (XMLIOFunction *)functionForKey:(NSString *)key {
+    return [self.functions objectAtIndex:[[key substringFromIndex:1] integerValue]];
+}
+
 - (XMLIOThrottle *)throttleWithService:(XMLIOService *)service {
     XMLIOThrottle *throttle = [[[XMLIOThrottle alloc] initWithRoster:self withService:service] autorelease];
     return throttle;
