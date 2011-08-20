@@ -67,6 +67,15 @@ NSString *const JMRITXTRecordKeyJMRI = @"jmri";
 #pragma mark -
 #pragma mark Net service handling
 
+/**
+ * Resolve addresses for a discovered service within the given time limit.
+ *
+ * Resolves the address or address for a service within <em>timeout</em> seconds. If the service was manually input,
+ * this method immediately calls JMRINetServiceDidResolveAddress: on the delegete.
+ *
+ * @return void
+ * @param  NSTimeInterval
+ */
 - (void)resolveWithTimeout:(NSTimeInterval)timeout {
 	if (self.service) {
 		[self.service resolveWithTimeout:timeout];
