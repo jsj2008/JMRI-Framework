@@ -423,11 +423,11 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 }
 
 - (void)XMLIOServiceHelperDidFinishLoading:(XMLIOServiceHelper *)helper {
+    NSURLConnection *connection = [[connections objectForKey:[helper.request HTTPBody]] retain];
+	[connections removeObjectForKey:[helper.request HTTPBody]];
 	if ([self.delegate respondsToSelector:@selector(XMLIOServiceDidFinishLoading:)]) {
 		[self.delegate XMLIOServiceDidFinishLoading:self];
 	}
-    NSURLConnection *connection = [[connections objectForKey:[helper.request HTTPBody]] retain];
-	[connections removeObjectForKey:[helper.request HTTPBody]];
 	if (self.logTraffic) {
 		NSLog(@"XMLIOService has just closed a connection. %u connections remain open.", [connections count]);
 	}
