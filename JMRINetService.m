@@ -93,11 +93,6 @@ NSString *const JMRITXTRecordKeyJMRI = @"jmri";
 	}
 }
 
-- (BOOL)testConnection {
-	[self doesNotRecognizeSelector:_cmd];
-	return NO;
-}
-
 #pragma mark -
 #pragma mark Net service delegate
 

@@ -134,21 +134,6 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 }
 
 #pragma mark -
-#pragma mark JMRI net service methods
-
-- (BOOL)testConnection {
-	if (self.port) {
-        if (self.useAttributeProtocol) {
-            [self readItem:XMLIOMetadataJMRIVersion ofType:XMLIOTypeMetadata];
-        } else {
-            [self readItem:XMLIOMemoryCurrentTime ofType:XMLIOTypeMemory];
-        }
-		return YES;
-	}
-	return NO;
-}
-
-#pragma mark -
 #pragma mark XMLIO methods
 
 - (void)conductOperation:(NSUInteger)operation 

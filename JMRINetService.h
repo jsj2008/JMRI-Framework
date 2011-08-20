@@ -49,7 +49,6 @@ extern NSString *const JMRITXTRecordKeyJMRI;
 - (void)startMonitoring;
 - (void)stop;
 - (void)stopMonitoring;
-- (BOOL)testConnection;
 
 #pragma mark -
 #pragma mark Object properties
