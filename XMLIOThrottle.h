@@ -30,7 +30,6 @@
     XMLIOService *service_;
     XMLIORoster *roster_;
     NSMutableDictionary *commands;
-    NSDate *lastUpdate;
     BOOL shouldSendUpdate;
     
     NSUInteger address; // this property supports 2.12
@@ -50,7 +49,6 @@
 @property (nonatomic, retain) XMLIOService *service;
 @property (nonatomic, retain) XMLIORoster *roster;
 @property (nonatomic, retain) NSMutableDictionary *commands;
-@property (nonatomic, retain) NSDate *lastUpdate;
 @property (nonatomic) BOOL shouldSendUpdate;
 
 @property (nonatomic) NSUInteger address;

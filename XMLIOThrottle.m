@@ -20,8 +20,6 @@
 #import "XMLIOService.h"
 #import "XMLIORoster.h"
 
-#define UPDATES_PER_SECOND 5
-
 @implementation XMLIOThrottle
 
 @synthesize forward = forward_;
@@ -30,7 +28,6 @@
 @synthesize service = service_;
 @synthesize roster = roster_;
 @synthesize commands;
-@synthesize lastUpdate;
 @synthesize shouldSendUpdate;
 
 @synthesize address;
@@ -73,7 +70,6 @@
         return nil;
     }
     if ((self = [super init])) {
-        self.lastUpdate = [NSDate date];
         self.shouldSendUpdate = NO;
         self.commands = [NSMutableDictionary dictionaryWithCapacity:0];
         self.roster = roster;
@@ -149,10 +145,9 @@
 }
 
 - (void)update {
-    if (self.shouldSendUpdate && [self.lastUpdate timeIntervalSinceNow] < -1.0/UPDATES_PER_SECOND) {
+    if (self.shouldSendUpdate) {
         [self.service sendThrottle:self.roster.dccAddress
                           commands:self.commands];
-        self.lastUpdate = [NSDate date];
         self.commands = nil;
         self.commands = [NSMutableDictionary dictionaryWithCapacity:0];
     }
@@ -160,7 +155,6 @@
 
 - (void)dealloc {
     self.service = nil;
-    self.lastUpdate = nil;
     self.commands = nil;
     self.roster = nil;
     [super dealloc];
