@@ -19,7 +19,7 @@
 #import <Foundation/Foundation.h>
 #import "XMLIOObject.h"
 
-@interface XMLIOItem : XMLIOObject {
+@interface XMLIOItem : XMLIOObject <NSCoding> {
 
     NSString *systemName;
     NSString *type;

@@ -76,6 +76,40 @@
 	return self;
 }
 
+- (id)initWithCoder:(NSCoder *)aDecoder {
+	if ((self = [super init])) {
+		self.name = [[aDecoder decodeObjectForKey:XMLIOItemName] retain];
+		self.type = [[aDecoder decodeObjectForKey:XMLIOItemType] retain];
+		self.userName = [[aDecoder decodeObjectForKey:XMLIOItemUserName] retain];
+		self.value = [[aDecoder decodeObjectForKey:XMLIOItemValue] retain];
+		self.comment = [[aDecoder decodeObjectForKey:XMLIOItemComment] retain];
+		self.inverted = [aDecoder decodeBoolForKey:XMLIOItemInverted];
+		self.dccAddress = 0;
+		self.addressLength = nil;
+		self.roadName = nil;
+		self.roadNumber = 0;
+		self.mfg = nil;
+		self.model = nil;
+		self.maxSpeedPct = 0.0;
+		self.imageFileName = nil;
+		self.imageIconName = nil;
+        self.functions = [NSMutableArray arrayWithCapacity:XMLIORosterMaxFunctions];
+        for (NSUInteger i = 0; i < XMLIORosterMaxFunctions; i++) {
+            [self.functions insertObject:[[[XMLIOFunction alloc] initWithFunctionIdentifier:i] autorelease] atIndex:i];
+        }
+	}
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.name forKey:XMLIOItemName];
+    [aCoder encodeObject:self.type forKey:XMLIOItemType];
+    [aCoder encodeObject:self.userName forKey:XMLIOItemUserName];
+    [aCoder encodeObject:self.value forKey:XMLIOItemValue];
+    [aCoder encodeObject:self.comment forKey:XMLIOItemComment];
+    [aCoder encodeBool:self.inverted forKey:XMLIOItemInverted];
+}
+
 - (void)dealloc {
 	self.name = nil;
 	self.type = nil;
