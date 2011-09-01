@@ -91,6 +91,9 @@ extern NSString *const XMLIOItemTypeKey;
 extern NSString *const XMLIOItemValueKey;
 extern NSString *const XMLIOThrottleKey;
 
+// NSError keys
+extern NSString *const XMLIOErrorDomain;
+
 // JavaISMs
 extern NSString *const XMLIOBooleanYES;
 extern NSString *const XMLIOBooleanNO;

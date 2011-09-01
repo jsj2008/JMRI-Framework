@@ -87,6 +87,9 @@ NSString *const XMLIOItemTypeKey = @"XMLIOItemTypeKey";
 NSString *const XMLIOItemValueKey = @"XMLIOItemValueKey";
 NSString *const XMLIOThrottleKey = @"XMLIOThrottleKey";
 
+// NSError keys
+NSString *const XMLIOErrorDomain = @"XMLIOErrorDomain";
+
 // Javaisms
 NSString *const XMLIOBooleanYES = @"true"; // java.lang.Boolean.toString returns "true" for YES
 NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns "false" for NO
