@@ -319,7 +319,11 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 	if ([error code] == NSURLErrorTimedOut &&
 		[monitoredItems containsObject:[helper.name stringByAppendingString:helper.type]]) {
 		[self readItem:helper.name ofType:helper.type];
-	}
+	} else if ([error code] == NSURLErrorNetworkConnectionLost && 
+               !self.useAttributeProtocol &&
+               [monitoredItems containsObject:[helper.name stringByAppendingString:helper.type]]) {
+        [monitoredItems removeObject:[helper.name stringByAppendingString:helper.type]];
+    }
 	if ([self.delegate respondsToSelector:@selector(XMLIOService:didFailWithError:)]) {
 		[self.delegate XMLIOService:self didFailWithError:error];
 	}
