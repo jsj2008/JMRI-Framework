@@ -39,6 +39,7 @@ extern NSString *const XMLIOItemName;
 extern NSString *const XMLIOItemType;
 extern NSString *const XMLIOItemUserName;
 extern NSString *const XMLIOItemValue;
+extern NSString *const XMLIOItemIsNull;
 
 // JMRI XMLIO roster attributes
 extern NSString *const XMLIORosterDCCAddress;

@@ -156,8 +156,8 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
             [(XMLIORoster *)newElement setModel:[attributeDict objectForKey:XMLIORosterModel]];
             [(XMLIORoster *)newElement setName:[attributeDict objectForKey:XMLIOItemName]];
             [(XMLIORoster *)newElement setRoadName:[attributeDict objectForKey:XMLIORosterRoadName]];
-            [(XMLIORoster *)newElement setRoadNumber:[[attributeDict objectForKey:XMLIORosterRoadNumber] integerValue]];
-            [(XMLIORoster *)newElement setUserName:[NSString stringWithFormat:@"%@ %u", [attributeDict objectForKey:XMLIORosterRoadName], [[attributeDict objectForKey:XMLIORosterRoadNumber] integerValue]]];
+            [(XMLIORoster *)newElement setRoadNumber:[attributeDict objectForKey:XMLIORosterRoadNumber]];
+            [(XMLIORoster *)newElement setUserName:[[NSString stringWithFormat:@"%@ %@", [attributeDict objectForKey:XMLIORosterRoadName], [attributeDict objectForKey:XMLIORosterRoadNumber]] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
             [(XMLIORoster *)newElement setType:XMLIOTypeRoster];
         } else if ([elementName isEqualToString:XMLIOTypeMemory] ||
                    [elementName isEqualToString:XMLIOTypeMetadata] ||
@@ -173,6 +173,9 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
             [(XMLIOItem *)newElement setValue:[attributeDict objectForKey:XMLIOItemValue]];
             [(XMLIOItem *)newElement setComment:[attributeDict objectForKey:XMLIOItemComment]];
             [(XMLIOItem *)newElement setInverted:[[attributeDict objectForKey:XMLIOItemInverted] isEqualToString:XMLIOBooleanYES]];
+            if ([XMLIOBooleanYES isEqualToString:[attributeDict objectForKey:XMLIOItemIsNull]]) {
+                [(XMLIOItem *)newElement setValue:nil];
+            }
         } else if ([elementName isEqualToString:XMLIOXMLThrottle]) {
             if (self.delegate.useAttributeProtocol) {
                 XMLIOThrottle *t = [self.delegate.throttles objectForKey:[attributeDict objectForKey:XMLIOThrottleAddress]];
@@ -251,8 +254,10 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
                             [currentElement.parent isKindOfClass:[XMLIOThrottle class]]) {
                             if ([currentElement.XMLName isEqualToString:XMLIORosterDCCAddress]) {
                                 [(XMLIORoster *)parent setDccAddress:[currentElement.text integerValue]];
+                            } else if ([currentElement.XMLName isEqualToString:XMLIORosterRoadName]) {
+                                [(XMLIORoster *)parent setRoadName:currentElement.text];
                             } else if ([currentElement.XMLName isEqualToString:XMLIORosterRoadNumber]) {
-                                [(XMLIORoster *)parent setRoadNumber:[currentElement.text integerValue]];
+                                [(XMLIORoster *)parent setRoadNumber:currentElement.text];
                             } else if ([currentElement.XMLName isEqualToString:XMLIORosterMaxSpeedPct]) {
                                 [(XMLIORoster *)parent setMaxSpeedPct:[currentElement.text floatValue]];
                             } else if ([currentElement.XMLName isEqualToString:XMLIOItemInverted]) {
@@ -309,7 +314,7 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
                 }
             }
             if ([currentElement isMemberOfClass:[XMLIORoster class]]) {
-                [(XMLIORoster *)currentElement setUserName:[[(XMLIORoster *)currentElement roadName] stringByAppendingFormat:@" %u", [(XMLIORoster *)currentElement roadNumber], nil]];
+                [(XMLIORoster *)currentElement setUserName:[[[(XMLIORoster *)currentElement roadName] stringByAppendingFormat:@" %@", [(XMLIORoster *)currentElement roadNumber], nil] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
             }
             currentElement = currentElement.parent;
         }

@@ -37,6 +37,7 @@ NSString *const XMLIOItemName = @"name";
 NSString *const XMLIOItemType = @"type";
 NSString *const XMLIOItemUserName = @"userName";
 NSString *const XMLIOItemValue = @"value";
+NSString *const XMLIOItemIsNull = @"isNull";
 
 NSString *const XMLIORosterDCCAddress = @"dccAddress";
 NSString *const XMLIORosterAddressLength = @"addressLength";
