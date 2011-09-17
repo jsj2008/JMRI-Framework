@@ -22,6 +22,7 @@
 #import "XMLIOItem.h"
 #import "XMLIORoster.h"
 #import "XMLIOThrottle.h"
+#import "XMLIOMetadata.h"
 
 // XMLIO Types
 NSString *const XMLIOXMLXMLIO = @"xmlio";
@@ -166,7 +167,11 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
                    [elementName isEqualToString:XMLIOTypeRoute] ||
                    [elementName isEqualToString:XMLIOTypeSensor] ||
                    [elementName isEqualToString:XMLIOTypeTurnout]) {
-            newElement = [[XMLIOItem alloc] init];
+            if ([elementName isEqualToString:XMLIOTypeMetadata]) {
+                newElement = [[XMLIOMetadata alloc] init];
+            } else {
+                newElement = [[XMLIOItem alloc] init];
+            }
             [(XMLIOItem *)newElement setType:elementName];
             [(XMLIOItem *)newElement setName:[attributeDict objectForKey:XMLIOItemName]];
             [(XMLIOItem *)newElement setUserName:[attributeDict objectForKey:XMLIOItemUserName]];
@@ -175,6 +180,11 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
             [(XMLIOItem *)newElement setInverted:[[attributeDict objectForKey:XMLIOItemInverted] isEqualToString:XMLIOBooleanYES]];
             if ([XMLIOBooleanYES isEqualToString:[attributeDict objectForKey:XMLIOItemIsNull]]) {
                 [(XMLIOItem *)newElement setValue:nil];
+            }
+            if ([elementName isEqualToString:XMLIOTypeMetadata]) {
+                [(XMLIOMetadata *)newElement setMajorVersion:[[attributeDict objectForKey:@"major"] integerValue]];
+                [(XMLIOMetadata *)newElement setMinorVersion:[[attributeDict objectForKey:@"minor"] integerValue]];
+                [(XMLIOMetadata *)newElement setTestVersion:[[attributeDict objectForKey:@"test"] integerValue]];
             }
         } else if ([elementName isEqualToString:XMLIOXMLThrottle]) {
             if (self.delegate.useAttributeProtocol) {
@@ -268,6 +278,11 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
                                 [(XMLIOThrottle *)parent setForward:[currentElement.text isEqualToString:XMLIOBooleanYES]];
                             } else if ([[currentElement.XMLName substringToIndex:1] isEqualToString:@"F"]) {
                                 [(XMLIOThrottle *)parent setState:([currentElement.text isEqualToString:XMLIOBooleanYES]) ? XMLIOItemStateActive : XMLIOItemStateInactive forFunction:[[elementName substringFromIndex:1] integerValue]];
+                            } else if ([currentElement.XMLName isEqualToString:@"major"] ||
+                                       [currentElement.XMLName isEqualToString:@"minor"] ||
+                                       [currentElement.XMLName isEqualToString:@"test"]) {
+                                // Do not attmept to read version specifics unless using
+                                // attribute protocol
                             } else if (![currentElement.XMLName isEqualToString:XMLIORosterFunctionLabels] &&
                                        ![currentElement.XMLName isEqualToString:XMLIORosterFunctionLockables] &&
                                        ![currentElement.XMLName isEqualToString:XMLIOXMLFunction]) {

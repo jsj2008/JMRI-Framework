@@ -19,6 +19,7 @@
 #import "XMLIOService.h"
 #import "XMLIOServiceHelper.h"
 #import "XMLIOThrottle.h"
+#import "XMLIOMetadata.h"
 
 NSString *const XMLIOTypeMemory = @"memory";
 NSString *const XMLIOTypeMetadata = @"metadata";
@@ -74,6 +75,9 @@ NSString *const XMLIOMemoryRateFactor = @"IMRATEFACTOR";
 NSString *const XMLIOMetadataJMRIVersion = @"JMRIVERSION";
 NSString *const XMLIOMetadataJVMVendor = @"JVMVENDOR";
 NSString *const XMLIOMetadataJVMVersion = @"JVMVERSION";
+NSString *const XMLIOMetadataVersionMajor = @"major";
+NSString *const XMLIOMetadataVersionMinor = @"minor";
+NSString *const XMLIOMetadataVersionTest = @"test";
 NSString *const XMLIOSensorClockRunning = @"ISCLOCKRUNNING";
 
 // NSNotification posting
@@ -204,7 +208,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 }
 
 - (void)readItem:(NSString *)name ofType:(NSString *)type {
-    if (self.useAttributeProtocol) {
+    if (self.useAttributeProtocol || [type isEqualToString:XMLIOTypeMetadata]) {
         [self conductOperation:XMLIOOperationRead
                  withXMLString:[NSString stringWithFormat:@"<%@ name=\"%@\" />", type, name]
                       withType:type
@@ -218,7 +222,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 }
 
 - (void)readItem:(NSString *)name ofType:(NSString *)type initialValue:(NSString *)value {
-    if (self.useAttributeProtocol) {
+    if (self.useAttributeProtocol || [type isEqualToString:XMLIOTypeMetadata]) {
         [self conductOperation:XMLIOOperationRead
                  withXMLString:[NSString stringWithFormat:@"<%@ name=\"%@\" value=\"%@\" />", type, name, value]
                       withType:type
@@ -370,8 +374,11 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 																	value, XMLIOItemValueKey,
 																	nil]];
 	}
-    if ([name isEqualToString:XMLIOMetadataJMRIVersion] && value) {
-        version_ = value;
+    if ([name isEqualToString:XMLIOMetadataJMRIVersion] && [(XMLIOMetadata *)item majorVersion] != 0) {
+        version_ = [NSString stringWithFormat:@"%i.%i.%i", 
+                    [(XMLIOMetadata *)item majorVersion],
+                    [(XMLIOMetadata *)item minorVersion],
+                    [(XMLIOMetadata *)item testVersion]];
         if (self.monitoringDelay == defaultMonitoringDelay) {
             defaultMonitoringDelay = (self.useAttributeProtocol) ? 0 : 5;
             self.monitoringDelay = defaultMonitoringDelay;
