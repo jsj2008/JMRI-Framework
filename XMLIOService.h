@@ -78,6 +78,9 @@ extern NSString *const XMLIOMemoryRateFactor;
 extern NSString *const XMLIOMetadataJMRIVersion;
 extern NSString *const XMLIOMetadataJVMVendor;
 extern NSString *const XMLIOMetadataJVMVersion;
+extern NSString *const XMLIOMetadataVersionMajor;
+extern NSString *const XMLIOMetadataVersionMinor;
+extern NSString *const XMLIOMetadataVersionTest;
 extern NSString *const XMLIOSensorClockRunning;
 
 // NSNotification userInfo keys

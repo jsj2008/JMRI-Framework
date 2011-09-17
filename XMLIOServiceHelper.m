@@ -182,9 +182,9 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
                 [(XMLIOItem *)newElement setValue:nil];
             }
             if ([elementName isEqualToString:XMLIOTypeMetadata]) {
-                [(XMLIOMetadata *)newElement setMajorVersion:[[attributeDict objectForKey:@"major"] integerValue]];
-                [(XMLIOMetadata *)newElement setMinorVersion:[[attributeDict objectForKey:@"minor"] integerValue]];
-                [(XMLIOMetadata *)newElement setTestVersion:[[attributeDict objectForKey:@"test"] integerValue]];
+                [(XMLIOMetadata *)newElement setMajorVersion:[[attributeDict objectForKey:XMLIOMetadataVersionMajor] integerValue]];
+                [(XMLIOMetadata *)newElement setMinorVersion:[[attributeDict objectForKey:XMLIOMetadataVersionMinor] integerValue]];
+                [(XMLIOMetadata *)newElement setTestVersion:[[attributeDict objectForKey:XMLIOMetadataVersionTest] integerValue]];
             }
         } else if ([elementName isEqualToString:XMLIOXMLThrottle]) {
             if (self.delegate.useAttributeProtocol) {
@@ -278,9 +278,9 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
                                 [(XMLIOThrottle *)parent setForward:[currentElement.text isEqualToString:XMLIOBooleanYES]];
                             } else if ([[currentElement.XMLName substringToIndex:1] isEqualToString:@"F"]) {
                                 [(XMLIOThrottle *)parent setState:([currentElement.text isEqualToString:XMLIOBooleanYES]) ? XMLIOItemStateActive : XMLIOItemStateInactive forFunction:[[elementName substringFromIndex:1] integerValue]];
-                            } else if ([currentElement.XMLName isEqualToString:@"major"] ||
-                                       [currentElement.XMLName isEqualToString:@"minor"] ||
-                                       [currentElement.XMLName isEqualToString:@"test"]) {
+                            } else if ([currentElement.XMLName isEqualToString:XMLIOMetadataVersionMajor] ||
+                                       [currentElement.XMLName isEqualToString:XMLIOMetadataVersionMinor] ||
+                                       [currentElement.XMLName isEqualToString:XMLIOMetadataVersionTest]) {
                                 // Do not attmept to read version specifics unless using
                                 // attribute protocol
                             } else if (![currentElement.XMLName isEqualToString:XMLIORosterFunctionLabels] &&
