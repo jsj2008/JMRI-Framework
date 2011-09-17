@@ -374,7 +374,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 																	value, XMLIOItemValueKey,
 																	nil]];
 	}
-    if ([name isEqualToString:XMLIOMetadataJMRIVersion] && [(XMLIOMetadata *)item majorVersion] != 0) {
+    if ([name isEqualToString:XMLIOMetadataJMRIVersion] && [[item class] isSubclassOfClass:[XMLIOMetadata class]] && [(XMLIOMetadata *)item majorVersion] != 0) {
         version_ = [NSString stringWithFormat:@"%i.%i.%i", 
                     [(XMLIOMetadata *)item majorVersion],
                     [(XMLIOMetadata *)item minorVersion],
