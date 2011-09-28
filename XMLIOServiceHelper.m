@@ -118,6 +118,13 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
 			if ([self.delegate respondsToSelector:@selector(XMLIOServiceHelper:didListItems:ofType:)]) {
 				[self.delegate XMLIOServiceHelper:self didListItems:[items allValues] ofType:type];
 			}
+            if ([type isEqualToString:XMLIOTypeMetadata] && [self.delegate respondsToSelector:@selector(XMLIOServiceHelper:didReadItem:withName:ofType:withValue:)] && [[items allKeys] containsObject:XMLIOMetadataJMRIVersion]) {
+                [self.delegate XMLIOServiceHelper:self 
+                                      didReadItem:[items objectForKey:XMLIOMetadataJMRIVersion]
+                                         withName:XMLIOMetadataJMRIVersion
+                                           ofType:XMLIOTypeMetadata
+                                        withValue:[[items objectForKey:XMLIOMetadataJMRIVersion] value]];
+            }
 			break;
 		case XMLIOOperationRead:
 			if ([self.delegate respondsToSelector:@selector(XMLIOServiceHelper:didReadItem:withName:ofType:withValue:)]) {
@@ -192,6 +199,9 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
                 t.shouldSendUpdate = NO;
                 t.forward = [[attributeDict objectForKey:XMLIOThrottleForward] isEqualToString:XMLIOBooleanYES];
                 t.speed = [[attributeDict objectForKey:XMLIOThrottleSpeed] floatValue];
+                if ([attributeDict objectForKey:@"steps"]) {
+                    t.steps = [[attributeDict objectForKey:@"steps"] integerValue];
+                }
                 [t setState:(([[attributeDict objectForKey:XMLIOThrottleF0] isEqualToString:XMLIOBooleanYES]) ? XMLIOItemStateActive : XMLIOItemStateInactive) forFunction:0];
                 [t setState:([[attributeDict objectForKey:XMLIOThrottleF1] isEqualToString:XMLIOBooleanYES]) ? XMLIOItemStateActive : XMLIOItemStateInactive forFunction:1];
                 [t setState:([[attributeDict objectForKey:XMLIOThrottleF2] isEqualToString:XMLIOBooleanYES]) ? XMLIOItemStateActive : XMLIOItemStateInactive forFunction:2];

@@ -26,6 +26,7 @@
 
     BOOL forward_;
     float speed_;
+    NSInteger steps_;
     
     XMLIOService *service_;
     XMLIORoster *roster_;
@@ -45,6 +46,7 @@
 
 @property (nonatomic) BOOL forward;
 @property (nonatomic) float speed;
+@property (nonatomic) NSInteger steps;
 
 @property (nonatomic, retain) XMLIOService *service;
 @property (nonatomic, retain) XMLIORoster *roster;

@@ -58,6 +58,7 @@ extern NSUInteger const XMLIORosterMaxFunctions;    // Maximum number of Functio
 extern NSString *const XMLIOThrottleAddress;
 extern NSString *const XMLIOThrottleForward;
 extern NSString *const XMLIOThrottleSpeed;
+extern NSString *const XMLIOThrottleSteps;
 extern NSString *const XMLIOThrottleF0;
 extern NSString *const XMLIOThrottleF1;
 extern NSString *const XMLIOThrottleF2;

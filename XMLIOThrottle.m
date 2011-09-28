@@ -24,6 +24,7 @@
 
 @synthesize forward = forward_;
 @synthesize speed = speed_;
+@synthesize steps = steps_;
 
 @synthesize service = service_;
 @synthesize roster = roster_;
@@ -74,6 +75,7 @@
         self.commands = [NSMutableDictionary dictionaryWithCapacity:0];
         self.roster = roster;
         self.service = service;
+        self.steps = 126; // set to 0 to when testing XMLIO server handling of this
         if (!service.useAttributeProtocol) {
             [[NSNotificationCenter defaultCenter] addObserver:self
                                                      selector:@selector(updateWithNotification:)
@@ -96,6 +98,9 @@
         }
         if (throttle.forward) {
             self.forward = throttle.forward;
+        }
+        if (throttle.steps) {
+            self.steps = throttle.steps;
         }
         if ([throttle stateForFunction:0]) {
             [self setState:[throttle stateForFunction:0] forFunction:0];

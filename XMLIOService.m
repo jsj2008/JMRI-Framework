@@ -55,6 +55,7 @@ NSUInteger const XMLIORosterMaxFunctions = 29; // F0 though F28
 NSString *const XMLIOThrottleAddress = @"address";
 NSString *const XMLIOThrottleForward = @"forward";
 NSString *const XMLIOThrottleSpeed = @"speed";
+NSString *const XMLIOThrottleSteps = @"steps";
 NSString *const XMLIOThrottleF0 = @"F0";
 NSString *const XMLIOThrottleF1 = @"F1";
 NSString *const XMLIOThrottleF2 = @"F2";
@@ -138,7 +139,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 }
 
 - (BOOL)useAttributeProtocol {
-    return ([self.version compare:@"2.13.1" options:NSNumericSearch] != NSOrderedAscending);
+    return ([self.version compare:@"2.13.2" options:NSNumericSearch] != NSOrderedAscending);
 }
 
 #pragma mark -
@@ -375,10 +376,10 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 																	nil]];
 	}
     if ([name isEqualToString:XMLIOMetadataJMRIVersion] && [[item class] isSubclassOfClass:[XMLIOMetadata class]] && [(XMLIOMetadata *)item majorVersion] != 0) {
-        version_ = [NSString stringWithFormat:@"%i.%i.%i", 
+        version_ = [[NSString stringWithFormat:@"%i.%i.%i", 
                     [(XMLIOMetadata *)item majorVersion],
                     [(XMLIOMetadata *)item minorVersion],
-                    [(XMLIOMetadata *)item testVersion]];
+                    [(XMLIOMetadata *)item testVersion]] retain];
         if (self.monitoringDelay == defaultMonitoringDelay) {
             defaultMonitoringDelay = (self.useAttributeProtocol) ? 0 : 5;
             self.monitoringDelay = defaultMonitoringDelay;
@@ -462,6 +463,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 		self.XMLIOPath = @"xmlio";
         defaultMonitoringDelay = 5;
         self.monitoringDelay = defaultMonitoringDelay;
+        [self list:XMLIOTypeMetadata];
 	}
 	return self;
 }
