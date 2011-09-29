@@ -58,7 +58,7 @@ extern NSUInteger const XMLIORosterMaxFunctions;    // Maximum number of Functio
 extern NSString *const XMLIOThrottleAddress;
 extern NSString *const XMLIOThrottleForward;
 extern NSString *const XMLIOThrottleSpeed;
-extern NSString *const XMLIOThrottleSteps;
+extern NSString *const XMLIOThrottleSpeedStepMode;
 extern NSString *const XMLIOThrottleF0;
 extern NSString *const XMLIOThrottleF1;
 extern NSString *const XMLIOThrottleF2;
@@ -124,6 +124,13 @@ typedef enum {
 	XMLIOPowerStateOn = 2,
 	XMLIOPowerStateOff = 4
 } XMLIOPowerStates;
+
+typedef enum {
+    XMLIOSpeedStepMode128 = 1,
+    XMLIOSpeedStepMode28 = 2,
+    XMLIOSpeedStepMode27 = 4,
+    XMLIOSpeedStepMode14 = 8
+} XMLIOThrottleSpeedSteps;
 
 @protocol XMLIOServiceDelegate;
 @protocol XMLIOServiceHelperDelegate;

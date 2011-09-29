@@ -24,7 +24,7 @@
 
 @synthesize forward = forward_;
 @synthesize speed = speed_;
-@synthesize steps = steps_;
+@synthesize speedStepMode = speedStepMode_;
 
 @synthesize service = service_;
 @synthesize roster = roster_;
@@ -58,6 +58,25 @@
     }
 }
 
+- (NSInteger)steps {
+    switch (self.speedStepMode) {
+        case XMLIOSpeedStepMode128:
+            return 126;
+            break;
+        case XMLIOSpeedStepMode14:
+            return 14;
+            break;
+        case XMLIOSpeedStepMode27:
+            return 27;
+            break;
+        case XMLIOSpeedStepMode28:
+            return 28;
+            break;
+        default:
+            break;
+    }
+    return NSNotFound;
+}
 
 - (NSUInteger)stateForFunction:(NSUInteger)function {
     if ([self.roster.functions count] > function) {
@@ -75,7 +94,7 @@
         self.commands = [NSMutableDictionary dictionaryWithCapacity:0];
         self.roster = roster;
         self.service = service;
-        self.steps = 126; // set to 0 to when testing XMLIO server handling of this
+        self.speedStepMode = XMLIOSpeedStepMode128;
         if (!service.useAttributeProtocol) {
             [[NSNotificationCenter defaultCenter] addObserver:self
                                                      selector:@selector(updateWithNotification:)
@@ -99,8 +118,8 @@
         if (throttle.forward) {
             self.forward = throttle.forward;
         }
-        if (throttle.steps) {
-            self.steps = throttle.steps;
+        if (throttle.speedStepMode) {
+            self.speedStepMode = throttle.speedStepMode;
         }
         if ([throttle stateForFunction:0]) {
             [self setState:[throttle stateForFunction:0] forFunction:0];

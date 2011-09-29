@@ -199,8 +199,8 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
                 t.shouldSendUpdate = NO;
                 t.forward = [[attributeDict objectForKey:XMLIOThrottleForward] isEqualToString:XMLIOBooleanYES];
                 t.speed = [[attributeDict objectForKey:XMLIOThrottleSpeed] floatValue];
-                if ([attributeDict objectForKey:@"steps"]) {
-                    t.steps = [[attributeDict objectForKey:@"steps"] integerValue];
+                if ([attributeDict objectForKey:XMLIOThrottleSpeedStepMode]) {
+                    t.speedStepMode = [[attributeDict objectForKey:XMLIOThrottleSpeedStepMode] integerValue];
                 }
                 [t setState:(([[attributeDict objectForKey:XMLIOThrottleF0] isEqualToString:XMLIOBooleanYES]) ? XMLIOItemStateActive : XMLIOItemStateInactive) forFunction:0];
                 [t setState:([[attributeDict objectForKey:XMLIOThrottleF1] isEqualToString:XMLIOBooleanYES]) ? XMLIOItemStateActive : XMLIOItemStateInactive forFunction:1];
