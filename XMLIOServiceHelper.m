@@ -43,16 +43,74 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
 #pragma mark -
 #pragma mark Properties
 
-@synthesize delegate;
-@synthesize name;
-@synthesize operation;
-@synthesize request;
-@synthesize type;
+@synthesize delegate = delegate_;
+@synthesize name = name_;
+@synthesize operation = operation_;
+@synthesize request = request_;
+@synthesize type = type_;
+
+- (id)initWithDelegate:(id)delegate withOperation:(NSUInteger)operation withRequest:(NSURLRequest *)request withType:(NSString *)type withName:(NSString *)name {
+    if ((self = [super init])) {
+        self.delegate = delegate;
+        self.name = [name copy];
+        self.operation = operation;
+        self.request = [request copy];
+        self.type = [type copy];
+        isExecuting_ = NO;
+        isFinished_ = NO;
+    }
+    return self;
+}
+
+#pragma mark -
+#pragma mark NSOperation methods
+
+- (void)start {
+    if (![NSThread isMainThread]) {
+        [self performSelectorOnMainThread:@selector(start) withObject:nil waitUntilDone:NO];
+        return;
+    }
+    [self willChangeValueForKey:@"isExecuting"];
+    isExecuting_ = YES;
+    [self didChangeValueForKey:@"isExecuting"];
+    
+    // do stuff from XMLIOService:performOperation
+    NSURLConnection *connection = [NSURLConnection connectionWithRequest:self.request delegate:self];
+    if (connection) {
+        if ([self.delegate respondsToSelector:@selector(XMLIOServiceHelper:didConnectWithRequest:)]) {
+            [self.delegate XMLIOServiceHelper:self didConnectWithRequest:self.request];
+        }
+    } else { // failed to create NSURLConnection object
+        [self.delegate XMLIOServiceHelper:self didFailWithError:[NSError errorWithDomain:@"JMRIErrorDomain" code:1027 userInfo:nil]];
+    }
+}
+
+- (void)finish {
+    [self willChangeValueForKey:@"isExecuting"];
+    [self willChangeValueForKey:@"isFinished"];    
+    isExecuting_ = NO;
+    isFinished_ = YES;    
+    [self didChangeValueForKey:@"isExecuting"];
+    [self didChangeValueForKey:@"isFinished"];
+}
+
+- (BOOL)isConcurrent {
+    return YES;
+}
+
+- (BOOL)isExecuting {
+    return isExecuting_;
+}
+
+- (BOOL)isFinished {
+    return isFinished_;
+}
 
 #pragma mark -
 #pragma mark URL Connection delegate
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    NSLog(@"Did receieve response");
     // This method is called when the server has determined that it
     // has enough information to create the NSURLResponse.
 	
@@ -81,9 +139,11 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
 		[self.delegate XMLIOServiceHelper:self didFailWithError:error];
 	}
 	// connection is autoreleased, so ignore it.
+    [self finish];
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    NSLog(@"Finished loading");
 	NSXMLParser *parser;
 	if ([self.delegate logTraffic]) {
 		NSLog(@"Received: %@", [NSString stringWithUTF8String:[connectionData bytes]]);
@@ -100,6 +160,7 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
 		[parser release];
 		parser = nil;
 	}
+    [self finish];
 }
 
 #pragma mark -
@@ -113,12 +174,13 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
 }
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
-	switch (operation) {
+    NSLog(@"Finished parsing");
+	switch (self.operation) {
 		case XMLIOOperationList:
 			if ([self.delegate respondsToSelector:@selector(XMLIOServiceHelper:didListItems:ofType:)]) {
-				[self.delegate XMLIOServiceHelper:self didListItems:[items allValues] ofType:type];
+				[self.delegate XMLIOServiceHelper:self didListItems:[items allValues] ofType:self.type];
 			}
-            if ([type isEqualToString:XMLIOTypeMetadata] && [self.delegate respondsToSelector:@selector(XMLIOServiceHelper:didReadItem:withName:ofType:withValue:)] && [[items allKeys] containsObject:XMLIOMetadataJMRIVersion]) {
+            if ([self.type isEqualToString:XMLIOTypeMetadata] && [self.delegate respondsToSelector:@selector(XMLIOServiceHelper:didReadItem:withName:ofType:withValue:)] && [[items allKeys] containsObject:XMLIOMetadataJMRIVersion]) {
                 [self.delegate XMLIOServiceHelper:self 
                                       didReadItem:[items objectForKey:XMLIOMetadataJMRIVersion]
                                          withName:XMLIOMetadataJMRIVersion
@@ -128,17 +190,17 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
 			break;
 		case XMLIOOperationRead:
 			if ([self.delegate respondsToSelector:@selector(XMLIOServiceHelper:didReadItem:withName:ofType:withValue:)]) {
-				[self.delegate XMLIOServiceHelper:self didReadItem:[items objectForKey:name] withName:name ofType:type withValue:[[items objectForKey:name] valueForKey:XMLIOItemValue]];
+				[self.delegate XMLIOServiceHelper:self didReadItem:[items objectForKey:name_] withName:name_ ofType:type_ withValue:[[items objectForKey:name_] valueForKey:XMLIOItemValue]];
 			}
 			break;
 		case XMLIOOperationWrite:
 			if ([self.delegate respondsToSelector:@selector(XMLIOServiceHelper:didWriteItem:ofType:withValue:)]) {
-				[self.delegate XMLIOServiceHelper:self didWriteItem:[items objectForKey:name] withName:name ofType:type withValue:[[items objectForKey:name] valueForKey:XMLIOItemValue]];
+				[self.delegate XMLIOServiceHelper:self didWriteItem:[items objectForKey:name_] withName:name_ ofType:type_ withValue:[[items objectForKey:name_] valueForKey:XMLIOItemValue]];
 			}
             break;
         case XMLIOOperationThrottle:
             if ([self.delegate respondsToSelector:@selector(XMLIOServiceHelper:didGetThrottle:atAddress:)]) {
-                [self.delegate XMLIOServiceHelper:self didGetThrottle:[items objectForKey:name] atAddress:[name integerValue]];
+                [self.delegate XMLIOServiceHelper:self didGetThrottle:[items objectForKey:name_] atAddress:[name_ integerValue]];
             }
 			break;
 	}
@@ -249,7 +311,7 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
             if (currentElement.parent) {
                 if (rootElement == currentElement.parent) {
                     if ([currentElement isKindOfClass:[XMLIOThrottle class]]) {
-                        [items setObject:currentElement forKey:name];
+                        [items setObject:currentElement forKey:name_];
                     } else {
                         [items setObject:currentElement forKey:[(XMLIOItem *)currentElement name]];
                     }
@@ -332,7 +394,7 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
                 }
                 if (rootElement == currentElement.parent) {
                     if ([currentElement isKindOfClass:[XMLIOThrottle class]]) {
-                        [items setObject:currentElement forKey:name];
+                        [items setObject:currentElement forKey:name_];
                     } else {
                         [items setObject:currentElement forKey:[(XMLIOItem *)currentElement name]];
                     }

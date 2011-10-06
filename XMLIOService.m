@@ -153,34 +153,22 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
         return;
     }
 	if (self.url) {
-		NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:self.url
-															   cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
-														   timeoutInterval:self.timeoutInterval];
-		[request setHTTPMethod:@"POST"];
-		[request setHTTPBody:[[NSString stringWithFormat:@"<?xml version=\"1.0\" encoding=\"UTF-8\"?><xmlio>%@</xmlio>", query]
-							  dataUsingEncoding:NSUTF8StringEncoding]];
-		if (self.logTraffic) {
-			NSLog(@"Sending %@ to %@", [NSString stringWithUTF8String:[[request HTTPBody] bytes]], self.url);
-		}
-		XMLIOServiceHelper *helper = [[XMLIOServiceHelper alloc] init];
-		helper.request = request;
-		helper.delegate = self;
-		helper.name = aName;
-		helper.operation = operation;
-		helper.type = type;
-		NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:helper];
-        [helper release];
-		if (connection) {
-			[connections setObject:connection forKey:[request HTTPBody]];
-			if (self.logTraffic) {
-				NSLog(@"XMLIOService opened new connection. %u connections are open.", [connections count]);
-			}
-			if ([self.delegate respondsToSelector:@selector(XMLIOService:didConnectWithRequest:)]) {
-				[self.delegate XMLIOService:self didConnectWithRequest:request];
-			}
-		} else { // failed to create NSURLConnection object
-			[self.delegate XMLIOService:self didFailWithError:[NSError errorWithDomain:@"JMRIErrorDomain" code:1027 userInfo:nil]];
-		}
+        NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:self.url
+                                                               cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                                           timeoutInterval:self.timeoutInterval];
+        [request setHTTPMethod:@"POST"];
+        [request setHTTPBody:[[NSString stringWithFormat:@"<?xml version=\"1.0\" encoding=\"UTF-8\"?><xmlio>%@</xmlio>", query]
+                              dataUsingEncoding:NSUTF8StringEncoding]];
+        if (self.logTraffic) {
+            NSLog(@"Sending %@ to %@", [NSString stringWithUTF8String:[[request HTTPBody] bytes]], self.url);
+        }
+        NSOperationQueue *queue = [[[NSOperationQueue alloc] init] autorelease];
+        XMLIOServiceHelper *helper = [[[XMLIOServiceHelper alloc] initWithDelegate:self
+                                                                     withOperation:operation
+                                                                       withRequest:request
+                                                                          withType:type
+                                                                          withName:aName] autorelease];
+        [queue addOperation:helper];
 	} else if (!self.url) { // did not resolve
 		[self.delegate XMLIOService:self didFailWithError:[NSError errorWithDomain:@"JMRIErrorDomain" code:1025 userInfo:nil]];
 	} else { // open connection
@@ -338,7 +326,18 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 	}
 }
 
+- (void)XMLIOServiceHelper:(XMLIOServiceHelper *)helper didConnectWithRequest:(NSURLRequest *)request {
+    [connections setObject:helper forKey:[request HTTPBody]];
+    if (self.logTraffic) {
+        NSLog(@"XMLIOService opened new connection. %u connections are open.", [connections count]);
+    }
+    if ([self.delegate respondsToSelector:@selector(XMLIOService:didConnectWithRequest:)]) {
+        [self.delegate XMLIOService:self didConnectWithRequest:request];
+    }
+}
+
 - (void)XMLIOServiceHelper:(XMLIOServiceHelper *)helper didListItems:(NSArray *)items ofType:(NSString *)type {
+    NSLog(@"listing %i %@s", [items count], type);
 	if ([self.delegate respondsToSelector:@selector(XMLIOService:didListItems:ofType:)]) {
 		[self.delegate XMLIOService:self didListItems:items ofType:type];
 	}

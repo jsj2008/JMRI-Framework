@@ -22,19 +22,27 @@
 @class XMLIOThrottle;
 @class XMLIOService;
 
-@interface XMLIOServiceHelper : NSObject <NSXMLParserDelegate> {
+@interface XMLIOServiceHelper : NSOperation <NSXMLParserDelegate> {
 
-	XMLIOService *delegate;
+	XMLIOService *delegate_;
 	NSMutableData* connectionData;
 	NSMutableDictionary* items;
     XMLIOObject* rootElement;
     XMLIOObject* currentElement;
-	NSUInteger operation;
-	NSString *type;
-	NSString *name;
-	NSURLRequest *request;
+	NSUInteger operation_;
+	NSString *type_;
+	NSString *name_;
+	NSURLRequest *request_;
+    BOOL isExecuting_;
+    BOOL isFinished_;
 
 }
+
+- (id)initWithDelegate:(id)delegate
+         withOperation:(NSUInteger)operation
+           withRequest:(NSURLRequest *)request
+              withType:(NSString *)type
+              withName:(NSString *)name;
 
 @property (retain) XMLIOService *delegate;
 @property NSUInteger operation;
@@ -50,6 +58,7 @@
 
 @required
 - (void)XMLIOServiceHelper:(XMLIOServiceHelper *)helper didFailWithError:(NSError *)error;
+- (void)XMLIOServiceHelper:(XMLIOServiceHelper *)helper didConnectWithRequest:(NSURLRequest *)request;
 
 #pragma mark Optional Methods
 
