@@ -174,7 +174,9 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
 }
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
-    NSLog(@"Finished parsing");
+    if ([type_ isEqualToString:XMLIOTypePanel]) {
+        type_ = XMLIOTypeFrame;
+    }
 	switch (self.operation) {
 		case XMLIOOperationList:
 			if ([self.delegate respondsToSelector:@selector(XMLIOServiceHelper:didListItems:ofType:)]) {
@@ -231,6 +233,7 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
             [(XMLIORoster *)newElement setType:XMLIOTypeRoster];
         } else if ([elementName isEqualToString:XMLIOTypeMemory] ||
                    [elementName isEqualToString:XMLIOTypeMetadata] ||
+                   [elementName isEqualToString:XMLIOTypeFrame] ||
                    [elementName isEqualToString:XMLIOTypePanel] ||
                    [elementName isEqualToString:XMLIOTypePower] ||
                    [elementName isEqualToString:XMLIOTypeRoute] ||
@@ -241,7 +244,12 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
             } else {
                 newElement = [[XMLIOItem alloc] init];
             }
-            [(XMLIOItem *)newElement setType:elementName];
+            // while Panels are considered a valid substitute for Frames
+            if ([elementName isEqualToString:XMLIOTypePanel]) {
+                [(XMLIOItem *)newElement setType:XMLIOTypeFrame];
+            } else {
+                [(XMLIOItem *)newElement setType:elementName];
+            }
             [(XMLIOItem *)newElement setName:[attributeDict objectForKey:XMLIOItemName]];
             [(XMLIOItem *)newElement setUserName:[attributeDict objectForKey:XMLIOItemUserName]];
             [(XMLIOItem *)newElement setValue:[attributeDict objectForKey:XMLIOItemValue]];

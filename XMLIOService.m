@@ -21,6 +21,7 @@
 #import "XMLIOThrottle.h"
 #import "XMLIOMetadata.h"
 
+NSString *const XMLIOTypeFrame = @"frame";
 NSString *const XMLIOTypeMemory = @"memory";
 NSString *const XMLIOTypeMetadata = @"metadata";
 NSString *const XMLIOTypePanel = @"panel";
@@ -205,6 +206,9 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
                       withType:type
                       withName:nil];
     } else {
+        if ([type isEqualToString:XMLIOTypeFrame]) {
+            type = XMLIOTypePanel;
+        }
 		[self conductOperation:XMLIOOperationList
 				 withXMLString:[NSString stringWithFormat:@"<list><type>%@</type></list>", type]
 					  withType:type
@@ -297,7 +301,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 }
 
 - (void)startMonitoring:(NSString *)name ofType:(NSString *)type {
-	if (![type isEqualToString:XMLIOTypePanel] &&
+	if (![type isEqualToString:XMLIOTypeFrame] &&
         ![type isEqualToString:XMLIOTypeRoster] &&
         ![type isEqualToString:XMLIOTypeMetadata] &&
         ![monitoredItems containsObject:[name stringByAppendingString:type]]) {

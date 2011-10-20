@@ -21,6 +21,7 @@
 #import "XMLIOServiceHelper.h"
 
 // JMRI XMLIO item types
+extern NSString *const XMLIOTypeFrame;
 extern NSString *const XMLIOTypeMemory;
 extern NSString *const XMLIOTypeMetadata;
 extern NSString *const XMLIOTypePanel;
