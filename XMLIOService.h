@@ -72,6 +72,22 @@ extern NSString *const XMLIOThrottleF9;
 extern NSString *const XMLIOThrottleF10;
 extern NSString *const XMLIOThrottleF11;
 extern NSString *const XMLIOThrottleF12;
+extern NSString *const XMLIOThrottleF13;
+extern NSString *const XMLIOThrottleF14;
+extern NSString *const XMLIOThrottleF15;
+extern NSString *const XMLIOThrottleF16;
+extern NSString *const XMLIOThrottleF17;
+extern NSString *const XMLIOThrottleF18;
+extern NSString *const XMLIOThrottleF19;
+extern NSString *const XMLIOThrottleF20;
+extern NSString *const XMLIOThrottleF21;
+extern NSString *const XMLIOThrottleF22;
+extern NSString *const XMLIOThrottleF23;
+extern NSString *const XMLIOThrottleF24;
+extern NSString *const XMLIOThrottleF25;
+extern NSString *const XMLIOThrottleF26;
+extern NSString *const XMLIOThrottleF27;
+extern NSString *const XMLIOThrottleF28;
 
 // JMRI XMLIO common names
 extern NSString *const XMLIOMemoryCurrentTime;

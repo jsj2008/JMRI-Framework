@@ -69,6 +69,22 @@ NSString *const XMLIOThrottleF9 = @"F9";
 NSString *const XMLIOThrottleF10 = @"F10";
 NSString *const XMLIOThrottleF11 = @"F11";
 NSString *const XMLIOThrottleF12 = @"F12";
+NSString *const XMLIOThrottleF13 = @"F13";
+NSString *const XMLIOThrottleF14 = @"F14";
+NSString *const XMLIOThrottleF15 = @"F15";
+NSString *const XMLIOThrottleF16 = @"F16";
+NSString *const XMLIOThrottleF17 = @"F17";
+NSString *const XMLIOThrottleF18 = @"F18";
+NSString *const XMLIOThrottleF19 = @"F19";
+NSString *const XMLIOThrottleF20 = @"F20";
+NSString *const XMLIOThrottleF21 = @"F21";
+NSString *const XMLIOThrottleF22 = @"F22";
+NSString *const XMLIOThrottleF23 = @"F23";
+NSString *const XMLIOThrottleF24 = @"F24";
+NSString *const XMLIOThrottleF25 = @"F25";
+NSString *const XMLIOThrottleF26 = @"F26";
+NSString *const XMLIOThrottleF27 = @"F27";
+NSString *const XMLIOThrottleF28 = @"F28";
 
 // Well known sensor and memory names
 NSString *const XMLIOMemoryCurrentTime = @"IMCURRENTTIME";

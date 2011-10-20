@@ -160,6 +160,54 @@
         if ([throttle stateForFunction:12]) {
             [self setState:[throttle stateForFunction:12] forFunction:12];
         }
+        if ([throttle stateForFunction:13]) {
+            [self setState:[throttle stateForFunction:13] forFunction:13];
+        }
+        if ([throttle stateForFunction:14]) {
+            [self setState:[throttle stateForFunction:14] forFunction:14];
+        }
+        if ([throttle stateForFunction:15]) {
+            [self setState:[throttle stateForFunction:15] forFunction:15];
+        }
+        if ([throttle stateForFunction:16]) {
+            [self setState:[throttle stateForFunction:16] forFunction:16];
+        }
+        if ([throttle stateForFunction:17]) {
+            [self setState:[throttle stateForFunction:17] forFunction:17];
+        }
+        if ([throttle stateForFunction:18]) {
+            [self setState:[throttle stateForFunction:18] forFunction:18];
+        }
+        if ([throttle stateForFunction:19]) {
+            [self setState:[throttle stateForFunction:19] forFunction:19];
+        }
+        if ([throttle stateForFunction:20]) {
+            [self setState:[throttle stateForFunction:20] forFunction:20];
+        }
+        if ([throttle stateForFunction:21]) {
+            [self setState:[throttle stateForFunction:21] forFunction:21];
+        }
+        if ([throttle stateForFunction:22]) {
+            [self setState:[throttle stateForFunction:22] forFunction:22];
+        }
+        if ([throttle stateForFunction:23]) {
+            [self setState:[throttle stateForFunction:23] forFunction:23];
+        }
+        if ([throttle stateForFunction:24]) {
+            [self setState:[throttle stateForFunction:24] forFunction:24];
+        }
+        if ([throttle stateForFunction:25]) {
+            [self setState:[throttle stateForFunction:25] forFunction:25];
+        }
+        if ([throttle stateForFunction:26]) {
+            [self setState:[throttle stateForFunction:26] forFunction:26];
+        }
+        if ([throttle stateForFunction:27]) {
+            [self setState:[throttle stateForFunction:27] forFunction:27];
+        }
+        if ([throttle stateForFunction:28]) {
+            [self setState:[throttle stateForFunction:28] forFunction:28];
+        }
         self.shouldSendUpdate = YES;
     }
 }
