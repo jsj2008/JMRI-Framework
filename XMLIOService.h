@@ -182,8 +182,16 @@ typedef enum {
 
 - (void)cancelAllConnections;
 
-#pragma mark -
-#pragma mark Properties
+#pragma mark - JMRI XMLIO Service rethreading
+
+- (void)helperDidFail:(NSDictionary *)parameters;
+- (void)helperDidListItems:(NSDictionary *)parameters;
+- (void)helperDidReadItem:(NSDictionary *)parameters;
+- (void)helperDidWriteItem:(NSDictionary *)parameters;
+- (void)helperDidGetThrottle:(NSDictionary *)parameters;
+- (void)helperDidConnectWithRequest:(NSDictionary *)parameters;
+
+#pragma mark - Properties
 
 @property (readonly, retain) NSURL* url;
 @property (readonly) BOOL openConnection;
