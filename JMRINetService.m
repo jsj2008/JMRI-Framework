@@ -58,8 +58,8 @@ NSString *const JMRITXTRecordKeyJMRI = @"jmri";
 }
 
 - (void)dealloc {
-	[self.service release];
-	[self.delegate release];
+	self.service = nil;
+	self.delegate = nil;
 	manualAddress = nil;
 	[super dealloc];
 }

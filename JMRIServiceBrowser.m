@@ -31,8 +31,8 @@ NSString *const JMRIServiceTypeWiThrottle = @"_withrottle._tcp.";
 
 - (id)init {
 	if ((self = [super init])) {
-		self.browser = [[NSNetServiceBrowser alloc] init];
-		[self.browser setDelegate:self];
+		self.browser = [[[NSNetServiceBrowser alloc] init] autorelease];
+        self.browser.delegate = self;
 		self.services = [NSMutableArray arrayWithCapacity:0];
 		_searching = NO;
 	}
@@ -40,8 +40,8 @@ NSString *const JMRIServiceTypeWiThrottle = @"_withrottle._tcp.";
 }
 
 - (void)dealloc {
-	[self.services release];
-	[self.browser release];
+	self.services = nil;
+	self.browser = nil;
 	[super dealloc];
 }
 
