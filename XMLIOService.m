@@ -395,7 +395,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 		[self.delegate XMLIOService:self didFailWithError:error];
 	}
 	if (self.logTraffic) {
-		NSLog(@"XMLIOService connection failed. %u connections remain open. Failed with operation: %u (%@, a %@)", [connections count], helper.operation, helper.name, helper.type);
+		NSLog(@"XMLIOService connection failed. %lu connections remain open. Failed with operation: %lu (%@, a %@)", (unsigned long)[connections count], (unsigned long)helper.operation, helper.name, helper.type);
 	}
 }
 
@@ -408,7 +408,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
     }
     [connections setObject:helper forKey:[request HTTPBody]];
     if (self.logTraffic) {
-        NSLog(@"XMLIOService opened new connection. %u connections are open.", [connections count]);
+        NSLog(@"XMLIOService opened new connection. %lu connections are open.", (unsigned long)[connections count]);
     }
     if ([self.delegate respondsToSelector:@selector(XMLIOService:didConnectWithRequest:)]) {
         [self.delegate XMLIOService:self didConnectWithRequest:request];
@@ -422,7 +422,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
                             waitUntilDone:NO];
         return;
     }
-    NSLog(@"listing %u %@s", [items count], type);
+    NSLog(@"listing %lu %@s", (unsigned long)[items count], type);
 	if ([self.delegate respondsToSelector:@selector(XMLIOService:didListItems:ofType:)]) {
 		[self.delegate XMLIOService:self didListItems:items ofType:type];
 	}
@@ -538,7 +538,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 		[self.delegate XMLIOServiceDidFinishLoading:self];
 	}
 	if (self.logTraffic) {
-		NSLog(@"XMLIOService has just closed a connection. %u connections remain open.", [connections count]);
+		NSLog(@"XMLIOService has just closed a connection. %lu connections remain open.", (unsigned long)[connections count]);
 	}
     [connection release];
 }
