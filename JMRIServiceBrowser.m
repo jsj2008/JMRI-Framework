@@ -19,6 +19,7 @@
 #import "JMRIServiceBrowser.h"
 #import "JMRINetService.h"
 
+NSString *const JMRIServiceTypeSimple = @"_jmri._tcp.";
 NSString *const JMRIServiceTypeXMLIO = @"_http._tcp.";
 NSString *const JMRIServiceTypeWiThrottle = @"_withrottle._tcp.";
 
