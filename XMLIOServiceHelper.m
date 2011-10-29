@@ -174,19 +174,19 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
 }
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
-    if ([type_ isEqualToString:XMLIOTypePanel]) {
-        type_ = XMLIOTypeFrame;
+    if ([type_ isEqualToString:JMRITypePanel]) {
+        type_ = JMRITypeFrame;
     }
 	switch (self.operation) {
 		case XMLIOOperationList:
 			if ([self.delegate respondsToSelector:@selector(XMLIOServiceHelper:didListItems:ofType:)]) {
 				[self.delegate XMLIOServiceHelper:self didListItems:[items allValues] ofType:self.type];
 			}
-            if ([self.type isEqualToString:XMLIOTypeMetadata] && [self.delegate respondsToSelector:@selector(XMLIOServiceHelper:didReadItem:withName:ofType:withValue:)] && [[items allKeys] containsObject:XMLIOMetadataJMRIVersion]) {
+            if ([self.type isEqualToString:JMRITypeMetadata] && [self.delegate respondsToSelector:@selector(XMLIOServiceHelper:didReadItem:withName:ofType:withValue:)] && [[items allKeys] containsObject:XMLIOMetadataJMRIVersion]) {
                 [self.delegate XMLIOServiceHelper:self 
                                       didReadItem:[items objectForKey:XMLIOMetadataJMRIVersion]
                                          withName:XMLIOMetadataJMRIVersion
-                                           ofType:XMLIOTypeMetadata
+                                           ofType:JMRITypeMetadata
                                         withValue:[[items objectForKey:XMLIOMetadataJMRIVersion] value]];
             }
 			break;
@@ -216,7 +216,7 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
         [root release];
     } else {
         XMLIOObject *newElement;
-        if ([elementName isEqualToString:XMLIOTypeRoster]) {
+        if ([elementName isEqualToString:JMRITypeRoster]) {
             newElement = [[XMLIORoster alloc] init];
             [(XMLIORoster *)newElement setDccAddress:[[attributeDict objectForKey:XMLIORosterDCCAddress] integerValue]];
             [(XMLIORoster *)newElement setAddressLength:[attributeDict objectForKey:XMLIORosterAddressLength]];
@@ -230,23 +230,23 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
             [(XMLIORoster *)newElement setRoadName:[attributeDict objectForKey:XMLIORosterRoadName]];
             [(XMLIORoster *)newElement setRoadNumber:[attributeDict objectForKey:XMLIORosterRoadNumber]];
             [(XMLIORoster *)newElement setUserName:[[NSString stringWithFormat:@"%@ %@", [attributeDict objectForKey:XMLIORosterRoadName], [attributeDict objectForKey:XMLIORosterRoadNumber]] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
-            [(XMLIORoster *)newElement setType:XMLIOTypeRoster];
-        } else if ([elementName isEqualToString:XMLIOTypeMemory] ||
-                   [elementName isEqualToString:XMLIOTypeMetadata] ||
-                   [elementName isEqualToString:XMLIOTypeFrame] ||
-                   [elementName isEqualToString:XMLIOTypePanel] ||
-                   [elementName isEqualToString:XMLIOTypePower] ||
-                   [elementName isEqualToString:XMLIOTypeRoute] ||
-                   [elementName isEqualToString:XMLIOTypeSensor] ||
-                   [elementName isEqualToString:XMLIOTypeTurnout]) {
-            if ([elementName isEqualToString:XMLIOTypeMetadata]) {
+            [(XMLIORoster *)newElement setType:JMRITypeRoster];
+        } else if ([elementName isEqualToString:JMRITypeMemory] ||
+                   [elementName isEqualToString:JMRITypeMetadata] ||
+                   [elementName isEqualToString:JMRITypeFrame] ||
+                   [elementName isEqualToString:JMRITypePanel] ||
+                   [elementName isEqualToString:JMRITypePower] ||
+                   [elementName isEqualToString:JMRITypeRoute] ||
+                   [elementName isEqualToString:JMRITypeSensor] ||
+                   [elementName isEqualToString:JMRITypeTurnout]) {
+            if ([elementName isEqualToString:JMRITypeMetadata]) {
                 newElement = [[XMLIOMetadata alloc] init];
             } else {
                 newElement = [[XMLIOItem alloc] init];
             }
             // while Panels are considered a valid substitute for Frames
-            if ([elementName isEqualToString:XMLIOTypePanel]) {
-                [(XMLIOItem *)newElement setType:XMLIOTypeFrame];
+            if ([elementName isEqualToString:JMRITypePanel]) {
+                [(XMLIOItem *)newElement setType:JMRITypeFrame];
             } else {
                 [(XMLIOItem *)newElement setType:elementName];
             }
@@ -258,7 +258,7 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
             if ([XMLIOBooleanYES isEqualToString:[attributeDict objectForKey:XMLIOItemIsNull]]) {
                 [(XMLIOItem *)newElement setValue:nil];
             }
-            if ([elementName isEqualToString:XMLIOTypeMetadata]) {
+            if ([elementName isEqualToString:JMRITypeMetadata]) {
                 [(XMLIOMetadata *)newElement setMajorVersion:[[attributeDict objectForKey:XMLIOMetadataVersionMajor] integerValue]];
                 [(XMLIOMetadata *)newElement setMinorVersion:[[attributeDict objectForKey:XMLIOMetadataVersionMinor] integerValue]];
                 [(XMLIOMetadata *)newElement setTestVersion:[[attributeDict objectForKey:XMLIOMetadataVersionTest] integerValue]];
@@ -397,7 +397,7 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
                         }
                     }
                 }
-                if ([currentElement isMemberOfClass:[XMLIOItem class]] && [[(XMLIOItem *)currentElement type] isEqualToString:XMLIOTypeRoster]) {
+                if ([currentElement isMemberOfClass:[XMLIOItem class]] && [[(XMLIOItem *)currentElement type] isEqualToString:JMRITypeRoster]) {
                     XMLIORoster *rosterElement = [[XMLIORoster alloc] initWithItem:(XMLIOItem *)currentElement];
                     rosterElement.children = currentElement.children;
                     rosterElement.parent = currentElement.parent;

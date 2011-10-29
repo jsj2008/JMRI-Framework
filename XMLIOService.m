@@ -29,17 +29,7 @@
 #import "XMLIOThrottle.h"
 #import "XMLIOMetadata.h"
 
-NSString *const XMLIOTypeFrame = @"frame";
-NSString *const XMLIOTypeMemory = @"memory";
-NSString *const XMLIOTypeMetadata = @"metadata";
-NSString *const XMLIOTypePanel = @"panel";
-NSString *const XMLIOTypePower = @"power";
-NSString *const XMLIOTypeRoster = @"roster";
-NSString *const XMLIOTypeRoute = @"route";
-NSString *const XMLIOTypeSensor = @"sensor";
-NSString *const XMLIOTypeTurnout = @"turnout";
-
-NSString *const XMLIOTypeThrottle = @"throttle";
+NSString *const JMRITypeThrottle = @"throttle";
 
 NSString *const XMLIOItemComment = @"comment";
 NSString *const XMLIOItemInverted = @"inverted";
@@ -148,6 +138,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 @synthesize XMLIOPath;
 @synthesize throttles;
 @synthesize monitoringDelay;
+@synthesize pollingInterval;
 
 - (BOOL)openConnection {
 	return ([connections count]);
@@ -174,7 +165,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 		   withXMLString:(NSString *)query 
 				withType:(NSString *)type
 				withName:(NSString *)aName {
-    if (!self.useAttributeProtocol && operation != XMLIOOperationList && [type isEqualToString:XMLIOTypeMetadata]) {
+    if (!self.useAttributeProtocol && operation != XMLIOOperationList && [type isEqualToString:JMRITypeMetadata]) {
         return;
     }
 	if (self.url) {
@@ -214,8 +205,8 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
                       withType:type
                       withName:nil];
     } else {
-        if ([type isEqualToString:XMLIOTypeFrame]) {
-            type = XMLIOTypePanel;
+        if ([type isEqualToString:JMRITypeFrame]) {
+            type = JMRITypePanel;
         }
 		[self conductOperation:XMLIOOperationList
 				 withXMLString:[NSString stringWithFormat:@"<list><type>%@</type></list>", type]
@@ -225,7 +216,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 }
 
 - (void)readItem:(NSString *)name ofType:(NSString *)type {
-    if (self.useAttributeProtocol || [type isEqualToString:XMLIOTypeMetadata]) {
+    if (self.useAttributeProtocol || [type isEqualToString:JMRITypeMetadata]) {
         [self conductOperation:XMLIOOperationRead
                  withXMLString:[NSString stringWithFormat:@"<%@ name=\"%@\" />", type, name]
                       withType:type
@@ -239,7 +230,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 }
 
 - (void)readItem:(NSString *)name ofType:(NSString *)type initialValue:(NSString *)value {
-    if (self.useAttributeProtocol || [type isEqualToString:XMLIOTypeMetadata]) {
+    if (self.useAttributeProtocol || [type isEqualToString:JMRITypeMetadata]) {
         [self conductOperation:XMLIOOperationRead
                  withXMLString:[NSString stringWithFormat:@"<%@ name=\"%@\" value=\"%@\" />", type, name, value]
                       withType:type
@@ -294,7 +285,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
     }
     [self conductOperation:XMLIOOperationThrottle 
              withXMLString:s 
-                  withType:XMLIOTypeThrottle
+                  withType:JMRITypeThrottle
                   withName:[[NSNumber numberWithUnsignedInteger:address] stringValue]];
 }
 
@@ -309,9 +300,9 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 }
 
 - (void)startMonitoring:(NSString *)name ofType:(NSString *)type {
-	if (![type isEqualToString:XMLIOTypeFrame] &&
-        ![type isEqualToString:XMLIOTypeRoster] &&
-        ![type isEqualToString:XMLIOTypeMetadata] &&
+	if (![type isEqualToString:JMRITypeFrame] &&
+        ![type isEqualToString:JMRITypeRoster] &&
+        ![type isEqualToString:JMRITypeMetadata] &&
         ![monitoredItems containsObject:[name stringByAppendingString:type]]) {
 		[monitoredItems addObject:[name stringByAppendingString:type]];
         [self readItem:name ofType:type];
@@ -324,6 +315,22 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 
 - (void)stopMonitoringAllItems {
 	[monitoredItems removeAllObjects];
+}
+
+- (void)startPollingForType:(NSString *)type {
+    if (![type isEqualToString:JMRITypeMetadata] &&
+        ![pollingTypes containsObject:type]) {
+        [pollingTypes addObject:type];
+        [self list:type];
+    }
+}
+
+- (void)stopPollingForType:(NSString *)type {
+    [pollingTypes removeObject:type];
+}
+
+- (void)stopPollingForAllTypes {
+    [pollingTypes removeAllObjects];
 }
 
 - (void)cancelAllConnections {
@@ -425,6 +432,13 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
     NSLog(@"listing %lu %@s", (unsigned long)[items count], type);
 	if ([self.delegate respondsToSelector:@selector(XMLIOService:didListItems:ofType:)]) {
 		[self.delegate XMLIOService:self didListItems:items ofType:type];
+	}
+	if ([pollingTypes containsObject:type]) {
+            [NSTimer scheduledTimerWithTimeInterval:self.pollingInterval
+                                             target:self
+                                           selector:@selector(list:)
+                                           userInfo:type
+                                            repeats:NO];
 	}
 	[[NSNotificationCenter defaultCenter] postNotificationName:XMLIOServiceDidListItems
 														object:self
@@ -559,6 +573,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 		self.XMLIOPath = @"xmlio";
         defaultMonitoringDelay = (self.useAttributeProtocol) ? 0 : 5;
         self.monitoringDelay = defaultMonitoringDelay;
+        self.pollingInterval = 5;
 	}
 	return self;
 }
@@ -571,7 +586,8 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 		self.XMLIOPath = @"xmlio";
         defaultMonitoringDelay = 5;
         self.monitoringDelay = defaultMonitoringDelay;
-        [self list:XMLIOTypeMetadata];
+        self.pollingInterval = 5;
+        [self list:JMRITypeMetadata];
 	}
 	return self;
 }

@@ -21,6 +21,18 @@
 #import <Foundation/Foundation.h>
 #import "NSArray+JMRIExtensions.h"
 
+// JMRI XMLIO item types
+extern NSString *const JMRITypeFrame;
+extern NSString *const JMRITypeMemory;
+extern NSString *const JMRITypeMetadata;
+extern NSString *const JMRITypePanel;
+extern NSString *const JMRITypePower;
+extern NSString *const JMRITypeRoster;
+extern NSString *const JMRITypeRoute;
+extern NSString *const JMRITypeSensor;
+extern NSString *const JMRITypeTurnout;
+
+
 extern NSString *const JMRITXTRecordKeyJMRI;
 
 @interface JMRINetService : NSObject <NSNetServiceDelegate> {

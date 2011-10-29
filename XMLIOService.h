@@ -20,18 +20,8 @@
 #import "XMLIOItem.h"
 #import "XMLIOServiceHelper.h"
 
-// JMRI XMLIO item types
-extern NSString *const XMLIOTypeFrame;
-extern NSString *const XMLIOTypeMemory;
-extern NSString *const XMLIOTypeMetadata;
-extern NSString *const XMLIOTypePanel;
-extern NSString *const XMLIOTypePower;
-extern NSString *const XMLIOTypeRoster;
-extern NSString *const XMLIOTypeRoute;
-extern NSString *const XMLIOTypeSensor;
-extern NSString *const XMLIOTypeTurnout;
 // JMRI XMLIO throttle type
-extern NSString *const XMLIOTypeThrottle;
+extern NSString *const JMRITypeThrottle;
 
 // JMRI XMLIO item attributes
 extern NSString *const XMLIOItemComment;
@@ -162,6 +152,8 @@ typedef enum {
     NSMutableDictionary *throttles;
     NSUInteger monitoringDelay; // in seconds, provides choke required by 2.12
     NSUInteger defaultMonitoringDelay; // ensures that any monitoring delay 
+    NSUInteger pollingInterval;
+    NSMutableSet *pollingTypes;
 
 }
 
@@ -179,6 +171,10 @@ typedef enum {
 - (void)startMonitoring:(NSString *)name ofType:(NSString *)type;
 - (void)stopMonitoring:(NSString *)name ofType:(NSString *)type;
 - (void)stopMonitoringAllItems;
+
+- (void)startPollingForType:(NSString *)type;
+- (void)stopPollingForType:(NSString *)type;
+- (void)stopPollingForAllTypes;
 
 - (void)cancelAllConnections;
 
@@ -199,6 +195,7 @@ typedef enum {
 @property (nonatomic, retain) NSString* XMLIOPath;
 @property (nonatomic, retain) NSMutableDictionary* throttles;
 @property NSUInteger monitoringDelay;
+@property NSUInteger pollingInterval;
 
 @end
 
