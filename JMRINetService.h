@@ -68,6 +68,12 @@ typedef enum {
 - (void)stop;
 - (void)stopMonitoring;
 
+#pragma mark - JMRI object handling
+
+- (void)readItem:(NSString *)name ofType:(NSString *)type;
+- (void)readItem:(NSString *)name ofType:(NSString *)type initialValue:(NSString *)value;
+- (void)writeItem:(NSString *)name ofType:(NSString *)type value:(NSString *)value;
+
 #pragma mark -
 #pragma mark Object properties
 

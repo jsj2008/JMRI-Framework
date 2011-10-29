@@ -148,9 +148,6 @@ typedef enum {
 #pragma mark XMLIO methods
 
 - (void)list:(NSString *)type;
-- (void)readItem:(NSString *)name ofType:(NSString *)type;
-- (void)readItem:(NSString *)name ofType:(NSString *)type initialValue:(NSString *)value;
-- (void)writeItem:(NSString *)name ofType:(NSString *)type value:(NSString *)value;
 - (void)sendThrottle:(NSUInteger)address commands:(NSDictionary *)commands;
 - (void)stopThrottle:(NSUInteger)address;
 - (void)stopAllThrottles;
