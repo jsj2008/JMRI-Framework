@@ -32,8 +32,14 @@ extern NSString *const JMRITypeRoute;
 extern NSString *const JMRITypeSensor;
 extern NSString *const JMRITypeTurnout;
 
-
 extern NSString *const JMRITXTRecordKeyJMRI;
+
+typedef enum {
+	JMRIItemStateUnknown = 0,
+	JMRIItemStateActive = 2,
+	JMRIItemStateInactive = 4,
+	JMRIItemStateInconsistent = 8
+} JMRIItemStates;
 
 @interface JMRINetService : NSObject <NSNetServiceDelegate> {
 

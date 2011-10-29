@@ -120,19 +120,6 @@ typedef enum {
 } XMLIOOperationType;
 
 typedef enum {
-	XMLIOItemStateUnknown = 0,
-	XMLIOItemStateActive = 2,
-	XMLIOItemStateInactive = 4,
-	XMLIOItemStateInconsistent = 8
-} XMLIOItemStates;
-
-typedef enum {
-	XMLIOPowerStateUnknown = 0,
-	XMLIOPowerStateOn = 2,
-	XMLIOPowerStateOff = 4
-} XMLIOPowerStates;
-
-typedef enum {
     XMLIOSpeedStepMode128 = 1,
     XMLIOSpeedStepMode28 = 2,
     XMLIOSpeedStepMode27 = 4,

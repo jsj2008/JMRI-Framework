@@ -22,7 +22,7 @@
         identifier_ = identifier;
         self.label = self.key;
         self.lockable = YES;
-        self.state = XMLIOItemStateUnknown;
+        self.state = JMRIItemStateUnknown;
         self.throttle = nil;
     }
     return self;
@@ -31,7 +31,7 @@
 - (id)initWithBooleanState:(BOOL)state {
     if ((self = [super init])) {
         identifier_ = NSNotFound;
-        self.state = (state) ? XMLIOItemStateActive : XMLIOItemStateInactive;
+        self.state = (state) ? JMRIItemStateActive : JMRIItemStateInactive;
     }
     return self;
 }

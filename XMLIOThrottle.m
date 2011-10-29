@@ -53,7 +53,7 @@
     if ([self stateForFunction:function] != state) {
         XMLIOFunction *f = [self.roster.functions objectAtIndex:function];
         f.state = state;
-        [self.commands setValue:(state == XMLIOItemStateActive) ? XMLIOBooleanYES : XMLIOBooleanNO forKey:f.key];
+        [self.commands setValue:(state == JMRIItemStateActive) ? XMLIOBooleanYES : XMLIOBooleanNO forKey:f.key];
         [self update];
     }
 }
@@ -82,7 +82,7 @@
     if ([self.roster.functions count] > function) {
         return [[self.roster.functions objectAtIndex:function] state];
     }
-    return XMLIOItemStateUnknown;
+    return JMRIItemStateUnknown;
 }
 
 - (id)initWithRoster:(XMLIORoster *)roster withService:(XMLIOService *)service {
