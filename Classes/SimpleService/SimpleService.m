@@ -7,6 +7,9 @@
 //
 
 #import "SimpleService.h"
+#ifdef TARGET_OS_IPHONE
+#import "NSStream+JMRIExtensions.h"
+#endif
 
 @interface SimpleService ()
 
@@ -29,11 +32,16 @@
 
 - (id)initWithAddress:(NSString *)address withPort:(NSInteger)port {
     if ((self = [super initWithAddress:address withPort:port])) {
-        [NSStream getStreamsToHost:address port:port inputStream:&input outputStream:&output];
+#ifdef TARGET_OS_IPHONE
+        [NSStream getStreamsToHostNamed:address port:port inputStream:&input outputStream:&output];
+#else
+        [NSStream getStreamsToHost:[NSHost hostWithAddress:address] port:port inputStream:&input outputStream:&output];
+#endif
         if (input != nil) {
             [self open];
         }
     }
+    return self;
 }
 
 #pragma mark - Private methods
@@ -54,7 +62,7 @@
 
 - (void)write:(NSString *)string {
     if ([output hasSpaceAvailable]) {
-        [output write:[string cStringUsingEncoding:NSASCIIStringEncoding]
+        [output write:[[string dataUsingEncoding:NSASCIIStringEncoding] bytes]
             maxLength:[string lengthOfBytesUsingEncoding:NSASCIIStringEncoding]];
     }
 }
