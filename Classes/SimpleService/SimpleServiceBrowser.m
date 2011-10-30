@@ -24,7 +24,6 @@
 }
 
 - (void)netServiceDidResolveAddress:(NSNetService *)sender {
-    NSDictionary *txtRecords = [NSNetService dictionaryFromTXTRecordData:[sender TXTRecordData]];
     if (![self containsService:sender]) {
 		SimpleService *service = [[[SimpleService alloc] initWithNetService:sender] autorelease];
 		[self.services addObject:service];
