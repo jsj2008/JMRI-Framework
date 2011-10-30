@@ -32,6 +32,21 @@ NSString *const JMRITXTRecordKeyJMRI = @"jmri";
 
 @implementation JMRINetService
 
+#pragma mark - JMRI Object handling
+
+- (void)readItem:(NSString *)name ofType:(NSString *)type {
+	[self doesNotRecognizeSelector:_cmd];
+}
+
+- (void)readItem:(NSString *)name ofType:(NSString *)type initialValue:(NSString *)value {
+    // default implementation simply attempts a read w/o initial value
+    [self readItem:name ofType:type];
+}
+
+- (void)writeItem:(NSString *)name ofType:(NSString *)type value:(NSString *)value {
+	[self doesNotRecognizeSelector:_cmd];
+}
+
 #pragma mark -
 #pragma mark Object handling
 
