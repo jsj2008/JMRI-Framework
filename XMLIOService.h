@@ -139,8 +139,6 @@ typedef enum {
     NSMutableDictionary *throttles;
     NSUInteger monitoringDelay; // in seconds, provides choke required by 2.12
     NSUInteger defaultMonitoringDelay; // ensures that any monitoring delay 
-    NSUInteger pollingInterval;
-    NSMutableSet *pollingTypes;
 
 }
 
@@ -155,10 +153,6 @@ typedef enum {
 - (void)startMonitoring:(NSString *)name ofType:(NSString *)type;
 - (void)stopMonitoring:(NSString *)name ofType:(NSString *)type;
 - (void)stopMonitoringAllItems;
-
-- (void)startPollingForType:(NSString *)type;
-- (void)stopPollingForType:(NSString *)type;
-- (void)stopPollingForAllTypes;
 
 - (void)cancelAllConnections;
 
@@ -179,7 +173,6 @@ typedef enum {
 @property (nonatomic, retain) NSString* XMLIOPath;
 @property (nonatomic, retain) NSMutableDictionary* throttles;
 @property NSUInteger monitoringDelay;
-@property NSUInteger pollingInterval;
 
 @end
 

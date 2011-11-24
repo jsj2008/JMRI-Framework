@@ -138,7 +138,6 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 @synthesize XMLIOPath;
 @synthesize throttles;
 @synthesize monitoringDelay;
-@synthesize pollingInterval;
 
 - (BOOL)openConnection {
 	return ([connections count]);
@@ -317,22 +316,6 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 	[monitoredItems removeAllObjects];
 }
 
-- (void)startPollingForType:(NSString *)type {
-    if (![type isEqualToString:JMRITypeMetadata] &&
-        ![pollingTypes containsObject:type]) {
-        [pollingTypes addObject:type];
-        [self list:type];
-    }
-}
-
-- (void)stopPollingForType:(NSString *)type {
-    [pollingTypes removeObject:type];
-}
-
-- (void)stopPollingForAllTypes {
-    [pollingTypes removeAllObjects];
-}
-
 - (void)cancelAllConnections {
     for (NSURLRequest *request in connections) {
         [[connections objectForKey:request] cancel];
@@ -432,13 +415,6 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
     NSLog(@"listing %lu %@s", (unsigned long)[items count], type);
 	if ([self.delegate respondsToSelector:@selector(XMLIOService:didListItems:ofType:)]) {
 		[self.delegate XMLIOService:self didListItems:items ofType:type];
-	}
-	if ([pollingTypes containsObject:type]) {
-            [NSTimer scheduledTimerWithTimeInterval:self.pollingInterval
-                                             target:self
-                                           selector:@selector(list:)
-                                           userInfo:type
-                                            repeats:NO];
 	}
 	[[NSNotificationCenter defaultCenter] postNotificationName:XMLIOServiceDidListItems
 														object:self
@@ -573,7 +549,6 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 		self.XMLIOPath = @"xmlio";
         defaultMonitoringDelay = (self.useAttributeProtocol) ? 0 : 5;
         self.monitoringDelay = defaultMonitoringDelay;
-        self.pollingInterval = 5;
 	}
 	return self;
 }
@@ -586,7 +561,6 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 		self.XMLIOPath = @"xmlio";
         defaultMonitoringDelay = 5;
         self.monitoringDelay = defaultMonitoringDelay;
-        self.pollingInterval = 5;
         [self list:JMRITypeMetadata];
 	}
 	return self;
