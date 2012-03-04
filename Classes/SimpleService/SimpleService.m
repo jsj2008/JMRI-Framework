@@ -73,8 +73,8 @@
 }
 
 - (void)closeConnection {
-    [self close];
     // if we ever need to send a closing message - do it here
+    [self close];
 }
 
 #pragma mark - JMRINetService items
@@ -96,6 +96,9 @@
 #pragma mark - NSStream delegate
 
 - (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode {
+    NSMutableData *data;
+    uint8_t buf[1024];
+    unsigned int len = 0;
     if (aStream == input) {
         switch (eventCode) {
             case NSStreamEventNone:
@@ -103,7 +106,16 @@
             case NSStreamEventOpenCompleted:
                 break;
             case NSStreamEventHasBytesAvailable:
-                
+                len = [(NSInputStream *)aStream read:buf maxLength:1024];
+                if (len) {    
+                    data = [NSData dataWithBytes:(const void *)buf length:len];
+                    [data appendBytes:(const void *)buf length:len];
+                    NSString *str = [NSString stringWithUTF8String:[data bytes]];
+                    NSLog(@"%@", str);
+                } else {
+                    NSLog(@"No data.");
+                }
+                data = nil;
                 break;
             case NSStreamEventErrorOccurred:
                 break;

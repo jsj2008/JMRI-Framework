@@ -30,9 +30,25 @@ NSString *const JMRITypeTurnout = @"turnout";
 
 NSString *const JMRITXTRecordKeyJMRI = @"jmri";
 
+static JMRINetService *sharedNetService_ = nil;
+
 @implementation JMRINetService
 
+#pragma mark - Shared instance
+
++ (void)initialize {
+    if (!sharedNetService_) {
+        sharedNetService_ = [[JMRINetService alloc] init];
+    }
+}
+
++ (JMRINetService *)sharedNetService {
+    return sharedNetService_;
+}
+
 #pragma mark - JMRI Object handling
+
+@synthesize items;
 
 - (void)readItem:(NSString *)name ofType:(NSString *)type {
 	[self doesNotRecognizeSelector:_cmd];

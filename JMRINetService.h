@@ -51,6 +51,9 @@ typedef enum {
 	NSInteger manualPort;
     NSString *version_;
 
+    @private
+    NSMutableDictionary *servers_;
+
 }
 
 #pragma mark -
@@ -92,6 +95,8 @@ typedef enum {
 @property (retain, readonly) NSString *hostName;
 @property (retain, readonly) NSString *name;
 @property (readonly) NSInteger port;
+
+@property (retain) NSMutableDictionary *items;
 
 @end
 
