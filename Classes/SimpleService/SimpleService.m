@@ -80,7 +80,7 @@
 #pragma mark - JMRINetService items
 
 - (void)readItem:(NSString *)name ofType:(NSString *)type {
-    NSString *string = [NSString stringWithFormat:@"%@ %@\n\r", [type uppercaseString], name];
+    NSString *string = [NSString stringWithFormat:@"%@ %@\n", [type uppercaseString], name];
     [self write:string];
 }
 
@@ -89,7 +89,7 @@
 }
 
 - (void)writeItem:(NSString *)name ofType:(NSString *)type value:(NSString *)value {
-    NSString *string = [NSString stringWithFormat:@"%@ %@ %@\n\r", [type uppercaseString], name, [value uppercaseString]];
+    NSString *string = [NSString stringWithFormat:@"%@ %@ %@\n", [type uppercaseString], name, [value uppercaseString]];
     [self write:string];
 }
 
