@@ -16,7 +16,7 @@
 //  Created by Randall Wood on 7/5/2011.
 //
 
-#import "JMRIWiThrottleService.h"
+#import "WiThrottleService.h"
 #import "XMLIOService.h"
 #import "NSArray+JMRIExtensions.h"
 
