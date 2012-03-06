@@ -25,7 +25,7 @@
 	if (self.searching) {
 		[self.browser stop];
 	}
-	[self.browser searchForServicesOfType:JMRIServiceTypeXMLIO inDomain:@""];
+	[self.browser searchForServicesOfType:JMRIServiceXmlIO inDomain:@""];
 }
 
 - (void)addServiceWithAddress:(NSString *)address withPort:(NSInteger)port {

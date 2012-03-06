@@ -15,7 +15,7 @@
 	if (self.searching) {
 		[self.browser stop];
 	}
-	[self.browser searchForServicesOfType:JMRIServiceTypeSimple inDomain:@""];
+	[self.browser searchForServicesOfType:JMRIServiceSimple inDomain:@""];
 }
 
 - (void)addServiceWithAddress:(NSString *)address withPort:(NSInteger)port {

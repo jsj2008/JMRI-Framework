@@ -22,7 +22,7 @@
 @implementation JMRIWiThrottleServiceBrowser
 
 - (void)searchForServices {
-	[self.browser searchForServicesOfType:JMRIServiceTypeWiThrottle inDomain:@""];
+	[self.browser searchForServicesOfType:JMRIServiceWiThrottle inDomain:@""];
 }
 
 - (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser didFindService:(NSNetService *)aNetService moreComing:(BOOL)moreComing {

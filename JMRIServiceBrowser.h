@@ -20,9 +20,9 @@
 #import "XMLIOService.h"
 #import "NSArray+JMRIExtensions.h"
 
-extern NSString *const JMRIServiceTypeSimple;
-extern NSString *const JMRIServiceTypeWiThrottle;
-extern NSString *const JMRIServiceTypeXMLIO;
+extern NSString *const JMRIServiceSimple;
+extern NSString *const JMRIServiceWiThrottle;
+extern NSString *const JMRIServiceXmlIO;
 
 @interface JMRIServiceBrowser : NSObject <NSNetServiceBrowserDelegate, NSNetServiceDelegate> {
 
