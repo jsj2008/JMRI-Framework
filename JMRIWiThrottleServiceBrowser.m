@@ -22,15 +22,15 @@
 @implementation JMRIWiThrottleServiceBrowser
 
 - (void)searchForServices {
-	[self.browser searchForServicesOfType:JMRIServiceWiThrottle inDomain:@""];
+	[self.browser searchForServicesOfType:JMRINetServiceWiThrottle inDomain:@""];
 }
 
 - (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser didFindService:(NSNetService *)aNetService moreComing:(BOOL)moreComing {
 	WiThrottleService *service;
 	service = [[[WiThrottleService alloc] initWithNetService:aNetService] autorelease];
 	[self.services addObject:service];
-	if ([self.delegate respondsToSelector:@selector(JMRIServiceBrowser:didFindService:moreComing:)]) {
-		[self.delegate JMRIServiceBrowser:self didFindService:service moreComing:moreComing];
+	if ([self.delegate respondsToSelector:@selector(JMRINetServiceBrowser:didFindService:moreComing:)]) {
+		[self.delegate JMRINetServiceBrowser:self didFindService:service moreComing:moreComing];
 	}	
 }
 

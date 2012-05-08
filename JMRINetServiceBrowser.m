@@ -10,7 +10,7 @@
  THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 //
-//  JMRIServiceBrowser.m
+//  JMRINetServiceBrowser.m
 //  JMRI Framework
 //
 //  Created by Randall Wood on 7/5/2011.
@@ -19,9 +19,9 @@
 #import "JMRINetServiceBrowser.h"
 #import "JMRINetService.h"
 
-NSString *const JMRIServiceSimple = @"_jmri._tcp.";
-NSString *const JMRIServiceXmlIO = @"_http._tcp.";
-NSString *const JMRIServiceWiThrottle = @"_withrottle._tcp.";
+NSString *const JMRINetServiceSimple = @"_jmri._tcp.";
+NSString *const JMRINetServiceXmlIO = @"_http._tcp.";
+NSString *const JMRINetServiceWiThrottle = @"_withrottle._tcp.";
 
 @implementation JMRINetServiceBrowser
 
@@ -90,22 +90,22 @@ NSString *const JMRIServiceWiThrottle = @"_withrottle._tcp.";
 
 - (void)netServiceBrowserWillSearch:(NSNetServiceBrowser *)browser {
 	_searching = YES;
-	if ([self.delegate respondsToSelector:@selector(JMRIServiceBrowserWillSearch:)]) {
-		[self.delegate JMRIServiceBrowserWillSearch:self];
+	if ([self.delegate respondsToSelector:@selector(JMRINetServiceBrowserWillSearch:)]) {
+		[self.delegate JMRINetServiceBrowserWillSearch:self];
 	}
 }
 
 - (void)netServiceBrowserDidStopSearch:(NSNetServiceBrowser *)aNetServiceBrowser {
 	_searching = NO;
-	if ([self.delegate respondsToSelector:@selector(JMRIServiceBrowserDidStopSearch:)]) {
-		[self.delegate JMRIServiceBrowserDidStopSearch:self];
+	if ([self.delegate respondsToSelector:@selector(JMRINetServiceBrowserDidStopSearch:)]) {
+		[self.delegate JMRINetServiceBrowserDidStopSearch:self];
 	}
 }
 
 - (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser didNotSearch:(NSDictionary *)errorDict {
 	_searching = NO;
-	if ([self.delegate respondsToSelector:@selector(JMRIServiceBrowser:didNotSearch:)]) {
-		[self.delegate JMRIServiceBrowser:self didNotSearch:errorDict];
+	if ([self.delegate respondsToSelector:@selector(JMRINetServiceBrowser:didNotSearch:)]) {
+		[self.delegate JMRINetServiceBrowser:self didNotSearch:errorDict];
 	}
 }
 
@@ -126,8 +126,8 @@ NSString *const JMRIServiceWiThrottle = @"_withrottle._tcp.";
     } else {
         service = [[[JMRINetService alloc] initWithNetService:aNetService] autorelease];
     }
-	if ([self.delegate respondsToSelector:@selector(JMRIServiceBrowser:didRemoveService:moreComing:)]) {
-		[self.delegate JMRIServiceBrowser:self didRemoveService:service moreComing:moreComing];
+	if ([self.delegate respondsToSelector:@selector(JMRINetServiceBrowser:didRemoveService:moreComing:)]) {
+		[self.delegate JMRINetServiceBrowser:self didRemoveService:service moreComing:moreComing];
 	}
 }
 
@@ -140,13 +140,13 @@ NSString *const JMRIServiceWiThrottle = @"_withrottle._tcp.";
 	//JMRINetService *service;
 	//service = [[[JMRINetService alloc] initWithNetService:aNetService] autorelease];
 	//[self.services addObject:service];
-	//if ([self.delegate respondsToSelector:@selector(JMRIServiceBrowser:didFindService:moreComing:)]) {
-	//	[self.delegate JMRIServiceBrowser:self didFindService:service moreComing:moreComing];
+	//if ([self.delegate respondsToSelector:@selector(JMRINetServiceBrowser:didFindService:moreComing:)]) {
+	//	[self.delegate JMRINetServiceBrowser:self didFindService:service moreComing:moreComing];
 	//}	
 }
 
 - (void)netService:(NSNetService *)sender didNotResolve:(NSDictionary *)errorDict {
-	NSLog(@"JMRIServiceBrowser error resolving new service!\n%@", errorDict);
+	NSLog(@"JMRINetServiceBrowser error resolving new service!\n%@", errorDict);
 }
 
 @end

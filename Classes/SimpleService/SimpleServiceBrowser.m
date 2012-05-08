@@ -15,7 +15,7 @@
 	if (self.searching) {
 		[self.browser stop];
 	}
-	[self.browser searchForServicesOfType:JMRIServiceSimple inDomain:@""];
+	[self.browser searchForServicesOfType:JMRINetServiceSimple inDomain:@""];
 }
 
 - (void)addServiceWithAddress:(NSString *)address withPort:(NSInteger)port {
@@ -27,8 +27,8 @@
     if (![self containsService:sender]) {
 		SimpleService *service = [[[SimpleService alloc] initWithNetService:sender] autorelease];
 		[self.services addObject:service];
-		if ([self.delegate respondsToSelector:@selector(JMRIServiceBrowser:didFindService:moreComing:)]) {
-			[self.delegate JMRIServiceBrowser:self didFindService:service moreComing:_searching];
+		if ([self.delegate respondsToSelector:@selector(JMRINetServiceBrowser:didFindService:moreComing:)]) {
+			[self.delegate JMRINetServiceBrowser:self didFindService:service moreComing:_searching];
 		}
 	}
 }

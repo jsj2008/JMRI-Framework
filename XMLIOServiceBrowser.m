@@ -25,7 +25,7 @@
 	if (self.searching) {
 		[self.browser stop];
 	}
-	[self.browser searchForServicesOfType:JMRIServiceXmlIO inDomain:@""];
+	[self.browser searchForServicesOfType:JMRINetServiceXmlIO inDomain:@""];
 }
 
 - (void)addServiceWithAddress:(NSString *)address withPort:(NSInteger)port {
@@ -38,8 +38,8 @@
 		XMLIOService *service;
 		service = [[[XMLIOService alloc] initWithNetService:aNetService] autorelease];
 		[self.services addObject:service];
-		if ([self.delegate respondsToSelector:@selector(JMRIServiceBrowser:didFindService:moreComing:)]) {
-			[self.delegate JMRIServiceBrowser:self didFindService:service moreComing:moreComing];
+		if ([self.delegate respondsToSelector:@selector(JMRINetServiceBrowser:didFindService:moreComing:)]) {
+			[self.delegate JMRINetServiceBrowser:self didFindService:service moreComing:moreComing];
 		}
 	}
 }
@@ -52,8 +52,8 @@
         ![self containsService:sender]) {
 		XMLIOService *service = [[[XMLIOService alloc] initWithNetService:sender] autorelease];
 		[self.services addObject:service];
-		if ([self.delegate respondsToSelector:@selector(JMRIServiceBrowser:didFindService:moreComing:)]) {
-			[self.delegate JMRIServiceBrowser:self didFindService:service moreComing:_searching];
+		if ([self.delegate respondsToSelector:@selector(JMRINetServiceBrowser:didFindService:moreComing:)]) {
+			[self.delegate JMRINetServiceBrowser:self didFindService:service moreComing:_searching];
 		}
 	}
 }
