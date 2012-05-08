@@ -16,10 +16,10 @@
 //  Created by Randall Wood on 11/5/2011.
 //
 
-#import "JMRIServiceBrowser.h"
+#import "JMRINetServiceBrowser.h"
 
 
-@interface XMLIOServiceBrowser : JMRIServiceBrowser {
+@interface XMLIOServiceBrowser : JMRINetServiceBrowser {
 
 }
 

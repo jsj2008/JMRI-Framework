@@ -6,8 +6,8 @@
 //  Copyright (c) 2011 Alexandria Software. All rights reserved.
 //
 
-#import "JMRIServiceBrowser.h"
+#import "JMRINetServiceBrowser.h"
 
-@interface SimpleServiceBrowser : JMRIServiceBrowser
+@interface SimpleServiceBrowser : JMRINetServiceBrowser
 
 @end
