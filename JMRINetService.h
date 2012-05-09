@@ -56,7 +56,7 @@ typedef enum {
 	NSInteger manualPort;
     NSString *version_;
     NSMutableDictionary *items;
-    NSString *type;
+    NSString *serviceType;
 
     @private
     NSMutableDictionary *servers_;

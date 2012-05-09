@@ -179,7 +179,7 @@ static JMRINetService *sharedNetService_ = nil;
 @synthesize logTraffic;
 @synthesize timeoutInterval;
 @synthesize version = version_;
-@synthesize type;
+@synthesize type = serviceType;
 
 - (BOOL)resolved {
 	return (self.port != -1);
