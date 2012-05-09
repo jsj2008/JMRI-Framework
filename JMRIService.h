@@ -11,10 +11,6 @@
 #import "WiThrottleService.h"
 #import "XMLIOService.h"
 
-extern NSString *const JMRIServiceSimple;
-extern NSString *const JMRIServiceWiThrottle;
-extern NSString *const JMRIServiceXmlIO;
-
 @interface JMRIService : NSObject {
     
     SimpleService *simple;

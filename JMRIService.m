@@ -8,10 +8,6 @@
 
 #import "JMRIService.h"
 
-NSString *const JMRIServiceSimple = @"JMRINetwork";
-NSString *const JMRIServiceXmlIO = @"WebServer";
-NSString *const JMRIServiceWiThrottle = @"wiThrottle";
-
 @implementation JMRIService
 
 @synthesize simpleService = simple;

@@ -21,4 +21,18 @@
 
 @implementation WiThrottleService
 
+- (id)initWithNetService:(NSNetService *)service {
+    if ((self = [super initWithNetService:service])) {
+        type = JMRIServiceWiThrottle;
+    }
+    return self;
+}
+
+- (id)initWithAddress:(NSString *)address withPort:(NSInteger)port {
+    if ((self = [super initWithAddress:address withPort:port])) {
+        type = JMRIServiceWiThrottle;
+    }
+    return self;
+}
+
 @end

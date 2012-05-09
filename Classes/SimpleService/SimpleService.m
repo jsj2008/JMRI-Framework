@@ -23,6 +23,7 @@
 
 - (id)initWithNetService:(NSNetService *)service {
     if ((self = [super initWithNetService:service])) {
+        type = JMRIServiceSimple;
         if ([service getInputStream:&input outputStream:&output]) {
             [self open];
         }
@@ -32,6 +33,7 @@
 
 - (id)initWithAddress:(NSString *)address withPort:(NSInteger)port {
     if ((self = [super initWithAddress:address withPort:port])) {
+        type = JMRIServiceSimple;
 #ifdef TARGET_OS_IPHONE
         [NSStream getStreamsToHostNamed:address port:port inputStream:&input outputStream:&output];
 #else

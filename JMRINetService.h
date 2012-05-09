@@ -21,6 +21,11 @@
 #import <Foundation/Foundation.h>
 #import "NSArray+JMRIExtensions.h"
 
+// Known service types
+extern NSString *const JMRIServiceSimple;
+extern NSString *const JMRIServiceWiThrottle;
+extern NSString *const JMRIServiceXmlIO;
+
 // JMRI XMLIO item types
 extern NSString *const JMRITypeFrame;
 extern NSString *const JMRITypeMemory;
@@ -51,6 +56,7 @@ typedef enum {
 	NSInteger manualPort;
     NSString *version_;
     NSMutableDictionary *items;
+    NSString *type;
 
     @private
     NSMutableDictionary *servers_;
@@ -87,6 +93,7 @@ typedef enum {
 @property NSTimeInterval timeoutInterval;
 @property (readonly) BOOL resolved;
 @property (readonly, retain) NSString *version;
+@property (readonly, retain) NSString *type;
 
 #pragma mark -
 #pragma mark Net service properties

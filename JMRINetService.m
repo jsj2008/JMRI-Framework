@@ -18,6 +18,10 @@
 
 #import "JMRINetService.h"
 
+NSString *const JMRIServiceSimple = @"JMRINetwork";
+NSString *const JMRIServiceXmlIO = @"WebServer";
+NSString *const JMRIServiceWiThrottle = @"wiThrottle";
+
 NSString *const JMRITypeFrame = @"frame";
 NSString *const JMRITypeMemory = @"memory";
 NSString *const JMRITypeMetadata = @"metadata";
@@ -175,6 +179,7 @@ static JMRINetService *sharedNetService_ = nil;
 @synthesize logTraffic;
 @synthesize timeoutInterval;
 @synthesize version = version_;
+@synthesize type;
 
 - (BOOL)resolved {
 	return (self.port != -1);
