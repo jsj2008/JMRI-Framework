@@ -96,17 +96,50 @@
 
 - (void)JMRINetServiceBrowser:(JMRINetServiceBrowser *)browser didFindService:(JMRINetService *)aNetService moreComing:(BOOL)moreComing {
     searching = moreComing;
-    // need to add aNetService to an existing JMRIService or create a new JMRIService
-    // then trigger JMRIServiceBrowser:didChangeService: in the delegate
-    // if a new service is created, trigger JMRIServiceBrowser:didFindService: in the delegate
+    JMRIService *service;
+    if ([self indexOfServiceWithName:aNetService.name] != NSNotFound) {
+        service = [self serviceWithName:aNetService.name];
+        if ([aNetService.type isEqualToString:JMRIServiceSimple]) {
+            service.simpleService = (SimpleService *)aNetService;
+        } else if ([aNetService.type isEqualToString:JMRIServiceWiThrottle]) {
+            service.wiThrottleService = (WiThrottleService *)aNetService;
+        } else {
+            service.xmlIOService = (XMLIOService *)aNetService;
+        }
+        if ([delegate respondsToSelector:@selector(JMRIServiceBrowser:didChangeService:moreComing:)]) {
+            [delegate JMRIServiceBrowser:self didChangeService:service moreComing:searching];
+        }
+    } else {
+        service = [[JMRIService alloc] initWithWebServices:[NSMutableDictionary dictionaryWithObject:aNetService forKey:aNetService.type]];
+        [self.services addObject:service];
+        if ([delegate respondsToSelector:@selector(JMRIServiceBrowser:didFindService:moreComing:)]) {
+            [delegate JMRIServiceBrowser:self didFindService:service moreComing:searching];
+        }
+    }
 }
 
 - (void)JMRINetServiceBrowser:(JMRINetServiceBrowser *)browser didRemoveService:(JMRINetService *)aNetService moreComing:(BOOL)moreComing {
     searching = moreComing;
-    // need to remove aNetService from an existing JMRIService
-    // and then trigger JMRIServiceBrowser:didChangeService: in the delegate
-    // if aNetService was not in a JMRIService, no notification is passed
-    // if the existing JMRIService has no services, remove it and trigger JMRIServiceBrowser:didRemoveService:
+    if ([self indexOfServiceWithName:aNetService.name] != NSNotFound) {
+        JMRIService *service = [self serviceWithName:aNetService.name];
+        if ([aNetService.type isEqualToString:JMRIServiceSimple]) {
+            service.simpleService = nil;
+        } else if ([aNetService.type isEqualToString:JMRIServiceWiThrottle]) {
+            service.wiThrottleService = nil;
+        } else {
+            service.xmlIOService = nil;
+        }
+        if (service.hasSimpleService || service.hasWiThrottleService || service.hasXmlIOService) {
+            if ([delegate respondsToSelector:@selector(JMRIServiceBrowser:didChangeService:moreComing:)]) {
+                [delegate JMRIServiceBrowser:self didChangeService:service moreComing:searching];
+            }
+        } else {
+            [self.services removeObject:service];
+            if ([delegate respondsToSelector:@selector(JMRIServiceBrowser:didRemoveService:moreComing:)]) {
+                [delegate JMRIServiceBrowser:self didRemoveService:service moreComing:searching];
+            }
+        }
+    }
 }
 
 @end
