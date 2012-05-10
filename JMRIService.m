@@ -17,13 +17,13 @@
 - (id)initWithAddress:(NSString *)address withPorts:(NSDictionary *)ports {
     if (([super init] != nil)) {
         if ([ports valueForKey:JMRIServiceSimple]) {
-            self.simpleService = [[SimpleService alloc] initWithAddress:address withPort:[[ports valueForKey:JMRIServiceSimple] integerValue]];
+            self.simpleService = [[[SimpleService alloc] initWithAddress:address withPort:[[ports valueForKey:JMRIServiceSimple] integerValue]] autorelease];
         }
         if ([ports valueForKey:JMRIServiceWiThrottle]) {
-            self.wiThrottleService = [[WiThrottleService alloc] initWithAddress:address withPort:[[ports valueForKey:JMRIServiceWiThrottle] integerValue]];
+            self.wiThrottleService = [[[WiThrottleService alloc] initWithAddress:address withPort:[[ports valueForKey:JMRIServiceWiThrottle] integerValue]] autorelease];
         }
         if ([ports valueForKey:JMRIServiceXmlIO]) {
-            self.xmlIOService = [[XMLIOService alloc] initWithAddress:address withPort:[[ports valueForKey:JMRIServiceXmlIO] integerValue]];
+            self.xmlIOService = [[[XMLIOService alloc] initWithAddress:address withPort:[[ports valueForKey:JMRIServiceXmlIO] integerValue]] autorelease];
         }
     }
     return self;

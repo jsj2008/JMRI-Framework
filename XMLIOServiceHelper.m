@@ -51,10 +51,10 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
 - (id)initWithDelegate:(id)delegate withOperation:(NSUInteger)operation withRequest:(NSURLRequest *)request withType:(NSString *)type withName:(NSString *)name {
     if ((self = [super init])) {
         self.delegate = delegate;
-        self.name = [name copy];
+        self.name = [[name copy] autorelease];
         self.operation = operation;
-        self.request = [request copy];
-        self.type = [type copy];
+        self.request = [[request copy] autorelease];
+        self.type = [[type copy] autorelease];
         isExecuting_ = NO;
         isFinished_ = NO;
     }

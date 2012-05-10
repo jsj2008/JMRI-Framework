@@ -78,11 +78,11 @@
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
 	if ((self = [super init])) {
-		self.name = [[aDecoder decodeObjectForKey:XMLIOItemName] retain];
-		self.type = [[aDecoder decodeObjectForKey:XMLIOItemType] retain];
-		self.userName = [[aDecoder decodeObjectForKey:XMLIOItemUserName] retain];
-		self.value = [[aDecoder decodeObjectForKey:XMLIOItemValue] retain];
-		self.comment = [[aDecoder decodeObjectForKey:XMLIOItemComment] retain];
+		self.name = [aDecoder decodeObjectForKey:XMLIOItemName];
+		self.type = [aDecoder decodeObjectForKey:XMLIOItemType];
+		self.userName = [aDecoder decodeObjectForKey:XMLIOItemUserName];
+		self.value = [aDecoder decodeObjectForKey:XMLIOItemValue];
+		self.comment = [aDecoder decodeObjectForKey:XMLIOItemComment];
 		self.inverted = [aDecoder decodeBoolForKey:XMLIOItemInverted];
 		self.dccAddress = 0;
 		self.addressLength = nil;

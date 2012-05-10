@@ -44,7 +44,7 @@
 }
 
 - (void)addServiceWithAddress:(NSString *)address withPorts:(NSDictionary *)ports {
-    [self.services addObject:[[JMRIService alloc] initWithAddress:address withPorts:ports]];
+    [self.services addObject:[[[JMRIService alloc] initWithAddress:address withPorts:ports] autorelease]];
 }
 
 - (void)stop {
@@ -96,9 +96,9 @@
 
 - (void)JMRINetServiceBrowser:(JMRINetServiceBrowser *)browser didFindService:(JMRINetService *)aNetService moreComing:(BOOL)moreComing {
     searching = moreComing;
-    JMRIService *service;
+    //JMRIService *service;
     if ([self indexOfServiceWithName:aNetService.name] != NSNotFound) {
-        service = [self serviceWithName:aNetService.name];
+        JMRIService *service = [self serviceWithName:aNetService.name];
         if ([aNetService.type isEqualToString:JMRIServiceSimple]) {
             service.simpleService = (SimpleService *)aNetService;
         } else if ([aNetService.type isEqualToString:JMRIServiceWiThrottle]) {
@@ -110,7 +110,7 @@
             [delegate JMRIServiceBrowser:self didChangeService:service moreComing:searching];
         }
     } else {
-        service = [[JMRIService alloc] initWithWebServices:[NSMutableDictionary dictionaryWithObject:aNetService forKey:aNetService.type]];
+        JMRIService *service = [[[JMRIService alloc] initWithWebServices:[NSMutableDictionary dictionaryWithObject:aNetService forKey:aNetService.type]] autorelease];
         [self.services addObject:service];
         if ([delegate respondsToSelector:@selector(JMRIServiceBrowser:didFindService:moreComing:)]) {
             [delegate JMRIServiceBrowser:self didFindService:service moreComing:searching];
