@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "JMRIService.h"
 #import "SimpleServiceBrowser.h"
-#import "JMRIWiThrottleServiceBrowser.h"
+#import "WiThrottleServiceBrowser.h"
 #import "XMLIOServiceBrowser.h"
 
 @interface JMRIServiceBrowser : NSObject <JMRINetServiceBrowserDelegate> {
@@ -18,7 +18,7 @@
 	BOOL searching;
     NSMutableArray *services;
     SimpleServiceBrowser *simpleBrowser;
-    JMRIWiThrottleServiceBrowser *wiThrottleBrowser;
+    WiThrottleServiceBrowser *wiThrottleBrowser;
     XMLIOServiceBrowser *xmlIOBrowser;
     
 }

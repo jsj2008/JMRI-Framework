@@ -20,7 +20,7 @@
         //self.browser.delegate = self;
         simpleBrowser = [[[SimpleServiceBrowser alloc] init] autorelease];
         simpleBrowser.delegate = self;
-        wiThrottleBrowser = [[[JMRIWiThrottleServiceBrowser alloc] init] autorelease];
+        wiThrottleBrowser = [[[WiThrottleServiceBrowser alloc] init] autorelease];
         wiThrottleBrowser.delegate = self;
         xmlIOBrowser = [[[XMLIOServiceBrowser alloc] init] autorelease];
         xmlIOBrowser.delegate = self;
