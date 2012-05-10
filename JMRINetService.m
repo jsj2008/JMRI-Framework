@@ -67,8 +67,7 @@ static JMRINetService *sharedNetService_ = nil;
 	[self doesNotRecognizeSelector:_cmd];
 }
 
-#pragma mark -
-#pragma mark Object handling
+#pragma mark - Object handling
 
 - (id)initWithNetService:(NSNetService *)service {
 	if ((self = [super init])) {
@@ -109,8 +108,7 @@ static JMRINetService *sharedNetService_ = nil;
 	[super dealloc];
 }
 
-#pragma mark -
-#pragma mark Net service handling
+#pragma mark - Net service handling
 
 /**
  * Resolve addresses for a discovered service within the given time limit.
@@ -147,8 +145,7 @@ static JMRINetService *sharedNetService_ = nil;
 	}
 }
 
-#pragma mark -
-#pragma mark Net service delegate
+#pragma mark - Net service delegate
 
 - (void)netService:(NSNetService *)sender didNotResolve:(NSDictionary *)errorDict {
 	NSLog(@"%@ failed to resolve: %@", self.name, errorDict);
@@ -171,8 +168,7 @@ static JMRINetService *sharedNetService_ = nil;
 	}
 }
 
-#pragma mark -
-#pragma mark Object properties
+#pragma mark - Object properties
 
 @synthesize delegate;
 @synthesize service = _service;
@@ -185,8 +181,7 @@ static JMRINetService *sharedNetService_ = nil;
 	return (self.port != -1);
 }
 
-#pragma mark -
-#pragma mark Net service properties
+#pragma mark - Net service properties
 
 - (NSArray *)addresses {
 	if (self.service) {

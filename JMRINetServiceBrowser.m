@@ -46,8 +46,7 @@ NSString *const JMRINetServiceWiThrottle = @"_withrottle._tcp.";
 	[super dealloc];
 }
 
-#pragma mark -
-#pragma mark Service browser methods
+#pragma mark - Service browser methods
 
 - (void)searchForServices {
 	[self doesNotRecognizeSelector:_cmd];
@@ -63,8 +62,7 @@ NSString *const JMRINetServiceWiThrottle = @"_withrottle._tcp.";
 	[self.browser stop];
 }
 
-#pragma mark -
-#pragma mark Utility methods
+#pragma mark - Utility methods
 
 - (BOOL)containsService:(NSNetService *)service {
 	return ([self indexOfServiceWithName:[service name]] != NSNotFound);
@@ -85,8 +83,7 @@ NSString *const JMRINetServiceWiThrottle = @"_withrottle._tcp.";
 	return [self.services objectWithName:name];
 }
 
-#pragma mark -
-#pragma mark Net Service Browser delegate
+#pragma mark - Net Service Browser delegate
 
 - (void)netServiceBrowserWillSearch:(NSNetServiceBrowser *)browser {
 	_searching = YES;
@@ -131,8 +128,7 @@ NSString *const JMRINetServiceWiThrottle = @"_withrottle._tcp.";
 	}
 }
 
-#pragma mark -
-#pragma mark Net service delegate
+#pragma mark - Net service delegate
 
 - (void)netServiceDidResolveAddress:(NSNetService *)sender {
 	[self doesNotRecognizeSelector:_cmd];

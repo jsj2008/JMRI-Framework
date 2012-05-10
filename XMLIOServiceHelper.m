@@ -40,8 +40,7 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
 
 @implementation XMLIOServiceHelper
 
-#pragma mark -
-#pragma mark Properties
+#pragma mark - Properties
 
 @synthesize delegate = delegate_;
 @synthesize name = name_;
@@ -62,8 +61,7 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
     return self;
 }
 
-#pragma mark -
-#pragma mark NSOperation methods
+#pragma mark - NSOperation methods
 
 - (void)start {
     if (![NSThread isMainThread]) {
@@ -106,8 +104,7 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
     return isFinished_;
 }
 
-#pragma mark -
-#pragma mark URL Connection delegate
+#pragma mark - URL Connection delegate
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
     NSLog(@"Did receieve response");
@@ -163,8 +160,7 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
     [self finish];
 }
 
-#pragma mark -
-#pragma mark XML parser delegate
+#pragma mark - XML parser delegate
 
 - (void)parserDidStartDocument:(NSXMLParser *)parser {
     if (items) {

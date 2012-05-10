@@ -142,8 +142,7 @@ typedef enum {
 
 }
 
-#pragma mark -
-#pragma mark XMLIO methods
+#pragma mark - XMLIO methods
 
 - (void)list:(NSString *)type;
 - (void)sendThrottle:(NSUInteger)address commands:(NSDictionary *)commands;
@@ -176,8 +175,7 @@ typedef enum {
 
 @end
 
-#pragma mark -
-#pragma mark Delegate protocol
+#pragma mark - Delegate protocol
 
 @protocol XMLIOServiceDelegate <JMRINetServiceDelegate>
 

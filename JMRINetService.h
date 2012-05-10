@@ -63,15 +63,13 @@ typedef enum {
 
 }
 
-#pragma mark -
-#pragma mark Object handling
+#pragma mark - Object handling
 
 - (id)initWithNetService:(NSNetService *)service;
 - (id)initWithAddress:(NSString *)address withPort:(NSInteger)port;
 - (NSComparisonResult)localizedCaseInsensitiveCompareByName:(JMRINetService*)aService;
 
-#pragma mark -
-#pragma mark Net service handling
+#pragma mark - Net service handling
 
 - (void)resolveWithTimeout:(NSTimeInterval)timeout;
 - (void)startMonitoring;
@@ -84,8 +82,7 @@ typedef enum {
 - (void)readItem:(NSString *)name ofType:(NSString *)type initialValue:(NSString *)value;
 - (void)writeItem:(NSString *)name ofType:(NSString *)type value:(NSString *)value;
 
-#pragma mark -
-#pragma mark Object properties
+#pragma mark - Object properties
 
 @property (retain) id delegate;
 @property (retain) NSNetService *service;
@@ -95,8 +92,7 @@ typedef enum {
 @property (readonly, retain) NSString *version;
 @property (readonly, retain) NSString *type;
 
-#pragma mark -
-#pragma mark Net service properties
+#pragma mark - Net service properties
 
 @property (retain, readonly) NSArray *addresses;
 @property (retain, readonly) NSString *domain;

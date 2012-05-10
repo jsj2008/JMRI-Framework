@@ -115,8 +115,7 @@ NSString *const XMLIOErrorDomain = @"XMLIOErrorDomain";
 NSString *const XMLIOBooleanYES = @"true"; // java.lang.Boolean.toString returns "true" for YES
 NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns "false" for NO
 
-#pragma mark -
-#pragma mark Private interface
+#pragma mark - Private interface
 
 @interface XMLIOService () <XMLIOServiceHelperDelegate>
 
@@ -132,8 +131,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 
 @implementation XMLIOService
 
-#pragma mark -
-#pragma mark Properties
+#pragma mark - Properties
 
 @synthesize XMLIOPath;
 @synthesize throttles;
@@ -160,8 +158,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
     return ([self.version compare:@"2.13.2" options:NSNumericSearch] != NSOrderedAscending);
 }
 
-#pragma mark -
-#pragma mark XMLIO methods
+#pragma mark - XMLIO methods
 
 - (void)conductOperation:(NSUInteger)operation 
 		   withXMLString:(NSString *)query 
@@ -536,13 +533,11 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
     [connection release];
 }
 
-#pragma mark -
-#pragma mark Net service delegate
+#pragma mark - Net service delegate
 
 // do not override superclass
 
-#pragma mark -
-#pragma mark Object management
+#pragma mark - Object management
 
 - (id)initWithNetService:(NSNetService *)service {
 	if ((self = [super initWithNetService:service])) {

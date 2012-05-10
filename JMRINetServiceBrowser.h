@@ -38,16 +38,14 @@ extern NSString *const JMRINetServiceXmlIO;
 - (void)addServiceWithAddress:(NSString *)address withPort:(NSInteger)port;
 - (void)stop;
 
-#pragma mark -
-#pragma mark Utility methods
+#pragma mark - Utility methods
 
 - (BOOL)containsService:(NSNetService *)service;
 - (void)sortServices;
 - (NSUInteger)indexOfServiceWithName:(NSString *)name;
 - (JMRINetService *)serviceWithName:(NSString *)name;
 
-#pragma mark -
-#pragma mark Properties
+#pragma mark - Properties
 
 @property (nonatomic, retain) NSNetServiceBrowser *browser;
 @property (nonatomic, retain) id delegate;
@@ -56,8 +54,7 @@ extern NSString *const JMRINetServiceXmlIO;
 
 @end
 
-#pragma mark -
-#pragma mark JMRI service browser delegate protocol
+#pragma mark - JMRI service browser delegate protocol
 
 @protocol JMRINetServiceBrowserDelegate
 
