@@ -48,18 +48,18 @@ typedef enum {
 
 @interface JMRINetService : NSObject <NSNetServiceDelegate> {
 
-	NSNetService *_service;
+	NSNetService *netService;
 	id delegate;
     NSTimeInterval timeoutInterval;
 	BOOL logTraffic;
 	NSString *manualAddress;
 	NSInteger manualPort;
-    NSString *version_;
-    NSMutableDictionary *items;
+    NSString *serviceVersion;
+    NSMutableDictionary *boundItems;
     NSString *serviceType;
 
     @private
-    NSMutableDictionary *servers_;
+    //NSMutableDictionary *servers_;
 
 }
 
@@ -99,6 +99,8 @@ typedef enum {
 @property (retain, readonly) NSString *hostName;
 @property (retain, readonly) NSString *name;
 @property (readonly) NSInteger port;
+
+#pragma mark - JMRI object properties
 
 @property (retain) NSMutableDictionary *items;
 

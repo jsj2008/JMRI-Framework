@@ -52,7 +52,7 @@ static JMRINetService *sharedNetService_ = nil;
 
 #pragma mark - JMRI Object handling
 
-@synthesize items;
+@synthesize items = boundItems;
 
 - (void)readItem:(NSString *)name ofType:(NSString *)type {
 	[self doesNotRecognizeSelector:_cmd];
@@ -77,9 +77,9 @@ static JMRINetService *sharedNetService_ = nil;
 		self.logTraffic = NO;
 		self.timeoutInterval = 60;
         if ([txtRecords objectForKey:JMRITXTRecordKeyJMRI]) {
-            version_ = [[NSString alloc] initWithUTF8String:[[txtRecords objectForKey:JMRITXTRecordKeyJMRI] bytes]];
+            serviceVersion = [[NSString alloc] initWithUTF8String:[[txtRecords objectForKey:JMRITXTRecordKeyJMRI] bytes]];
         } else {
-            version_ = MIN_JMRI_VERSION;
+            serviceVersion = MIN_JMRI_VERSION;
         }
 	}
 	return self;
@@ -92,7 +92,7 @@ static JMRINetService *sharedNetService_ = nil;
 		manualAddress = [address retain];
 		manualPort = port;
 		self.timeoutInterval = 60;
-        version_ = MIN_JMRI_VERSION;
+        serviceVersion = MIN_JMRI_VERSION;
 	}
 	return self;
 }
@@ -171,10 +171,10 @@ static JMRINetService *sharedNetService_ = nil;
 #pragma mark - Object properties
 
 @synthesize delegate;
-@synthesize service = _service;
+@synthesize service = netService;
 @synthesize logTraffic;
 @synthesize timeoutInterval;
-@synthesize version = version_;
+@synthesize version = serviceVersion;
 @synthesize type = serviceType;
 
 - (BOOL)resolved {

@@ -456,10 +456,10 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 																	nil]];
 	}
     if ([name isEqualToString:XMLIOMetadataJMRIVersion] && [[item class] isSubclassOfClass:[XMLIOMetadata class]] && [(XMLIOMetadata *)item majorVersion] != 0) {
-        version_ = [[NSString stringWithFormat:@"%i.%i.%i", 
-                    [(XMLIOMetadata *)item majorVersion],
-                    [(XMLIOMetadata *)item minorVersion],
-                    [(XMLIOMetadata *)item testVersion]] retain];
+        serviceVersion = [[NSString stringWithFormat:@"%i.%i.%i", 
+                           [(XMLIOMetadata *)item majorVersion],
+                           [(XMLIOMetadata *)item minorVersion],
+                           [(XMLIOMetadata *)item testVersion]] retain];
         if (self.monitoringDelay == defaultMonitoringDelay) {
             defaultMonitoringDelay = (self.useAttributeProtocol) ? 0 : 5;
             self.monitoringDelay = defaultMonitoringDelay;
