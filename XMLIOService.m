@@ -150,6 +150,9 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 	if (![self.XMLIOPath hasPrefix:@"/"]) {
 		self.XMLIOPath = [@"/" stringByAppendingString:self.XMLIOPath];
 	}
+    if (![self.XMLIOPath hasSuffix:@"/"]) {
+        self.XMLIOPath = [self.XMLIOPath stringByAppendingString:@"/"];
+    }
 	return [[NSURL URLWithString:[NSString stringWithFormat:@"http://%@:%i%@", self.hostName, self.port, self.XMLIOPath, nil]] absoluteURL];
 }
 
@@ -547,7 +550,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 		connections = [[NSMutableDictionary alloc] initWithCapacity:0];
 		monitoredItems = [[NSMutableSet alloc] initWithCapacity:0];
         throttles = [[NSMutableDictionary alloc] initWithCapacity:0];
-		self.XMLIOPath = @"xmlio";
+		self.XMLIOPath = @"xmlio/";
         defaultMonitoringDelay = (self.useAttributeProtocol) ? 0 : 5;
         self.monitoringDelay = defaultMonitoringDelay;
 	}
@@ -560,7 +563,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 		connections = [[NSMutableDictionary alloc] initWithCapacity:0];
 		monitoredItems = [[NSMutableSet alloc] initWithCapacity:0];
         throttles = [[NSMutableDictionary alloc] initWithCapacity:0];
-		self.XMLIOPath = @"xmlio";
+		self.XMLIOPath = @"xmlio/";
         defaultMonitoringDelay = 5;
         self.monitoringDelay = defaultMonitoringDelay;
         [self list:JMRITypeMetadata];
