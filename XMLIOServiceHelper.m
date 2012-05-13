@@ -51,10 +51,10 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
 - (id)initWithDelegate:(id)delegate withOperation:(NSUInteger)operation withRequest:(NSURLRequest *)request withType:(NSString *)type withName:(NSString *)name {
     if ((self = [super init])) {
         self.delegate = delegate;
-        self.name = [[name copy] autorelease];
+        self.name = [name copy];
         self.operation = operation;
-        self.request = [[request copy] autorelease];
-        self.type = [[type copy] autorelease];
+        self.request = [request copy];
+        self.type = [type copy];
         isExecuting_ = NO;
         isFinished_ = NO;
     }
@@ -150,11 +150,9 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
 	}
     parser = [[NSXMLParser alloc] initWithData:connectionData];
 	@synchronized(parser) {
-		[connectionData release];
 		connectionData = nil;
 		[parser setDelegate:self];
 		[parser parse];
-		[parser release];
 		parser = nil;
 	}
     [self finish];
@@ -164,7 +162,7 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
 
 - (void)parserDidStartDocument:(NSXMLParser *)parser {
     if (items) {
-        [items release];
+        items = nil;
     }
     items = [NSMutableDictionary dictionaryWithCapacity:0];
 }
@@ -208,8 +206,7 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
     if (rootElement == nil) {
         XMLIOObject *root = [[XMLIOObject alloc] init];
         rootElement = root;
-        currentElement = [root retain];
-        [root release];
+        currentElement = root;
     } else {
         XMLIOObject *newElement;
         if ([elementName isEqualToString:JMRITypeRoster]) {
@@ -317,7 +314,6 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
         newElement.parent = currentElement;
         [currentElement.children addObject:newElement];
         currentElement = newElement;
-        [newElement release];
     }
     currentElement.XMLName = elementName;
     if ([attributeDict count]) {
@@ -399,9 +395,7 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
                     rosterElement.parent = currentElement.parent;
                     [rosterElement.parent.children addObject:rosterElement];
                     [rosterElement.parent.children removeObject:currentElement];
-                    [currentElement release];
                     currentElement = rosterElement;
-                    [rosterElement release];
                 }
                 if ([currentElement isMemberOfClass:[XMLIOThrottle class]]) {
                     XMLIOThrottle *throttleElement = [self.delegate.throttles objectForKey:[[NSNumber numberWithInteger:[(XMLIOThrottle *)currentElement address]] stringValue]];

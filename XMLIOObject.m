@@ -41,7 +41,6 @@
     self.parent = nil;
     self.children = nil;
     self.attributes = nil;
-    [super dealloc];
 }
 
 @end

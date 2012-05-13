@@ -27,17 +27,17 @@
     
     CFStreamCreatePairWithSocketToHost(
                                        NULL, 
-                                       (CFStringRef) hostName, 
+                                       (__bridge CFStringRef) hostName, 
                                        port, 
                                        ((inputStreamPtr  != nil) ? &readStream : NULL),
                                        ((outputStreamPtr != nil) ? &writeStream : NULL)
                                        );
     
     if (inputStreamPtr != NULL) {
-        *inputStreamPtr  = [NSMakeCollectable(readStream) autorelease];
+        *inputStreamPtr  = CFBridgingRelease(readStream);
     }
     if (outputStreamPtr != NULL) {
-        *outputStreamPtr = [NSMakeCollectable(writeStream) autorelease];
+        *outputStreamPtr = CFBridgingRelease(writeStream);
     }
 }
 

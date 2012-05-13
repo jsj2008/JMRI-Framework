@@ -43,7 +43,6 @@
 - (void)dealloc {
     self.label = nil;
     self.throttle = nil;
-    [super dealloc];
 }
 
 @end

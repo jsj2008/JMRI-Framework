@@ -70,7 +70,7 @@
 		self.imageIconName = nil;
         self.functions = [NSMutableArray arrayWithCapacity:XMLIORosterMaxFunctions];
         for (NSUInteger i = 0; i < XMLIORosterMaxFunctions; i++) {
-            [self.functions insertObject:[[[XMLIOFunction alloc] initWithFunctionIdentifier:i] autorelease] atIndex:i];
+            [self.functions insertObject:[[XMLIOFunction alloc] initWithFunctionIdentifier:i] atIndex:i];
         }
 	}
 	return self;
@@ -95,7 +95,7 @@
 		self.imageIconName = nil;
         self.functions = [NSMutableArray arrayWithCapacity:XMLIORosterMaxFunctions];
         for (NSUInteger i = 0; i < XMLIORosterMaxFunctions; i++) {
-            [self.functions insertObject:[[[XMLIOFunction alloc] initWithFunctionIdentifier:i] autorelease] atIndex:i];
+            [self.functions insertObject:[[XMLIOFunction alloc] initWithFunctionIdentifier:i] atIndex:i];
         }
 	}
     return self;
@@ -123,7 +123,6 @@
 	self.imageFileName = nil;
 	self.imageIconName = nil;
     self.functions = nil;
-	[super dealloc];
 }
 
 @end

@@ -29,14 +29,14 @@
 }
 
 - (void)addServiceWithAddress:(NSString *)address withPort:(NSInteger)port {
-	XMLIOService *service = [[[XMLIOService alloc] initWithAddress:address withPort:port] autorelease];
+	XMLIOService *service = [[XMLIOService alloc] initWithAddress:address withPort:port];
 	[self.services addObject:service];
 }
 /*
 - (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser didFindService:(NSNetService *)aNetService moreComing:(BOOL)moreComing {
 	if (![self containsService:aNetService]) {
 		XMLIOService *service;
-		service = [[[XMLIOService alloc] initWithNetService:aNetService] autorelease];
+		service = [[[XMLIOService alloc] initWithNetService:aNetService];
 		[self.services addObject:service];
 		if ([self.delegate respondsToSelector:@selector(JMRINetServiceBrowser:didFindService:moreComing:)]) {
 			[self.delegate JMRINetServiceBrowser:self didFindService:service moreComing:moreComing];
@@ -50,7 +50,7 @@
     // the test for path=index.html should hopefully be only temporary && JMRI post 2.13 should have a jmri=version instead
     if (([txtRecords objectForKey:JMRITXTRecordKeyJMRI] || [txtRecords objectForKey:@"path"]) &&
         ![self containsService:sender]) {
-		XMLIOService *service = [[[XMLIOService alloc] initWithNetService:sender] autorelease];
+		XMLIOService *service = [[XMLIOService alloc] initWithNetService:sender];
 		[self.services addObject:service];
 		if ([self.delegate respondsToSelector:@selector(JMRINetServiceBrowser:didFindService:moreComing:)]) {
 			[self.delegate JMRINetServiceBrowser:self didFindService:service moreComing:_searching];

@@ -27,7 +27,7 @@
 	if ((self = [super init])) {
         self.functions = [NSMutableArray arrayWithCapacity:XMLIORosterMaxFunctions];
         for (NSUInteger i = 0; i < XMLIORosterMaxFunctions; i++) {
-            [self.functions insertObject:[[[XMLIOFunction alloc] initWithFunctionIdentifier:i] autorelease] atIndex:i];
+            [self.functions insertObject:[[XMLIOFunction alloc] initWithFunctionIdentifier:i] atIndex:i];
         }
 	}
 	return self;
@@ -74,13 +74,12 @@
 }
 
 - (XMLIOThrottle *)throttleWithService:(XMLIOService *)service {
-    XMLIOThrottle *throttle = [[[XMLIOThrottle alloc] initWithRoster:self withService:service] autorelease];
+    XMLIOThrottle *throttle = [[XMLIOThrottle alloc] initWithRoster:self withService:service];
     return throttle;
 }
 
 - (void)dealloc {
     self.functions = nil;
-	[super dealloc];
 }
 
 @end

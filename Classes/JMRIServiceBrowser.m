@@ -16,13 +16,13 @@
 
 - (id)init {
 	if ((self = [super init])) {
-		//self.browser = [[[NSNetServiceBrowser alloc] init] autorelease];
+		//self.browser = [[[NSNetServiceBrowser alloc] init];
         //self.browser.delegate = self;
-        simpleBrowser = [[[SimpleServiceBrowser alloc] init] autorelease];
+        simpleBrowser = [[SimpleServiceBrowser alloc] init];
         simpleBrowser.delegate = self;
-        wiThrottleBrowser = [[[WiThrottleServiceBrowser alloc] init] autorelease];
+        wiThrottleBrowser = [[WiThrottleServiceBrowser alloc] init];
         wiThrottleBrowser.delegate = self;
-        xmlIOBrowser = [[[XMLIOServiceBrowser alloc] init] autorelease];
+        xmlIOBrowser = [[XMLIOServiceBrowser alloc] init];
         xmlIOBrowser.delegate = self;
 		self.services = [NSMutableArray arrayWithCapacity:0];
 		searching = NO;
@@ -32,7 +32,6 @@
 
 - (void)dealloc {
 	self.services = nil;
-	[super dealloc];
 }
 
 #pragma mark - Service browser methods
@@ -44,7 +43,7 @@
 }
 
 - (void)addServiceWithAddress:(NSString *)address withPorts:(NSDictionary *)ports {
-    [self.services addObject:[[[JMRIService alloc] initWithAddress:address withPorts:ports] autorelease]];
+    [self.services addObject:[[JMRIService alloc] initWithAddress:address withPorts:ports]];
 }
 
 - (void)stop {
@@ -110,7 +109,7 @@
             [delegate JMRIServiceBrowser:self didChangeService:service moreComing:searching];
         }
     } else {
-        JMRIService *service = [[[JMRIService alloc] initWithWebServices:[NSMutableDictionary dictionaryWithObject:aNetService forKey:aNetService.type]] autorelease];
+        JMRIService *service = [[JMRIService alloc] initWithWebServices:[NSMutableDictionary dictionaryWithObject:aNetService forKey:aNetService.type]];
         [self.services addObject:service];
         if ([delegate respondsToSelector:@selector(JMRIServiceBrowser:didFindService:moreComing:)]) {
             [delegate JMRIServiceBrowser:self didFindService:service moreComing:searching];

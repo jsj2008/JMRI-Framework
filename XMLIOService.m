@@ -177,12 +177,12 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
         if (self.logTraffic) {
             NSLog(@"Sending %@ to %@", [NSString stringWithUTF8String:[[request HTTPBody] bytes]], self.url);
         }
-        NSOperationQueue *queue = [[[NSOperationQueue alloc] init] autorelease];
-        XMLIOServiceHelper *helper = [[[XMLIOServiceHelper alloc] initWithDelegate:self
+        NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+        XMLIOServiceHelper *helper = [[XMLIOServiceHelper alloc] initWithDelegate:self
                                                                      withOperation:operation
                                                                        withRequest:request
                                                                           withType:type
-                                                                          withName:aName] autorelease];
+                                                                          withName:aName];
         [queue addOperation:helper];
 	} else if (!self.url) { // did not resolve
 		[self.delegate XMLIOService:self didFailWithError:[NSError errorWithDomain:@"JMRIErrorDomain" code:1025 userInfo:nil]];
@@ -456,10 +456,10 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 																	nil]];
 	}
     if ([name isEqualToString:XMLIOMetadataJMRIVersion] && [[item class] isSubclassOfClass:[XMLIOMetadata class]] && [(XMLIOMetadata *)item majorVersion] != 0) {
-        serviceVersion = [[NSString stringWithFormat:@"%i.%i.%i", 
+        serviceVersion = [NSString stringWithFormat:@"%i.%i.%i", 
                            [(XMLIOMetadata *)item majorVersion],
                            [(XMLIOMetadata *)item minorVersion],
-                           [(XMLIOMetadata *)item testVersion]] retain];
+                           [(XMLIOMetadata *)item testVersion]];
         if (self.monitoringDelay == defaultMonitoringDelay) {
             defaultMonitoringDelay = (self.useAttributeProtocol) ? 0 : 5;
             self.monitoringDelay = defaultMonitoringDelay;
@@ -522,7 +522,6 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
                             waitUntilDone:NO];
         return;
     }
-    NSURLConnection *connection = [[connections objectForKey:[helper.request HTTPBody]] retain];
 	[connections removeObjectForKey:[helper.request HTTPBody]];
 	if ([self.delegate respondsToSelector:@selector(XMLIOServiceDidFinishLoading:)]) {
 		[self.delegate XMLIOServiceDidFinishLoading:self];
@@ -530,7 +529,6 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 	if (self.logTraffic) {
 		NSLog(@"XMLIOService has just closed a connection. %lu connections remain open.", (unsigned long)[connections count]);
 	}
-    [connection release];
 }
 
 #pragma mark - Net service delegate
@@ -567,10 +565,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 }
 
 - (void)dealloc {
-	[monitoredItems release];
-    [throttles release];
 	self.XMLIOPath = nil;
-	[super dealloc];
 }
 
 @end

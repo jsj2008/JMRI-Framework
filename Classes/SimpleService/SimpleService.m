@@ -24,7 +24,11 @@
 - (id)initWithNetService:(NSNetService *)service {
     if ((self = [super initWithNetService:service])) {
         serviceType = JMRIServiceSimple;
-        if ([service getInputStream:&input outputStream:&output]) {
+        NSInputStream* is = [[NSInputStream alloc] init];
+        NSOutputStream* os = [[NSOutputStream alloc] init];
+        if ([service getInputStream:&is outputStream:&os]) {
+            input = is;
+            output = os;
             [self open];
         }
     }
@@ -34,12 +38,16 @@
 - (id)initWithAddress:(NSString *)address withPort:(NSInteger)port {
     if ((self = [super initWithAddress:address withPort:port])) {
         serviceType = JMRIServiceSimple;
+        NSInputStream* is = [[NSInputStream alloc] init];
+        NSOutputStream* os = [[NSOutputStream alloc] init];
 #ifdef TARGET_OS_IPHONE
-        [NSStream getStreamsToHostNamed:address port:port inputStream:&input outputStream:&output];
+        [NSStream getStreamsToHostNamed:address port:port inputStream:&is outputStream:&os];
 #else
-        [NSStream getStreamsToHost:[NSHost hostWithAddress:address] port:port inputStream:&input outputStream:&output];
+        [NSStream getStreamsToHost:[NSHost hostWithAddress:address] port:port inputStream:&is outputStream:&os];
 #endif
-        if (input != nil) {
+        if (is != nil) {
+            input = is;
+            output = os;
             [self open];
         }
     }

@@ -27,7 +27,7 @@
 
 - (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser didFindService:(NSNetService *)aNetService moreComing:(BOOL)moreComing {
 	WiThrottleService *service;
-	service = [[[WiThrottleService alloc] initWithNetService:aNetService] autorelease];
+	service = [[WiThrottleService alloc] initWithNetService:aNetService];
 	[self.services addObject:service];
 	if ([self.delegate respondsToSelector:@selector(JMRINetServiceBrowser:didFindService:moreComing:)]) {
 		[self.delegate JMRINetServiceBrowser:self didFindService:service moreComing:moreComing];

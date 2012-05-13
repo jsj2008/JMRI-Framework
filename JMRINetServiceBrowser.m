@@ -32,7 +32,7 @@ NSString *const JMRINetServiceWiThrottle = @"_withrottle._tcp.";
 
 - (id)init {
 	if ((self = [super init])) {
-		self.browser = [[[NSNetServiceBrowser alloc] init] autorelease];
+		self.browser = [[NSNetServiceBrowser alloc] init];
         self.browser.delegate = self;
 		self.services = [NSMutableArray arrayWithCapacity:0];
 		_searching = NO;
@@ -43,7 +43,6 @@ NSString *const JMRINetServiceWiThrottle = @"_withrottle._tcp.";
 - (void)dealloc {
 	self.services = nil;
 	self.browser = nil;
-	[super dealloc];
 }
 
 #pragma mark - Service browser methods
@@ -108,7 +107,6 @@ NSString *const JMRINetServiceWiThrottle = @"_withrottle._tcp.";
 
 - (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser didFindService:(NSNetService *)aNetService moreComing:(BOOL)moreComing {
 	_searching = moreComing;
-	[aNetService retain];
 	[aNetService setDelegate:self];
 	[aNetService resolveWithTimeout:10];
 }
@@ -121,7 +119,7 @@ NSString *const JMRINetServiceWiThrottle = @"_withrottle._tcp.";
         service = [self.services objectAtIndex:index];
         [self.services removeObjectAtIndex:index];
     } else {
-        service = [[[JMRINetService alloc] initWithNetService:aNetService] autorelease];
+        service = [[JMRINetService alloc] initWithNetService:aNetService];
     }
 	if ([self.delegate respondsToSelector:@selector(JMRINetServiceBrowser:didRemoveService:moreComing:)]) {
 		[self.delegate JMRINetServiceBrowser:self didRemoveService:service moreComing:moreComing];
@@ -134,7 +132,7 @@ NSString *const JMRINetServiceWiThrottle = @"_withrottle._tcp.";
 	[self doesNotRecognizeSelector:_cmd];
 	// sample implementation:
 	//JMRINetService *service;
-	//service = [[[JMRINetService alloc] initWithNetService:aNetService] autorelease];
+	//service = [[[JMRINetService alloc] initWithNetService:aNetService];
 	//[self.services addObject:service];
 	//if ([self.delegate respondsToSelector:@selector(JMRINetServiceBrowser:didFindService:moreComing:)]) {
 	//	[self.delegate JMRINetServiceBrowser:self didFindService:service moreComing:moreComing];

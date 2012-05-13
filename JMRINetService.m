@@ -89,7 +89,7 @@ static JMRINetService *sharedNetService_ = nil;
 	if ((self = [super init])) {
 		self.service = nil;
 		self.logTraffic = NO;
-		manualAddress = [address retain];
+		manualAddress = address;
 		manualPort = port;
 		self.timeoutInterval = 60;
         serviceVersion = MIN_JMRI_VERSION;
@@ -105,7 +105,6 @@ static JMRINetService *sharedNetService_ = nil;
 	self.service = nil;
 	self.delegate = nil;
 	manualAddress = nil;
-	[super dealloc];
 }
 
 #pragma mark - Net service handling

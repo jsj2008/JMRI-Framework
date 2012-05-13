@@ -19,13 +19,13 @@
 }
 
 - (void)addServiceWithAddress:(NSString *)address withPort:(NSInteger)port {
-	SimpleService *service = [[[SimpleService alloc] initWithAddress:address withPort:port] autorelease];
+	SimpleService *service = [[SimpleService alloc] initWithAddress:address withPort:port];
 	[self.services addObject:service];
 }
 
 - (void)netServiceDidResolveAddress:(NSNetService *)sender {
     if (![self containsService:sender]) {
-		SimpleService *service = [[[SimpleService alloc] initWithNetService:sender] autorelease];
+		SimpleService *service = [[SimpleService alloc] initWithNetService:sender];
 		[self.services addObject:service];
 		if ([self.delegate respondsToSelector:@selector(JMRINetServiceBrowser:didFindService:moreComing:)]) {
 			[self.delegate JMRINetServiceBrowser:self didFindService:service moreComing:_searching];
