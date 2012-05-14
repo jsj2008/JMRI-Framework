@@ -32,18 +32,17 @@
 	XMLIOService *service = [[XMLIOService alloc] initWithAddress:address withPort:port];
 	[self.services addObject:service];
 }
-/*
+
 - (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser didFindService:(NSNetService *)aNetService moreComing:(BOOL)moreComing {
 	if (![self containsService:aNetService]) {
 		XMLIOService *service;
-		service = [[[XMLIOService alloc] initWithNetService:aNetService];
+		service = [[XMLIOService alloc] initWithNetService:aNetService];
 		[self.services addObject:service];
 		if ([self.delegate respondsToSelector:@selector(JMRINetServiceBrowser:didFindService:moreComing:)]) {
 			[self.delegate JMRINetServiceBrowser:self didFindService:service moreComing:moreComing];
 		}
 	}
 }
-*/
 
 - (void)netServiceDidResolveAddress:(NSNetService *)sender {
     NSDictionary *txtRecords = [NSNetService dictionaryFromTXTRecordData:[sender TXTRecordData]];
