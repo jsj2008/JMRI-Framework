@@ -46,9 +46,9 @@
 
 @property XMLIOService *delegate;
 @property NSUInteger operation;
-@property NSString *name;
-@property NSString *type;
-@property NSURLRequest *request;
+@property (strong) NSString *name;
+@property (strong) NSString *type;
+@property (strong) NSURLRequest *request;
 
 @end
 

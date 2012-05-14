@@ -46,7 +46,7 @@ extern NSString *const JMRINetServiceXmlIO;
 
 #pragma mark - Properties
 
-@property (nonatomic) NSNetServiceBrowser *browser;
+@property (strong, nonatomic) NSNetServiceBrowser *browser;
 @property (weak, nonatomic) id delegate;
 @property (readonly) BOOL searching;
 @property (nonatomic) NSMutableArray *services;

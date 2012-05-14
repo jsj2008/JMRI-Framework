@@ -26,9 +26,9 @@
 
 #pragma mark - Properties
 
-@property (readwrite) SimpleService *simpleService;
-@property (readwrite) WiThrottleService *wiThrottleService;
-@property (readwrite) XMLIOService *xmlIOService;
+@property (readwrite, strong) SimpleService *simpleService;
+@property (readwrite, strong) WiThrottleService *wiThrottleService;
+@property (readwrite, strong) XMLIOService *xmlIOService;
 @property (readonly) Boolean hasSimpleService;
 @property (readonly) Boolean hasWiThrottleService;
 @property (readonly) Boolean hasXmlIOService;
