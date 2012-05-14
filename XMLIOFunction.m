@@ -40,9 +40,5 @@
     return [NSString stringWithFormat:@"F%lu", (unsigned long)self.identifier];
 }
 
-- (void)dealloc {
-    self.label = nil;
-    self.throttle = nil;
-}
 
 @end

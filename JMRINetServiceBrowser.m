@@ -40,10 +40,6 @@ NSString *const JMRINetServiceWiThrottle = @"_withrottle._tcp.";
 	return self;
 }
 
-- (void)dealloc {
-	self.services = nil;
-	self.browser = nil;
-}
 
 #pragma mark - Service browser methods
 

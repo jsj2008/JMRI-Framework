@@ -225,10 +225,5 @@
     }
 }
 
-- (void)dealloc {
-    self.service = nil;
-    self.commands = nil;
-    self.roster = nil;
-}
 
 @end

@@ -24,10 +24,10 @@
 - (id)initWithBooleanState:(BOOL)state;
 
 @property (readonly) NSUInteger identifier;
-@property (readonly, retain) NSString* key;
-@property (nonatomic, retain) NSString* label;
+@property (readonly) NSString* key;
+@property (nonatomic) NSString* label;
 @property (nonatomic) BOOL lockable;
 @property (nonatomic) NSUInteger state;
-@property (nonatomic, retain) XMLIOThrottle* throttle;
+@property (nonatomic) XMLIOThrottle* throttle;
 
 @end

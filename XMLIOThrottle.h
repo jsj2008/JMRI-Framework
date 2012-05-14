@@ -49,9 +49,9 @@
 @property (nonatomic) NSInteger speedStepMode;
 @property (readonly) NSInteger steps;
 
-@property (nonatomic, retain) XMLIOService *service;
-@property (nonatomic, retain) XMLIORoster *roster;
-@property (nonatomic, retain) NSMutableDictionary *commands;
+@property (nonatomic) XMLIOService *service;
+@property (nonatomic) XMLIORoster *roster;
+@property (nonatomic) NSMutableDictionary *commands;
 @property (nonatomic) BOOL shouldSendUpdate;
 
 @property (nonatomic) NSUInteger address;

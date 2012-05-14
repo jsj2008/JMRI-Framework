@@ -31,10 +31,10 @@
 
 // XMLIOObject contains properties needed to parse XML correctly
 // Subclasses contain properties specific to the subclass
-@property (retain) NSString *XMLName;
-@property (retain) NSString *text;
-@property (retain) XMLIOObject *parent;
-@property (retain) NSMutableArray *children;
-@property (retain) NSMutableDictionary *attributes;
+@property NSString *XMLName;
+@property NSString *text;
+@property XMLIOObject *parent;
+@property NSMutableArray *children;
+@property NSMutableDictionary *attributes;
 
 @end

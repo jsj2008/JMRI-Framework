@@ -26,15 +26,15 @@
 
 #pragma mark - Properties
 
-@property (retain, readwrite) SimpleService *simpleService;
-@property (retain, readwrite) WiThrottleService *wiThrottleService;
-@property (retain, readwrite) XMLIOService *xmlIOService;
+@property (readwrite) SimpleService *simpleService;
+@property (readwrite) WiThrottleService *wiThrottleService;
+@property (readwrite) XMLIOService *xmlIOService;
 @property (readonly) Boolean hasSimpleService;
 @property (readonly) Boolean hasWiThrottleService;
 @property (readonly) Boolean hasXmlIOService;
-@property (retain, readonly) NSArray *addresses;
-@property (retain, readonly) NSString *domain;
-@property (retain, readonly) NSString *hostName;
-@property (retain, readonly) NSString *name;
+@property (readonly) NSArray *addresses;
+@property (readonly) NSString *domain;
+@property (readonly) NSString *hostName;
+@property (readonly) NSString *name;
 
 @end

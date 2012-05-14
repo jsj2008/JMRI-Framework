@@ -46,24 +46,24 @@
 
 # pragma mark Standard properties
 
-@property (nonatomic, retain) NSString* name;
-@property (nonatomic, retain) NSString* type;
-@property (nonatomic, retain) NSString* userName;
-@property (nonatomic, retain) NSString* value;
-@property (nonatomic, retain) NSString* comment;
+@property (nonatomic) NSString* name;
+@property (nonatomic) NSString* type;
+@property (nonatomic) NSString* userName;
+@property (nonatomic) NSString* value;
+@property (nonatomic) NSString* comment;
 @property (nonatomic) BOOL inverted;
 
 #pragma mark Roster properties
 
 @property (nonatomic) NSUInteger dccAddress;
-@property (nonatomic, retain) NSString* addressLength;
-@property (nonatomic, retain) NSString* roadName;
-@property (nonatomic, retain) NSString* roadNumber;
-@property (nonatomic, retain) NSString* mfg;
-@property (nonatomic, retain) NSString* model;
+@property (nonatomic) NSString* addressLength;
+@property (nonatomic) NSString* roadName;
+@property (nonatomic) NSString* roadNumber;
+@property (nonatomic) NSString* mfg;
+@property (nonatomic) NSString* model;
 @property (nonatomic) float maxSpeedPct;
-@property (nonatomic, retain) NSString* imageFileName;
-@property (nonatomic, retain) NSString* imageIconName;
-@property (retain) NSMutableArray* functions;
+@property (nonatomic) NSString* imageFileName;
+@property (nonatomic) NSString* imageIconName;
+@property  NSMutableArray* functions;
 
 @end

@@ -102,7 +102,6 @@ static JMRINetService *sharedNetService_ = nil;
 }
 
 - (void)dealloc {
-	self.service = nil;
 	self.delegate = nil;
 	manualAddress = nil;
 }

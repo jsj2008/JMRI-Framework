@@ -166,11 +166,11 @@ typedef enum {
 
 #pragma mark - Properties
 
-@property (readonly, retain) NSURL* url;
+@property (readonly) NSURL* url;
 @property (readonly) BOOL openConnection;
 @property (readonly) BOOL useAttributeProtocol;
-@property (nonatomic, retain) NSString* XMLIOPath;
-@property (nonatomic, retain) NSMutableDictionary* throttles;
+@property (nonatomic) NSString* XMLIOPath;
+@property (nonatomic) NSMutableDictionary* throttles;
 @property NSUInteger monitoringDelay;
 
 @end

@@ -84,24 +84,24 @@ typedef enum {
 #pragma mark - Object properties
 
 @property (weak, nonatomic) id delegate;
-@property (retain) NSNetService *service;
+@property NSNetService *service;
 @property BOOL logTraffic;
 @property NSTimeInterval timeoutInterval;
 @property (readonly) BOOL resolved;
-@property (readonly, retain) NSString *version;
-@property (readonly, retain) NSString *type;
+@property (readonly) NSString *version;
+@property (readonly) NSString *type;
 
 #pragma mark - Net service properties
 
-@property (retain, readonly) NSArray *addresses;
-@property (retain, readonly) NSString *domain;
-@property (retain, readonly) NSString *hostName;
-@property (retain, readonly) NSString *name;
+@property (readonly) NSArray *addresses;
+@property (readonly) NSString *domain;
+@property (readonly) NSString *hostName;
+@property (readonly) NSString *name;
 @property (readonly) NSInteger port;
 
 #pragma mark - JMRI object properties
 
-@property (retain) NSMutableDictionary *items;
+@property NSMutableDictionary *items;
 
 @end
 

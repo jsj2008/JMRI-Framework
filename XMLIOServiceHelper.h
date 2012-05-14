@@ -44,11 +44,11 @@
               withType:(NSString *)type
               withName:(NSString *)name;
 
-@property (retain) XMLIOService *delegate;
+@property XMLIOService *delegate;
 @property NSUInteger operation;
-@property (retain) NSString *name;
-@property (retain) NSString *type;
-@property (retain) NSURLRequest *request;
+@property NSString *name;
+@property NSString *type;
+@property NSURLRequest *request;
 
 @end
 

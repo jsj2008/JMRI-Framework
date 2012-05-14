@@ -39,7 +39,7 @@
 
 @property (weak, nonatomic) id delegate;
 @property (readonly) BOOL searching;
-@property (nonatomic, retain) NSMutableArray *services;
+@property (nonatomic) NSMutableArray *services;
 
 @end
 

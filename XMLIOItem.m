@@ -110,19 +110,5 @@
     [aCoder encodeBool:self.inverted forKey:XMLIOItemInverted];
 }
 
-- (void)dealloc {
-	self.name = nil;
-	self.type = nil;
-	self.userName = nil;
-	self.value = nil;
-	self.comment = nil;
-	self.addressLength = nil;
-	self.roadName = nil;
-	self.mfg = nil;
-	self.model = nil;
-	self.imageFileName = nil;
-	self.imageIconName = nil;
-    self.functions = nil;
-}
 
 @end

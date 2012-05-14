@@ -564,8 +564,5 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 	return self;
 }
 
-- (void)dealloc {
-	self.XMLIOPath = nil;
-}
 
 @end

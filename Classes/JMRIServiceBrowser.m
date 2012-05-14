@@ -30,9 +30,6 @@
 	return self;
 }
 
-- (void)dealloc {
-	self.services = nil;
-}
 
 #pragma mark - Service browser methods
 

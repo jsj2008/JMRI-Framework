@@ -35,12 +35,5 @@
     return self;
 }
 
-- (void)dealloc {
-    self.XMLName = nil;
-    self.text = nil;
-    self.parent = nil;
-    self.children = nil;
-    self.attributes = nil;
-}
 
 @end
