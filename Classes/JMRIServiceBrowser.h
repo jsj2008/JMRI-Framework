@@ -14,7 +14,6 @@
 
 @interface JMRIServiceBrowser : NSObject <JMRINetServiceBrowserDelegate> {
     
-    id delegate;
 	BOOL searching;
     NSMutableArray *services;
     SimpleServiceBrowser *simpleBrowser;
@@ -38,7 +37,7 @@
 
 #pragma mark - Properties
 
-@property (nonatomic, retain) id delegate;
+@property (weak, nonatomic) id delegate;
 @property (readonly) BOOL searching;
 @property (nonatomic, retain) NSMutableArray *services;
 

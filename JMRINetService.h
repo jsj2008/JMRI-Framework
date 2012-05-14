@@ -49,7 +49,6 @@ typedef enum {
 @interface JMRINetService : NSObject <NSNetServiceDelegate> {
 
 	NSNetService *netService;
-	id delegate;
     NSTimeInterval timeoutInterval;
 	BOOL logTraffic;
 	NSString *manualAddress;
@@ -84,7 +83,7 @@ typedef enum {
 
 #pragma mark - Object properties
 
-@property (retain) id delegate;
+@property (weak, nonatomic) id delegate;
 @property (retain) NSNetService *service;
 @property BOOL logTraffic;
 @property NSTimeInterval timeoutInterval;

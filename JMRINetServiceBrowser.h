@@ -27,7 +27,6 @@ extern NSString *const JMRINetServiceXmlIO;
 @interface JMRINetServiceBrowser : NSObject <NSNetServiceBrowserDelegate, NSNetServiceDelegate> {
 
 	NSNetServiceBrowser *_browser;
-	id _delegate;
 	BOOL _searching;
 	NSMutableArray *_services;
 }
@@ -48,7 +47,7 @@ extern NSString *const JMRINetServiceXmlIO;
 #pragma mark - Properties
 
 @property (nonatomic, retain) NSNetServiceBrowser *browser;
-@property (nonatomic, retain) id delegate;
+@property (weak, nonatomic) id delegate;
 @property (readonly) BOOL searching;
 @property (nonatomic, retain) NSMutableArray *services;
 

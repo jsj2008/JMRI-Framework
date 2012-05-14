@@ -26,7 +26,7 @@ NSString *const JMRINetServiceWiThrottle = @"_withrottle._tcp.";
 @implementation JMRINetServiceBrowser
 
 @synthesize browser = _browser;
-@synthesize delegate = _delegate;
+@synthesize delegate;
 @synthesize searching = _searching;
 @synthesize services = _services;
 
