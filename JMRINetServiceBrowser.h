@@ -50,6 +50,7 @@ extern NSString *const JMRINetServiceXmlIO;
 @property (weak, nonatomic) id delegate;
 @property (readonly) BOOL searching;
 @property (nonatomic) NSMutableArray *services;
+@property (nonatomic) NSMutableSet *unresolvedServices;
 
 @end
 

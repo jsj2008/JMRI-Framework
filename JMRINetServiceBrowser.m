@@ -29,12 +29,14 @@ NSString *const JMRINetServiceWiThrottle = @"_withrottle._tcp.";
 @synthesize delegate;
 @synthesize searching = _searching;
 @synthesize services = _services;
+@synthesize unresolvedServices;
 
 - (id)init {
 	if ((self = [super init])) {
 		self.browser = [[NSNetServiceBrowser alloc] init];
         self.browser.delegate = self;
 		self.services = [NSMutableArray arrayWithCapacity:0];
+        self.unresolvedServices = [NSMutableSet setWithCapacity:0];
 		_searching = NO;
 	}
 	return self;
@@ -103,6 +105,7 @@ NSString *const JMRINetServiceWiThrottle = @"_withrottle._tcp.";
 
 - (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser didFindService:(NSNetService *)aNetService moreComing:(BOOL)moreComing {
 	_searching = moreComing;
+    [self.unresolvedServices addObject:aNetService];
 	[aNetService setDelegate:self];
 	[aNetService resolveWithTimeout:10];
 }
@@ -130,6 +133,7 @@ NSString *const JMRINetServiceWiThrottle = @"_withrottle._tcp.";
 	//JMRINetService *service;
 	//service = [[[JMRINetService alloc] initWithNetService:aNetService];
 	//[self.services addObject:service];
+    //[self.unresolvedServices removeObject:sender];
 	//if ([self.delegate respondsToSelector:@selector(JMRINetServiceBrowser:didFindService:moreComing:)]) {
 	//	[self.delegate JMRINetServiceBrowser:self didFindService:service moreComing:moreComing];
 	//}	
