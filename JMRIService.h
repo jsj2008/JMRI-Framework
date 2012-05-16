@@ -11,13 +11,7 @@
 #import "WiThrottleService.h"
 #import "XMLIOService.h"
 
-@interface JMRIService : NSObject {
-    
-    SimpleService *simple;
-    WiThrottleService *wiThrottle;
-    XMLIOService *xmlio;
-    
-}
+@interface JMRIService : NSObject
 
 #pragma mark - Initialization
 
@@ -28,10 +22,10 @@
 
 @property (readwrite, strong) SimpleService *simpleService;
 @property (readwrite, strong) WiThrottleService *wiThrottleService;
-@property (readwrite, strong) XMLIOService *xmlIOService;
+@property (readwrite, strong) XMLIOService *webService;
 @property (readonly) Boolean hasSimpleService;
 @property (readonly) Boolean hasWiThrottleService;
-@property (readonly) Boolean hasXmlIOService;
+@property (readonly) Boolean hasWebService;
 @property (readonly) NSArray *addresses;
 @property (readonly) NSString *domain;
 @property (readonly) NSString *hostName;

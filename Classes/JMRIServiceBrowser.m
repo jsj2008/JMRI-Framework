@@ -16,14 +16,12 @@
 
 - (id)init {
 	if ((self = [super init])) {
-		//self.browser = [[[NSNetServiceBrowser alloc] init];
-        //self.browser.delegate = self;
         simpleBrowser = [[SimpleServiceBrowser alloc] init];
         simpleBrowser.delegate = self;
         wiThrottleBrowser = [[WiThrottleServiceBrowser alloc] init];
         wiThrottleBrowser.delegate = self;
-        xmlIOBrowser = [[XMLIOServiceBrowser alloc] init];
-        xmlIOBrowser.delegate = self;
+        webBrowser = [[XMLIOServiceBrowser alloc] init];
+        webBrowser.delegate = self;
 		self.services = [NSMutableArray arrayWithCapacity:0];
 		searching = NO;
 	}
@@ -36,7 +34,7 @@
 - (void)searchForServices {
     [simpleBrowser searchForServices];
     [wiThrottleBrowser searchForServices];
-    [xmlIOBrowser searchForServices];
+    [webBrowser searchForServices];
 }
 
 - (void)addServiceWithAddress:(NSString *)address withPorts:(NSDictionary *)ports {
@@ -46,7 +44,7 @@
 - (void)stop {
     [simpleBrowser stop];
     [wiThrottleBrowser stop];
-    [xmlIOBrowser stop];
+    [webBrowser stop];
 }
 
 #pragma mark - Utility methods
@@ -92,7 +90,6 @@
 
 - (void)JMRINetServiceBrowser:(JMRINetServiceBrowser *)browser didFindService:(JMRINetService *)aNetService moreComing:(BOOL)moreComing {
     searching = moreComing;
-    //JMRIService *service;
     if ([self indexOfServiceWithName:aNetService.name] != NSNotFound) {
         JMRIService *service = [self serviceWithName:aNetService.name];
         if ([aNetService.type isEqualToString:JMRIServiceSimple]) {
@@ -100,7 +97,7 @@
         } else if ([aNetService.type isEqualToString:JMRIServiceWiThrottle]) {
             service.wiThrottleService = (WiThrottleService *)aNetService;
         } else {
-            service.xmlIOService = (XMLIOService *)aNetService;
+            service.webService = (XMLIOService *)aNetService;
         }
         if ([delegate respondsToSelector:@selector(JMRIServiceBrowser:didChangeService:moreComing:)]) {
             [delegate JMRIServiceBrowser:self didChangeService:service moreComing:searching];
@@ -123,9 +120,9 @@
         } else if ([aNetService.type isEqualToString:JMRIServiceWiThrottle]) {
             service.wiThrottleService = nil;
         } else {
-            service.xmlIOService = nil;
+            service.webService = nil;
         }
-        if (service.hasSimpleService || service.hasWiThrottleService || service.hasXmlIOService) {
+        if (service.hasSimpleService || service.hasWiThrottleService || service.hasWebService) {
             if ([delegate respondsToSelector:@selector(JMRIServiceBrowser:didChangeService:moreComing:)]) {
                 [delegate JMRIServiceBrowser:self didChangeService:service moreComing:searching];
             }

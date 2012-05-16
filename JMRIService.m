@@ -12,7 +12,7 @@
 
 @synthesize simpleService = simple;
 @synthesize wiThrottleService = wiThrottle;
-@synthesize xmlIOService = xmlio;
+@synthesize webService = xmlio;
 
 - (id)initWithAddress:(NSString *)address withPorts:(NSDictionary *)ports {
     if (([super init] != nil)) {
@@ -22,8 +22,8 @@
         if ([ports valueForKey:JMRIServiceWiThrottle]) {
             self.wiThrottleService = [[WiThrottleService alloc] initWithAddress:address withPort:[[ports valueForKey:JMRIServiceWiThrottle] integerValue]];
         }
-        if ([ports valueForKey:JMRIServiceXmlIO]) {
-            self.xmlIOService = [[XMLIOService alloc] initWithAddress:address withPort:[[ports valueForKey:JMRIServiceXmlIO] integerValue]];
+        if ([ports valueForKey:JMRIServiceWeb]) {
+            self.webService = [[XMLIOService alloc] initWithAddress:address withPort:[[ports valueForKey:JMRIServiceWeb] integerValue]];
         }
     }
     return self;
@@ -33,7 +33,7 @@
     if (([super init] != nil)) {
         self.simpleService = [services valueForKey:JMRIServiceSimple];
         self.wiThrottleService = [services valueForKey:JMRIServiceWiThrottle];
-        self.xmlIOService = [services valueForKey:JMRIServiceXmlIO];
+        self.webService = [services valueForKey:JMRIServiceWeb];
     }
     return self;
 }
@@ -47,7 +47,7 @@
 }
 
 - (Boolean)hasXmlIOService {
-    return (self.xmlIOService != nil);
+    return (self.webService != nil);
 }
 
 - (NSArray *)addresses {
@@ -55,8 +55,8 @@
         return self.simpleService.addresses;
     } else if (self.hasWiThrottleService) {
         return self.wiThrottleService.addresses;
-    } else if (self.hasXmlIOService) {
-        return self.xmlIOService.addresses;
+    } else if (self.hasWebService) {
+        return self.webService.addresses;
     }
     return nil;
 }
@@ -66,8 +66,8 @@
         return self.simpleService.domain;
     } else if (self.hasWiThrottleService) {
         return self.wiThrottleService.domain;
-    } else if (self.hasXmlIOService) {
-        return self.xmlIOService.domain;
+    } else if (self.hasWebService) {
+        return self.webService.domain;
     }
     return nil;
 }
@@ -77,8 +77,8 @@
         return self.simpleService.hostName;
     } else if (self.hasWiThrottleService) {
         return self.wiThrottleService.hostName;
-    } else if (self.hasXmlIOService) {
-        return self.xmlIOService.hostName;
+    } else if (self.hasWebService) {
+        return self.webService.hostName;
     }
     return nil;
 }
@@ -88,8 +88,8 @@
         return self.simpleService.name;
     } else if (self.hasWiThrottleService) {
         return self.wiThrottleService.name;
-    } else if (self.hasXmlIOService) {
-        return self.xmlIOService.name;
+    } else if (self.hasWebService) {
+        return self.webService.name;
     }
     return nil;
 }

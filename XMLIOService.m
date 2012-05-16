@@ -539,7 +539,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 
 - (id)initWithNetService:(NSNetService *)service {
 	if ((self = [super initWithNetService:service])) {
-        serviceType = JMRIServiceXmlIO;
+        serviceType = JMRIServiceWeb;
 		connections = [[NSMutableDictionary alloc] initWithCapacity:0];
 		monitoredItems = [[NSMutableSet alloc] initWithCapacity:0];
         throttles = [[NSMutableDictionary alloc] initWithCapacity:0];
@@ -552,7 +552,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 
 - (id)initWithAddress:(NSString *)address withPort:(NSInteger)port {
 	if ((self = [super initWithAddress:address withPort:port])) {
-        serviceType = JMRIServiceXmlIO;
+        serviceType = JMRIServiceWeb;
 		connections = [[NSMutableDictionary alloc] initWithCapacity:0];
 		monitoredItems = [[NSMutableSet alloc] initWithCapacity:0];
         throttles = [[NSMutableDictionary alloc] initWithCapacity:0];

@@ -22,7 +22,7 @@
 
 extern NSString *const JMRINetServiceSimple;
 extern NSString *const JMRINetServiceWiThrottle;
-extern NSString *const JMRINetServiceXmlIO;
+extern NSString *const JMRINetServiceWeb;
 
 @interface JMRINetServiceBrowser : NSObject <NSNetServiceBrowserDelegate, NSNetServiceDelegate> {
 

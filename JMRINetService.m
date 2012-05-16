@@ -19,7 +19,7 @@
 #import "JMRINetService.h"
 
 NSString *const JMRIServiceSimple = @"JMRINetwork";
-NSString *const JMRIServiceXmlIO = @"WebServer";
+NSString *const JMRIServiceWeb = @"WebServer";
 NSString *const JMRIServiceWiThrottle = @"wiThrottle";
 
 NSString *const JMRITypeFrame = @"frame";

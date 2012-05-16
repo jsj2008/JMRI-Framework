@@ -18,7 +18,7 @@
     NSMutableArray *services;
     SimpleServiceBrowser *simpleBrowser;
     WiThrottleServiceBrowser *wiThrottleBrowser;
-    XMLIOServiceBrowser *xmlIOBrowser;
+    XMLIOServiceBrowser *webBrowser;
     
 }
 

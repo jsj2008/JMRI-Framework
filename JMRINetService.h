@@ -24,7 +24,7 @@
 // Known service types
 extern NSString *const JMRIServiceSimple;
 extern NSString *const JMRIServiceWiThrottle;
-extern NSString *const JMRIServiceXmlIO;
+extern NSString *const JMRIServiceWeb;
 
 // JMRI XMLIO item types
 extern NSString *const JMRITypeFrame;

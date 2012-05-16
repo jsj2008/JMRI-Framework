@@ -20,7 +20,7 @@
 #import "JMRINetService.h"
 
 NSString *const JMRINetServiceSimple = @"_jmri._tcp.";
-NSString *const JMRINetServiceXmlIO = @"_http._tcp.";
+NSString *const JMRINetServiceWeb = @"_http._tcp.";
 NSString *const JMRINetServiceWiThrottle = @"_withrottle._tcp.";
 
 @implementation JMRINetServiceBrowser
