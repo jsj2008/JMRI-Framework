@@ -11,7 +11,13 @@
 #import "WiThrottleService.h"
 #import "XMLIOService.h"
 
-@interface JMRIService : NSObject
+@interface JMRIService : NSObject {
+    
+    SimpleService *simple;
+    XMLIOService *xmlio;
+    WiThrottleService *wiThrottle;
+    
+}
 
 #pragma mark - Initialization
 
