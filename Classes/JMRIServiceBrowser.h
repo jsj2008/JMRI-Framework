@@ -15,12 +15,15 @@
 @interface JMRIServiceBrowser : NSObject <JMRINetServiceBrowserDelegate> {
     
 	BOOL searching;
-    NSMutableArray *services;
     SimpleServiceBrowser *simpleBrowser;
     WiThrottleServiceBrowser *wiThrottleBrowser;
     XMLIOServiceBrowser *webBrowser;
     
 }
+
+#pragma mark - Initializers
+
+- (id)initForServices:(NSSet *)services;
 
 #pragma mark - Service browser methods
 

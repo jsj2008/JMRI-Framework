@@ -12,22 +12,31 @@
 
 @synthesize delegate;
 @synthesize searching;
-@synthesize services;
+@synthesize services = _services;
 
 - (id)init {
-	if ((self = [super init])) {
-        simpleBrowser = [[SimpleServiceBrowser alloc] init];
-        simpleBrowser.delegate = self;
-        wiThrottleBrowser = [[WiThrottleServiceBrowser alloc] init];
-        wiThrottleBrowser.delegate = self;
-        webBrowser = [[XMLIOServiceBrowser alloc] init];
-        webBrowser.delegate = self;
-		self.services = [NSMutableArray arrayWithCapacity:0];
-		searching = NO;
-	}
-	return self;
+	return [self initForServices:[NSSet setWithObjects:JMRIServiceSimple, JMRIServiceWeb, JMRIServiceWiThrottle, nil]];
 }
 
+- (id)initForServices:(NSSet *)services {
+    if ((self = [super init])) {
+        if ([services containsObject:JMRIServiceSimple]) {
+            simpleBrowser = [[SimpleServiceBrowser alloc] init];
+            simpleBrowser.delegate = self;
+        }
+        if ([services containsObject:JMRIServiceWeb]) {
+            webBrowser = [[XMLIOServiceBrowser alloc] init];
+            webBrowser.delegate = self;
+        }
+        if ([services containsObject:JMRIServiceWiThrottle]) {
+            wiThrottleBrowser = [[WiThrottleServiceBrowser alloc] init];
+            wiThrottleBrowser.delegate = self;
+        }
+        self.services = [NSMutableArray arrayWithCapacity:0];
+        searching = NO;
+    }
+    return self;
+}
 
 #pragma mark - Service browser methods
 
