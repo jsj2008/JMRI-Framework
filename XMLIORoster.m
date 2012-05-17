@@ -33,34 +33,6 @@
 	return self;
 }
 
-/*
- Copy everything from an XMLIOItem into an XMLIORoster
- 
- This method is required to support JMRI 2.12 since its impossible to tell when starting to parse an item element if it contains an XMLIOItem or XMLIORoster object.
- */
-- (id)initWithItem:(XMLIOItem *)item {
-    if ((self = [super init])) {
-        // copy everything incase this is not really a roster element
-        self.name = item.name;
-        self.type = item.type;
-        self.userName = item.userName;
-        self.value = item.value;
-        self.comment = item.comment;
-        self.inverted = item.inverted;
-        self.dccAddress = item.dccAddress;
-        self.addressLength = item.addressLength;
-        self.roadName = item.roadName;
-        self.roadNumber = item.roadNumber;
-        self.mfg = item.mfg;
-        self.model = item.model;
-        self.maxSpeedPct = item.maxSpeedPct;
-        self.imageFileName = item.imageFileName;
-        self.imageIconName = item.imageIconName;
-        self.functions = item.functions;
-    }
-    return self;
-}
-
 - (NSString *)labelForFunction:(NSInteger)function {
     return [(XMLIOFunction *)[self.functions objectAtIndex:function] label];
 }

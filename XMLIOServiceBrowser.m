@@ -35,8 +35,7 @@
 
 - (void)netServiceDidResolveAddress:(NSNetService *)sender {
     NSDictionary *txtRecords = [NSNetService dictionaryFromTXTRecordData:[sender TXTRecordData]];
-    // the test for path=index.html should hopefully be only temporary && JMRI post 2.13 should have a jmri=version instead
-    if (([txtRecords objectForKey:JMRITXTRecordKeyJMRI] || [txtRecords objectForKey:@"path"]) &&
+    if ([txtRecords objectForKey:JMRITXTRecordKeyJMRI] &&
         ![self containsService:sender]) {
 		XMLIOService *service = [[XMLIOService alloc] initWithNetService:sender];
 		[self.services addObject:service];

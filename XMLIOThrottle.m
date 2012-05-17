@@ -95,12 +95,6 @@
         self.roster = roster;
         self.service = service;
         self.speedStepMode = XMLIOSpeedStepMode128;
-        if (!service.useAttributeProtocol) {
-            [[NSNotificationCenter defaultCenter] addObserver:self
-                                                     selector:@selector(updateWithNotification:)
-                                                         name:XMLIOServiceDidGetThrottle 
-                                                       object:service];
-        }
         self.shouldSendUpdate = YES;
         [self.commands removeAllObjects];
         [service sendThrottle:self.roster.dccAddress commands:nil];

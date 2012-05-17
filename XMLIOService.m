@@ -135,7 +135,6 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 
 @synthesize XMLIOPath;
 @synthesize throttles;
-@synthesize monitoringDelay;
 
 - (BOOL)openConnection {
 	return ([connections count]);
@@ -154,19 +153,12 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 	return [[NSURL URLWithString:[NSString stringWithFormat:@"http://%@:%i%@", self.hostName, self.port, self.XMLIOPath, nil]] absoluteURL];
 }
 
-- (BOOL)useAttributeProtocol {
-    return ([self.version compare:@"2.13.2" options:NSNumericSearch] != NSOrderedAscending);
-}
-
 #pragma mark - XMLIO methods
 
 - (void)conductOperation:(NSUInteger)operation 
 		   withXMLString:(NSString *)query 
 				withType:(NSString *)type
 				withName:(NSString *)aName {
-    if (!self.useAttributeProtocol && operation != XMLIOOperationList && [type isEqualToString:JMRITypeMetadata]) {
-        return;
-    }
 	if (self.url) {
         NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:self.url
                                                                cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
@@ -198,48 +190,24 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 }
 
 - (void)list:(NSString *)type {
-    if (self.useAttributeProtocol) {
-        [self conductOperation:XMLIOOperationList
-                 withXMLString:[NSString stringWithFormat:@"<list type=\"%@\" />", type]
-                      withType:type
-                      withName:nil];
-    } else {
-        if ([type isEqualToString:JMRITypeFrame]) {
-            type = JMRITypePanel;
-        }
-		[self conductOperation:XMLIOOperationList
-				 withXMLString:[NSString stringWithFormat:@"<list><type>%@</type></list>", type]
-					  withType:type
-					  withName:nil];
-    }
+    [self conductOperation:XMLIOOperationList
+             withXMLString:[NSString stringWithFormat:@"<list type=\"%@\" />", type]
+                  withType:type
+                  withName:nil];
 }
 
 - (void)readItem:(NSString *)name ofType:(NSString *)type {
-    if (self.useAttributeProtocol || [type isEqualToString:JMRITypeMetadata]) {
-        [self conductOperation:XMLIOOperationRead
-                 withXMLString:[NSString stringWithFormat:@"<%@ name=\"%@\" />", type, name]
-                      withType:type
-                      withName:name];
-    } else {
-        [self conductOperation:XMLIOOperationRead
-                 withXMLString:[NSString stringWithFormat:@"<item><type>%@</type><name>%@</name></item>", type, name]
-                      withType:type
-                      withName:name];
-    }
+    [self conductOperation:XMLIOOperationRead
+             withXMLString:[NSString stringWithFormat:@"<%@ name=\"%@\" />", type, name]
+                  withType:type
+                  withName:name];
 }
 
 - (void)readItem:(NSString *)name ofType:(NSString *)type initialValue:(NSString *)value {
-    if (self.useAttributeProtocol || [type isEqualToString:JMRITypeMetadata]) {
-        [self conductOperation:XMLIOOperationRead
-                 withXMLString:[NSString stringWithFormat:@"<%@ name=\"%@\" value=\"%@\" />", type, name, value]
-                      withType:type
-                      withName:name];
-    } else {
-        [self conductOperation:XMLIOOperationRead
-                 withXMLString:[NSString stringWithFormat:@"<item><type>%@</type><name>%@</name><value>%@</value></item>", type, name, value]
-                      withType:type
-                      withName:name];
-    }
+    [self conductOperation:XMLIOOperationRead
+             withXMLString:[NSString stringWithFormat:@"<%@ name=\"%@\" value=\"%@\" />", type, name, value]
+                  withType:type
+                  withName:name];
     if (self.logTraffic) {
         NSLog(@"Monitoring: %@", monitoredItems);
         NSLog(@"Open Requests:");
@@ -250,38 +218,20 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 }
 
 - (void)writeItem:(NSString *)name ofType:(NSString *)type value:(NSString *)value {
-    if (self.useAttributeProtocol) {
-        [self conductOperation:XMLIOOperationWrite
-                 withXMLString:[NSString stringWithFormat:@"<%@ name=\"%@\" set=\"%@\" />", type, name, value]
-                      withType:type
-                      withName:name];
-    } else {
-        [self conductOperation:XMLIOOperationWrite
-                 withXMLString:[NSString stringWithFormat:@"<item><type>%@</type><name>%@</name><set>%@</set></item>", type, name, value]
-                      withType:type
-                      withName:name];
-    }
+    [self conductOperation:XMLIOOperationWrite
+             withXMLString:[NSString stringWithFormat:@"<%@ name=\"%@\" set=\"%@\" />", type, name, value]
+                  withType:type
+                  withName:name];
 }
 
 - (void)sendThrottle:(NSUInteger)address commands:(NSDictionary *)commands {
-    NSMutableString *s;
-    if (self.useAttributeProtocol) {
-        s = [NSMutableString stringWithFormat:@"<throttle address=\"%lu\"", address];
-        if (commands) {
-            for (NSString *key in commands) {
-                [s appendFormat:@" %@=\"%@\"", key, [commands objectForKey:key]];
-            }
+    NSMutableString *s = [NSMutableString stringWithFormat:@"<throttle address=\"%lu\"", address];
+    if (commands) {
+        for (NSString *key in commands) {
+            [s appendFormat:@" %@=\"%@\"", key, [commands objectForKey:key]];
         }
-        [s appendString:@"/>"];
-    } else {
-        s = [NSMutableString stringWithFormat:@"<throttle><address>%lu</address>", address];
-        if (commands) {
-            for (NSString *key in commands) {
-                [s appendFormat:@"<%@>%@</%@>", key, [commands objectForKey:key], key];
-            }
-        }
-        [s appendString:@"</throttle>"];
     }
+    [s appendString:@"/>"];
     [self conductOperation:XMLIOOperationThrottle 
              withXMLString:s 
                   withType:JMRITypeThrottle
@@ -376,10 +326,6 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 	if ([error code] == NSURLErrorTimedOut &&
 		[monitoredItems containsObject:[helper.name stringByAppendingString:helper.type]]) {
 		[self readItem:helper.name ofType:helper.type];
-	} else if ([error code] == NSURLErrorNetworkConnectionLost && 
-               !self.useAttributeProtocol &&
-               [monitoredItems containsObject:[helper.name stringByAppendingString:helper.type]]) {
-        [monitoredItems removeObject:[helper.name stringByAppendingString:helper.type]];
     }
 	if ([self.delegate respondsToSelector:@selector(XMLIOService:didFailWithError:)]) {
 		[self.delegate XMLIOService:self didFailWithError:error];
@@ -435,15 +381,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 		[self.delegate XMLIOService:self didReadItem:item withName:name ofType:type withValue:value];
 	}
 	if ([monitoredItems containsObject:[name stringByAppendingString:type]]) {
-        if (self.monitoringDelay) {
-            [NSTimer scheduledTimerWithTimeInterval:self.monitoringDelay
-                                             target:self
-                                           selector:@selector(readItemFromTimer:)
-                                           userInfo:[NSDictionary dictionaryWithObjectsAndKeys:name,XMLIOItemNameKey, type, XMLIOItemTypeKey, value, XMLIOItemValueKey, nil]
-                                            repeats:NO];
-        } else {
-            [self readItem:name ofType:type initialValue:value];            
-        }
+        [self readItem:name ofType:type initialValue:value];            
 	}
 	if (value) {
 		[[NSNotificationCenter defaultCenter] postNotificationName:XMLIOServiceDidReadItem
@@ -460,10 +398,6 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
                            [(XMLIOMetadata *)item majorVersion],
                            [(XMLIOMetadata *)item minorVersion],
                            [(XMLIOMetadata *)item testVersion]];
-        if (self.monitoringDelay == defaultMonitoringDelay) {
-            defaultMonitoringDelay = (self.useAttributeProtocol) ? 0 : 5;
-            self.monitoringDelay = defaultMonitoringDelay;
-        }
     }
 }
 
@@ -544,8 +478,6 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 		monitoredItems = [[NSMutableSet alloc] initWithCapacity:0];
         throttles = [[NSMutableDictionary alloc] initWithCapacity:0];
 		self.XMLIOPath = @"xmlio/";
-        defaultMonitoringDelay = (self.useAttributeProtocol) ? 0 : 5;
-        self.monitoringDelay = defaultMonitoringDelay;
 	}
 	return self;
 }
@@ -557,8 +489,6 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 		monitoredItems = [[NSMutableSet alloc] initWithCapacity:0];
         throttles = [[NSMutableDictionary alloc] initWithCapacity:0];
 		self.XMLIOPath = @"xmlio/";
-        defaultMonitoringDelay = 5;
-        self.monitoringDelay = defaultMonitoringDelay;
         [self list:JMRITypeMetadata];
 	}
 	return self;

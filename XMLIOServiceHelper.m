@@ -29,11 +29,7 @@ NSString *const XMLIOXMLXMLIO = @"xmlio";
 NSString *const XMLIOXMLItem = @"item";
 NSString *const XMLIOXMLThrottle = @"throttle";
 
-// XMLIO 2.12 Roster elements that are implemented differently in the Objective-C classes
-NSString *const XMLIORosterFunctionLabels = @"functionLabels";
-NSString *const XMLIORosterFunctionLockables = @"functionLockables";
-
-// XMLIO 2.13 Roster function attribute names that are properties of XMLIOFunction objects
+// XMLIO Roster function attribute names that are properties of XMLIOFunction objects
 NSString *const XMLIOXMLFunction = @"function";
 NSString *const XMLIORosterFunctionLabel = @"label";
 NSString *const XMLIORosterFunctionLockable = @"lockable";
@@ -257,49 +253,45 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
                 [(XMLIOMetadata *)newElement setTestVersion:[[attributeDict objectForKey:XMLIOMetadataVersionTest] integerValue]];
             }
         } else if ([elementName isEqualToString:XMLIOXMLThrottle]) {
-            if (self.delegate.useAttributeProtocol) {
-                XMLIOThrottle *t = [self.delegate.throttles objectForKey:[attributeDict objectForKey:XMLIOThrottleAddress]];
-                t.shouldSendUpdate = NO;
-                t.forward = [[attributeDict objectForKey:XMLIOThrottleForward] isEqualToString:XMLIOBooleanYES];
-                t.speed = [[attributeDict objectForKey:XMLIOThrottleSpeed] floatValue];
-                if ([attributeDict objectForKey:XMLIOThrottleSpeedStepMode]) {
-                    t.speedStepMode = [[attributeDict objectForKey:XMLIOThrottleSpeedStepMode] integerValue];
-                }
-                [t setState:(([[attributeDict objectForKey:XMLIOThrottleF0] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive) forFunction:0];
-                [t setState:([[attributeDict objectForKey:XMLIOThrottleF1] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:1];
-                [t setState:([[attributeDict objectForKey:XMLIOThrottleF2] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:2];
-                [t setState:([[attributeDict objectForKey:XMLIOThrottleF3] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:3];
-                [t setState:([[attributeDict objectForKey:XMLIOThrottleF4] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:4];
-                [t setState:([[attributeDict objectForKey:XMLIOThrottleF5] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:5];
-                [t setState:([[attributeDict objectForKey:XMLIOThrottleF6] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:6];
-                [t setState:([[attributeDict objectForKey:XMLIOThrottleF7] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:7];
-                [t setState:([[attributeDict objectForKey:XMLIOThrottleF8] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:8];
-                [t setState:([[attributeDict objectForKey:XMLIOThrottleF9] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:9];
-                [t setState:([[attributeDict objectForKey:XMLIOThrottleF10] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:10];
-                [t setState:([[attributeDict objectForKey:XMLIOThrottleF11] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:11];
-                [t setState:([[attributeDict objectForKey:XMLIOThrottleF12] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:12];
-                [t setState:([[attributeDict objectForKey:XMLIOThrottleF13] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:13];
-                [t setState:([[attributeDict objectForKey:XMLIOThrottleF14] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:14];
-                [t setState:([[attributeDict objectForKey:XMLIOThrottleF15] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:15];
-                [t setState:([[attributeDict objectForKey:XMLIOThrottleF16] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:16];
-                [t setState:([[attributeDict objectForKey:XMLIOThrottleF17] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:17];
-                [t setState:([[attributeDict objectForKey:XMLIOThrottleF18] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:18];
-                [t setState:([[attributeDict objectForKey:XMLIOThrottleF19] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:19];
-                [t setState:([[attributeDict objectForKey:XMLIOThrottleF20] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:20];
-                [t setState:([[attributeDict objectForKey:XMLIOThrottleF21] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:21];
-                [t setState:([[attributeDict objectForKey:XMLIOThrottleF22] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:22];
-                [t setState:([[attributeDict objectForKey:XMLIOThrottleF23] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:23];
-                [t setState:([[attributeDict objectForKey:XMLIOThrottleF24] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:24];
-                [t setState:([[attributeDict objectForKey:XMLIOThrottleF25] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:25];
-                [t setState:([[attributeDict objectForKey:XMLIOThrottleF26] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:26];
-                [t setState:([[attributeDict objectForKey:XMLIOThrottleF27] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:27];
-                [t setState:([[attributeDict objectForKey:XMLIOThrottleF28] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:28];
-                t.shouldSendUpdate = YES;
-                newElement = t;
-                // its an error to have requested a throttle that does not already exist
-            } else {
-                newElement = [[XMLIOThrottle alloc] init];
+            XMLIOThrottle *t = [self.delegate.throttles objectForKey:[attributeDict objectForKey:XMLIOThrottleAddress]];
+            t.shouldSendUpdate = NO;
+            t.forward = [[attributeDict objectForKey:XMLIOThrottleForward] isEqualToString:XMLIOBooleanYES];
+            t.speed = [[attributeDict objectForKey:XMLIOThrottleSpeed] floatValue];
+            if ([attributeDict objectForKey:XMLIOThrottleSpeedStepMode]) {
+                t.speedStepMode = [[attributeDict objectForKey:XMLIOThrottleSpeedStepMode] integerValue];
             }
+            [t setState:(([[attributeDict objectForKey:XMLIOThrottleF0] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive) forFunction:0];
+            [t setState:([[attributeDict objectForKey:XMLIOThrottleF1] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:1];
+            [t setState:([[attributeDict objectForKey:XMLIOThrottleF2] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:2];
+            [t setState:([[attributeDict objectForKey:XMLIOThrottleF3] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:3];
+            [t setState:([[attributeDict objectForKey:XMLIOThrottleF4] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:4];
+            [t setState:([[attributeDict objectForKey:XMLIOThrottleF5] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:5];
+            [t setState:([[attributeDict objectForKey:XMLIOThrottleF6] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:6];
+            [t setState:([[attributeDict objectForKey:XMLIOThrottleF7] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:7];
+            [t setState:([[attributeDict objectForKey:XMLIOThrottleF8] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:8];
+            [t setState:([[attributeDict objectForKey:XMLIOThrottleF9] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:9];
+            [t setState:([[attributeDict objectForKey:XMLIOThrottleF10] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:10];
+            [t setState:([[attributeDict objectForKey:XMLIOThrottleF11] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:11];
+            [t setState:([[attributeDict objectForKey:XMLIOThrottleF12] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:12];
+            [t setState:([[attributeDict objectForKey:XMLIOThrottleF13] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:13];
+            [t setState:([[attributeDict objectForKey:XMLIOThrottleF14] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:14];
+            [t setState:([[attributeDict objectForKey:XMLIOThrottleF15] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:15];
+            [t setState:([[attributeDict objectForKey:XMLIOThrottleF16] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:16];
+            [t setState:([[attributeDict objectForKey:XMLIOThrottleF17] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:17];
+            [t setState:([[attributeDict objectForKey:XMLIOThrottleF18] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:18];
+            [t setState:([[attributeDict objectForKey:XMLIOThrottleF19] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:19];
+            [t setState:([[attributeDict objectForKey:XMLIOThrottleF20] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:20];
+            [t setState:([[attributeDict objectForKey:XMLIOThrottleF21] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:21];
+            [t setState:([[attributeDict objectForKey:XMLIOThrottleF22] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:22];
+            [t setState:([[attributeDict objectForKey:XMLIOThrottleF23] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:23];
+            [t setState:([[attributeDict objectForKey:XMLIOThrottleF24] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:24];
+            [t setState:([[attributeDict objectForKey:XMLIOThrottleF25] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:25];
+            [t setState:([[attributeDict objectForKey:XMLIOThrottleF26] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:26];
+            [t setState:([[attributeDict objectForKey:XMLIOThrottleF27] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:27];
+            [t setState:([[attributeDict objectForKey:XMLIOThrottleF28] isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:28];
+            t.shouldSendUpdate = YES;
+            newElement = t;
+            // its an error to have requested a throttle that does not already exist
         } else if ([elementName isEqualToString:XMLIOXMLFunction]) {
             NSUInteger i = [[[attributeDict objectForKey:XMLIOItemName] substringFromIndex:1] integerValue];
             XMLIOFunction *f = [[(XMLIORoster *)currentElement functions] objectAtIndex:i];
@@ -322,103 +314,17 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
-    if (self.delegate.useAttributeProtocol) {
-        if (currentElement) {
-            if (currentElement.parent) {
-                if (rootElement == currentElement.parent) {
-                    if ([currentElement isKindOfClass:[XMLIOThrottle class]]) {
-                        [items setObject:currentElement forKey:name_];
-                    } else {
-                        [items setObject:currentElement forKey:[(XMLIOItem *)currentElement name]];
-                    }
-                }
-            }
-            currentElement = currentElement.parent;
-        }
-    } else { // the rest of this method supports JMRI 2.12
-        if (currentElement) {
-            if (currentElement.parent) {
-                XMLIOObject *parent;
-                XMLIOFunction *f;
-                if ([currentElement.parent isMemberOfClass:[XMLIOThrottle class]]) {
-                    parent = (XMLIOThrottle *)currentElement.parent;
+    if (currentElement) {
+        if (currentElement.parent) {
+            if (rootElement == currentElement.parent) {
+                if ([currentElement isKindOfClass:[XMLIOThrottle class]]) {
+                    [items setObject:currentElement forKey:name_];
                 } else {
-                    parent = (XMLIOItem *)currentElement.parent;
-                }
-                if (currentElement.parent != rootElement) {
-                    if (self.delegate.useAttributeProtocol) {
-                    } else {
-                        if ([currentElement.parent isKindOfClass:[XMLIOItem class]] ||
-                            [currentElement.parent isKindOfClass:[XMLIOThrottle class]]) {
-                            if ([currentElement.XMLName isEqualToString:XMLIORosterDCCAddress]) {
-                                [(XMLIORoster *)parent setDccAddress:[currentElement.text integerValue]];
-                            } else if ([currentElement.XMLName isEqualToString:XMLIORosterRoadName]) {
-                                [(XMLIORoster *)parent setRoadName:currentElement.text];
-                            } else if ([currentElement.XMLName isEqualToString:XMLIORosterRoadNumber]) {
-                                [(XMLIORoster *)parent setRoadNumber:currentElement.text];
-                            } else if ([currentElement.XMLName isEqualToString:XMLIORosterMaxSpeedPct]) {
-                                [(XMLIORoster *)parent setMaxSpeedPct:[currentElement.text floatValue]];
-                            } else if ([currentElement.XMLName isEqualToString:XMLIOItemInverted]) {
-                                [(XMLIOItem *)parent setInverted:[currentElement.text isEqualToString:XMLIOBooleanYES]];
-                            } else if ([currentElement.XMLName isEqualToString:XMLIOThrottleAddress]) {
-                                [(XMLIOThrottle *)parent setAddress:[currentElement.text integerValue]];
-                            } else if ([currentElement.XMLName isEqualToString:XMLIOThrottleForward]) {
-                                [(XMLIOThrottle *)parent setForward:[currentElement.text isEqualToString:XMLIOBooleanYES]];
-                            } else if ([[currentElement.XMLName substringToIndex:1] isEqualToString:@"F"]) {
-                                [(XMLIOThrottle *)parent setState:([currentElement.text isEqualToString:XMLIOBooleanYES]) ? JMRIItemStateActive : JMRIItemStateInactive forFunction:[[elementName substringFromIndex:1] integerValue]];
-                            } else if ([currentElement.XMLName isEqualToString:XMLIOMetadataVersionMajor] ||
-                                       [currentElement.XMLName isEqualToString:XMLIOMetadataVersionMinor] ||
-                                       [currentElement.XMLName isEqualToString:XMLIOMetadataVersionTest]) {
-                                // Do not attmept to read version specifics unless using
-                                // attribute protocol
-                            } else if (![currentElement.XMLName isEqualToString:XMLIORosterFunctionLabels] &&
-                                       ![currentElement.XMLName isEqualToString:XMLIORosterFunctionLockables] &&
-                                       ![currentElement.XMLName isEqualToString:XMLIOXMLFunction]) {
-                                [parent setValue:currentElement.text forKey:elementName];
-                            }
-                        } else if ([parent.XMLName isEqualToString:XMLIORosterFunctionLabels] ||
-                                   [parent.XMLName isEqualToString:XMLIORosterFunctionLockables]) {
-                            XMLIORoster *roster = (XMLIORoster *)parent.parent;
-                            NSUInteger i = [[elementName substringFromIndex:1] integerValue];
-                            f = [roster.functions objectAtIndex:i];
-                            if ([parent.XMLName isEqualToString:XMLIORosterFunctionLabels]) {
-                                f.label = currentElement.text;
-                            } else {
-                                f.lockable = [currentElement.text isEqualToString:XMLIOBooleanYES];
-                            }
-                        }
-                    }
-                }
-                if ([currentElement isMemberOfClass:[XMLIOItem class]] && [[(XMLIOItem *)currentElement type] isEqualToString:JMRITypeRoster]) {
-                    XMLIORoster *rosterElement = [[XMLIORoster alloc] initWithItem:(XMLIOItem *)currentElement];
-                    rosterElement.children = currentElement.children;
-                    rosterElement.parent = currentElement.parent;
-                    [rosterElement.parent.children addObject:rosterElement];
-                    [rosterElement.parent.children removeObject:currentElement];
-                    currentElement = rosterElement;
-                }
-                if ([currentElement isMemberOfClass:[XMLIOThrottle class]]) {
-                    XMLIOThrottle *throttleElement = [self.delegate.throttles objectForKey:[[NSNumber numberWithInteger:[(XMLIOThrottle *)currentElement address]] stringValue]];
-                    throttleElement.children = currentElement.children;
-                    throttleElement.parent = currentElement.parent;
-                    [throttleElement.parent.children addObject:throttleElement];
-                    [throttleElement.parent.children removeObject:currentElement];
-                    [throttleElement updateFromThrottle:(XMLIOThrottle *)currentElement];
-                    currentElement = throttleElement;
-                }
-                if (rootElement == currentElement.parent) {
-                    if ([currentElement isKindOfClass:[XMLIOThrottle class]]) {
-                        [items setObject:currentElement forKey:name_];
-                    } else {
-                        [items setObject:currentElement forKey:[(XMLIOItem *)currentElement name]];
-                    }
+                    [items setObject:currentElement forKey:[(XMLIOItem *)currentElement name]];
                 }
             }
-            if ([currentElement isMemberOfClass:[XMLIORoster class]]) {
-                [(XMLIORoster *)currentElement setUserName:[[[(XMLIORoster *)currentElement roadName] stringByAppendingFormat:@" %@", [(XMLIORoster *)currentElement roadNumber], nil] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
-            }
-            currentElement = currentElement.parent;
         }
+        currentElement = currentElement.parent;
     }
 }
 

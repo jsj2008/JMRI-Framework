@@ -33,7 +33,6 @@
     NSMutableDictionary *commands;
     BOOL shouldSendUpdate;
     
-    NSUInteger address; // this property supports 2.12
 }
 
 - (id)initWithRoster:(XMLIORoster *)roster withService:(XMLIOService *)service;

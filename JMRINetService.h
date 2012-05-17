@@ -16,7 +16,7 @@
 //  Created by Randall Wood on 10/5/2011.
 //
 
-#define MIN_JMRI_VERSION @"2.12"
+#define MIN_JMRI_VERSION @"2.14"
 
 #import <Foundation/Foundation.h>
 #import "NSArray+JMRIExtensions.h"
