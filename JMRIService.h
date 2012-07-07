@@ -24,6 +24,10 @@
 - (id)initWithAddress:(NSString *)address withPorts:(NSDictionary *)ports;
 - (id)initWithWebServices:(NSDictionary *)services;
 
+#pragma mark - Object Handling
+
+- (NSComparisonResult)localizedCaseInsensitiveCompareByName:(JMRINetService*)aService;
+
 #pragma mark - Properties
 
 @property (readwrite, strong) SimpleService *simpleService;

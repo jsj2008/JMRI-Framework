@@ -37,6 +37,12 @@
     return self;
 }
 
+#pragma mark - Object Handling
+
+- (NSComparisonResult)localizedCaseInsensitiveCompareByName:(JMRIService*)aService {
+	return [self.name localizedCaseInsensitiveCompare:aService.name];
+}
+
 #pragma - Properties
 
 - (Boolean)hasSimpleService {
