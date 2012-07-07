@@ -69,36 +69,15 @@
 }
 
 - (NSString *)domain {
-    if (self.hasSimpleService) {
-        return self.simpleService.domain;
-    } else if (self.hasWiThrottleService) {
-        return self.wiThrottleService.domain;
-    } else if (self.hasWebService) {
-        return self.webService.domain;
-    }
-    return nil;
+    return domain;
 }
 
 - (NSString *)hostName {
-    if (self.hasSimpleService) {
-        return self.simpleService.hostName;
-    } else if (self.hasWiThrottleService) {
-        return self.wiThrottleService.hostName;
-    } else if (self.hasWebService) {
-        return self.webService.hostName;
-    }
-    return nil;
+    return hostName;
 }
 
 - (NSString *)name {
-    if (self.hasSimpleService) {
-        return self.simpleService.name;
-    } else if (self.hasWiThrottleService) {
-        return self.wiThrottleService.name;
-    } else if (self.hasWebService) {
-        return self.webService.name;
-    }
-    return nil;
+    return name;
 }
 
 - (SimpleService *)simpleService {
@@ -113,6 +92,11 @@
     [simple stop];
     simple = simpleService;
     [simple startMonitoring];
+    if (simple) {
+        domain = simple.domain;
+        hostName = simple.hostName;
+        name = simple.name;
+    }
 }
 
 - (XMLIOService *)webService {
@@ -127,6 +111,11 @@
     [xmlio stop];
     xmlio = webService;
     [xmlio startMonitoring];
+    if (xmlio) {
+        domain = xmlio.domain;
+        hostName = xmlio.hostName;
+        name = xmlio.name;
+    }
 }
 
 - (WiThrottleService *)wiThrottleService {
@@ -141,6 +130,11 @@
     [wiThrottle stop];
     wiThrottle = wiThrottleService;
     [wiThrottle startMonitoring];
+    if (wiThrottle) {
+        domain = wiThrottle.domain;
+        hostName = wiThrottle.hostName;
+        name = wiThrottle.name;
+    }
 }
 
 @end

@@ -16,6 +16,9 @@
     SimpleService *simple;
     XMLIOService *xmlio;
     WiThrottleService *wiThrottle;
+    NSString *domain;
+    NSString *hostName;
+    NSString *name;
     
 }
 
