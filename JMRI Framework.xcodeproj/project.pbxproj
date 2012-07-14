@@ -206,22 +206,12 @@
 		08FB77AEFE84172EC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				48B014BC15B1D77900997BD3 /* Extensions */,
+				48B014BB15B1D77400997BD3 /* Core */,
 				487AA4BA15AC33C800F76F47 /* Items */,
 				483FD437145A392900BCED0D /* SimpleService */,
 				483C571A138E132000245381 /* WiThrottle */,
 				483C5718138E131200245381 /* XMLIO */,
-				48F65A1013796DEF0086D4E3 /* JMRINetService.h */,
-				48F65A1113796DEF0086D4E3 /* JMRINetService.m */,
-				4888594E1375B1F4001EAD5B /* JMRINetServiceBrowser.h */,
-				4888594F1375B1F4001EAD5B /* JMRINetServiceBrowser.m */,
-				4813F4841386DE8900718FFC /* NSArray+JMRIExtensions.h */,
-				4813F4851386DE8900718FFC /* NSArray+JMRIExtensions.m */,
-				483FD43D145BA5DB00BCED0D /* NSStream+JMRIExtensions.h */,
-				483FD43E145BA5DB00BCED0D /* NSStream+JMRIExtensions.m */,
-				48D4AD7B15514149000B964C /* JMRIService.h */,
-				48D4AD7C15514149000B964C /* JMRIService.m */,
-				48D4AD871559132D000B964C /* JMRIServiceBrowser.h */,
-				48D4AD881559132D000B964C /* JMRIServiceBrowser.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -310,6 +300,32 @@
 				48B014B315B1CEA600997BD3 /* Cocoa.framework */,
 			);
 			name = "OS X";
+			sourceTree = "<group>";
+		};
+		48B014BB15B1D77400997BD3 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				48F65A1013796DEF0086D4E3 /* JMRINetService.h */,
+				48F65A1113796DEF0086D4E3 /* JMRINetService.m */,
+				4888594E1375B1F4001EAD5B /* JMRINetServiceBrowser.h */,
+				4888594F1375B1F4001EAD5B /* JMRINetServiceBrowser.m */,
+				48D4AD7B15514149000B964C /* JMRIService.h */,
+				48D4AD7C15514149000B964C /* JMRIService.m */,
+				48D4AD871559132D000B964C /* JMRIServiceBrowser.h */,
+				48D4AD881559132D000B964C /* JMRIServiceBrowser.m */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
+		48B014BC15B1D77900997BD3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4813F4841386DE8900718FFC /* NSArray+JMRIExtensions.h */,
+				4813F4851386DE8900718FFC /* NSArray+JMRIExtensions.m */,
+				483FD43D145BA5DB00BCED0D /* NSStream+JMRIExtensions.h */,
+				483FD43E145BA5DB00BCED0D /* NSStream+JMRIExtensions.m */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
