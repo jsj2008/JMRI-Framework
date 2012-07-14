@@ -71,10 +71,10 @@
 		48B014A815B1CCFE00997BD3 /* XMLIOServiceBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 48642FBB137A5DD900B93C86 /* XMLIOServiceBrowser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48B014A915B1CCFE00997BD3 /* XMLIOServiceHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 487E2B8F137EFF3F0004761D /* XMLIOServiceHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48B014AA15B1CCFE00997BD3 /* XMLIOThrottle.h in Headers */ = {isa = PBXBuildFile; fileRef = 48849563139565860086790D /* XMLIOThrottle.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		48B014AB15B1CCFE00997BD3 /* JMRINetService.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F65A1013796DEF0086D4E3 /* JMRINetService.h */; };
-		48B014AC15B1CCFE00997BD3 /* JMRINetServiceBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 4888594E1375B1F4001EAD5B /* JMRINetServiceBrowser.h */; };
-		48B014AD15B1CCFE00997BD3 /* NSArray+JMRIExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 4813F4841386DE8900718FFC /* NSArray+JMRIExtensions.h */; };
-		48B014AE15B1CCFE00997BD3 /* NSStream+JMRIExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 483FD43D145BA5DB00BCED0D /* NSStream+JMRIExtensions.h */; };
+		48B014AB15B1CCFE00997BD3 /* JMRINetService.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F65A1013796DEF0086D4E3 /* JMRINetService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		48B014AC15B1CCFE00997BD3 /* JMRINetServiceBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 4888594E1375B1F4001EAD5B /* JMRINetServiceBrowser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		48B014AD15B1CCFE00997BD3 /* NSArray+JMRIExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 4813F4841386DE8900718FFC /* NSArray+JMRIExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		48B014AE15B1CCFE00997BD3 /* NSStream+JMRIExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 483FD43D145BA5DB00BCED0D /* NSStream+JMRIExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48B014AF15B1CCFE00997BD3 /* JMRIService.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D4AD7B15514149000B964C /* JMRIService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48B014B015B1CCFE00997BD3 /* JMRIServiceBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D4AD871559132D000B964C /* JMRIServiceBrowser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48B014B415B1CEA600997BD3 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48B014B315B1CEA600997BD3 /* Cocoa.framework */; };

@@ -12,8 +12,25 @@
 
 #import <JMRI/JMRIService.h>
 #import <JMRI/JMRIServiceBrowser.h>
+#import <JMRI/JMRINetService.h>
+#import <JMRI/JMRINetServiceBrowser.h>
 
 //  JMRI SimpleService
 
 #import <JMRI/SimpleService.h>
 #import <JMRI/SimpleServiceBrowser.h>
+
+// WiThrottle
+
+#import <JMRI/WiThrottleService.h>
+#import <JMRI/WiThrottleServiceBrowser.h>
+
+// XMLIO
+
+#import <JMRI/XMLIOService.h>
+#import <JMRI/XMLIOServiceBrowser.h>
+
+//  Extensions
+
+#import <JMRI/NSArray+JMRIExtensions.h>
+#import <JMRI/NSStream+JMRIExtensions.h>
