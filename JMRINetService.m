@@ -18,22 +18,6 @@
 
 #import "JMRINetService.h"
 
-NSString *const JMRIServiceSimple = @"JMRINetwork";
-NSString *const JMRIServiceWeb = @"WebServer";
-NSString *const JMRIServiceWiThrottle = @"wiThrottle";
-
-NSString *const JMRITypeFrame = @"frame";
-NSString *const JMRITypeMemory = @"memory";
-NSString *const JMRITypeMetadata = @"metadata";
-NSString *const JMRITypePanel = @"panel";
-NSString *const JMRITypePower = @"power";
-NSString *const JMRITypeRoster = @"roster";
-NSString *const JMRITypeRoute = @"route";
-NSString *const JMRITypeSensor = @"sensor";
-NSString *const JMRITypeTurnout = @"turnout";
-
-NSString *const JMRITXTRecordKeyJMRI = @"jmri";
-
 static JMRINetService *sharedNetService_ = nil;
 
 @implementation JMRINetService
