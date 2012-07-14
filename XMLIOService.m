@@ -28,6 +28,7 @@
 #import "XMLIOServiceHelper.h"
 #import "XMLIOThrottle.h"
 #import "XMLIOMetadata.h"
+#import "JMRIService.h"
 
 NSString *const JMRITypeThrottle = @"throttle";
 

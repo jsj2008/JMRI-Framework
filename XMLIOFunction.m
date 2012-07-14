@@ -8,6 +8,7 @@
 
 #import "XMLIOFunction.h"
 #import "XMLIOService.h"
+#import "JMRIService.h"
 
 @implementation XMLIOFunction
 

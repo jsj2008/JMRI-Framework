@@ -7,6 +7,7 @@
 //
 
 #import "JMRIItem.h"
+#import "JMRIService.h"
 
 @implementation JMRIItem
 

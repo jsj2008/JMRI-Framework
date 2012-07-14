@@ -23,6 +23,7 @@
 #import "XMLIORoster.h"
 #import "XMLIOThrottle.h"
 #import "XMLIOMetadata.h"
+#import "JMRIService.h"
 
 // XMLIO Types
 NSString *const XMLIOXMLXMLIO = @"xmlio";
