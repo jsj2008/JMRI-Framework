@@ -14,9 +14,10 @@
 
 @interface SimpleService ()
 
-- (void)write:(NSString *)string;
 - (void)open;
 - (void)close;
+
+- (void)error:(NSError *)error;
 
 @end
 
@@ -39,9 +40,9 @@
 - (id)initWithAddress:(NSString *)address withPort:(NSInteger)port {
     if ((self = [super initWithAddress:address withPort:port])) {
         serviceType = JMRIServiceSimple;
-        NSInputStream* is = [[NSInputStream alloc] init];
-        NSOutputStream* os = [[NSOutputStream alloc] init];
-#ifdef TARGET_OS_IPHONE
+        NSInputStream* is;
+        NSOutputStream* os;
+#if TARGET_OS_IPHONE
         [NSStream getStreamsToHostNamed:address port:port inputStream:&is outputStream:&os];
 #else
         [NSStream getStreamsToHost:[NSHost hostWithAddress:address] port:port inputStream:&is outputStream:&os];
@@ -50,6 +51,8 @@
             input = is;
             output = os;
             [self open];
+        } else {
+            [self error:[[NSError alloc] initWithDomain:JMRIServiceSimple code:1 userInfo:nil]];
         }
     }
     return self;
@@ -70,6 +73,14 @@
     [input close];
     [output close];
 }
+
+- (void)error:(NSError *)error {
+    if ([self.delegate respondsToSelector:@selector(simpleService:didFailWithError:)]) {
+        [self.delegate simpleService:self didFailWithError:error];
+    }
+}
+
+#pragma mark - Public methods
 
 - (void)write:(NSString *)string {
     if ([output hasSpaceAvailable]) {
