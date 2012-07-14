@@ -8,86 +8,90 @@
 
 /* Begin PBXBuildFile section */
 		4813F4871386DE8900718FFC /* NSArray+JMRIExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4813F4851386DE8900718FFC /* NSArray+JMRIExtensions.m */; };
-		4813F4881386DE8900718FFC /* NSArray+JMRIExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 4813F4841386DE8900718FFC /* NSArray+JMRIExtensions.h */; };
-		4813F4891386DE8900718FFC /* NSArray+JMRIExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4813F4851386DE8900718FFC /* NSArray+JMRIExtensions.m */; };
-		483C571D138E139E00245381 /* XMLIOItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 483C571B138E139E00245381 /* XMLIOItem.h */; };
-		483C571E138E139E00245381 /* XMLIOItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 483C571C138E139E00245381 /* XMLIOItem.m */; };
 		483C571F138E139E00245381 /* XMLIOItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 483C571B138E139E00245381 /* XMLIOItem.h */; };
 		483C5720138E139E00245381 /* XMLIOItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 483C571C138E139E00245381 /* XMLIOItem.m */; };
 		483FD433145A391300BCED0D /* SimpleService.h in Headers */ = {isa = PBXBuildFile; fileRef = 483FD431145A391300BCED0D /* SimpleService.h */; };
-		483FD434145A391300BCED0D /* SimpleService.h in Headers */ = {isa = PBXBuildFile; fileRef = 483FD431145A391300BCED0D /* SimpleService.h */; };
 		483FD435145A391300BCED0D /* SimpleService.m in Sources */ = {isa = PBXBuildFile; fileRef = 483FD432145A391300BCED0D /* SimpleService.m */; };
-		483FD436145A391300BCED0D /* SimpleService.m in Sources */ = {isa = PBXBuildFile; fileRef = 483FD432145A391300BCED0D /* SimpleService.m */; };
 		483FD43F145BA5DB00BCED0D /* NSStream+JMRIExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 483FD43D145BA5DB00BCED0D /* NSStream+JMRIExtensions.h */; };
 		483FD441145BA5DB00BCED0D /* NSStream+JMRIExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 483FD43E145BA5DB00BCED0D /* NSStream+JMRIExtensions.m */; };
 		483FD449145BCD5D00BCED0D /* SimpleServiceBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 483FD447145BCD5D00BCED0D /* SimpleServiceBrowser.h */; };
-		483FD44A145BCD5D00BCED0D /* SimpleServiceBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 483FD447145BCD5D00BCED0D /* SimpleServiceBrowser.h */; };
 		483FD44B145BCD5D00BCED0D /* SimpleServiceBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 483FD448145BCD5D00BCED0D /* SimpleServiceBrowser.m */; };
-		483FD44C145BCD5D00BCED0D /* SimpleServiceBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 483FD448145BCD5D00BCED0D /* SimpleServiceBrowser.m */; };
 		48642FBD137A5DD900B93C86 /* XMLIOServiceBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 48642FBB137A5DD900B93C86 /* XMLIOServiceBrowser.h */; settings = {ATTRIBUTES = (); }; };
 		48642FBE137A5DD900B93C86 /* XMLIOServiceBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 48642FBC137A5DD900B93C86 /* XMLIOServiceBrowser.m */; };
-		48642FBF137A5DD900B93C86 /* XMLIOServiceBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 48642FBB137A5DD900B93C86 /* XMLIOServiceBrowser.h */; };
-		48642FC0137A5DD900B93C86 /* XMLIOServiceBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 48642FBC137A5DD900B93C86 /* XMLIOServiceBrowser.m */; };
 		48642FCC137A5F3400B93C86 /* WiThrottleServiceBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 48642FCA137A5F3400B93C86 /* WiThrottleServiceBrowser.h */; settings = {ATTRIBUTES = (); }; };
 		48642FCD137A5F3400B93C86 /* WiThrottleServiceBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 48642FCB137A5F3400B93C86 /* WiThrottleServiceBrowser.m */; };
-		48642FCE137A5F3400B93C86 /* WiThrottleServiceBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 48642FCA137A5F3400B93C86 /* WiThrottleServiceBrowser.h */; };
-		48642FCF137A5F3400B93C86 /* WiThrottleServiceBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 48642FCB137A5F3400B93C86 /* WiThrottleServiceBrowser.m */; };
-		487AA4B615AC33BE00F76F47 /* JMRIItem.h in Sources */ = {isa = PBXBuildFile; fileRef = 487AA4B415AC33BD00F76F47 /* JMRIItem.h */; };
-		487AA4B715AC33BE00F76F47 /* JMRIItem.h in Sources */ = {isa = PBXBuildFile; fileRef = 487AA4B415AC33BD00F76F47 /* JMRIItem.h */; };
+		487AA4B615AC33BE00F76F47 /* JMRIItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 487AA4B415AC33BD00F76F47 /* JMRIItem.h */; };
 		487AA4B815AC33BE00F76F47 /* JMRIItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 487AA4B515AC33BE00F76F47 /* JMRIItem.m */; };
-		487AA4B915AC33BE00F76F47 /* JMRIItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 487AA4B515AC33BE00F76F47 /* JMRIItem.m */; };
-		487AA4BD15AC43DA00F76F47 /* JMRITurnout.h in Sources */ = {isa = PBXBuildFile; fileRef = 487AA4BB15AC43DA00F76F47 /* JMRITurnout.h */; };
-		487AA4BE15AC43DA00F76F47 /* JMRITurnout.h in Sources */ = {isa = PBXBuildFile; fileRef = 487AA4BB15AC43DA00F76F47 /* JMRITurnout.h */; };
+		487AA4BD15AC43DA00F76F47 /* JMRITurnout.h in Headers */ = {isa = PBXBuildFile; fileRef = 487AA4BB15AC43DA00F76F47 /* JMRITurnout.h */; };
 		487AA4BF15AC43DA00F76F47 /* JMRITurnout.m in Sources */ = {isa = PBXBuildFile; fileRef = 487AA4BC15AC43DA00F76F47 /* JMRITurnout.m */; };
-		487AA4C015AC43DA00F76F47 /* JMRITurnout.m in Sources */ = {isa = PBXBuildFile; fileRef = 487AA4BC15AC43DA00F76F47 /* JMRITurnout.m */; };
 		487E2B91137EFF3F0004761D /* XMLIOServiceHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 487E2B8F137EFF3F0004761D /* XMLIOServiceHelper.h */; };
 		487E2B92137EFF3F0004761D /* XMLIOServiceHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 487E2B90137EFF3F0004761D /* XMLIOServiceHelper.m */; };
-		487E2B93137EFF3F0004761D /* XMLIOServiceHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 487E2B8F137EFF3F0004761D /* XMLIOServiceHelper.h */; };
-		487E2B94137EFF3F0004761D /* XMLIOServiceHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 487E2B90137EFF3F0004761D /* XMLIOServiceHelper.m */; };
-		487F9377137509BB00FF9DBA /* XMLIOService.h in Headers */ = {isa = PBXBuildFile; fileRef = 487F9375137509BB00FF9DBA /* XMLIOService.h */; };
-		487F9378137509BB00FF9DBA /* XMLIOService.m in Sources */ = {isa = PBXBuildFile; fileRef = 487F9376137509BB00FF9DBA /* XMLIOService.m */; };
 		487F9379137509BB00FF9DBA /* XMLIOService.h in Headers */ = {isa = PBXBuildFile; fileRef = 487F9375137509BB00FF9DBA /* XMLIOService.h */; settings = {ATTRIBUTES = (); }; };
 		487F937A137509BB00FF9DBA /* XMLIOService.m in Sources */ = {isa = PBXBuildFile; fileRef = 487F9376137509BB00FF9DBA /* XMLIOService.m */; };
-		4884955D1395653B0086790D /* XMLIOObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 4884955B1395653B0086790D /* XMLIOObject.h */; };
-		4884955E1395653B0086790D /* XMLIOObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4884955C1395653B0086790D /* XMLIOObject.m */; };
 		4884955F1395653B0086790D /* XMLIOObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 4884955B1395653B0086790D /* XMLIOObject.h */; };
 		488495601395653B0086790D /* XMLIOObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4884955C1395653B0086790D /* XMLIOObject.m */; };
-		48849565139565860086790D /* XMLIOThrottle.h in Headers */ = {isa = PBXBuildFile; fileRef = 48849563139565860086790D /* XMLIOThrottle.h */; };
-		48849566139565860086790D /* XMLIOThrottle.m in Sources */ = {isa = PBXBuildFile; fileRef = 48849564139565860086790D /* XMLIOThrottle.m */; };
 		48849567139565860086790D /* XMLIOThrottle.h in Headers */ = {isa = PBXBuildFile; fileRef = 48849563139565860086790D /* XMLIOThrottle.h */; };
 		48849568139565860086790D /* XMLIOThrottle.m in Sources */ = {isa = PBXBuildFile; fileRef = 48849564139565860086790D /* XMLIOThrottle.m */; };
 		488859511375B1F4001EAD5B /* JMRINetServiceBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4888594F1375B1F4001EAD5B /* JMRINetServiceBrowser.m */; };
-		488859521375B1F4001EAD5B /* JMRINetServiceBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 4888594E1375B1F4001EAD5B /* JMRINetServiceBrowser.h */; };
-		488859531375B1F4001EAD5B /* JMRINetServiceBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4888594F1375B1F4001EAD5B /* JMRINetServiceBrowser.m */; };
 		488859541375B202001EAD5B /* JMRINetServiceBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 4888594E1375B1F4001EAD5B /* JMRINetServiceBrowser.h */; settings = {ATTRIBUTES = (); }; };
+		48B0148515B1CBF600997BD3 /* JMRIItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 487AA4B515AC33BE00F76F47 /* JMRIItem.m */; };
+		48B0148615B1CBF600997BD3 /* JMRITurnout.m in Sources */ = {isa = PBXBuildFile; fileRef = 487AA4BC15AC43DA00F76F47 /* JMRITurnout.m */; };
+		48B0148715B1CBF600997BD3 /* SimpleService.m in Sources */ = {isa = PBXBuildFile; fileRef = 483FD432145A391300BCED0D /* SimpleService.m */; };
+		48B0148815B1CBF600997BD3 /* SimpleServiceBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 483FD448145BCD5D00BCED0D /* SimpleServiceBrowser.m */; };
+		48B0148915B1CBF600997BD3 /* WiThrottleService.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F65A7F137984C40086D4E3 /* WiThrottleService.m */; };
+		48B0148A15B1CBF600997BD3 /* WiThrottleServiceBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 48642FCB137A5F3400B93C86 /* WiThrottleServiceBrowser.m */; };
+		48B0148B15B1CBF600997BD3 /* XMLIOMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 48B9D0DF14242D4A00EDB24E /* XMLIOMetadata.m */; };
+		48B0148C15B1CBF600997BD3 /* XMLIOFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DA6CD613B63E5800E3643D /* XMLIOFunction.m */; };
+		48B0148D15B1CBF600997BD3 /* XMLIOItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 483C571C138E139E00245381 /* XMLIOItem.m */; };
+		48B0148E15B1CBF600997BD3 /* XMLIOObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4884955C1395653B0086790D /* XMLIOObject.m */; };
+		48B0148F15B1CBF600997BD3 /* XMLIORoster.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E71B6A139490E7003AB481 /* XMLIORoster.m */; };
+		48B0149015B1CBF600997BD3 /* XMLIOService.m in Sources */ = {isa = PBXBuildFile; fileRef = 487F9376137509BB00FF9DBA /* XMLIOService.m */; };
+		48B0149115B1CBF600997BD3 /* XMLIOServiceBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 48642FBC137A5DD900B93C86 /* XMLIOServiceBrowser.m */; };
+		48B0149215B1CBF600997BD3 /* XMLIOServiceHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 487E2B90137EFF3F0004761D /* XMLIOServiceHelper.m */; };
+		48B0149315B1CBF600997BD3 /* XMLIOThrottle.m in Sources */ = {isa = PBXBuildFile; fileRef = 48849564139565860086790D /* XMLIOThrottle.m */; };
+		48B0149415B1CBF600997BD3 /* JMRINetService.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F65A1113796DEF0086D4E3 /* JMRINetService.m */; };
+		48B0149515B1CBF600997BD3 /* JMRINetServiceBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4888594F1375B1F4001EAD5B /* JMRINetServiceBrowser.m */; };
+		48B0149615B1CBF600997BD3 /* NSArray+JMRIExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4813F4851386DE8900718FFC /* NSArray+JMRIExtensions.m */; };
+		48B0149715B1CBF600997BD3 /* NSStream+JMRIExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 483FD43E145BA5DB00BCED0D /* NSStream+JMRIExtensions.m */; };
+		48B0149815B1CBF600997BD3 /* JMRIService.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D4AD7C15514149000B964C /* JMRIService.m */; };
+		48B0149915B1CBF600997BD3 /* JMRIServiceBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D4AD881559132D000B964C /* JMRIServiceBrowser.m */; };
+		48B0149B15B1CC2400997BD3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48B0149A15B1CC2400997BD3 /* Foundation.framework */; };
+		48B0149C15B1CCFE00997BD3 /* JMRIItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 487AA4B415AC33BD00F76F47 /* JMRIItem.h */; };
+		48B0149D15B1CCFE00997BD3 /* JMRITurnout.h in Headers */ = {isa = PBXBuildFile; fileRef = 487AA4BB15AC43DA00F76F47 /* JMRITurnout.h */; };
+		48B0149E15B1CCFE00997BD3 /* SimpleService.h in Headers */ = {isa = PBXBuildFile; fileRef = 483FD431145A391300BCED0D /* SimpleService.h */; };
+		48B0149F15B1CCFE00997BD3 /* SimpleServiceBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 483FD447145BCD5D00BCED0D /* SimpleServiceBrowser.h */; };
+		48B014A015B1CCFE00997BD3 /* WiThrottleService.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F65A7E137984C40086D4E3 /* WiThrottleService.h */; };
+		48B014A115B1CCFE00997BD3 /* WiThrottleServiceBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 48642FCA137A5F3400B93C86 /* WiThrottleServiceBrowser.h */; };
+		48B014A215B1CCFE00997BD3 /* XMLIOMetadata.h in Headers */ = {isa = PBXBuildFile; fileRef = 48B9D0DE14242D4A00EDB24E /* XMLIOMetadata.h */; };
+		48B014A315B1CCFE00997BD3 /* XMLIOFunction.h in Headers */ = {isa = PBXBuildFile; fileRef = 48DA6CD513B63E5800E3643D /* XMLIOFunction.h */; };
+		48B014A415B1CCFE00997BD3 /* XMLIOItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 483C571B138E139E00245381 /* XMLIOItem.h */; };
+		48B014A515B1CCFE00997BD3 /* XMLIOObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 4884955B1395653B0086790D /* XMLIOObject.h */; };
+		48B014A615B1CCFE00997BD3 /* XMLIORoster.h in Headers */ = {isa = PBXBuildFile; fileRef = 48E71B69139490E7003AB481 /* XMLIORoster.h */; };
+		48B014A715B1CCFE00997BD3 /* XMLIOService.h in Headers */ = {isa = PBXBuildFile; fileRef = 487F9375137509BB00FF9DBA /* XMLIOService.h */; };
+		48B014A815B1CCFE00997BD3 /* XMLIOServiceBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 48642FBB137A5DD900B93C86 /* XMLIOServiceBrowser.h */; };
+		48B014A915B1CCFE00997BD3 /* XMLIOServiceHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 487E2B8F137EFF3F0004761D /* XMLIOServiceHelper.h */; };
+		48B014AA15B1CCFE00997BD3 /* XMLIOThrottle.h in Headers */ = {isa = PBXBuildFile; fileRef = 48849563139565860086790D /* XMLIOThrottle.h */; };
+		48B014AB15B1CCFE00997BD3 /* JMRINetService.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F65A1013796DEF0086D4E3 /* JMRINetService.h */; };
+		48B014AC15B1CCFE00997BD3 /* JMRINetServiceBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 4888594E1375B1F4001EAD5B /* JMRINetServiceBrowser.h */; };
+		48B014AD15B1CCFE00997BD3 /* NSArray+JMRIExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 4813F4841386DE8900718FFC /* NSArray+JMRIExtensions.h */; };
+		48B014AE15B1CCFE00997BD3 /* NSStream+JMRIExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 483FD43D145BA5DB00BCED0D /* NSStream+JMRIExtensions.h */; };
+		48B014AF15B1CCFE00997BD3 /* JMRIService.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D4AD7B15514149000B964C /* JMRIService.h */; };
+		48B014B015B1CCFE00997BD3 /* JMRIServiceBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D4AD871559132D000B964C /* JMRIServiceBrowser.h */; };
+		48B014B415B1CEA600997BD3 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48B014B315B1CEA600997BD3 /* Cocoa.framework */; };
 		48B9D0E014242D4A00EDB24E /* XMLIOMetadata.h in Headers */ = {isa = PBXBuildFile; fileRef = 48B9D0DE14242D4A00EDB24E /* XMLIOMetadata.h */; };
-		48B9D0E114242D4A00EDB24E /* XMLIOMetadata.h in Headers */ = {isa = PBXBuildFile; fileRef = 48B9D0DE14242D4A00EDB24E /* XMLIOMetadata.h */; };
 		48B9D0E214242D4A00EDB24E /* XMLIOMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 48B9D0DF14242D4A00EDB24E /* XMLIOMetadata.m */; };
-		48B9D0E314242D4A00EDB24E /* XMLIOMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 48B9D0DF14242D4A00EDB24E /* XMLIOMetadata.m */; };
 		48D4AD7D15514149000B964C /* JMRIService.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D4AD7B15514149000B964C /* JMRIService.h */; };
-		48D4AD7E15514149000B964C /* JMRIService.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D4AD7B15514149000B964C /* JMRIService.h */; };
 		48D4AD7F15514149000B964C /* JMRIService.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D4AD7C15514149000B964C /* JMRIService.m */; };
-		48D4AD8015514149000B964C /* JMRIService.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D4AD7C15514149000B964C /* JMRIService.m */; };
 		48D4AD891559132D000B964C /* JMRIServiceBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D4AD871559132D000B964C /* JMRIServiceBrowser.h */; };
-		48D4AD8A1559132D000B964C /* JMRIServiceBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D4AD871559132D000B964C /* JMRIServiceBrowser.h */; };
 		48D4AD8B1559132D000B964C /* JMRIServiceBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D4AD881559132D000B964C /* JMRIServiceBrowser.m */; };
-		48D4AD8C1559132D000B964C /* JMRIServiceBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D4AD881559132D000B964C /* JMRIServiceBrowser.m */; };
 		48DA6CD713B63E5800E3643D /* XMLIOFunction.h in Headers */ = {isa = PBXBuildFile; fileRef = 48DA6CD513B63E5800E3643D /* XMLIOFunction.h */; };
-		48DA6CD813B63E5800E3643D /* XMLIOFunction.h in Headers */ = {isa = PBXBuildFile; fileRef = 48DA6CD513B63E5800E3643D /* XMLIOFunction.h */; };
 		48DA6CD913B63E5800E3643D /* XMLIOFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DA6CD613B63E5800E3643D /* XMLIOFunction.m */; };
-		48DA6CDA13B63E5800E3643D /* XMLIOFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DA6CD613B63E5800E3643D /* XMLIOFunction.m */; };
-		48E71B6B139490E7003AB481 /* XMLIORoster.h in Headers */ = {isa = PBXBuildFile; fileRef = 48E71B69139490E7003AB481 /* XMLIORoster.h */; };
-		48E71B6C139490E7003AB481 /* XMLIORoster.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E71B6A139490E7003AB481 /* XMLIORoster.m */; };
 		48E71B6D139490E7003AB481 /* XMLIORoster.h in Headers */ = {isa = PBXBuildFile; fileRef = 48E71B69139490E7003AB481 /* XMLIORoster.h */; };
 		48E71B6E139490E7003AB481 /* XMLIORoster.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E71B6A139490E7003AB481 /* XMLIORoster.m */; };
 		48F65A1313796DEF0086D4E3 /* JMRINetService.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F65A1113796DEF0086D4E3 /* JMRINetService.m */; };
-		48F65A1413796DEF0086D4E3 /* JMRINetService.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F65A1013796DEF0086D4E3 /* JMRINetService.h */; };
-		48F65A1513796DEF0086D4E3 /* JMRINetService.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F65A1113796DEF0086D4E3 /* JMRINetService.m */; };
 		48F65A2F137979530086D4E3 /* JMRINetService.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F65A1013796DEF0086D4E3 /* JMRINetService.h */; settings = {ATTRIBUTES = (); }; };
 		48F65A80137984C40086D4E3 /* WiThrottleService.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F65A7E137984C40086D4E3 /* WiThrottleService.h */; settings = {ATTRIBUTES = (); }; };
 		48F65A81137984C40086D4E3 /* WiThrottleService.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F65A7F137984C40086D4E3 /* WiThrottleService.m */; };
-		48F65A82137984C40086D4E3 /* WiThrottleService.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F65A7E137984C40086D4E3 /* WiThrottleService.h */; };
-		48F65A83137984C40086D4E3 /* WiThrottleService.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F65A7F137984C40086D4E3 /* WiThrottleService.m */; };
 		AA747D9F0F9514B9006C5449 /* Framework_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* Framework_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 /* End PBXBuildFile section */
@@ -115,7 +119,7 @@
 		487E2B90137EFF3F0004761D /* XMLIOServiceHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XMLIOServiceHelper.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		487F9375137509BB00FF9DBA /* XMLIOService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = XMLIOService.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		487F9376137509BB00FF9DBA /* XMLIOService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XMLIOService.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		488242051373A41F00597F5F /* JMRI.Framework-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JMRI.Framework-Info.plist"; sourceTree = "<group>"; };
+		488242051373A41F00597F5F /* libJMRI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "libJMRI-Info.plist"; sourceTree = "<group>"; };
 		4884955B1395653B0086790D /* XMLIOObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = XMLIOObject.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4884955C1395653B0086790D /* XMLIOObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XMLIOObject.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		48849563139565860086790D /* XMLIOThrottle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = XMLIOThrottle.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -123,6 +127,10 @@
 		4888594E1375B1F4001EAD5B /* JMRINetServiceBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = JMRINetServiceBrowser.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4888594F1375B1F4001EAD5B /* JMRINetServiceBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = JMRINetServiceBrowser.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		48AB635413A4EBBF002DB6AE /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; lineEnding = 0; path = README.md; sourceTree = "<group>"; };
+		48B0147115B1CB6400997BD3 /* JMRI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JMRI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		48B0149A15B1CC2400997BD3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		48B014B115B1CD4600997BD3 /* JMRI.framework-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "JMRI.framework-Info.plist"; sourceTree = "<group>"; };
+		48B014B315B1CEA600997BD3 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
 		48B9D0DE14242D4A00EDB24E /* XMLIOMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLIOMetadata.h; sourceTree = "<group>"; };
 		48B9D0DF14242D4A00EDB24E /* XMLIOMetadata.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLIOMetadata.m; sourceTree = "<group>"; };
 		48D4AD7B15514149000B964C /* JMRIService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMRIService.h; sourceTree = "<group>"; };
@@ -143,10 +151,12 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		488242031373A41F00597F5F /* Frameworks */ = {
+		48B0146D15B1CB6400997BD3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48B014B415B1CEA600997BD3 /* Cocoa.framework in Frameworks */,
+				48B0149B15B1CC2400997BD3 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				D2AAC07E0554694100DB518D /* libJMRI.a */,
+				48B0147115B1CB6400997BD3 /* JMRI.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -184,7 +195,8 @@
 		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				AACBBE490F95108600F1A2B1 /* Foundation.framework */,
+				48B014B615B1CEB700997BD3 /* OS X */,
+				48B014B515B1CEB000997BD3 /* iOS */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -215,8 +227,9 @@
 		32C88DFF0371C24200C91783 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				48B014B115B1CD4600997BD3 /* JMRI.framework-Info.plist */,
 				AA747D9E0F9514B9006C5449 /* Framework_Prefix.pch */,
-				488242051373A41F00597F5F /* JMRI.Framework-Info.plist */,
+				488242051373A41F00597F5F /* libJMRI-Info.plist */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -279,31 +292,51 @@
 			name = Items;
 			sourceTree = "<group>";
 		};
+		48B014B515B1CEB000997BD3 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				AACBBE490F95108600F1A2B1 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		48B014B615B1CEB700997BD3 /* OS X */ = {
+			isa = PBXGroup;
+			children = (
+				48B0149A15B1CC2400997BD3 /* Foundation.framework */,
+				48B014B315B1CEA600997BD3 /* Cocoa.framework */,
+			);
+			name = "OS X";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		488242001373A41F00597F5F /* Headers */ = {
+		48B0146E15B1CB6400997BD3 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48849565139565860086790D /* XMLIOThrottle.h in Headers */,
-				4884955D1395653B0086790D /* XMLIOObject.h in Headers */,
-				48E71B6B139490E7003AB481 /* XMLIORoster.h in Headers */,
-				483C571D138E139E00245381 /* XMLIOItem.h in Headers */,
-				4813F4881386DE8900718FFC /* NSArray+JMRIExtensions.h in Headers */,
-				487E2B93137EFF3F0004761D /* XMLIOServiceHelper.h in Headers */,
-				48642FCE137A5F3400B93C86 /* WiThrottleServiceBrowser.h in Headers */,
-				48642FBF137A5DD900B93C86 /* XMLIOServiceBrowser.h in Headers */,
-				48F65A82137984C40086D4E3 /* WiThrottleService.h in Headers */,
-				48F65A1413796DEF0086D4E3 /* JMRINetService.h in Headers */,
-				488859521375B1F4001EAD5B /* JMRINetServiceBrowser.h in Headers */,
-				487F9377137509BB00FF9DBA /* XMLIOService.h in Headers */,
-				48DA6CD813B63E5800E3643D /* XMLIOFunction.h in Headers */,
-				48B9D0E114242D4A00EDB24E /* XMLIOMetadata.h in Headers */,
-				483FD434145A391300BCED0D /* SimpleService.h in Headers */,
-				483FD44A145BCD5D00BCED0D /* SimpleServiceBrowser.h in Headers */,
-				48D4AD7E15514149000B964C /* JMRIService.h in Headers */,
-				48D4AD8A1559132D000B964C /* JMRIServiceBrowser.h in Headers */,
+				48B0149C15B1CCFE00997BD3 /* JMRIItem.h in Headers */,
+				48B0149D15B1CCFE00997BD3 /* JMRITurnout.h in Headers */,
+				48B0149E15B1CCFE00997BD3 /* SimpleService.h in Headers */,
+				48B0149F15B1CCFE00997BD3 /* SimpleServiceBrowser.h in Headers */,
+				48B014A015B1CCFE00997BD3 /* WiThrottleService.h in Headers */,
+				48B014A115B1CCFE00997BD3 /* WiThrottleServiceBrowser.h in Headers */,
+				48B014A215B1CCFE00997BD3 /* XMLIOMetadata.h in Headers */,
+				48B014A315B1CCFE00997BD3 /* XMLIOFunction.h in Headers */,
+				48B014A415B1CCFE00997BD3 /* XMLIOItem.h in Headers */,
+				48B014A515B1CCFE00997BD3 /* XMLIOObject.h in Headers */,
+				48B014A615B1CCFE00997BD3 /* XMLIORoster.h in Headers */,
+				48B014A715B1CCFE00997BD3 /* XMLIOService.h in Headers */,
+				48B014A815B1CCFE00997BD3 /* XMLIOServiceBrowser.h in Headers */,
+				48B014A915B1CCFE00997BD3 /* XMLIOServiceHelper.h in Headers */,
+				48B014AA15B1CCFE00997BD3 /* XMLIOThrottle.h in Headers */,
+				48B014AB15B1CCFE00997BD3 /* JMRINetService.h in Headers */,
+				48B014AC15B1CCFE00997BD3 /* JMRINetServiceBrowser.h in Headers */,
+				48B014AD15B1CCFE00997BD3 /* NSArray+JMRIExtensions.h in Headers */,
+				48B014AE15B1CCFE00997BD3 /* NSStream+JMRIExtensions.h in Headers */,
+				48B014AF15B1CCFE00997BD3 /* JMRIService.h in Headers */,
+				48B014B015B1CCFE00997BD3 /* JMRIServiceBrowser.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,6 +344,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				487AA4B615AC33BE00F76F47 /* JMRIItem.h in Headers */,
+				487AA4BD15AC43DA00F76F47 /* JMRITurnout.h in Headers */,
 				4884955F1395653B0086790D /* XMLIOObject.h in Headers */,
 				48849567139565860086790D /* XMLIOThrottle.h in Headers */,
 				48E71B6D139490E7003AB481 /* XMLIORoster.h in Headers */,
@@ -336,21 +371,22 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		488242041373A41F00597F5F /* JMRI.Framework */ = {
+		48B0147015B1CB6400997BD3 /* JMRI */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 488242081373A41F00597F5F /* Build configuration list for PBXNativeTarget "JMRI.Framework" */;
+			buildConfigurationList = 48B0148215B1CB6400997BD3 /* Build configuration list for PBXNativeTarget "JMRI" */;
 			buildPhases = (
-				488242001373A41F00597F5F /* Headers */,
-				488242011373A41F00597F5F /* Resources */,
-				488242021373A41F00597F5F /* Sources */,
-				488242031373A41F00597F5F /* Frameworks */,
+				48B0146E15B1CB6400997BD3 /* Headers */,
+				48B0146C15B1CB6400997BD3 /* Sources */,
+				48B0146D15B1CB6400997BD3 /* Frameworks */,
+				48B0146F15B1CB6400997BD3 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = JMRI.Framework;
-			productName = JMRI.Framework;
+			name = JMRI;
+			productName = jmri.framework;
+			productReference = 48B0147115B1CB6400997BD3 /* JMRI.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		D2AAC07D0554694100DB518D /* libJMRI */ = {
@@ -387,6 +423,7 @@
 				Japanese,
 				French,
 				German,
+				en,
 			);
 			mainGroup = 0867D691FE84028FC02AAC07 /* Framework */;
 			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
@@ -394,13 +431,13 @@
 			projectRoot = "";
 			targets = (
 				D2AAC07D0554694100DB518D /* libJMRI */,
-				488242041373A41F00597F5F /* JMRI.Framework */,
+				48B0147015B1CB6400997BD3 /* JMRI */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		488242011373A41F00597F5F /* Resources */ = {
+		48B0146F15B1CB6400997BD3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -410,32 +447,31 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		488242021373A41F00597F5F /* Sources */ = {
+		48B0146C15B1CB6400997BD3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				487F9378137509BB00FF9DBA /* XMLIOService.m in Sources */,
-				488859531375B1F4001EAD5B /* JMRINetServiceBrowser.m in Sources */,
-				48F65A1513796DEF0086D4E3 /* JMRINetService.m in Sources */,
-				48F65A83137984C40086D4E3 /* WiThrottleService.m in Sources */,
-				48642FC0137A5DD900B93C86 /* XMLIOServiceBrowser.m in Sources */,
-				48642FCF137A5F3400B93C86 /* WiThrottleServiceBrowser.m in Sources */,
-				487E2B94137EFF3F0004761D /* XMLIOServiceHelper.m in Sources */,
-				4813F4891386DE8900718FFC /* NSArray+JMRIExtensions.m in Sources */,
-				483C571E138E139E00245381 /* XMLIOItem.m in Sources */,
-				48E71B6C139490E7003AB481 /* XMLIORoster.m in Sources */,
-				4884955E1395653B0086790D /* XMLIOObject.m in Sources */,
-				48849566139565860086790D /* XMLIOThrottle.m in Sources */,
-				48DA6CDA13B63E5800E3643D /* XMLIOFunction.m in Sources */,
-				48B9D0E314242D4A00EDB24E /* XMLIOMetadata.m in Sources */,
-				483FD436145A391300BCED0D /* SimpleService.m in Sources */,
-				483FD44C145BCD5D00BCED0D /* SimpleServiceBrowser.m in Sources */,
-				48D4AD8015514149000B964C /* JMRIService.m in Sources */,
-				48D4AD8C1559132D000B964C /* JMRIServiceBrowser.m in Sources */,
-				487AA4B715AC33BE00F76F47 /* JMRIItem.h in Sources */,
-				487AA4B915AC33BE00F76F47 /* JMRIItem.m in Sources */,
-				487AA4BE15AC43DA00F76F47 /* JMRITurnout.h in Sources */,
-				487AA4C015AC43DA00F76F47 /* JMRITurnout.m in Sources */,
+				48B0148515B1CBF600997BD3 /* JMRIItem.m in Sources */,
+				48B0148615B1CBF600997BD3 /* JMRITurnout.m in Sources */,
+				48B0148715B1CBF600997BD3 /* SimpleService.m in Sources */,
+				48B0148815B1CBF600997BD3 /* SimpleServiceBrowser.m in Sources */,
+				48B0148915B1CBF600997BD3 /* WiThrottleService.m in Sources */,
+				48B0148A15B1CBF600997BD3 /* WiThrottleServiceBrowser.m in Sources */,
+				48B0148B15B1CBF600997BD3 /* XMLIOMetadata.m in Sources */,
+				48B0148C15B1CBF600997BD3 /* XMLIOFunction.m in Sources */,
+				48B0148D15B1CBF600997BD3 /* XMLIOItem.m in Sources */,
+				48B0148E15B1CBF600997BD3 /* XMLIOObject.m in Sources */,
+				48B0148F15B1CBF600997BD3 /* XMLIORoster.m in Sources */,
+				48B0149015B1CBF600997BD3 /* XMLIOService.m in Sources */,
+				48B0149115B1CBF600997BD3 /* XMLIOServiceBrowser.m in Sources */,
+				48B0149215B1CBF600997BD3 /* XMLIOServiceHelper.m in Sources */,
+				48B0149315B1CBF600997BD3 /* XMLIOThrottle.m in Sources */,
+				48B0149415B1CBF600997BD3 /* JMRINetService.m in Sources */,
+				48B0149515B1CBF600997BD3 /* JMRINetServiceBrowser.m in Sources */,
+				48B0149615B1CBF600997BD3 /* NSArray+JMRIExtensions.m in Sources */,
+				48B0149715B1CBF600997BD3 /* NSStream+JMRIExtensions.m in Sources */,
+				48B0149815B1CBF600997BD3 /* JMRIService.m in Sources */,
+				48B0149915B1CBF600997BD3 /* JMRIServiceBrowser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -462,9 +498,7 @@
 				483FD44B145BCD5D00BCED0D /* SimpleServiceBrowser.m in Sources */,
 				48D4AD7F15514149000B964C /* JMRIService.m in Sources */,
 				48D4AD8B1559132D000B964C /* JMRIServiceBrowser.m in Sources */,
-				487AA4B615AC33BE00F76F47 /* JMRIItem.h in Sources */,
 				487AA4B815AC33BE00F76F47 /* JMRIItem.m in Sources */,
-				487AA4BD15AC43DA00F76F47 /* JMRITurnout.h in Sources */,
 				487AA4BF15AC43DA00F76F47 /* JMRITurnout.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -550,67 +584,63 @@
 			};
 			name = Release;
 		};
-		488242061373A41F00597F5F /* Debug */ = {
+		48B0148315B1CB6400997BD3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				COPY_PHASE_STRIP = NO;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_VERSION = A;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_MODEL_TUNING = G5;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				INFOPLIST_FILE = "JMRI.Framework-Info.plist";
-				INSTALL_PATH = "$(HOME)/Library/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = "";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
 				);
-				PRODUCT_NAME = JMRI.Framework;
+				FRAMEWORK_VERSION = A;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Framework_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				INFOPLIST_FILE = "JMRI.framework-Info.plist";
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = JMRI;
 				SDKROOT = macosx;
+				WRAPPER_EXTENSION = framework;
 			};
 			name = Debug;
 		};
-		488242071373A41F00597F5F /* Release */ = {
+		48B0148415B1CB6400997BD3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_VERSION = A;
-				GCC_MODEL_TUNING = G5;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				INFOPLIST_FILE = "JMRI.Framework-Info.plist";
-				INSTALL_PATH = "$(HOME)/Library/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = "";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
 				);
-				PRODUCT_NAME = JMRI.Framework;
+				FRAMEWORK_VERSION = A;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Framework_Prefix.pch;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				INFOPLIST_FILE = "JMRI.framework-Info.plist";
+				PRODUCT_NAME = JMRI;
 				SDKROOT = macosx;
-				ZERO_LINK = NO;
+				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;
 		};
@@ -635,14 +665,13 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		488242081373A41F00597F5F /* Build configuration list for PBXNativeTarget "JMRI.Framework" */ = {
+		48B0148215B1CB6400997BD3 /* Build configuration list for PBXNativeTarget "JMRI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				488242061373A41F00597F5F /* Debug */,
-				488242071373A41F00597F5F /* Release */,
+				48B0148315B1CB6400997BD3 /* Debug */,
+				48B0148415B1CB6400997BD3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
