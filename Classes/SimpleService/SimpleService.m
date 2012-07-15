@@ -16,7 +16,6 @@
 
 - (void)open;
 - (void)close;
-
 - (void)error:(NSError *)error;
 
 @end
@@ -26,11 +25,11 @@
 - (id)initWithNetService:(NSNetService *)service {
     if ((self = [super initWithNetService:service])) {
         serviceType = JMRIServiceSimple;
-        NSInputStream* is = [[NSInputStream alloc] init];
-        NSOutputStream* os = [[NSOutputStream alloc] init];
+        NSInputStream* is;
+        NSOutputStream* os;
         if ([service getInputStream:&is outputStream:&os]) {
-            input = is;
-            output = os;
+            inputStream = is;
+            outputStream = os;
             [self open];
         }
     }
@@ -48,8 +47,8 @@
         [NSStream getStreamsToHost:[NSHost hostWithAddress:address] port:port inputStream:&is outputStream:&os];
 #endif
         if (is != nil) {
-            input = is;
-            output = os;
+            inputStream = is;
+            outputStream = os;
             [self open];
         } else {
             [self error:[[NSError alloc] initWithDomain:JMRIServiceSimple code:1 userInfo:nil]];
@@ -61,17 +60,26 @@
 #pragma mark - Private methods
 
 - (void)open {
-    input.delegate = self;
-    output.delegate = self;
-    [input scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-    [output scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-    [input open];
-    [output open];
+    inputStream.delegate = self;
+    outputStream.delegate = self;
+    [inputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+    [outputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+    [inputStream open];
+    [outputStream open];
 }
 
 - (void)close {
-    [input close];
-    [output close];
+    [inputStream close];
+    [outputStream close];
+}
+
+- (void)write:(NSString *)string {
+    if ([outputStream hasSpaceAvailable]) {
+        [outputStream write:[[string dataUsingEncoding:NSASCIIStringEncoding] bytes]
+            maxLength:[string lengthOfBytesUsingEncoding:NSASCIIStringEncoding]];
+    } else {
+        [self error:[NSError errorWithDomain:JMRIServiceSimple code:1001 userInfo:nil]];
+    }
 }
 
 - (void)error:(NSError *)error {
@@ -81,13 +89,6 @@
 }
 
 #pragma mark - Public methods
-
-- (void)write:(NSString *)string {
-    if ([output hasSpaceAvailable]) {
-        [output write:[[string dataUsingEncoding:NSASCIIStringEncoding] bytes]
-            maxLength:[string lengthOfBytesUsingEncoding:NSASCIIStringEncoding]];
-    }
-}
 
 - (void)openConnection {
     [self open];
@@ -118,46 +119,74 @@
 #pragma mark - NSStream delegate
 
 - (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode {
-    NSMutableData *data;
     uint8_t buf[1024];
     unsigned int len = 0;
-    if (aStream == input) {
+    if ([aStream isEqualTo:inputStream]) {
         switch (eventCode) {
             case NSStreamEventNone:
+                NSLog(@"[IN] Nothing to see here.");
                 break;
             case NSStreamEventOpenCompleted:
+                if ([self.delegate respondsToSelector:@selector(simpleServiceDidOpenConnection:)]) {
+                    [self.delegate simpleServiceDidOpenConnection:self];
+                }
                 break;
             case NSStreamEventHasBytesAvailable:
                 len = [(NSInputStream *)aStream read:buf maxLength:1024];
-                if (len) {    
-                    data = [NSData dataWithBytes:(const void *)buf length:len];
-                    [data appendBytes:(const void *)buf length:len];
-                    NSString *str = [NSString stringWithUTF8String:[data bytes]];
-                    NSLog(@"%@", str);
+                if (len) {
+                    NSString *str = [[NSString alloc] initWithBytes:buf length:len encoding:NSASCIIStringEncoding];
+                    NSLog(@"[IN] Data received: [%@]", str);
+                    str = [str stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                    NSArray *cmds = [str componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+                    for (NSString *cmd in cmds) {
+                        if ([self.delegate respondsToSelector:@selector(simpleService:didGetInput:)]) {
+                            [self.delegate simpleService:self didGetInput:cmd];
+                        }
+                        if ([cmd hasPrefix:@"POWER"]) {
+                            if ([self.delegate respondsToSelector:@selector(simpleService:didGetPowerState:)]) {
+                                NSUInteger state;
+                                if ([cmd hasSuffix:@"ON"]) {
+                                    state = JMRIItemStateActive;
+                                } else if ([cmd hasSuffix:@"OFF"]) {
+                                    state = JMRIItemStateInactive;
+                                } else if ([cmd hasSuffix:@"UNKNOWN"]) {
+                                    state = JMRIItemStateUnknown;
+                                }
+                                [self.delegate simpleService:self didGetPowerState:state];
+                            }
+                        }
+                    }
                 } else {
-                    NSLog(@"No data.");
+                    NSLog(@"[IN] No data.");
                 }
-                data = nil;
                 break;
             case NSStreamEventErrorOccurred:
+                NSLog(@"[IN] An error!");
                 break;
             case NSStreamEventEndEncountered:
+                NSLog(@"[IN] Over.");
                 break;
             default:
                 break;
         }
-    } else {
+    } else { // event in outputStream
         switch (eventCode) {
             case NSStreamEventNone:
+                NSLog(@"[OUT] Nothing to see here.");
                 break;
             case NSStreamEventOpenCompleted:
+                if ([self.delegate respondsToSelector:@selector(simpleServiceDidOpenConnection:)]) {
+                    [self.delegate simpleServiceDidOpenConnection:self];
+                }
                 break;
             case NSStreamEventHasSpaceAvailable:
+                NSLog(@"[OUT] Has space available.");
                 break;
             case NSStreamEventErrorOccurred:
+                NSLog(@"[OUT] An error!");
                 break;
             case NSStreamEventEndEncountered:
-                break;
+                NSLog(@"[OUT] Over.");
             default:
                 break;
         }

@@ -10,15 +10,15 @@
 
 @interface SimpleService : JMRINetService <NSStreamDelegate> {
 
-    NSInputStream* input;
-    NSOutputStream* output;
+    NSInputStream* inputStream;
+    NSOutputStream* outputStream;
 
 }
 
-- (void)write:(NSString *)string;
-
 - (void)openConnection;
 - (void)closeConnection;
+
+- (void)write:(NSString *)string;
 
 @end
 
@@ -34,7 +34,9 @@
 #pragma mark Optional Methods
 
 @optional
-- (void)simpleService:(SimpleService *)service didReadItemNamed:(NSString *)name ofType:(NSString *)type withValue:(NSString *)value;
-- (void)simpleService:(SimpleService *)service didWriteItemNamed:(NSString *)name ofType:(NSString *)type withValue:(NSString *)value;
+- (void)simpleService:(SimpleService *)service didGetInput:(NSString *)input;
+- (void)simpleService:(SimpleService *)service didGetPowerState:(NSUInteger)state;
+- (void)simpleService:(SimpleService *)service didGetTurnout:(NSString *)turnout withState:(NSUInteger)state;
+- (void)simpleServiceDidOpenConnection:(SimpleService *)service;
 
 @end
