@@ -17,7 +17,7 @@
 //
 
 #import "WiThrottleService.h"
-#import "JMRIService.h"
+#import "JMRIConstants.h"
 
 @implementation WiThrottleService
 

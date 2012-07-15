@@ -18,7 +18,7 @@
 
 #import "XMLIOServiceBrowser.h"
 #import "XMLIOService.h"
-#import "JMRIService.h"
+#import "JMRIConstants.h"
 
 @implementation XMLIOServiceBrowser
 

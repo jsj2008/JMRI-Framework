@@ -19,7 +19,7 @@
 #import "XMLIOThrottle.h"
 #import "XMLIOService.h"
 #import "XMLIORoster.h"
-#import "JMRIService.h"
+#import "JMRIConstants.h"
 
 @implementation XMLIOThrottle
 

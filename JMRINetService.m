@@ -17,7 +17,7 @@
 //
 
 #import "JMRINetService.h"
-#import "JMRIService.h"
+#import "JMRIConstants.h"
 
 static JMRINetService *sharedNetService_ = nil;
 

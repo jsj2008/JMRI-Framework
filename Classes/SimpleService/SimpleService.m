@@ -7,7 +7,7 @@
 //
 
 #import "SimpleService.h"
-#import "JMRIService.h"
+#import "JMRIConstants.h"
 #ifdef TARGET_OS_IPHONE
 #import "NSStream+JMRIExtensions.h"
 #endif

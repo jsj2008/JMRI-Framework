@@ -11,31 +11,6 @@
 #import "WiThrottleService.h"
 #import "XMLIOService.h"
 
-// Known service types
-extern NSString *const JMRIServiceSimple;
-extern NSString *const JMRIServiceWiThrottle;
-extern NSString *const JMRIServiceWeb;
-
-// JMRI XMLIO item types
-extern NSString *const JMRITypeFrame;
-extern NSString *const JMRITypeMemory;
-extern NSString *const JMRITypeMetadata;
-extern NSString *const JMRITypePanel;
-extern NSString *const JMRITypePower;
-extern NSString *const JMRITypeRoster;
-extern NSString *const JMRITypeRoute;
-extern NSString *const JMRITypeSensor;
-extern NSString *const JMRITypeTurnout;
-
-extern NSString *const JMRITXTRecordKeyJMRI;
-
-typedef enum {
-	JMRIItemStateUnknown = 0,
-	JMRIItemStateActive = 2,
-	JMRIItemStateInactive = 4,
-	JMRIItemStateInconsistent = 8
-} JMRIItemStates;
-
 @interface JMRIService : NSObject {
     
     SimpleService *simple;

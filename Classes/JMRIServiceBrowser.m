@@ -7,6 +7,7 @@
 //
 
 #import "JMRIServiceBrowser.h"
+#import "JMRIConstants.h"
 
 @implementation JMRIServiceBrowser
 

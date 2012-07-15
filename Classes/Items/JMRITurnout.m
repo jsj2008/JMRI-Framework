@@ -7,7 +7,7 @@
 //
 
 #import "JMRITurnout.h"
-#import "JMRIService.h"
+#import "JMRIConstants.h"
 
 @implementation JMRITurnout
 

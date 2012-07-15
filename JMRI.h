@@ -8,6 +8,9 @@
 
 #include <Foundation/Foundation.h>
 
+//  JMRI constants
+#import <JMRI/JMRIConstants.h>
+
 //  JMRI core
 
 #import <JMRI/JMRIService.h>
