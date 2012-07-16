@@ -117,6 +117,18 @@
     }
 }
 
+- (void)setStateFromSimpleService:(NSString *)state {
+    [self doesNotRecognizeSelector:_cmd];
+}
+
+- (void)setStateFromWiThrottleService:(NSString *)state {
+    [self doesNotRecognizeSelector:_cmd];
+}
+
+- (void)setStateFromXmlIOService:(NSString *)state {
+    [self doesNotRecognizeSelector:_cmd];
+}
+
 @synthesize comment = _comment;
 @synthesize delegate = _delegate;
 @synthesize inverted = _inverted;
