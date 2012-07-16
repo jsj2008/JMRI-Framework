@@ -24,11 +24,47 @@
 
 #pragma mark - Communications
 
-- (void)readState {
+- (void)read {
+    if ([self.service isKindOfClass:[SimpleService class]]) {
+        [self readFromSimpleService];
+    } else if ([self.service isKindOfClass:[WiThrottleService class]]) {
+        [self readFromWiThrottleService];
+    } else if ([self.service isKindOfClass:[XMLIOService class]]) {
+        [self readFromXmlIOService];
+    }
+}
+
+- (void)readFromSimpleService {
     [self doesNotRecognizeSelector:_cmd];
 }
 
-- (void)writeState {
+- (void)readFromWiThrottleService {
+    [self doesNotRecognizeSelector:_cmd];
+}
+
+- (void)readFromXmlIOService {
+    [self doesNotRecognizeSelector:_cmd];
+}
+
+- (void)write {
+    if ([self.service isKindOfClass:[SimpleService class]]) {
+        [self writeToSimpleService];
+    } else if ([self.service isKindOfClass:[WiThrottleService class]]) {
+        [self writeToWiThrottleService];
+    } else if ([self.service isKindOfClass:[XMLIOService class]]) {
+        [self writeToXmlIOService];
+    }
+}
+
+- (void)writeToSimpleService {
+    [self doesNotRecognizeSelector:_cmd];
+}
+
+- (void)writeToWiThrottleService {
+    [self doesNotRecognizeSelector:_cmd];
+}
+
+- (void)writeToXmlIOService {
     [self doesNotRecognizeSelector:_cmd];
 }
 
@@ -38,13 +74,13 @@
     return _state;
 }
 
-- (void)setState:(NSUInteger)aState {
-    if (_state != aState) {
-        _state = aState;
+- (void)setState:(NSUInteger)state {
+    if (_state != state) {
+        _state = state;
         if (_state == JMRIItemStateUnknown) {
-            [self readState];
+            [self read];
         } else {
-            [self writeState];
+            [self write];
         }
         if ([self.delegate respondsToSelector:@selector(item:didChangeState:)]) {
             [self.delegate item:self didChangeState:self.state];
@@ -52,9 +88,15 @@
     }
 }
 
-- (void)setState:(NSUInteger)aState withService:(JMRINetService *)service {
+- (void)setState:(NSString *)state forService:(JMRINetService *)service {
     if (service == self.service) {
-        _state = aState;
+        if ([self.service isKindOfClass:[SimpleService class]]) {
+            [self setStateFromSimpleService:state];
+        } else if ([self.service isKindOfClass:[WiThrottleService class]]) {
+            [self setStateFromWiThrottleService:state];
+        } else if ([self.service isKindOfClass:[XMLIOService class]]) {
+            [self setStateFromXmlIOService:state];
+        }
         if ([self.delegate respondsToSelector:@selector(item:didChangeState:)]) {
             [self.delegate item:self didChangeState:self.state];
         }

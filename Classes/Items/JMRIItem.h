@@ -10,6 +10,7 @@
 #import "SimpleService.h"
 #import "WiThrottleService.h"
 #import "XMLIOService.h"
+#import "JMRIConstants.h"
 #import <Foundation/Foundation.h>
 
 @class JMRIItem;
@@ -37,12 +38,21 @@
 
 #pragma mark - Communications
 
-- (void)readState;
-- (void)writeState;
+- (void)read;
+- (void)readFromSimpleService;
+- (void)readFromWiThrottleService;
+- (void)readFromXmlIOService;
+- (void)write;
+- (void)writeToSimpleService;
+- (void)writeToWiThrottleService;
+- (void)writeToXmlIOService;
 
 #pragma mark - Properties
 
-- (void)setState:(NSUInteger)aState withService:(JMRINetService*)service;
+- (void)setState:(NSString *)state forService:(JMRINetService *)service;
+- (void)setStateFromSimpleService:(NSString *)state;
+- (void)setStateFromWiThrottleService:(NSString *)state;
+- (void)setStateFromXmlIOService:(NSString *)state;
 
 @property NSString* comment;
 @property id<JMRIItemDelegate> delegate;
