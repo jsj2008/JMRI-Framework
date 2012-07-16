@@ -24,6 +24,20 @@
 
 #pragma mark - Communications
 
+- (void)monitor {
+    // monitoring is not automatic in XmlIO, so support a special monitor command
+    // for that protocol. Otherwise treat a monitor request as a normal read
+    if ([self.service isKindOfClass:[XMLIOService class]]) {
+        [self monitorWithXmlIOService];
+    } else {
+        [self read];
+    }
+}
+
+- (void)monitorWithXmlIOService {
+    [self doesNotRecognizeSelector:_cmd];
+}
+
 - (void)read {
     if ([self.service isKindOfClass:[SimpleService class]]) {
         [self readFromSimpleService];

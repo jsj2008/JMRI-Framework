@@ -38,6 +38,8 @@
 
 #pragma mark - Communications
 
+- (void)monitor;
+- (void)monitorWithXmlIOService;
 - (void)read;
 - (void)readFromSimpleService;
 - (void)readFromWiThrottleService;

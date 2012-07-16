@@ -12,6 +12,10 @@
 
 #pragma mark - Operations
 
+- (void)monitorWithXmlIOService {
+    [self.service readItem:JMRITypePower ofType:JMRITypePower initialValue:[[NSNumber numberWithInteger:self.state] stringValue]];
+}
+
 - (void)readFromSimpleService {
     [self.service readItem:nil ofType:[JMRITypePower uppercaseString]];
 }

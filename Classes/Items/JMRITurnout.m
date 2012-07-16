@@ -11,40 +11,52 @@
 
 @implementation JMRITurnout
 
-- (void)readState {
+- (void)monitorWithXmlIOService {
+    [self.service readItem:self.name ofType:JMRITypeTurnout initialValue:[[NSNumber numberWithInteger:self.state] stringValue]];
+}
+
+- (void)readFromSimpleService {
+    [self.service readItem:self.name ofType:[JMRITypeTurnout uppercaseString]];
+}
+
+- (void)readFromXmlIOService {
     [self.service readItem:self.name ofType:JMRITypeTurnout];
 }
 
-- (void)writeState {
+- (void)writeToSimpleService {
     NSString* state;
-    if ([self.service isKindOfClass:[XMLIOService class]]) {
-        state = [[NSNumber numberWithInteger:self.state] stringValue];
-    } else if ([self.service isKindOfClass:[SimpleService class]]) {
-        switch (self.state) {
-            case JMRIItemStateActive:
-                state = @"THROWN";
-                break;
-            case JMRIItemStateInactive:
-                state = @"CLOSED";
-                break;                
-            default:
-                state = @"UNKNOWN";
-                break;
-        }
-    } else {
-        switch (self.state) {
-            case JMRIItemStateActive:
-                state = @"T";
-                break;
-            case JMRIItemStateInactive:
-                state = @"C";
-                break;
-            default:
-                state = @"U";
-                break;
-        }
+    switch (self.state) {
+        case JMRIItemStateActive:
+            state = @"THROWN";
+            break;
+        case JMRIItemStateInactive:
+            state = @"CLOSED";
+            break;                
+        default:
+            state = @"UNKNOWN";
+            break;
     }
     [self.service writeItem:self.name ofType:JMRITypeTurnout value:state];
+}
+
+- (void)writeToWiThrottleService {
+    NSString* state;
+    switch (self.state) {
+        case JMRIItemStateActive:
+            state = @"T";
+            break;
+        case JMRIItemStateInactive:
+            state = @"C";
+            break;
+        default:
+            state = @"U";
+            break;
+    }
+    [self.service writeItem:self.name ofType:JMRITypeTurnout value:state];
+}
+
+- (void)writeToXmlIOService {
+    [self.service writeItem:self.name ofType:JMRITypeTurnout value:[[NSNumber numberWithInteger:self.state] stringValue]];
 }
 
 @end
