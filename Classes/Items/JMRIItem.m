@@ -7,13 +7,18 @@
 //
 
 #import "JMRIItem.h"
+#import "JMRIItem+Internal.h"
 #import "JMRIConstants.h"
+#import "JMRINetService.h"
+#import "SimpleService.h"
+#import "WiThrottleService.h"
+#import "XMLIOService.h"
 
 @implementation JMRIItem
 
 #pragma mark - Initializers
 
-- (id)initWithName:(NSString *)name withService:(JMRINetService *)service {
+- (id)initWithName:(NSString *)name withService:(JMRIService *)service {
     if (([super init] != nil)) {
         self.name = name;
         self.service = service;
@@ -27,7 +32,7 @@
 - (void)monitor {
     // monitoring is not automatic in XmlIO, so support a special monitor command
     // for that protocol. Otherwise treat a monitor request as a normal read
-    if ([self.service isKindOfClass:[XMLIOService class]]) {
+    if (self.service.hasWebService && self.service.useXmlIOService) {
         [self monitorWithXmlIOService];
     } else {
         [self read];
@@ -39,11 +44,11 @@
 }
 
 - (void)read {
-    if ([self.service isKindOfClass:[SimpleService class]]) {
+    if (self.service.hasSimpleService && self.service.useSimpleService) {
         [self readFromSimpleService];
-    } else if ([self.service isKindOfClass:[WiThrottleService class]]) {
+    } else if (self.service.hasWiThrottleService && self.service.useWiThrottleService) {
         [self readFromWiThrottleService];
-    } else if ([self.service isKindOfClass:[XMLIOService class]]) {
+    } else if (self.service.hasWebService && self.service.useXmlIOService) {
         [self readFromXmlIOService];
     }
 }
@@ -61,11 +66,11 @@
 }
 
 - (void)write {
-    if ([self.service isKindOfClass:[SimpleService class]]) {
+    if (self.service.hasSimpleService && self.service.useSimpleService) {
         [self writeToSimpleService];
-    } else if ([self.service isKindOfClass:[WiThrottleService class]]) {
+    } else if (self.service.hasWiThrottleService && self.service.useWiThrottleService) {
         [self writeToWiThrottleService];
-    } else if ([self.service isKindOfClass:[XMLIOService class]]) {
+    } else if (self.service.hasWebService && self.service.useXmlIOService) {
         [self writeToXmlIOService];
     }
 }
@@ -89,45 +94,24 @@
 }
 
 - (void)setState:(NSUInteger)state {
+    [self setState:state updateService:YES];
+}
+
+- (void)setState:(NSUInteger)state updateService:(Boolean)update {
     if (_state != state) {
         _state = state;
-        if (_state == JMRIItemStateUnknown) {
-            [self read];
-        } else {
-            [self write];
+        if (update) {
+            if (_state == JMRIItemStateUnknown) {
+                [self read];
+            } else {
+                [self write];
+            }
         }
         if ([self.delegate respondsToSelector:@selector(item:didChangeState:)]) {
             [self.delegate item:self didChangeState:self.state];
         }
     }
-}
-
-- (void)setState:(NSString *)state forService:(JMRINetService *)service {
-    if (service == self.service) {
-        if ([self.service isKindOfClass:[SimpleService class]]) {
-            [self setStateFromSimpleService:state];
-        } else if ([self.service isKindOfClass:[WiThrottleService class]]) {
-            [self setStateFromWiThrottleService:state];
-        } else if ([self.service isKindOfClass:[XMLIOService class]]) {
-            [self setStateFromXmlIOService:state];
-        }
-        if ([self.delegate respondsToSelector:@selector(item:didChangeState:)]) {
-            [self.delegate item:self didChangeState:self.state];
-        }
-    }
-}
-
-- (void)setStateFromSimpleService:(NSString *)state {
-    [self doesNotRecognizeSelector:_cmd];
-}
-
-- (void)setStateFromWiThrottleService:(NSString *)state {
-    [self doesNotRecognizeSelector:_cmd];
-}
-
-- (void)setStateFromXmlIOService:(NSString *)state {
-    [self doesNotRecognizeSelector:_cmd];
-}
+}    
 
 @synthesize comment = _comment;
 @synthesize delegate = _delegate;

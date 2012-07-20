@@ -6,10 +6,7 @@
 //  Copyright (c) 2012 Alexandria Software. All rights reserved.
 //
 
-#import "JMRINetService.h"
-#import "SimpleService.h"
-#import "WiThrottleService.h"
-#import "XMLIOService.h"
+#import "JMRIService.h"
 #import "JMRIConstants.h"
 #import <Foundation/Foundation.h>
 
@@ -34,7 +31,7 @@
 
 #pragma mark Initializers
 
-- (id)initWithName:(NSString*)name withService:(JMRINetService*)service;
+- (id)initWithName:(NSString*)name withService:(JMRIService*)service;
 
 #pragma mark - Communications
 
@@ -51,17 +48,12 @@
 
 #pragma mark - Properties
 
-- (void)setState:(NSString *)state forService:(JMRINetService *)service;
-- (void)setStateFromSimpleService:(NSString *)state;
-- (void)setStateFromWiThrottleService:(NSString *)state;
-- (void)setStateFromXmlIOService:(NSString *)state;
-
 @property NSString* comment;
 @property id<JMRIItemDelegate> delegate;
 @property Boolean inverted;
 @property NSString* name;
 @property NSUInteger state;
-@property JMRINetService* service;
+@property JMRIService* service;
 @property NSString* userName;
 
 @end
