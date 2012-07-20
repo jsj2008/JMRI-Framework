@@ -6,32 +6,19 @@
 //  Copyright (c) 2012 Alexandria Software. All rights reserved.
 //
 
-#include <Foundation/Foundation.h>
-
 //  JMRI constants
+
 #import <JMRI/JMRIConstants.h>
 
 //  JMRI core
 
 #import <JMRI/JMRIService.h>
 #import <JMRI/JMRIServiceBrowser.h>
-#import <JMRI/JMRINetService.h>
-#import <JMRI/JMRINetServiceBrowser.h>
 
-//  JMRI SimpleService
+//  JMRI items
 
-#import <JMRI/SimpleService.h>
-#import <JMRI/SimpleServiceBrowser.h>
-
-// WiThrottle
-
-#import <JMRI/WiThrottleService.h>
-#import <JMRI/WiThrottleServiceBrowser.h>
-
-// XMLIO
-
-#import <JMRI/XMLIOService.h>
-#import <JMRI/XMLIOServiceBrowser.h>
+#import <JMRI/JMRIPower.h>
+#import <JMRI/JMRITurnout.h>
 
 //  Extensions
 
