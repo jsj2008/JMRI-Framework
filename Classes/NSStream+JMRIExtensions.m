@@ -11,7 +11,7 @@
 @implementation NSStream (JMRIExtensions)
 
 + (void)getStreamsToHostNamed:(NSString *)hostName 
-                         port:(NSInteger)port 
+                         port:(unsigned int)port
                   inputStream:(NSInputStream **)inputStreamPtr 
                  outputStream:(NSOutputStream **)outputStreamPtr
 {
