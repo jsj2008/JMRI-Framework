@@ -151,7 +151,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
     if (![self.XMLIOPath hasSuffix:@"/"]) {
         self.XMLIOPath = [self.XMLIOPath stringByAppendingString:@"/"];
     }
-	return [[NSURL URLWithString:[NSString stringWithFormat:@"http://%@:%i%@", self.hostName, self.port, self.XMLIOPath, nil]] absoluteURL];
+	return [[NSURL URLWithString:[NSString stringWithFormat:@"http://%@:%li%@", self.hostName, self.port, self.XMLIOPath, nil]] absoluteURL];
 }
 
 #pragma mark - XMLIO methods
@@ -261,6 +261,10 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 
 - (void)stopMonitoring:(NSString *)name ofType:(NSString *)type {
 	[monitoredItems removeObject:[name stringByAppendingString:type]];
+}
+
+- (Boolean)isMonitoring:(NSString *)name ofType:(NSString *)type {
+    return [monitoredItems containsObject:[name stringByAppendingString:type]];
 }
 
 - (void)stopMonitoringAllItems {
@@ -395,7 +399,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 																	nil]];
 	}
     if ([name isEqualToString:XMLIOMetadataJMRIVersion] && [[item class] isSubclassOfClass:[XMLIOMetadata class]] && [(XMLIOMetadata *)item majorVersion] != 0) {
-        serviceVersion = [NSString stringWithFormat:@"%i.%i.%i", 
+        serviceVersion = [NSString stringWithFormat:@"%li.%li.%li",
                            [(XMLIOMetadata *)item majorVersion],
                            [(XMLIOMetadata *)item minorVersion],
                            [(XMLIOMetadata *)item testVersion]];

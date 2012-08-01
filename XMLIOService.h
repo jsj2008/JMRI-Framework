@@ -20,6 +20,9 @@
 #import "XMLIOItem.h"
 #import "XMLIOServiceHelper.h"
 
+@class JMRIPower;
+@class JMRITurnout;
+
 // JMRI XMLIO throttle type
 extern NSString *const JMRITypeThrottle;
 
@@ -142,7 +145,6 @@ typedef enum {
 
 #pragma mark - XMLIO methods
 
-- (void)list:(NSString *)type;
 - (void)sendThrottle:(NSUInteger)address commands:(NSDictionary *)commands;
 - (void)stopThrottle:(NSUInteger)address;
 - (void)stopAllThrottles;
@@ -150,8 +152,16 @@ typedef enum {
 - (void)startMonitoring:(NSString *)name ofType:(NSString *)type;
 - (void)stopMonitoring:(NSString *)name ofType:(NSString *)type;
 - (void)stopMonitoringAllItems;
+- (Boolean)isMonitoring:(NSString *)name ofType:(NSString *)type;
 
 - (void)cancelAllConnections;
+
+#pragma mark - XmlIO messages
+
+- (void)list:(NSString *)type;
+- (void)readItem:(NSString *)name ofType:(NSString *)type;
+- (void)readItem:(NSString *)name ofType:(NSString *)type initialValue:(NSString *)value;
+- (void)writeItem:(NSString *)name ofType:(NSString *)type value:(NSString *)value;
 
 #pragma mark - JMRI XMLIO Service rethreading
 
