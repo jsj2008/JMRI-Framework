@@ -6,27 +6,25 @@
 //  Copyright (c) 2012 Alexandria Software. All rights reserved.
 //
 
-#import "JMRIService.h"
-#import "JMRIConstants.h"
 #import <Foundation/Foundation.h>
+#import "JMRIConstants.h"
 
+@class JMRIService;
 @class JMRIItem;
 
 #pragma mark Delegation
 
-@protocol JMRIItemDelegate <NSObject>
+@protocol JMRIItemDelegate<NSObject>
 
 @required
 - (void)item:(JMRIItem*)item didChangeState:(NSUInteger)state;
 
 @end
 
-#pragma mark - Class
-
 @interface JMRIItem : NSObject {
     
     NSUInteger _state;
-    
+
 }
 
 #pragma mark Initializers
@@ -36,25 +34,19 @@
 #pragma mark - Communications
 
 - (void)monitor;
-- (void)monitorWithXmlIOService;
-- (void)read;
-- (void)readFromSimpleService;
-- (void)readFromWiThrottleService;
-- (void)readFromXmlIOService;
+- (void)stopMonitoring;
+- (void)query;
 - (void)write;
-- (void)writeToSimpleService;
-- (void)writeToWiThrottleService;
-- (void)writeToXmlIOService;
 
 #pragma mark - Properties
 
 @property NSString* comment;
-@property id<JMRIItemDelegate> delegate;
+@property (assign) id<JMRIItemDelegate> delegate;
 @property Boolean inverted;
 @property NSString* name;
 @property NSUInteger state;
 @property JMRIService* service;
 @property NSString* userName;
+@property (readonly) NSString* type;
 
 @end
-

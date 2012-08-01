@@ -6,7 +6,6 @@
 //  Copyright (c) 2012 Alexandria Software. All rights reserved.
 //
 
-#import "JMRIItem.h"
 #import "JMRIItem+Internal.h"
 #import "JMRIConstants.h"
 #import "JMRINetService.h"
@@ -32,58 +31,59 @@
 - (void)monitor {
     // monitoring is not automatic in XmlIO, so support a special monitor command
     // for that protocol. Otherwise treat a monitor request as a normal read
-    if (self.service.hasWebService && self.service.useXmlIOService) {
-        [self monitorWithXmlIOService];
-    } else {
-        [self read];
-    }
+    [self query];
+    [self.service monitor:self];
 }
 
-- (void)monitorWithXmlIOService {
-    [self doesNotRecognizeSelector:_cmd];
+- (Boolean)isMonitoring {
+    return [self.service isMonitoring:self];
 }
 
-- (void)read {
+- (void)stopMonitoring {
+    [self.service stopMonitoring:self];
+}
+
+- (void)query {
     if (self.service.hasSimpleService && self.service.useSimpleService) {
-        [self readFromSimpleService];
+        [self queryFromSimpleService:self.service.simpleService];
     } else if (self.service.hasWiThrottleService && self.service.useWiThrottleService) {
-        [self readFromWiThrottleService];
+        // WiThrottle has no explicit query mechanism
     } else if (self.service.hasWebService && self.service.useXmlIOService) {
-        [self readFromXmlIOService];
+        [self queryFromXmlIOService:self.service.webService];
     }
 }
 
-- (void)readFromSimpleService {
+- (void)queryFromSimpleService:(SimpleService *)service {
     [self doesNotRecognizeSelector:_cmd];
 }
 
-- (void)readFromWiThrottleService {
+- (void)queryFromWiThrottleService:(WiThrottleService *)service {
     [self doesNotRecognizeSelector:_cmd];
 }
 
-- (void)readFromXmlIOService {
+- (void)queryFromXmlIOService:(XMLIOService *)service {
     [self doesNotRecognizeSelector:_cmd];
 }
 
 - (void)write {
     if (self.service.hasSimpleService && self.service.useSimpleService) {
-        [self writeToSimpleService];
+        [self writeToSimpleService:self.service.simpleService];
     } else if (self.service.hasWiThrottleService && self.service.useWiThrottleService) {
-        [self writeToWiThrottleService];
+        [self writeToWiThrottleService:self.service.wiThrottleService];
     } else if (self.service.hasWebService && self.service.useXmlIOService) {
-        [self writeToXmlIOService];
+        [self writeToXmlIOService:self.service.webService];
     }
 }
 
-- (void)writeToSimpleService {
+- (void)writeToSimpleService:(SimpleService *)service {
     [self doesNotRecognizeSelector:_cmd];
 }
 
-- (void)writeToWiThrottleService {
+- (void)writeToWiThrottleService:(WiThrottleService *)service {
     [self doesNotRecognizeSelector:_cmd];
 }
 
-- (void)writeToXmlIOService {
+- (void)writeToXmlIOService:(XMLIOService *)service {
     [self doesNotRecognizeSelector:_cmd];
 }
 
@@ -102,7 +102,7 @@
         _state = state;
         if (update) {
             if (_state == JMRIItemStateUnknown) {
-                [self read];
+                [self query];
             } else {
                 [self write];
             }
@@ -112,6 +112,11 @@
         }
     }
 }    
+
+- (NSString *)type {
+    [self doesNotRecognizeSelector:_cmd];
+    return @"";
+}
 
 @synthesize comment = _comment;
 @synthesize delegate = _delegate;

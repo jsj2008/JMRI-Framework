@@ -7,51 +7,52 @@
 //
 
 #import "JMRIPower.h"
+#import "JMRIItem+Internal.h"
 
 @implementation JMRIPower
 
 #pragma mark - Operations
 
 - (void)monitorWithXmlIOService {
-    [self.service readItem:JMRITypePower ofType:JMRITypePower initialValue:[[NSNumber numberWithInteger:self.state] stringValue]];
+    [self.service.webService readItem:JMRITypePower ofType:JMRITypePower initialValue:[[NSNumber numberWithInteger:self.state] stringValue]];
 }
 
-- (void)readFromSimpleService {
-    [self.service readItem:nil ofType:[JMRITypePower uppercaseString]];
+- (void)queryFromSimpleService:(SimpleService *)service {
+    [service send:[JMRITypePower uppercaseString]];
 }
 
-- (void)readFromXmlIOService {
-    [self.service readItem:JMRITypePower ofType:JMRITypePower];
+- (void)queryFromXmlIOService:(XMLIOService *)service {
+    [service readItem:JMRITypePower ofType:JMRITypePower];
 }
 
-- (void)writeToSimpleService {
+- (void)writeToSimpleService:(SimpleService *)service {
     switch (self.state) {
         case JMRIItemStateActive:
-            [self.service writeItem:nil ofType:[JMRITypePower uppercaseString] value:@"ON"];
+            [service send:@"POWER ON"];
             break;
         case JMRIItemStateInactive:
-            [self.service writeItem:nil ofType:[JMRITypePower uppercaseString] value:@"OFF"];
+            [service send:@"POWER OFF"];
             break;
         default:
             break;
     }
 }
 
-- (void)writeToWiThrottleService {
+- (void)writeToWiThrottleService:(WiThrottleService *)service {
     switch (self.state) {
         case JMRIItemStateActive:
-            [self.service writeItem:nil ofType:@"PPA" value:@"1"];
+            [service send:@"PPA1"];
             break;
         case JMRIItemStateInactive:
-            [self.service writeItem:nil ofType:@"PPA" value:@"0"];
+            [service send:@"PPA0"];
             break;
         default:
             break;
     }
 }
 
-- (void)writeToXmlIOService {
-    [self.service writeItem:JMRITypePower ofType:JMRITypePower value:[[NSNumber numberWithInteger:self.state] stringValue]];
+- (void)writeToXmlIOService:(XMLIOService *)service {
+    [service writeItem:JMRITypePower ofType:JMRITypePower value:[[NSNumber numberWithInteger:self.state] stringValue]];
 }
 
 #pragma mark - Properties
@@ -69,6 +70,10 @@
 }
 
 - (NSString *)userName {
+    return JMRITypePower;
+}
+
+- (NSString *)type {
     return JMRITypePower;
 }
 

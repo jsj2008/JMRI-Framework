@@ -7,23 +7,19 @@
 //
 
 #import "JMRITurnout.h"
-#import "JMRIConstants.h"
+#import "JMRIItem+Internal.h"
 
 @implementation JMRITurnout
 
-- (void)monitorWithXmlIOService {
-    [self.service readItem:self.name ofType:JMRITypeTurnout initialValue:[[NSNumber numberWithInteger:self.state] stringValue]];
+- (void)queryFromSimpleService:(SimpleService *)service {
+    [service send:[NSString stringWithFormat:@"TURNOUT %@", self.name]];
 }
 
-- (void)readFromSimpleService {
-    [self.service readItem:self.name ofType:[JMRITypeTurnout uppercaseString]];
+- (void)queryFromXmlIOService:(XMLIOService *)service {
+    [service readItem:self.name ofType:JMRITypeTurnout];
 }
 
-- (void)readFromXmlIOService {
-    [self.service readItem:self.name ofType:JMRITypeTurnout];
-}
-
-- (void)writeToSimpleService {
+- (void)writeToSimpleService:(SimpleService *)service {
     NSString* state;
     switch (self.state) {
         case JMRIItemStateActive:
@@ -33,13 +29,13 @@
             state = @"CLOSED";
             break;                
         default:
-            state = @"UNKNOWN";
+            return; // state is invalid so don't send it
             break;
     }
-    [self.service writeItem:self.name ofType:JMRITypeTurnout value:state];
+    [service send:[NSString stringWithFormat:@"TURNOUT %@ %@", self.name, state]];
 }
 
-- (void)writeToWiThrottleService {
+- (void)writeToWiThrottleService:(WiThrottleService *)service {
     NSString* state;
     switch (self.state) {
         case JMRIItemStateActive:
@@ -49,14 +45,14 @@
             state = @"C";
             break;
         default:
-            state = @"U";
+            return; // state is invalid so don't send it
             break;
     }
-    [self.service writeItem:self.name ofType:JMRITypeTurnout value:state];
+    [service send:[NSString stringWithFormat:@"PTA%@%@", state, self.name]];
 }
 
-- (void)writeToXmlIOService {
-    [self.service writeItem:self.name ofType:JMRITypeTurnout value:[[NSNumber numberWithInteger:self.state] stringValue]];
+- (void)writeToXmlIOService:(XMLIOService *)service {
+    [service writeItem:self.name ofType:JMRITypeTurnout value:[[NSNumber numberWithInteger:self.state] stringValue]];
 }
 
 @end
