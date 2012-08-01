@@ -54,6 +54,7 @@
 - (void)JMRIServiceBrowser:(JMRIServiceBrowser *)browser didNotSearch:(NSDictionary *)errorDict;
 
 @optional
+- (void)JMRIServiceDidResolveAddress:(JMRIService *)aJMRIService;
 - (void)JMRIServiceBrowserWillSearch:(JMRIServiceBrowser *)browser;
 - (void)JMRIServiceBrowserDidStopSearch:(JMRIServiceBrowser *)browser;
 - (void)JMRIServiceBrowser:(JMRIServiceBrowser *)browser didFindService:(JMRIService *)aJMRIService moreComing:(BOOL)moreComing;
