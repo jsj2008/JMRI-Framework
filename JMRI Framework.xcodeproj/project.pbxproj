@@ -87,6 +87,8 @@
 		48B1DF4215B3127B007DCD57 /* JMRIPower.h in Headers */ = {isa = PBXBuildFile; fileRef = 48B1DF3515B310CD007DCD57 /* JMRIPower.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48B1DF4315B3129A007DCD57 /* JMRIConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 48B1DF3B15B311A8007DCD57 /* JMRIConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48B1DF4415B3129A007DCD57 /* JMRIPower.h in Headers */ = {isa = PBXBuildFile; fileRef = 48B1DF3515B310CD007DCD57 /* JMRIPower.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		48B1DF4B15BAAF90007DCD57 /* JMRIItem+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 48B1DF4515B97490007DCD57 /* JMRIItem+Internal.h */; settings = {ATTRIBUTES = (); }; };
+		48B1DF4C15BAAFAC007DCD57 /* JMRIItem+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 48B1DF4515B97490007DCD57 /* JMRIItem+Internal.h */; settings = {ATTRIBUTES = (); }; };
 		48B9D0E014242D4A00EDB24E /* XMLIOMetadata.h in Headers */ = {isa = PBXBuildFile; fileRef = 48B9D0DE14242D4A00EDB24E /* XMLIOMetadata.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48B9D0E214242D4A00EDB24E /* XMLIOMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 48B9D0DF14242D4A00EDB24E /* XMLIOMetadata.m */; };
 		48D4AD7D15514149000B964C /* JMRIService.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D4AD7B15514149000B964C /* JMRIService.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -145,6 +147,7 @@
 		48B1DF3615B310CD007DCD57 /* JMRIPower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JMRIPower.m; path = Classes/Items/JMRIPower.m; sourceTree = "<group>"; };
 		48B1DF3B15B311A8007DCD57 /* JMRIConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; path = JMRIConstants.h; sourceTree = "<group>"; };
 		48B1DF3C15B311A8007DCD57 /* JMRIConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMRIConstants.m; sourceTree = "<group>"; };
+		48B1DF4515B97490007DCD57 /* JMRIItem+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; name = "JMRIItem+Internal.h"; path = "Classes/Items/JMRIItem+Internal.h"; sourceTree = "<group>"; };
 		48B9D0DE14242D4A00EDB24E /* XMLIOMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLIOMetadata.h; sourceTree = "<group>"; };
 		48B9D0DF14242D4A00EDB24E /* XMLIOMetadata.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLIOMetadata.m; sourceTree = "<group>"; };
 		48D4AD7B15514149000B964C /* JMRIService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMRIService.h; sourceTree = "<group>"; };
@@ -290,6 +293,7 @@
 			isa = PBXGroup;
 			children = (
 				487AA4B415AC33BD00F76F47 /* JMRIItem.h */,
+				48B1DF4515B97490007DCD57 /* JMRIItem+Internal.h */,
 				487AA4B515AC33BE00F76F47 /* JMRIItem.m */,
 				48B1DF3515B310CD007DCD57 /* JMRIPower.h */,
 				48B1DF3615B310CD007DCD57 /* JMRIPower.m */,
@@ -375,6 +379,7 @@
 				48B1DF4215B3127B007DCD57 /* JMRIPower.h in Headers */,
 				48B014AD15B1CCFE00997BD3 /* NSArray+JMRIExtensions.h in Headers */,
 				48B014AE15B1CCFE00997BD3 /* NSStream+JMRIExtensions.h in Headers */,
+				48B1DF4C15BAAFAC007DCD57 /* JMRIItem+Internal.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,6 +410,7 @@
 				48B1DF4415B3129A007DCD57 /* JMRIPower.h in Headers */,
 				48B1DF4315B3129A007DCD57 /* JMRIConstants.h in Headers */,
 				48D4AD891559132D000B964C /* JMRIServiceBrowser.h in Headers */,
+				48B1DF4B15BAAF90007DCD57 /* JMRIItem+Internal.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,7 +458,7 @@
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0440;
 			};
 			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "JMRI Framework" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -633,6 +639,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -666,6 +673,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DYLIB_COMPATIBILITY_VERSION = 1;
