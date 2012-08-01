@@ -18,6 +18,9 @@
 - (void)close;
 - (void)error:(NSError *)error;
 
+- (void)didGetPowerState:(NSString *)string;
+- (void)didGetTurnoutState:(NSString *)string;
+
 @end
 
 @implementation SimpleService
@@ -119,8 +122,6 @@
 #pragma mark - NSStream delegate
 
 - (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode {
-    uint8_t buf[1024];
-    unsigned int len = 0;
     if ([aStream isEqualTo:inputStream]) {
         switch (eventCode) {
             case NSStreamEventNone:
@@ -132,33 +133,7 @@
                 }
                 break;
             case NSStreamEventHasBytesAvailable:
-                len = [(NSInputStream *)aStream read:buf maxLength:1024];
-                if (len) {
-                    NSString *str = [[NSString alloc] initWithBytes:buf length:len encoding:NSASCIIStringEncoding];
-                    NSLog(@"[IN] Data received: [%@]", str);
-                    str = [str stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-                    NSArray *cmds = [str componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
-                    for (NSString *cmd in cmds) {
-                        if ([self.delegate respondsToSelector:@selector(simpleService:didGetInput:)]) {
-                            [self.delegate simpleService:self didGetInput:cmd];
-                        }
-                        if ([cmd hasPrefix:@"POWER"]) {
-                            if ([self.delegate respondsToSelector:@selector(simpleService:didGetPowerState:)]) {
-                                NSUInteger state;
-                                if ([cmd hasSuffix:@"ON"]) {
-                                    state = JMRIItemStateActive;
-                                } else if ([cmd hasSuffix:@"OFF"]) {
-                                    state = JMRIItemStateInactive;
-                                } else if ([cmd hasSuffix:@"UNKNOWN"]) {
-                                    state = JMRIItemStateUnknown;
-                                }
-                                [self.delegate simpleService:self didGetPowerState:state];
-                            }
-                        }
-                    }
-                } else {
-                    NSLog(@"[IN] No data.");
-                }
+                [self didGetInput:inputStream];
                 break;
             case NSStreamEventErrorOccurred:
                 NSLog(@"[IN] An error!");
@@ -190,6 +165,59 @@
             default:
                 break;
         }
+    }
+}
+
+- (void)didGetInput:(NSInputStream *)stream {
+    uint8_t buf[1024];
+    NSUInteger len = 0;
+    len = [stream read:buf maxLength:1024];
+    if (len) {
+        NSString *str = [[NSString alloc] initWithBytes:buf length:len encoding:NSASCIIStringEncoding];
+        NSLog(@"[IN] Data received: [%@]", str);
+        str = [str stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        NSArray *cmds = [str componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+        for (NSString *cmd in cmds) {
+            if ([self.delegate respondsToSelector:@selector(simpleService:didGetInput:)]) {
+                [self.delegate simpleService:self didGetInput:cmd];
+            }
+            if ([cmd hasPrefix:@"POWER"]) {
+                [self didGetPowerState:cmd];
+            } else if ([cmd hasPrefix:@"TURNOUT"]) {
+                [self didGetTurnoutState:cmd];
+            }
+        }
+    } else {
+        NSLog(@"[IN] No data.");
+    }
+}
+
+- (void)didGetPowerState:(NSString *)string {
+    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetPowerState:)]) {
+        NSUInteger state;
+        if ([string hasSuffix:@"ON"]) {
+            state = JMRIItemStateActive;
+        } else if ([string hasSuffix:@"OFF"]) {
+            state = JMRIItemStateInactive;
+        } else {
+            state = JMRIItemStateUnknown;
+        }
+        [self.delegate JMRINetService:self didGetPowerState:state];
+    }
+}
+
+- (void)didGetTurnoutState:(NSString *)string {
+    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetTurnout:withState:)]) {
+        NSUInteger state;
+        NSArray *tokens = [string componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        if ([[tokens objectAtIndex:2] isEqualTo:@"THROWN"]) {
+            state = JMRIItemStateActive;
+        } else if ([[tokens objectAtIndex:2] isEqualTo:@"CLOSED"]) {
+            state = JMRIItemStateInactive;
+        } else {
+            state = JMRIItemStateUnknown;
+        }
+        [self.delegate JMRINetService:self didGetTurnout:[tokens objectAtIndex:1] withState:state];
     }
 }
 

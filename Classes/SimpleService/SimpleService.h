@@ -35,8 +35,6 @@
 
 @optional
 - (void)simpleService:(SimpleService *)service didGetInput:(NSString *)input;
-- (void)simpleService:(SimpleService *)service didGetPowerState:(NSUInteger)state;
-- (void)simpleService:(SimpleService *)service didGetTurnout:(NSString *)turnout withState:(NSUInteger)state;
 - (void)simpleServiceDidOpenConnection:(SimpleService *)service;
 
 @end
