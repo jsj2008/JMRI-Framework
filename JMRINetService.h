@@ -19,7 +19,6 @@
 #define MIN_JMRI_VERSION @"2.14"
 
 #import <Foundation/Foundation.h>
-#import "NSArray+JMRIExtensions.h"
 
 @interface JMRINetService : NSObject <NSNetServiceDelegate> {
 
@@ -29,7 +28,6 @@
 	NSString *manualAddress;
 	NSInteger manualPort;
     NSString *serviceVersion;
-    NSMutableDictionary *boundItems;
     NSString *serviceType;
 
     @private
@@ -52,9 +50,7 @@
 
 #pragma mark - JMRI object handling
 
-- (void)readItem:(NSString *)name ofType:(NSString *)type;
-- (void)readItem:(NSString *)name ofType:(NSString *)type initialValue:(NSString *)value;
-- (void)writeItem:(NSString *)name ofType:(NSString *)type value:(NSString *)value;
+- (void)send:(NSString *)message;
 
 #pragma mark - Object properties
 
@@ -74,10 +70,6 @@
 @property (readonly) NSString *name;
 @property (readonly) NSInteger port;
 
-#pragma mark - JMRI object properties
-
-@property NSMutableDictionary *items;
-
 @end
 
 @protocol JMRINetServiceDelegate
@@ -88,5 +80,7 @@
 @optional
 - (void)JMRINetServiceDidResolveAddress:(JMRINetService *)service;
 - (void)JMRINetServiceWillResolve:(JMRINetService *)service;
+- (void)JMRINetService:(JMRINetService *)service didGetPowerState:(NSUInteger)state;
+- (void)JMRINetService:(JMRINetService *)service didGetTurnout:(NSString *)turnout withState:(NSUInteger)state;
 
 @end

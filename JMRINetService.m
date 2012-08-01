@@ -18,6 +18,7 @@
 
 #import "JMRINetService.h"
 #import "JMRIConstants.h"
+#import "NSArray+JMRIExtensions.h"
 
 static JMRINetService *sharedNetService_ = nil;
 
@@ -35,21 +36,10 @@ static JMRINetService *sharedNetService_ = nil;
     return sharedNetService_;
 }
 
-#pragma mark - JMRI Object handling
+#pragma mark - JMRI object handling
 
-@synthesize items = boundItems;
-
-- (void)readItem:(NSString *)name ofType:(NSString *)type {
-	[self doesNotRecognizeSelector:_cmd];
-}
-
-- (void)readItem:(NSString *)name ofType:(NSString *)type initialValue:(NSString *)value {
-    // default implementation simply attempts a read w/o initial value
-    [self readItem:name ofType:type];
-}
-
-- (void)writeItem:(NSString *)name ofType:(NSString *)type value:(NSString *)value {
-	[self doesNotRecognizeSelector:_cmd];
+- (void)send:(NSString *)message {
+    [self doesNotRecognizeSelector:_cmd];
 }
 
 #pragma mark - Object handling
