@@ -21,12 +21,12 @@
 
 @interface XMLIOItem : XMLIOObject <NSCoding> {
 
-    NSString *systemName;
-    NSString *type;
-    NSString *userName;
-    NSString *value;
-    NSString *comment;
-    BOOL inverted;
+    NSString *systemName;   // name
+    NSString *type;         // type
+    NSString *userName;     // userName
+    NSString *value;        // state
+    NSString *comment;      // comment
+    BOOL inverted;          // inverted
 
     // roster-only elements are needed in XMLIOItem for JMRI < 2.13.1
     NSUInteger dccAddress;

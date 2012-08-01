@@ -110,5 +110,4 @@
     [aCoder encodeBool:self.inverted forKey:XMLIOItemInverted];
 }
 
-
 @end
