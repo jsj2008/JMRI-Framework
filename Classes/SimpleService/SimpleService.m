@@ -122,7 +122,7 @@
 #pragma mark - NSStream delegate
 
 - (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode {
-    if ([aStream isEqualTo:inputStream]) {
+    if ([aStream isEqual:inputStream]) {
         switch (eventCode) {
             case NSStreamEventNone:
                 NSLog(@"[IN] Nothing to see here.");
@@ -210,9 +210,9 @@
     if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetTurnout:withState:)]) {
         NSUInteger state;
         NSArray *tokens = [string componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-        if ([[tokens objectAtIndex:2] isEqualTo:@"THROWN"]) {
+        if ([[tokens objectAtIndex:2] isEqualToString:@"THROWN"]) {
             state = JMRIItemStateActive;
-        } else if ([[tokens objectAtIndex:2] isEqualTo:@"CLOSED"]) {
+        } else if ([[tokens objectAtIndex:2] isEqualToString:@"CLOSED"]) {
             state = JMRIItemStateInactive;
         } else {
             state = JMRIItemStateUnknown;
