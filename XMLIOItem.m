@@ -19,6 +19,9 @@
 #import "XMLIOItem.h"
 #import "XMLIOService.h"
 #import "XMLIOFunction.h"
+#import "JMRIService.h"
+#import "JMRIPower.h"
+#import "JMRITurnout.h"
 
 @implementation XMLIOItem
 
@@ -49,6 +52,21 @@
 		return [self.name localizedCaseInsensitiveCompare:item.userName];
 	}
 	return [self.name localizedCaseInsensitiveCompare:item.name];
+}
+
+- (JMRIItem *)JMRIItemForService:(JMRIService *)service {
+    JMRIItem *i = nil;
+    if ([self.type isEqualToString:JMRITypePower]) {
+        i = [[JMRIPower alloc] initWithName:JMRITypePower withService:service];
+        i.state = [self.value integerValue];
+    } else if ([self.type isEqualToString:JMRITypeTurnout]) {
+        i = [[JMRITurnout alloc] initWithName:self.name withService:service];
+        i.comment = self.comment;
+        i.inverted = self.inverted;
+        i.state = [self.value integerValue];
+        i.userName = self.userName;
+    }
+    return i;
 }
 
 - (id)init {

@@ -19,6 +19,9 @@
 #import <Foundation/Foundation.h>
 #import "XMLIOObject.h"
 
+@class JMRIItem;
+@class JMRIService;
+
 @interface XMLIOItem : XMLIOObject <NSCoding> {
 
     NSString *systemName;   // name
@@ -42,7 +45,8 @@
     
 }
 
-- (NSComparisonResult)localizedCaseInsensitiveCompareByUserName:(XMLIOItem*)item;
+- (NSComparisonResult)localizedCaseInsensitiveCompareByUserName:(XMLIOItem *)item;
+- (JMRIItem *)JMRIItemForService:(JMRIService *)service;
 
 # pragma mark Standard properties
 
