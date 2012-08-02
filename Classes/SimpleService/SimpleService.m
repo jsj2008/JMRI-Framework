@@ -21,6 +21,8 @@
 - (void)didGetPowerState:(NSString *)string;
 - (void)didGetTurnoutState:(NSString *)string;
 
+@property NSString *buffer;
+
 @end
 
 @implementation SimpleService
@@ -63,6 +65,7 @@
 #pragma mark - Private methods
 
 - (void)open {
+    self.buffer = @"";
     inputStream.delegate = self;
     outputStream.delegate = self;
     [inputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
@@ -72,6 +75,7 @@
 }
 
 - (void)close {
+    self.buffer = nil;
     [inputStream close];
     [outputStream close];
 }
@@ -175,16 +179,21 @@
     if (len) {
         NSString *str = [[NSString alloc] initWithBytes:buf length:len encoding:NSASCIIStringEncoding];
         NSLog(@"[IN] Data received: [%@]", str);
-        str = [str stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        NSArray *cmds = [str componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
-        for (NSString *cmd in cmds) {
-            if ([self.delegate respondsToSelector:@selector(simpleService:didGetInput:)]) {
-                [self.delegate simpleService:self didGetInput:cmd];
-            }
-            if ([cmd hasPrefix:@"POWER"]) {
-                [self didGetPowerState:cmd];
-            } else if ([cmd hasPrefix:@"TURNOUT"]) {
-                [self didGetTurnoutState:cmd];
+        if ([str rangeOfCharacterFromSet:[NSCharacterSet newlineCharacterSet]].location == NSNotFound) {
+            self.buffer = str;
+        } else {
+            str = [[self.buffer stringByAppendingString:str] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            self.buffer = @"";
+            NSArray *cmds = [str componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+            for (NSString *cmd in cmds) {
+                if ([self.delegate respondsToSelector:@selector(simpleService:didGetInput:)]) {
+                    [self.delegate simpleService:self didGetInput:cmd];
+                }
+                if ([cmd hasPrefix:@"POWER"]) {
+                    [self didGetPowerState:cmd];
+                } else if ([cmd hasPrefix:@"TURNOUT"]) {
+                    [self didGetTurnoutState:cmd];
+                }
             }
         }
     } else {
