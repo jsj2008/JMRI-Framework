@@ -9,6 +9,7 @@
 #import "JMRIService.h"
 #import "JMRIConstants.h"
 #import "JMRIItem+Internal.h"
+#import "JMRILight.h"
 #import "JMRIPower.h"
 #import "JMRITurnout.h"
 
@@ -238,6 +239,14 @@
     if ([self.delegate respondsToSelector:@selector(JMRIService:didNotResolve:)]) {
         [self.delegate JMRIService:self didNotResolve:errorDict];
     }
+}
+
+- (void)JMRINetService:(JMRINetService *)service didGetLight:(NSString *)light withState:(NSUInteger)state {
+    if (![self.lights objectForKey:light]) {
+        JMRILight *lightObj = [[JMRILight alloc] initWithName:light withService:self];
+        [self.lights setValue:lightObj forKey:light];
+    }
+    [((JMRILight *)[self.lights objectForKey:light]) setState:state updateService:NO];
 }
 
 - (void)JMRINetService:(JMRINetService *)service didGetPowerState:(NSUInteger)state {

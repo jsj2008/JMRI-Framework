@@ -80,6 +80,7 @@
 @optional
 - (void)JMRINetServiceDidResolveAddress:(JMRINetService *)service;
 - (void)JMRINetServiceWillResolve:(JMRINetService *)service;
+- (void)JMRINetService:(JMRINetService *)service didGetLight:(NSString *)light withState:(NSUInteger)state;
 - (void)JMRINetService:(JMRINetService *)service didGetPowerState:(NSUInteger)state;
 - (void)JMRINetService:(JMRINetService *)service didGetTurnout:(NSString *)turnout withState:(NSUInteger)state;
 

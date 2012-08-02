@@ -18,6 +18,7 @@
 - (void)close;
 - (void)error:(NSError *)error;
 
+- (void)didGetLightState:(NSString *)string;
 - (void)didGetPowerState:(NSString *)string;
 - (void)didGetTurnoutState:(NSString *)string;
 
@@ -189,7 +190,9 @@
                 if ([self.delegate respondsToSelector:@selector(simpleService:didGetInput:)]) {
                     [self.delegate simpleService:self didGetInput:cmd];
                 }
-                if ([cmd hasPrefix:@"POWER"]) {
+                if ([cmd hasPrefix:@"LIGHT"]) {
+                    [self didGetLightState:cmd];
+                } else if ([cmd hasPrefix:@"POWER"]) {
                     [self didGetPowerState:cmd];
                 } else if ([cmd hasPrefix:@"TURNOUT"]) {
                     [self didGetTurnoutState:cmd];
@@ -198,6 +201,21 @@
         }
     } else {
         NSLog(@"[IN] No data.");
+    }
+}
+
+- (void)didGetLightState:(NSString *)string {
+    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetLight:withState:)]) {
+        NSUInteger state;
+        NSArray *tokens = [string componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        if ([[tokens objectAtIndex:2] isEqualToString:@"ON"]) {
+            state = JMRIItemStateActive;
+        } else if ([[tokens objectAtIndex:2] isEqualToString:@"OFF"]) {
+            state = JMRIItemStateInactive;
+        } else {
+            state = JMRIItemStateUnknown;
+        }
+        [self.delegate JMRINetService:self didGetLight:[tokens objectAtIndex:1] withState:state];
     }
 }
 

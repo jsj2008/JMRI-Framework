@@ -55,4 +55,8 @@
     [service writeItem:self.name ofType:JMRITypeTurnout value:[[NSNumber numberWithInteger:self.state] stringValue]];
 }
 
+- (NSString *)type {
+    return JMRITypeTurnout;
+}
+
 @end
