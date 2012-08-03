@@ -20,6 +20,7 @@
 
 - (void)didGetLightState:(NSString *)string;
 - (void)didGetPowerState:(NSString *)string;
+- (void)didGetSensorState:(NSString *)string;
 - (void)didGetTurnoutState:(NSString *)string;
 
 @property NSString *buffer;
@@ -194,6 +195,8 @@
                     [self didGetLightState:cmd];
                 } else if ([cmd hasPrefix:@"POWER"]) {
                     [self didGetPowerState:cmd];
+                } else if ([cmd hasPrefix:@"SENSOR"]) {
+                    [self didGetSensorState:cmd];
                 } else if ([cmd hasPrefix:@"TURNOUT"]) {
                     [self didGetTurnoutState:cmd];
                 }
@@ -230,6 +233,21 @@
             state = JMRIItemStateUnknown;
         }
         [self.delegate JMRINetService:self didGetPowerState:state];
+    }
+}
+
+- (void)didGetSensorState:(NSString *)string {
+    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetSensor:withState:)]) {
+        NSUInteger state;
+        NSArray *tokens = [string componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        if ([[tokens objectAtIndex:2] isEqualToString:@"ACTIVE"]) {
+            state = JMRIItemStateActive;
+        } else if ([[tokens objectAtIndex:2] isEqualToString:@"INACTIVE"]) {
+            state = JMRIItemStateInactive;
+        } else {
+            state = JMRIItemStateUnknown;
+        }
+        [self.delegate JMRINetService:self didGetSensor:[tokens objectAtIndex:1] withState:state];
     }
 }
 

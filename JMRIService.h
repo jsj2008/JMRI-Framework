@@ -14,6 +14,7 @@
 @class JMRIService;
 @class JMRIItem;
 @class JMRIPower;
+@class JMRISensor;
 
 #pragma mark - Delegatation Protocol
 

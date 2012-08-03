@@ -11,6 +11,7 @@
 #import "JMRIItem+Internal.h"
 #import "JMRILight.h"
 #import "JMRIPower.h"
+#import "JMRISensor.h"
 #import "JMRITurnout.h"
 
 @interface JMRIService (Private)
@@ -253,6 +254,14 @@
     [self.power setState:state updateService:NO];
 }
 
+- (void)JMRINetService:(JMRINetService *)service didGetSensor:(NSString *)sensor withState:(NSUInteger)state {
+    if (![self.sensors objectForKey:sensor]) {
+        JMRISensor *turnoutObj = [[JMRISensor alloc] initWithName:sensor withService:self];
+        [self.sensors setValue:turnoutObj forKey:sensor];
+    }
+    [((JMRISensor *)[self.sensors objectForKey:sensor]) setState:state updateService:NO];
+}
+
 - (void)JMRINetService:(JMRINetService *)service didGetTurnout:(NSString *)turnout withState:(NSUInteger)state {
     if (![self.turnouts objectForKey:turnout]) {
         JMRITurnout *turnoutObj = [[JMRITurnout alloc] initWithName:turnout withService:self];
@@ -292,6 +301,14 @@
 - (void)XMLIOService:(XMLIOService *)service didListItems:(NSArray *)items ofType:(NSString *)type {
     if ([type isEqualToString:JMRITypePower]) {
         [self.power setState:[((XMLIOItem *)[items objectAtIndex:0]).value integerValue] updateService:NO];
+    } else if ([type isEqualToString:JMRITypeSensor]) {
+        for (XMLIOItem *i in items) {
+            if ([self.sensors objectForKey:i.name]) {
+                ((JMRISensor *)[self.sensors objectForKey:i.name]).state = [i.value integerValue];
+            } else {
+                [self.sensors setValue:[i JMRIItemForService:self] forKey:i.name];
+            }
+        }
     } else if ([type isEqualToString:JMRITypeTurnout]) {
         for (XMLIOItem *i in items) {
             if ([self.turnouts objectForKey:i.name]) {
@@ -305,10 +322,16 @@
 
 - (void)XMLIOService:(XMLIOService *)service didReadItem:(XMLIOItem *)item withName:(NSString *)aName ofType:(NSString *)type withValue:(NSString *)value {
     if ([type isEqualToString:JMRITypePower]) {
-        [self.power setState:[item.value integerValue] updateService:NO];
+        [self.power setState:[value integerValue] updateService:NO];
+    } else if ([type isEqualToString:JMRITypeSensor]) {
+        if ([self.sensors objectForKey:aName]) {
+            ((JMRISensor *)[self.sensors objectForKey:aName]).state = [value integerValue];
+        } else {
+            [self.sensors setValue:[item JMRIItemForService:self] forKey:aName];
+        }
     } else if ([type isEqualToString:JMRITypeTurnout]) {
         if ([self.turnouts objectForKey:aName]) {
-            ((JMRITurnout *)[self.turnouts objectForKey:aName]).state = [item.value integerValue];
+            ((JMRITurnout *)[self.turnouts objectForKey:aName]).state = [value integerValue];
         } else {
             [self.turnouts setValue:[item JMRIItemForService:self] forKey:aName];
         }
