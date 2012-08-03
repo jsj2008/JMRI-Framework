@@ -21,11 +21,7 @@
 
 @end
 
-@interface JMRIItem : NSObject {
-    
-    NSUInteger _state;
-
-}
+@protocol JMRIItem <NSObject>
 
 #pragma mark Initializers
 
@@ -40,12 +36,36 @@
 
 #pragma mark - Properties
 
+- (NSString *)comment;
+- (void)setComment:(NSString *)comment;
+- (id<JMRIItemDelegate>)delegate;
+- (void)setDelegate:(id<JMRIItemDelegate>)delegate;
+- (Boolean)inverted;
+- (void)setInverted:(Boolean)inverted;
+- (NSString *)name;
+- (void)setName:(NSString *)name;
+- (JMRIService *)service;
+- (void)setService:(JMRIService *)service;
+- (NSString *)userName;
+- (void)setUserName:(NSString *)userName;
+- (NSString *)type;
+
+@end
+
+@interface JMRIItem : NSObject <JMRIItem> {
+    
+    NSUInteger _state;
+
+}
+
+#pragma mark - Properties
+
 @property NSString* comment;
 @property (assign) id<JMRIItemDelegate> delegate;
 @property Boolean inverted;
 @property NSString* name;
-@property NSUInteger state;
 @property JMRIService* service;
+@property NSUInteger state;
 @property NSString* userName;
 @property (readonly) NSString* type;
 
