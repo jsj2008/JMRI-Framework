@@ -50,4 +50,12 @@
     }
 }
 
+- (void)setState:(NSUInteger)state {
+    // state is meaningless for a reporter
+}
+
+- (NSUInteger)state {
+    return JMRIItemStateInconsistent;
+}
+
 @end
