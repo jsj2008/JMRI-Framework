@@ -18,6 +18,7 @@
 //  JMRI items
 
 #import <JMRI/JMRILight.h>
+#import <JMRI/JMRIMemory.h>
 #import <JMRI/JMRIPower.h>
 #import <JMRI/JMRISensor.h>
 #import <JMRI/JMRIReporter.h>

@@ -20,6 +20,7 @@
 
 - (void)didGetLightState:(NSString *)string;
 - (void)didGetPowerState:(NSString *)string;
+- (void)didGetReporterValue:(NSString *)string;
 - (void)didGetSensorState:(NSString *)string;
 - (void)didGetTurnoutState:(NSString *)string;
 
@@ -195,6 +196,8 @@
                     [self didGetLightState:cmd];
                 } else if ([cmd hasPrefix:@"POWER"]) {
                     [self didGetPowerState:cmd];
+                } else if ([cmd hasPrefix:@"REPORTER"]) {
+                    [self didGetReporterValue:cmd];
                 } else if ([cmd hasPrefix:@"SENSOR"]) {
                     [self didGetSensorState:cmd];
                 } else if ([cmd hasPrefix:@"TURNOUT"]) {
@@ -233,6 +236,16 @@
             state = JMRIItemStateUnknown;
         }
         [self.delegate JMRINetService:self didGetPowerState:state];
+    }
+}
+
+- (void)didGetReporterValue:(NSString *)string {
+    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetReporter:withValue:)]) {
+        NSArray *tokens = [string componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        string = [[[string stringByReplacingOccurrencesOfString:[tokens objectAtIndex:0] withString:@""]
+                   stringByReplacingOccurrencesOfString:[tokens objectAtIndex:1] withString:@""]
+                  stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        [self.delegate JMRINetService:self didGetReporter:[tokens objectAtIndex:1] withValue:string];
     }
 }
 

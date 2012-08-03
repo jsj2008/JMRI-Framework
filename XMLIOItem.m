@@ -20,6 +20,7 @@
 #import "XMLIOService.h"
 #import "XMLIOFunction.h"
 #import "JMRIService.h"
+#import "JMRIMemory.h"
 #import "JMRIPower.h"
 #import "JMRISensor.h"
 #import "JMRITurnout.h"
@@ -57,7 +58,12 @@
 
 - (JMRIItem *)JMRIItemForService:(JMRIService *)service {
     JMRIItem *i = nil;
-    if ([self.type isEqualToString:JMRITypePower]) {
+    if ([self.type isEqualToString:JMRITypeMemory]) {
+        i = [[JMRIMemory alloc] initWithName:self.name withService:service];
+        i.comment = self.comment;
+        i.value = self.value;
+        i.userName = self.userName;
+    } else if ([self.type isEqualToString:JMRITypePower]) {
         i = [[JMRIPower alloc] initWithName:JMRITypePower withService:service];
         i.state = [self.value integerValue];
     } else if ([self.type isEqualToString:JMRITypeSensor]) {

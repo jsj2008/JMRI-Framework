@@ -104,6 +104,10 @@
 		48BA518A15CBE0310066095E /* JMRIReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 48BA518715CBE0310066095E /* JMRIReporter.h */; };
 		48BA518B15CBE0310066095E /* JMRIReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 48BA518815CBE0310066095E /* JMRIReporter.m */; };
 		48BA518C15CBE0310066095E /* JMRIReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 48BA518815CBE0310066095E /* JMRIReporter.m */; };
+		48BA518F15CBF1400066095E /* JMRIMemory.h in Headers */ = {isa = PBXBuildFile; fileRef = 48BA518D15CBF1400066095E /* JMRIMemory.h */; };
+		48BA519015CBF1400066095E /* JMRIMemory.h in Headers */ = {isa = PBXBuildFile; fileRef = 48BA518D15CBF1400066095E /* JMRIMemory.h */; };
+		48BA519115CBF1400066095E /* JMRIMemory.m in Sources */ = {isa = PBXBuildFile; fileRef = 48BA518E15CBF1400066095E /* JMRIMemory.m */; };
+		48BA519215CBF1400066095E /* JMRIMemory.m in Sources */ = {isa = PBXBuildFile; fileRef = 48BA518E15CBF1400066095E /* JMRIMemory.m */; };
 		48D4AD7D15514149000B964C /* JMRIService.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D4AD7B15514149000B964C /* JMRIService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48D4AD7F15514149000B964C /* JMRIService.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D4AD7C15514149000B964C /* JMRIService.m */; };
 		48D4AD891559132D000B964C /* JMRIServiceBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D4AD871559132D000B964C /* JMRIServiceBrowser.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -169,6 +173,8 @@
 		48BA517F15CB53DF0066095E /* JMRISensor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JMRISensor.m; path = Classes/Items/JMRISensor.m; sourceTree = "<group>"; };
 		48BA518715CBE0310066095E /* JMRIReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JMRIReporter.h; path = Classes/Items/JMRIReporter.h; sourceTree = "<group>"; };
 		48BA518815CBE0310066095E /* JMRIReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JMRIReporter.m; path = Classes/Items/JMRIReporter.m; sourceTree = "<group>"; };
+		48BA518D15CBF1400066095E /* JMRIMemory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JMRIMemory.h; path = Classes/Items/JMRIMemory.h; sourceTree = "<group>"; };
+		48BA518E15CBF1400066095E /* JMRIMemory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JMRIMemory.m; path = Classes/Items/JMRIMemory.m; sourceTree = "<group>"; };
 		48D4AD7B15514149000B964C /* JMRIService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMRIService.h; sourceTree = "<group>"; };
 		48D4AD7C15514149000B964C /* JMRIService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMRIService.m; sourceTree = "<group>"; };
 		48D4AD871559132D000B964C /* JMRIServiceBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JMRIServiceBrowser.h; path = Classes/JMRIServiceBrowser.h; sourceTree = "<group>"; };
@@ -324,6 +330,8 @@
 				48B1DF3615B310CD007DCD57 /* JMRIPower.m */,
 				487AA4BB15AC43DA00F76F47 /* JMRITurnout.h */,
 				487AA4BC15AC43DA00F76F47 /* JMRITurnout.m */,
+				48BA518D15CBF1400066095E /* JMRIMemory.h */,
+				48BA518E15CBF1400066095E /* JMRIMemory.m */,
 			);
 			name = Items;
 			sourceTree = "<group>";
@@ -408,6 +416,7 @@
 				48BA518115CB53DF0066095E /* JMRISensor.h in Headers */,
 				48B1DF4C15BAAFAC007DCD57 /* JMRIItem+Internal.h in Headers */,
 				48BA518A15CBE0310066095E /* JMRIReporter.h in Headers */,
+				48BA519015CBF1400066095E /* JMRIMemory.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,6 +452,7 @@
 				48BA518015CB53DF0066095E /* JMRISensor.h in Headers */,
 				48B1DF4B15BAAF90007DCD57 /* JMRIItem+Internal.h in Headers */,
 				48BA518915CBE0310066095E /* JMRIReporter.h in Headers */,
+				48BA518F15CBF1400066095E /* JMRIMemory.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -555,6 +565,7 @@
 				48BA517C15CA95820066095E /* JMRILight.m in Sources */,
 				48BA518315CB53DF0066095E /* JMRISensor.m in Sources */,
 				48BA518C15CBE0310066095E /* JMRIReporter.m in Sources */,
+				48BA519215CBF1400066095E /* JMRIMemory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -588,6 +599,7 @@
 				48BA517B15CA95820066095E /* JMRILight.m in Sources */,
 				48BA518215CB53DF0066095E /* JMRISensor.m in Sources */,
 				48BA518B15CBE0310066095E /* JMRIReporter.m in Sources */,
+				48BA519115CBF1400066095E /* JMRIMemory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
