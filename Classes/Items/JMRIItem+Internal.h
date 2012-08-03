@@ -14,6 +14,7 @@
 #pragma mark Properties
 
 - (void)setState:(NSUInteger)state updateService:(Boolean)update;
+- (void)setReport:(NSString *)report updateService:(Boolean)update;
 
 #pragma mark - Communications
 

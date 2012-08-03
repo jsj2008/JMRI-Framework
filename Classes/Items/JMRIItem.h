@@ -18,6 +18,7 @@
 
 @required
 - (void)item:(JMRIItem*)item didChangeState:(NSUInteger)state;
+- (void)item:(JMRIItem*)item didGetReport:(NSString *)report;
 
 @end
 

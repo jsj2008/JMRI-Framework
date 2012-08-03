@@ -20,6 +20,7 @@
 #import <JMRI/JMRILight.h>
 #import <JMRI/JMRIPower.h>
 #import <JMRI/JMRISensor.h>
+#import <JMRI/JMRIReporter.h>
 #import <JMRI/JMRITurnout.h>
 
 //  Extensions

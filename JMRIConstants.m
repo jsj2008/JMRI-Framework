@@ -18,6 +18,7 @@ NSString *const JMRITypeMemory = @"memory";
 NSString *const JMRITypeMetadata = @"metadata";
 NSString *const JMRITypePanel = @"panel";
 NSString *const JMRITypePower = @"power";
+NSString *const JMRITypeReporter = @"reporter";
 NSString *const JMRITypeRoster = @"roster";
 NSString *const JMRITypeRoute = @"route";
 NSString *const JMRITypeSensor = @"sensor";
