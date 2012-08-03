@@ -114,7 +114,10 @@
 }    
 
 - (NSString *)value {
-    return _value;
+    if (self.state == JMRIItemStateStateless) {
+        return _value;
+    }
+    return [[NSNumber numberWithInteger:self.state] stringValue];
 }
 
 - (void)setValue:(NSString *)value {
