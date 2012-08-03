@@ -21,7 +21,7 @@
     if (([super init] != nil)) {
         self.name = name;
         self.service = service;
-        self.state = JMRIItemStateUnknown;
+        _state = JMRIItemStateUnknown;
     }
     return self;
 }
@@ -98,7 +98,7 @@
 }
 
 - (void)setState:(NSUInteger)state updateService:(Boolean)update {
-    if (_state != state) {
+    if (_state != JMRIItemStateStateless && _state != state) {
         _state = state;
         if (update) {
             if (_state == JMRIItemStateUnknown) {
@@ -112,6 +112,38 @@
         }
     }
 }    
+
+- (NSString *)value {
+    return _value;
+}
+
+- (void)setValue:(NSString *)value {
+    [self setValue:value updateService:YES];
+}
+
+- (void)setValue:(NSString *)value updateService:(Boolean)update {
+    if (self.state == JMRIItemStateStateless) {
+        if (![_value isEqualToString:value]) {
+            if ([value isEqualToString:@""]) {
+                _value = nil;
+            } else {
+                _value = value;
+            }
+            if (update) {
+                if (!_value) {
+                    [self query];
+                } else {
+                    [self write];
+                }
+            }
+            if ([self.delegate respondsToSelector:@selector(item:didGetValue:)]) {
+                [self.delegate item:self didGetValue:self.value];
+            }
+        }
+    } else {
+        [self setState:[value integerValue] updateService:update];
+    }
+}
 
 - (NSString *)type {
     [self doesNotRecognizeSelector:_cmd];

@@ -18,7 +18,7 @@
 
 @required
 - (void)item:(JMRIItem*)item didChangeState:(NSUInteger)state;
-- (void)item:(JMRIItem*)item didGetReport:(NSString *)report;
+- (void)item:(JMRIItem*)item didGetValue:(NSString *)value;
 
 @end
 
@@ -56,6 +56,7 @@
 @interface JMRIItem : NSObject <JMRIItem> {
     
     NSUInteger _state;
+    NSString *_value;
 
 }
 
@@ -68,6 +69,7 @@
 @property JMRIService* service;
 @property NSUInteger state;
 @property NSString* userName;
+@property NSString* value;
 @property (readonly) NSString* type;
 
 @end

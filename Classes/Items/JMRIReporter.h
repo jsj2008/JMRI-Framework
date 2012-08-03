@@ -6,14 +6,8 @@
 //
 //
 
-#import <JMRI/JMRI.h>
+#import "JMRIItem.h"
 
-@interface JMRIReporter : JMRIItem {
-    
-    NSString *_report;
-    
-}
-
-@property NSString* report;
+@interface JMRIReporter : JMRIItem
 
 @end

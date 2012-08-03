@@ -11,51 +11,23 @@
 
 @implementation JMRIReporter
 
+- (id)initWithName:(NSString *)name withService:(JMRIService *)service {
+    if (([super initWithName:name withService:service] != nil)) {
+        _state = JMRIItemStateStateless;
+    }
+    return self;
+}
+
 - (void)queryFromSimpleService:(SimpleService *)service {
     [service send:[NSString stringWithFormat:@"REPORTER %@", self.name]];
 }
 
 - (void)writeToSimpleService:(SimpleService *)service {
-    [service send:[NSString stringWithFormat:@"REPORTER %@ %@", self.name, self.report]];
+    [service send:[NSString stringWithFormat:@"REPORTER %@ %@", self.name, self.value]];
 }
 
 - (NSString *)type {
     return JMRITypeReporter;
-}
-
-- (void)setReport:(NSString *)report {
-    [self setReport:report updateService:YES];
-}
-
-- (NSString *)report {
-    return _report;
-}
-
-- (void)setReport:(NSString *)report updateService:(Boolean)update {
-    if (_report != report) {
-        _report = report;
-        if ([_report isEqualToString:@""]) {
-            _report = nil;
-        }
-        if (update) {
-            if (!_report) {
-                [self query];
-            } else {
-                [self write];
-            }
-        }
-        if ([self.delegate respondsToSelector:@selector(item:didGetReport:)]) {
-            [self.delegate item:self didGetReport:_report];
-        }
-    }
-}
-
-- (void)setState:(NSUInteger)state {
-    // state is meaningless for a reporter
-}
-
-- (NSUInteger)state {
-    return JMRIItemStateInconsistent;
 }
 
 @end

@@ -31,5 +31,6 @@ typedef enum {
 	JMRIItemStateUnknown = 0,
 	JMRIItemStateActive = 2,
 	JMRIItemStateInactive = 4,
-	JMRIItemStateInconsistent = 8
+	JMRIItemStateInconsistent = 8,
+    JMRIItemStateStateless = INT_MAX
 } JMRIItemStates;
