@@ -36,7 +36,7 @@
 }
 
 - (void)writeToXmlIOService:(XMLIOService *)service {
-    [service writeItem:self.name ofType:JMRITypeSensor value:[[NSNumber numberWithInteger:self.state] stringValue]];
+    [service writeItem:self.name ofType:JMRITypeSensor value:self.value];
 }
 
 - (NSString *)type {

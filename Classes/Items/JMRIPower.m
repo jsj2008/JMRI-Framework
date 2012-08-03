@@ -52,7 +52,7 @@
 }
 
 - (void)writeToXmlIOService:(XMLIOService *)service {
-    [service writeItem:JMRITypePower ofType:JMRITypePower value:[[NSNumber numberWithInteger:self.state] stringValue]];
+    [service writeItem:JMRITypePower ofType:JMRITypePower value:self.value];
 }
 
 #pragma mark - Properties

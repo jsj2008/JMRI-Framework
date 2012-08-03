@@ -52,7 +52,7 @@
 }
 
 - (void)writeToXmlIOService:(XMLIOService *)service {
-    [service writeItem:self.name ofType:JMRITypeTurnout value:[[NSNumber numberWithInteger:self.state] stringValue]];
+    [service writeItem:self.name ofType:JMRITypeTurnout value:self.value];
 }
 
 - (NSString *)type {
