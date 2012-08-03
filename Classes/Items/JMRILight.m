@@ -13,22 +13,8 @@
 
 #pragma mark - Operations
 
-// Lights are only supported by the SimpleService
-- (void)query {
-    if (self.service.hasSimpleService && self.service.useSimpleService) {
-        [self queryFromSimpleService:self.service.simpleService];
-    }
-}
-
 - (void)queryFromSimpleService:(SimpleService *)service {
     [service send:[NSString stringWithFormat:@"LIGHT %@", self.name]];
-}
-
-// Lights are only supported by the SimpleService
-- (void)write {
-    if (self.service.hasSimpleService && self.service.useSimpleService) {
-        [self writeToSimpleService:self.service.simpleService];
-    }
 }
 
 - (void)writeToSimpleService:(SimpleService *)service {

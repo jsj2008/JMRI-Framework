@@ -35,14 +35,6 @@
     [service send:[NSString stringWithFormat:@"SENSOR %@ %@", self.name, state]];
 }
 
-- (void)write {
-    if (self.service.hasSimpleService && self.service.useSimpleService) {
-        [self writeToSimpleService:self.service.simpleService];
-    } else if (self.service.hasWebService && self.service.useXmlIOService) {
-        [self writeToXmlIOService:self.service.webService];
-    }
-}
-
 - (void)writeToXmlIOService:(XMLIOService *)service {
     [service writeItem:self.name ofType:JMRITypeSensor value:[[NSNumber numberWithInteger:self.state] stringValue]];
 }

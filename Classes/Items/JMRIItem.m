@@ -54,15 +54,15 @@
 }
 
 - (void)queryFromSimpleService:(SimpleService *)service {
-    [self doesNotRecognizeSelector:_cmd];
+    // silently do nothing if not supported by protocol
 }
 
 - (void)queryFromWiThrottleService:(WiThrottleService *)service {
-    [self doesNotRecognizeSelector:_cmd];
+    // silently do nothing if not supported by protocol
 }
 
 - (void)queryFromXmlIOService:(XMLIOService *)service {
-    [self doesNotRecognizeSelector:_cmd];
+    // silently do nothing if not supported by protocol
 }
 
 - (void)write {
@@ -76,15 +76,15 @@
 }
 
 - (void)writeToSimpleService:(SimpleService *)service {
-    [self doesNotRecognizeSelector:_cmd];
+    // silently do nothing if not supported by protocol
 }
 
 - (void)writeToWiThrottleService:(WiThrottleService *)service {
-    [self doesNotRecognizeSelector:_cmd];
+    // silently do nothing if not supported by protocol
 }
 
 - (void)writeToXmlIOService:(XMLIOService *)service {
-    [self doesNotRecognizeSelector:_cmd];
+    // silently do nothing if not supported by protocol
 }
 
 #pragma mark - Properties
