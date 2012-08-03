@@ -96,8 +96,8 @@
 		48BA517B15CA95820066095E /* JMRILight.m in Sources */ = {isa = PBXBuildFile; fileRef = 48BA517815CA95820066095E /* JMRILight.m */; };
 		48BA517C15CA95820066095E /* JMRILight.m in Sources */ = {isa = PBXBuildFile; fileRef = 48BA517815CA95820066095E /* JMRILight.m */; };
 		48BA517D15CA99620066095E /* JMRI.h in Headers */ = {isa = PBXBuildFile; fileRef = 48B014B915B1D06200997BD3 /* JMRI.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		48BA518015CB53DF0066095E /* JMRISensor.h in Headers */ = {isa = PBXBuildFile; fileRef = 48BA517E15CB53DF0066095E /* JMRISensor.h */; };
-		48BA518115CB53DF0066095E /* JMRISensor.h in Headers */ = {isa = PBXBuildFile; fileRef = 48BA517E15CB53DF0066095E /* JMRISensor.h */; };
+		48BA518015CB53DF0066095E /* JMRISensor.h in Headers */ = {isa = PBXBuildFile; fileRef = 48BA517E15CB53DF0066095E /* JMRISensor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		48BA518115CB53DF0066095E /* JMRISensor.h in Headers */ = {isa = PBXBuildFile; fileRef = 48BA517E15CB53DF0066095E /* JMRISensor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48BA518215CB53DF0066095E /* JMRISensor.m in Sources */ = {isa = PBXBuildFile; fileRef = 48BA517F15CB53DF0066095E /* JMRISensor.m */; };
 		48BA518315CB53DF0066095E /* JMRISensor.m in Sources */ = {isa = PBXBuildFile; fileRef = 48BA517F15CB53DF0066095E /* JMRISensor.m */; };
 		48D4AD7D15514149000B964C /* JMRIService.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D4AD7B15514149000B964C /* JMRIService.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -397,8 +397,8 @@
 				48BA517A15CA95820066095E /* JMRILight.h in Headers */,
 				48B014AD15B1CCFE00997BD3 /* NSArray+JMRIExtensions.h in Headers */,
 				48B014AE15B1CCFE00997BD3 /* NSStream+JMRIExtensions.h in Headers */,
-				48B1DF4C15BAAFAC007DCD57 /* JMRIItem+Internal.h in Headers */,
 				48BA518115CB53DF0066095E /* JMRISensor.h in Headers */,
+				48B1DF4C15BAAFAC007DCD57 /* JMRIItem+Internal.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,8 +431,8 @@
 				48B1DF4315B3129A007DCD57 /* JMRIConstants.h in Headers */,
 				48BA517915CA95820066095E /* JMRILight.h in Headers */,
 				48D4AD891559132D000B964C /* JMRIServiceBrowser.h in Headers */,
-				48B1DF4B15BAAF90007DCD57 /* JMRIItem+Internal.h in Headers */,
 				48BA518015CB53DF0066095E /* JMRISensor.h in Headers */,
+				48B1DF4B15BAAF90007DCD57 /* JMRIItem+Internal.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
