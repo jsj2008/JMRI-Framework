@@ -24,6 +24,7 @@
 #import "JMRIMetadata.h"
 #import "JMRIPower.h"
 #import "JMRISensor.h"
+#import "JMRIRoute.h"
 #import "JMRITurnout.h"
 
 @implementation XMLIOItem
@@ -69,6 +70,12 @@
         i.state = [self.value integerValue];
     } else if ([self.type isEqualToString:JMRITypeSensor]) {
         i = [[JMRISensor alloc] initWithName:self.name withService:service];
+        i.comment = self.comment;
+        i.inverted = self.inverted;
+        i.state = [self.value integerValue];
+        i.userName = self.userName;
+    } else if ([self.type isEqualToString:JMRITypeRoute]) {
+        i = [[JMRIRoute alloc] initWithName:self.name withService:service];
         i.comment = self.comment;
         i.inverted = self.inverted;
         i.state = [self.value integerValue];

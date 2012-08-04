@@ -20,6 +20,9 @@
 
 - (void)commonInit;
 
+- (void)setStateInList:(NSDictionary *)list forItem:(XMLIOItem *)item;
+- (void)setValueInList:(NSDictionary *)list forItem:(XMLIOItem *)item;
+
 @end
 
 @implementation JMRIService
@@ -311,68 +314,42 @@
 - (void)XMLIOService:(XMLIOService *)service didListItems:(NSArray *)items ofType:(NSString *)type {
     if ([type isEqualToString:JMRITypeMemory]) {
         for (XMLIOItem *i in items) {
-            if ([self.memoryVariables objectForKey:i.name]) {
-                ((JMRIMemory *)[self.memoryVariables objectForKey:i.name]).value = i.value;
-            } else {
-                [self.memoryVariables setValue:[i JMRIItemForService:self] forKey:i.name];
-            }
+            [self setValueInList:self.memoryVariables forItem:i];
         }
     } else if ([type isEqualToString:JMRITypeMetadata]) {
         for (XMLIOItem *i in items) {
-            if ([self.metadata objectForKey:i.name]) {
-                ((JMRIMetadata *)[self.metadata objectForKey:i.name]).value = i.value;
-            } else {
-                [self.metadata setValue:[i JMRIItemForService:self] forKey:i.name];
-            }
+            [self setValueInList:self.metadata forItem:i];
         }
     } else if ([type isEqualToString:JMRITypePower]) {
         [self.power setState:[((XMLIOItem *)[items objectAtIndex:0]).value integerValue] updateService:NO];
+    } else if ([type isEqualToString:JMRITypeRoute]) {
+        for (XMLIOItem *i in items) {
+            [self setStateInList:self.routes forItem:i];
+        }
     } else if ([type isEqualToString:JMRITypeSensor]) {
         for (XMLIOItem *i in items) {
-            if ([self.sensors objectForKey:i.name]) {
-                ((JMRISensor *)[self.sensors objectForKey:i.name]).state = [i.value integerValue];
-            } else {
-                [self.sensors setValue:[i JMRIItemForService:self] forKey:i.name];
-            }
+            [self setStateInList:self.sensors forItem:i];
         }
     } else if ([type isEqualToString:JMRITypeTurnout]) {
         for (XMLIOItem *i in items) {
-            if ([self.turnouts objectForKey:i.name]) {
-                ((JMRITurnout *)[self.turnouts objectForKey:i.name]).state = [i.value integerValue];
-            } else {
-                [self.turnouts setValue:[i JMRIItemForService:self] forKey:i.name];
-            }
+            [self setStateInList:self.turnouts forItem:i];
         }
     }
 }
 
 - (void)XMLIOService:(XMLIOService *)service didReadItem:(XMLIOItem *)item withName:(NSString *)aName ofType:(NSString *)type withValue:(NSString *)value {
     if ([type isEqualToString:JMRITypeMemory]) {
-        if ([self.memoryVariables objectForKey:aName]) {
-            ((JMRIMemory *)[self.memoryVariables objectForKey:aName]).value = value;
-        } else {
-            [self.memoryVariables setValue:[item JMRIItemForService:self] forKey:aName];
-        }
+        [self setValueInList:self.memoryVariables forItem:item];
     } else if ([type isEqualToString:JMRITypeMetadata]) {
-        if ([self.metadata objectForKey:aName]) {
-            ((JMRIMetadata *)[self.metadata objectForKey:aName]).value = value;
-        } else {
-            [self.metadata setValue:[item JMRIItemForService:self] forKey:aName];
-        }
+        [self setValueInList:self.metadata forItem:item];
     } else if ([type isEqualToString:JMRITypePower]) {
         [self.power setState:[value integerValue] updateService:NO];
+    } else if ([type isEqualToString:JMRITypeRoute]) {
+        [self setStateInList:self.routes forItem:item];
     } else if ([type isEqualToString:JMRITypeSensor]) {
-        if ([self.sensors objectForKey:aName]) {
-            ((JMRISensor *)[self.sensors objectForKey:aName]).state = [value integerValue];
-        } else {
-            [self.sensors setValue:[item JMRIItemForService:self] forKey:aName];
-        }
+        [self setStateInList:self.sensors forItem:item];
     } else if ([type isEqualToString:JMRITypeTurnout]) {
-        if ([self.turnouts objectForKey:aName]) {
-            ((JMRITurnout *)[self.turnouts objectForKey:aName]).state = [value integerValue];
-        } else {
-            [self.turnouts setValue:[item JMRIItemForService:self] forKey:aName];
-        }
+        [self setStateInList:self.turnouts forItem:item];
     }
 }
 
@@ -383,5 +360,21 @@
 - (void)XMLIOService:(XMLIOService *)service didGetThrottle:(XMLIOThrottle *)throttle withAddress:(NSUInteger)address {}
 - (void)XMLIOService:(XMLIOService *)service didConnectWithRequest:(NSURLRequest *)request {}
 - (void)XMLIOServiceDidFinishLoading:(XMLIOService *)service {}
+
+- (void)setStateInList:(NSDictionary *)list fromItem:(XMLIOItem *)item {
+    if ([list objectForKey:item.name]) {
+        ((JMRIItem *)[list objectForKey:item.name]).state = [item.value integerValue];
+    } else {
+        [list setValue:[item JMRIItemForService:self] forKey:item.name];
+    }
+}
+
+- (void)setValueInList:(NSDictionary *)list fromItem:(XMLIOItem *)item {
+    if ([list objectForKey:item.name]) {
+        ((JMRIItem *)[list objectForKey:item.name]).value = item.value;
+    } else {
+        [list setValue:[item JMRIItemForService:self] forKey:item.name];
+    }
+}
 
 @end
