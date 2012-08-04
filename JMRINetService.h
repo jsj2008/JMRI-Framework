@@ -19,6 +19,7 @@
 #define MIN_JMRI_VERSION @"2.14"
 
 #import <Foundation/Foundation.h>
+#import "JMRIConstants.h"
 
 @interface JMRINetService : NSObject <NSNetServiceDelegate> {
 
