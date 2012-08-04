@@ -18,7 +18,7 @@
 #pragma mark - Initializers
 
 - (id)initWithName:(NSString *)name withService:(JMRIService *)service {
-    if (([super init] != nil)) {
+    if ((self = [super init])) {
         self.name = name;
         self.service = service;
         _state = JMRIItemStateUnknown;

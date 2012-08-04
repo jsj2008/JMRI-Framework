@@ -12,7 +12,7 @@
 @implementation JMRIMemory
 
 - (id)initWithName:(NSString *)name withService:(JMRIService *)service {
-    if (([super initWithName:name withService:service] != nil)) {
+    if ((self = [super initWithName:name withService:service])) {
         _state = JMRIItemStateStateless;
     }
     return self;

@@ -25,7 +25,7 @@
 @implementation JMRIService
 
 - (id)initWithAddress:(NSString *)address withPorts:(NSDictionary *)ports {
-    if (([super init] != nil)) {
+    if ((self = [super init])) {
         [self commonInit];
         if ([ports valueForKey:JMRIServiceSimple]) {
             self.simpleService = [[SimpleService alloc] initWithAddress:address withPort:[[ports valueForKey:JMRIServiceSimple] integerValue]];
@@ -50,7 +50,7 @@
 }
 
 - (id)initWithWebServices:(NSDictionary *)services {
-    if (([super init] != nil)) {
+    if ((self = [super init])) {
         [self commonInit];
         if ([services valueForKey:JMRIServiceSimple]) {
             self.simpleService = [services valueForKey:JMRIServiceSimple];
