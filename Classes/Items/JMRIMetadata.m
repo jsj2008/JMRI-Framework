@@ -29,10 +29,6 @@
     [service readItem:self.name ofType:self.type];
 }
 
-- (void)writeToXmlIOService:(XMLIOService *)service {
-    [service writeItem:self.name ofType:self.type value:self.value];
-}
-
 - (NSString *)type {
     return JMRITypeMetadata;
 }
