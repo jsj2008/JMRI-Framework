@@ -317,6 +317,14 @@
                 [self.memoryVariables setValue:[i JMRIItemForService:self] forKey:i.name];
             }
         }
+    } else if ([type isEqualToString:JMRITypeMetadata]) {
+        for (XMLIOItem *i in items) {
+            if ([self.metadata objectForKey:i.name]) {
+                ((JMRIMetadata *)[self.metadata objectForKey:i.name]).value = i.value;
+            } else {
+                [self.metadata setValue:[i JMRIItemForService:self] forKey:i.name];
+            }
+        }
     } else if ([type isEqualToString:JMRITypePower]) {
         [self.power setState:[((XMLIOItem *)[items objectAtIndex:0]).value integerValue] updateService:NO];
     } else if ([type isEqualToString:JMRITypeSensor]) {
@@ -344,6 +352,12 @@
             ((JMRIMemory *)[self.memoryVariables objectForKey:aName]).value = value;
         } else {
             [self.memoryVariables setValue:[item JMRIItemForService:self] forKey:aName];
+        }
+    } else if ([type isEqualToString:JMRITypeMetadata]) {
+        if ([self.metadata objectForKey:aName]) {
+            ((JMRIMetadata *)[self.metadata objectForKey:aName]).value = value;
+        } else {
+            [self.metadata setValue:[item JMRIItemForService:self] forKey:aName];
         }
     } else if ([type isEqualToString:JMRITypePower]) {
         [self.power setState:[value integerValue] updateService:NO];

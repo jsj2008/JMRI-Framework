@@ -17,6 +17,7 @@
 //
 
 #import "XMLIOMetadata.h"
+#import "JMRIMetadata.h"
 
 @implementation XMLIOMetadata
 
@@ -31,6 +32,17 @@
         testVersion = 0;
     }
     return self;
+}
+
+- (JMRIItem *)JMRIItemForService:(JMRIService *)service {
+    JMRIMetadata *m = [[JMRIMetadata alloc] initWithName:self.name withService:service];
+    m.value = self.value;
+    m.userName = self.userName;
+    m.comment = self.comment;
+    m.majorVersion = self.majorVersion;
+    m.minorVersion = self.minorVersion;
+    m.testVersion = self.testVersion;
+    return m;
 }
 
 @end

@@ -79,6 +79,7 @@
 
 @property (readonly) NSDictionary *lights;
 @property (readonly) NSDictionary *memoryVariables;
+@property (readonly) NSDictionary *metadata;
 @property (readonly) NSDictionary *panels;
 @property (readonly) JMRIPower *power;
 @property (readonly) NSDictionary *reporters;

@@ -21,6 +21,7 @@
 #import "XMLIOFunction.h"
 #import "JMRIService.h"
 #import "JMRIMemory.h"
+#import "JMRIMetadata.h"
 #import "JMRIPower.h"
 #import "JMRISensor.h"
 #import "JMRITurnout.h"
