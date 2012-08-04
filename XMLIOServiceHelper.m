@@ -165,9 +165,6 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
 }
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
-    if ([type_ isEqualToString:JMRITypePanel]) {
-        type_ = JMRITypeFrame;
-    }
 	switch (self.operation) {
 		case XMLIOOperationList:
 			if ([self.delegate respondsToSelector:@selector(XMLIOServiceHelper:didListItems:ofType:)]) {
@@ -234,12 +231,7 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
             } else {
                 newElement = [[XMLIOItem alloc] init];
             }
-            // while Panels are considered a valid substitute for Frames
-            if ([elementName isEqualToString:JMRITypePanel]) {
-                [(XMLIOItem *)newElement setType:JMRITypeFrame];
-            } else {
-                [(XMLIOItem *)newElement setType:elementName];
-            }
+            [(XMLIOItem *)newElement setType:elementName];
             [(XMLIOItem *)newElement setName:[attributeDict objectForKey:XMLIOItemName]];
             [(XMLIOItem *)newElement setUserName:[attributeDict objectForKey:XMLIOItemUserName]];
             [(XMLIOItem *)newElement setValue:[attributeDict objectForKey:XMLIOItemValue]];
