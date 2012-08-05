@@ -24,5 +24,11 @@ NSString *const JMRITypeRoute = @"route";
 NSString *const JMRITypeSensor = @"sensor";
 NSString *const JMRITypeTurnout = @"turnout";
 
+NSString *const JMRIPanelPositionableLabel = @"positionablelabel";
+NSString *const JMRIPanelSensorIcon = @"sensoricon";
+NSString *const JMRIPanelSignalHeadIcon = @"signalheadicon";
+NSString *const JMRIPanelTurnoutIcon = @"turnouticon";
+
 NSString *const JMRITXTRecordKeyJMRI = @"jmri";
+NSString *const JMRIErrorDomain = @"JMRIError";
 

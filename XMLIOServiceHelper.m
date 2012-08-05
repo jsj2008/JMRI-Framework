@@ -76,7 +76,7 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
             [self.delegate XMLIOServiceHelper:self didConnectWithRequest:self.request];
         }
     } else { // failed to create NSURLConnection object
-        [self.delegate XMLIOServiceHelper:self didFailWithError:[NSError errorWithDomain:@"JMRIErrorDomain" code:1027 userInfo:nil]];
+        [self.delegate XMLIOServiceHelper:self didFailWithError:[NSError errorWithDomain:JMRIErrorDomain code:1027 userInfo:nil]];
     }
 }
 

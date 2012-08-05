@@ -25,7 +25,14 @@ extern NSString *const JMRITypeRoute;
 extern NSString *const JMRITypeSensor;
 extern NSString *const JMRITypeTurnout;
 
+// JMRI Panel elements
+extern NSString *const JMRIPanelPositionableLabel;
+extern NSString *const JMRIPanelSensorIcon;
+extern NSString *const JMRIPanelSignalHeadIcon;
+extern NSString *const JMRIPanelTurnoutIcon;
+
 extern NSString *const JMRITXTRecordKeyJMRI;
+extern NSString *const JMRIErrorDomain;
 
 typedef enum {
 	JMRIItemStateUnknown = 0,

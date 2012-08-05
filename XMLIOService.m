@@ -178,9 +178,9 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
                                                                           withName:aName];
         [queue addOperation:helper];
 	} else if (!self.url) { // did not resolve
-		[self.delegate XMLIOService:self didFailWithError:[NSError errorWithDomain:@"JMRIErrorDomain" code:1025 userInfo:nil]];
+		[self.delegate XMLIOService:self didFailWithError:[NSError errorWithDomain:JMRIErrorDomain code:1025 userInfo:nil]];
 	} else { // open connection
-		[self.delegate XMLIOService:self didFailWithError:[NSError errorWithDomain:@"JMRIErrorDomain" code:1026 userInfo:nil]];
+		[self.delegate XMLIOService:self didFailWithError:[NSError errorWithDomain:JMRIErrorDomain code:1026 userInfo:nil]];
 	}
 }
 
