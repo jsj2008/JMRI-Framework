@@ -41,3 +41,7 @@ typedef enum {
 	JMRIItemStateInconsistent = 8,
     JMRIItemStateStateless = INT_MAX
 } JMRIItemStates;
+
+typedef enum {
+    JMRIXMLUnexpectedRootElement = 512
+} JMRIErrorCodes;
