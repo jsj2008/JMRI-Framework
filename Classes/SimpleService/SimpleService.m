@@ -183,7 +183,7 @@
         NSString *str = [[NSString alloc] initWithBytes:buf length:len encoding:NSASCIIStringEncoding];
         NSLog(@"[IN] Data received: [%@]", str);
         if ([str rangeOfCharacterFromSet:[NSCharacterSet newlineCharacterSet]].location == NSNotFound) {
-            self.buffer = str;
+            self.buffer = [self.buffer stringByAppendingString:str];
         } else {
             str = [[self.buffer stringByAppendingString:str] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
             self.buffer = @"";
