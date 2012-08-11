@@ -37,7 +37,9 @@ extern NSString *const JMRIErrorDomain;
 typedef enum {
 	JMRIItemStateUnknown = 0,
 	JMRIItemStateActive = 2,
+	JMRIItemStateClosed = 2,
 	JMRIItemStateInactive = 4,
+	JMRIItemStateThrown = 4,
 	JMRIItemStateInconsistent = 8,
     JMRIItemStateStateless = INT_MAX
 } JMRIItemStates;
