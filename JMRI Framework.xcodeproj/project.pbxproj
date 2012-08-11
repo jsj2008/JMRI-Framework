@@ -124,7 +124,6 @@
 		48BA51A915CD51BE0066095E /* JMRIPanelHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 48BA51A615CD51BE0066095E /* JMRIPanelHelper.h */; };
 		48BA51AA15CD51BE0066095E /* JMRIPanelHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 48BA51A715CD51BE0066095E /* JMRIPanelHelper.m */; };
 		48BA51AB15CD51BE0066095E /* JMRIPanelHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 48BA51A715CD51BE0066095E /* JMRIPanelHelper.m */; };
-		48BA51AE15CD52E60066095E /* JMRIPanelItem.h in Sources */ = {isa = PBXBuildFile; fileRef = 48BA51AC15CD52E50066095E /* JMRIPanelItem.h */; };
 		48BA51AF15CD52E60066095E /* JMRIPanelItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 48BA51AC15CD52E50066095E /* JMRIPanelItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48BA51B015CD52E60066095E /* JMRIPanelItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 48BA51AD15CD52E50066095E /* JMRIPanelItem.m */; };
 		48BA51B115CD52E60066095E /* JMRIPanelItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 48BA51AD15CD52E50066095E /* JMRIPanelItem.m */; };
@@ -704,7 +703,6 @@
 				487AA4BF15AC43DA00F76F47 /* JMRITurnout.m in Sources */,
 				48B1DF3915B310CD007DCD57 /* JMRIPower.m in Sources */,
 				48B1DF3F15B311A8007DCD57 /* JMRIConstants.m in Sources */,
-				48BA51AE15CD52E60066095E /* JMRIPanelItem.h in Sources */,
 				48BA517B15CA95820066095E /* JMRILight.m in Sources */,
 				48BA518215CB53DF0066095E /* JMRISensor.m in Sources */,
 				48BA518B15CBE0310066095E /* JMRIReporter.m in Sources */,
