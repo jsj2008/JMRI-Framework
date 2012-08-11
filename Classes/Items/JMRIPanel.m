@@ -9,6 +9,11 @@
 #import "JMRIPanel.h"
 #import "JMRIPanelHelper.h"
 #import "JMRIItem+Internal.h"
+#ifdef TARGET_OS_IPHONE
+#import <UIKit/UIKit.h>
+#else
+#import <Cocoa/Cocoa.h>
+#endif
 
 @implementation JMRIPanel
 
@@ -37,6 +42,35 @@
 
 - (NSString *)type {
     return JMRITypePanel;
+}
+
+#pragma mark - Panel helper delegate
+
+- (void)JMRIPanelHelper:(JMRIPanelHelper *)helper didConnectWithRequest:(NSURLRequest *)request {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"didConnect" object:self];
+}
+
+- (void)JMRIPanelHelper:(JMRIPanelHelper *)helper didFailWithError:(NSError *)error {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"didFailWithError" object:self userInfo:[NSDictionary dictionaryWithObject:error forKey:@"error"]];
+}
+
+- (void)JMRIPanelHelper:(JMRIPanelHelper *)helper didReadItem:(JMRIPanelItem *)item {
+    if ([self.items valueForKey:item.item.name] && item != [self.items valueForKey:item.item.name]) {
+        if ([[self.items valueForKey:item.item.name] isKindOfClass:[NSMutableArray class]]) {
+            [((NSMutableArray *)[self.items valueForKey:item.item.name]) addObject:item];
+        } else {
+            [self.items setValue:[NSMutableArray arrayWithObjects:item, [self.items valueForKey:item.item.name], nil] forKey:item.item.name];
+        }
+    } else {
+        [self.items setValue:item forKey:item.item.name];
+    }
+    if (item.level > self.levels) {
+        self.levels = item.level;
+    }
+}
+
+- (void)JMRIPanelHelperDidFinishLoading:(JMRIPanelHelper *)helper {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"didFinishLoading" object:self];
 }
 
 @end
