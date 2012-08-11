@@ -14,6 +14,7 @@
 #import "JMRIPower.h"
 #import "JMRIReporter.h"
 #import "JMRISensor.h"
+#import "JMRISignalHead.h"
 #import "JMRITurnout.h"
 
 @interface JMRIService (Private)
@@ -217,6 +218,7 @@
 @synthesize roster;
 @synthesize routes;
 @synthesize sensors;
+@synthesize signalHeads;
 @synthesize turnouts;
 
 - (void)monitor:(JMRIItem *)item {
@@ -275,6 +277,13 @@
     [((JMRISensor *)[self.sensors objectForKey:sensor]) setState:state updateService:NO];
 }
 
+- (void)JMRINetService:(JMRINetService *)service didGetSignalHead:(NSString *)signalHead withState:(NSUInteger)state {
+    if (![self.signalHeads objectForKey:signalHead]) {
+        JMRISignalHead *signalHeadObj = [[JMRISignalHead alloc] initWithName:signalHead withService:self];
+        [self.signalHeads setValue:signalHeadObj forKey:signalHead];
+    }
+    [((JMRISignalHead *)[self.signalHeads objectForKey:signalHead]) setState:state updateService:NO];
+}
 - (void)JMRINetService:(JMRINetService *)service didGetTurnout:(NSString *)turnout withState:(NSUInteger)state {
     if (![self.turnouts objectForKey:turnout]) {
         JMRITurnout *turnoutObj = [[JMRITurnout alloc] initWithName:turnout withService:self];

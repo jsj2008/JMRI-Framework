@@ -86,6 +86,7 @@
 @property (readonly) NSDictionary *roster;
 @property (readonly) NSDictionary *routes;
 @property (readonly) NSDictionary *sensors;
+@property (readonly) NSDictionary *signalHeads;
 @property (readonly) NSDictionary *turnouts;
 
 #pragma mark - JMRI element handling

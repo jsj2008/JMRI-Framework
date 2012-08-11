@@ -43,5 +43,17 @@ typedef enum {
 } JMRIItemStates;
 
 typedef enum {
+    JMRISignalAppearanceDark = 0,
+    JMRISignalAppearanceRed = 1,
+    JMRISignalAppearanceFlashRed = 2,
+    JMRISignalAppearanceYellow = 4,
+    JMRISignalAppearanceFlashYellow = 8,
+    JMRISignalAppearanceGreen = 10,
+    JMRISignalAppearanceFlashGreen = 20,
+    JMRISignalAppearanceLunar = 40,
+    JMRISignalAppearanceFlashLunar = 80
+} JMRISignalAppearances;
+
+typedef enum {
     JMRIXMLUnexpectedRootElement = 512
 } JMRIErrorCodes;
