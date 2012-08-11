@@ -164,7 +164,6 @@
                 }
                 break;
             case NSStreamEventHasSpaceAvailable:
-                NSLog(@"[OUT] Has space available.");
                 break;
             case NSStreamEventErrorOccurred:
                 NSLog(@"[OUT] An error!");
@@ -183,7 +182,6 @@
     len = [stream read:buf maxLength:1024];
     if (len) {
         NSString *str = [[NSString alloc] initWithBytes:buf length:len encoding:NSASCIIStringEncoding];
-        NSLog(@"[IN] Data received: [%@]", str);
         if ([str rangeOfCharacterFromSet:[NSCharacterSet newlineCharacterSet]].location == NSNotFound) {
             self.buffer = [self.buffer stringByAppendingString:str];
         } else {
