@@ -9,7 +9,7 @@
 #import "JMRIPanel.h"
 #import "JMRIPanelHelper.h"
 #import "JMRIItem+Internal.h"
-#ifdef TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
 #else
 #import <Cocoa/Cocoa.h>
