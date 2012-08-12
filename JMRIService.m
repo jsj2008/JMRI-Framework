@@ -370,7 +370,7 @@
 - (void)XMLIOService:(XMLIOService *)service didConnectWithRequest:(NSURLRequest *)request {}
 - (void)XMLIOServiceDidFinishLoading:(XMLIOService *)service {}
 
-- (void)setStateInList:(NSDictionary *)list fromItem:(XMLIOItem *)item {
+- (void)setStateInList:(NSDictionary *)list forItem:(XMLIOItem *)item {
     if ([list objectForKey:item.name]) {
         ((JMRIItem *)[list objectForKey:item.name]).state = [item.value integerValue];
     } else {
@@ -378,7 +378,7 @@
     }
 }
 
-- (void)setValueInList:(NSDictionary *)list fromItem:(XMLIOItem *)item {
+- (void)setValueInList:(NSDictionary *)list forItem:(XMLIOItem *)item {
     if ([list objectForKey:item.name]) {
         ((JMRIItem *)[list objectForKey:item.name]).value = item.value;
     } else {
