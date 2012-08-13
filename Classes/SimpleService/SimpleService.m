@@ -266,11 +266,10 @@
 
 - (void)didGetSignalHeadState:(NSString *)string {
     if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetSignalHead:withState:)]) {
-        NSUInteger state;
+        NSUInteger state = JMRISignalAppearanceDark;
         NSArray *tokens = [string componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-        if ([[tokens objectAtIndex:2] isEqualToString:JMRIPanelSignalDark]) {
-            state = JMRISignalAppearanceDark;
-        } else if ([[tokens objectAtIndex:2] isEqualToString:JMRIPanelSignalFlashGreen]) {
+        // since dark is the default/fallback state, we aren't checking for it.
+        if ([[tokens objectAtIndex:2] isEqualToString:JMRIPanelSignalFlashGreen]) {
             state = JMRISignalAppearanceFlashGreen;
         } else if ([[tokens objectAtIndex:2] isEqualToString:JMRIPanelSignalFlashLunar]) {
             state = JMRISignalAppearanceFlashLunar;
