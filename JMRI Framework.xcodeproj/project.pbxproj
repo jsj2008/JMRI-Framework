@@ -20,6 +20,7 @@
 		48642FBE137A5DD900B93C86 /* XMLIOServiceBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 48642FBC137A5DD900B93C86 /* XMLIOServiceBrowser.m */; };
 		48642FCC137A5F3400B93C86 /* WiThrottleServiceBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 48642FCA137A5F3400B93C86 /* WiThrottleServiceBrowser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48642FCD137A5F3400B93C86 /* WiThrottleServiceBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 48642FCB137A5F3400B93C86 /* WiThrottleServiceBrowser.m */; };
+		487875CF15D9054D00BD3E0D /* NSArray+JMRIExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 4813F4841386DE8900718FFC /* NSArray+JMRIExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		487AA4B615AC33BE00F76F47 /* JMRIItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 487AA4B415AC33BD00F76F47 /* JMRIItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		487AA4B815AC33BE00F76F47 /* JMRIItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 487AA4B515AC33BE00F76F47 /* JMRIItem.m */; };
 		487AA4BD15AC43DA00F76F47 /* JMRITurnout.h in Headers */ = {isa = PBXBuildFile; fileRef = 487AA4BB15AC43DA00F76F47 /* JMRITurnout.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -491,8 +492,6 @@
 				48B014AC15B1CCFE00997BD3 /* JMRINetServiceBrowser.h in Headers */,
 				48B1DF4215B3127B007DCD57 /* JMRIPower.h in Headers */,
 				48BA517A15CA95820066095E /* JMRILight.h in Headers */,
-				48B014AD15B1CCFE00997BD3 /* NSArray+JMRIExtensions.h in Headers */,
-				48B014AE15B1CCFE00997BD3 /* NSStream+JMRIExtensions.h in Headers */,
 				48BA518115CB53DF0066095E /* JMRISensor.h in Headers */,
 				48BA518A15CBE0310066095E /* JMRIReporter.h in Headers */,
 				48BA519015CBF1400066095E /* JMRIMemory.h in Headers */,
@@ -502,6 +501,8 @@
 				48BA51AF15CD52E60066095E /* JMRIPanelItem.h in Headers */,
 				48DCFB5A15D710DF0096D2D0 /* JMRIPanelImage.h in Headers */,
 				48DCFB5515D705A00096D2D0 /* JMRISignalHead.h in Headers */,
+				48B014AD15B1CCFE00997BD3 /* NSArray+JMRIExtensions.h in Headers */,
+				48B014AE15B1CCFE00997BD3 /* NSStream+JMRIExtensions.h in Headers */,
 				48B1DF4C15BAAFAC007DCD57 /* JMRIItem+Internal.h in Headers */,
 				48BA51A915CD51BE0066095E /* JMRIPanelHelper.h in Headers */,
 				48BA51B515CD97920066095E /* XMLPanelObject.h in Headers */,
@@ -531,7 +532,6 @@
 				48DA6CD713B63E5800E3643D /* XMLIOFunction.h in Headers */,
 				48B9D0E014242D4A00EDB24E /* XMLIOMetadata.h in Headers */,
 				483FD433145A391300BCED0D /* SimpleService.h in Headers */,
-				483FD43F145BA5DB00BCED0D /* NSStream+JMRIExtensions.h in Headers */,
 				483FD449145BCD5D00BCED0D /* SimpleServiceBrowser.h in Headers */,
 				48D4AD7D15514149000B964C /* JMRIService.h in Headers */,
 				48B1DF4415B3129A007DCD57 /* JMRIPower.h in Headers */,
@@ -547,6 +547,8 @@
 				48DCFB5815D710B80096D2D0 /* JMRIPanelImage.h in Headers */,
 				48DCFB5915D710B80096D2D0 /* JMRIPanelItem.h in Headers */,
 				48DCFB5415D705A00096D2D0 /* JMRISignalHead.h in Headers */,
+				487875CF15D9054D00BD3E0D /* NSArray+JMRIExtensions.h in Headers */,
+				483FD43F145BA5DB00BCED0D /* NSStream+JMRIExtensions.h in Headers */,
 				48B1DF4B15BAAF90007DCD57 /* JMRIItem+Internal.h in Headers */,
 				48BA51A815CD51BE0066095E /* JMRIPanelHelper.h in Headers */,
 				48BA51B415CD97920066095E /* XMLPanelObject.h in Headers */,
@@ -582,6 +584,7 @@
 				D2AAC07A0554694100DB518D /* Headers */,
 				D2AAC07B0554694100DB518D /* Sources */,
 				D2AAC07C0554694100DB518D /* Frameworks */,
+				487875CE15D9031000BD3E0D /* Prepare Framework */,
 			);
 			buildRules = (
 			);
@@ -631,6 +634,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		487875CE15D9031000BD3E0D /* Prepare Framework */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Prepare Framework";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\nmkdir -p \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers\"\n\n# Link the \"Current\" version to \"A\"\n/bin/ln -sfh A \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/Current\"\n/bin/ln -sfh Versions/Current/Headers \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Headers\"\n/bin/ln -sfh \"Versions/Current/${PRODUCT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/${PRODUCT_NAME}\"\n\n# The -a ensures that the headers maintain the source modification date so that we don't constantly\n# cause propagating rebuilds of files that import these headers.\n/bin/cp -a \"${TARGET_BUILD_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		48B0146C15B1CB6400997BD3 /* Sources */ = {
@@ -730,6 +750,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = NO;
 				DSTROOT = /tmp/libJMRI.dst;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_MODEL_TUNING = G5;
@@ -740,7 +761,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = JMRI;
+				PUBLIC_HEADERS_FOLDER_PATH = "$(PROJECT_NAME)Headers";
 				SKIP_INSTALL = YES;
+				STRIP_STYLE = "non-global";
 			};
 			name = Debug;
 		};
@@ -751,6 +774,8 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_OBJCPP_ARC_ABI = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = NO;
 				DSTROOT = /tmp/libJMRI.dst;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -759,7 +784,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = JMRI;
+				PUBLIC_HEADERS_FOLDER_PATH = "$(PROJECT_NAME)Headers";
 				SKIP_INSTALL = YES;
+				STRIP_STYLE = "non-global";
 			};
 			name = Release;
 		};
