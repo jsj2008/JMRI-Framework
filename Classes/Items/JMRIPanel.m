@@ -37,7 +37,7 @@
     if (!self.service.hasWebService || self.service.webService.port == -1) {
 		return nil;
 	}
-	return [[NSURL URLWithString:[NSString stringWithFormat:@"http://%@:%li/panel/%@", self.service.hostName, self.service.webService.port, self.name, nil]] absoluteURL];
+	return [[NSURL URLWithString:[NSString stringWithFormat:@"http://%@:%li/panel/%@", self.service.hostName, (long)self.service.webService.port, self.name, nil]] absoluteURL];
 }
 
 - (NSString *)type {
