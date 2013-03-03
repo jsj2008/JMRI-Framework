@@ -29,6 +29,7 @@
 
 - (void)searchForServices;
 - (void)addServiceWithAddress:(NSString *)address withPorts:(NSDictionary *)ports;
+- (void)addServiceWithName:(NSString *)name withAddress:(NSString *)address withPorts:(NSDictionary *)ports;
 - (void)stop;
 
 #pragma mark - Utility methods

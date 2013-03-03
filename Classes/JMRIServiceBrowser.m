@@ -47,6 +47,10 @@
     [webBrowser searchForServices];
 }
 
+- (void)addServiceWithName:(NSString *)name withAddress:(NSString *)address withPorts:(NSDictionary *)ports {
+    [self.services addObject:[[JMRIService alloc] initWithName:name withAddress:address withPorts:ports]];    
+}
+
 - (void)addServiceWithAddress:(NSString *)address withPorts:(NSDictionary *)ports {
     [self.services addObject:[[JMRIService alloc] initWithAddress:address withPorts:ports]];
 }
