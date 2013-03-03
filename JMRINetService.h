@@ -26,6 +26,7 @@
 	NSNetService *netService;
     NSTimeInterval timeoutInterval;
 	BOOL logTraffic;
+    NSString *manualName;
 	NSString *manualAddress;
 	NSInteger manualPort;
     NSString *serviceVersion;
@@ -40,6 +41,7 @@
 
 - (id)initWithNetService:(NSNetService *)service;
 - (id)initWithAddress:(NSString *)address withPort:(NSInteger)port;
+- (id)initWithName:(NSString *)name withAddress:(NSString *)address withPort:(NSInteger)port;
 - (NSComparisonResult)localizedCaseInsensitiveCompareByName:(JMRINetService*)aService;
 
 #pragma mark - Net service handling

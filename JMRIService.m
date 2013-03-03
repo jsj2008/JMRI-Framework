@@ -28,29 +28,33 @@
 
 @implementation JMRIService
 
-- (id)initWithAddress:(NSString *)address withPorts:(NSDictionary *)ports {
+- (id)initWithName:(NSString *)name withAddress:(NSString *)address withPorts:(NSDictionary *)ports {
     if ((self = [super init])) {
         [self commonInit];
         if ([ports valueForKey:JMRIServiceSimple]) {
-            self.simpleService = [[SimpleService alloc] initWithAddress:address withPort:[[ports valueForKey:JMRIServiceSimple] integerValue]];
+            self.simpleService = [[SimpleService alloc] initWithName:name withAddress:address withPort:[[ports valueForKey:JMRIServiceSimple] integerValue]];
             self.requiresSimpleService = YES;
         } else {
             self.useSimpleService = NO;
         }
         if ([ports valueForKey:JMRIServiceWiThrottle]) {
-            self.wiThrottleService = [[WiThrottleService alloc] initWithAddress:address withPort:[[ports valueForKey:JMRIServiceWiThrottle] integerValue]];
+            self.wiThrottleService = [[WiThrottleService alloc] initWithName:name withAddress:address withPort:[[ports valueForKey:JMRIServiceWiThrottle] integerValue]];
             self.requiresWiThrottleService = YES;
         } else {
             self.useWiThrottleService = NO;
         }
         if ([ports valueForKey:JMRIServiceWeb]) {
-            self.webService = [[XMLIOService alloc] initWithAddress:address withPort:[[ports valueForKey:JMRIServiceWeb] integerValue]];
+            self.webService = [[XMLIOService alloc] initWithName:name withAddress:address withPort:[[ports valueForKey:JMRIServiceWeb] integerValue]];
             self.requiresXmlIOService = YES;
         } else {
             self.useXmlIOService = NO;
         }
     }
     return self;
+}
+
+- (id)initWithAddress:(NSString *)address withPorts:(NSDictionary *)ports {
+    return [self initWithName:nil withAddress:address withPorts:ports];
 }
 
 - (id)initWithWebServices:(NSDictionary *)services {
@@ -119,7 +123,7 @@
 }
 
 - (NSString *)name {
-    return name;
+    return _name;
 }
 
 @synthesize delegate;
@@ -143,7 +147,7 @@
     if (simple) {
         domain = simple.domain;
         hostName = simple.hostName;
-        name = simple.name;
+        _name = simple.name;
     }
 }
 
@@ -164,7 +168,7 @@
     if (xmlio) {
         domain = xmlio.domain;
         hostName = xmlio.hostName;
-        name = xmlio.name;
+        _name = xmlio.name;
     }
 }
 
@@ -185,7 +189,7 @@
     if (wiThrottle) {
         domain = wiThrottle.domain;
         hostName = wiThrottle.hostName;
-        name = wiThrottle.name;
+        _name = wiThrottle.name;
     }
 }
 

@@ -60,16 +60,21 @@ static JMRINetService *sharedNetService_ = nil;
 	return self;
 }
 
-- (id)initWithAddress:(NSString *)address withPort:(NSInteger)port {
+- (id)initWithName:(NSString *)name withAddress:(NSString *)address withPort:(NSInteger)port {
 	if ((self = [super init])) {
 		self.service = nil;
 		self.logTraffic = NO;
+        manualName = name;
 		manualAddress = address;
 		manualPort = port;
 		self.timeoutInterval = 60;
         serviceVersion = MIN_JMRI_VERSION;
 	}
 	return self;
+}
+
+- (id)initWithAddress:(NSString *)address withPort:(NSInteger)port {
+    return [self initWithName:nil withAddress:address withPort:port];
 }
 
 - (NSComparisonResult)localizedCaseInsensitiveCompareByName:(JMRINetService*)aService {
@@ -181,7 +186,7 @@ static JMRINetService *sharedNetService_ = nil;
 	if (self.service) {
 		return ([[self.service name] hasPrefix:@"JMRI on "]) ? [[self.service name] substringFromIndex:8] : [self.service name];
 	}
-	return manualAddress;
+    return (manualName) ? manualName : manualAddress;
 }
 
 - (NSInteger)port {

@@ -491,8 +491,8 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 	return self;
 }
 
-- (id)initWithAddress:(NSString *)address withPort:(NSInteger)port {
-	if ((self = [super initWithAddress:address withPort:port])) {
+- (id)initWithName:(NSString *)name withAddress:(NSString *)address withPort:(NSInteger)port {
+	if ((self = [super initWithName:name withAddress:address withPort:port])) {
         serviceType = JMRIServiceWeb;
 		connections = [[NSMutableDictionary alloc] initWithCapacity:0];
 		monitoredItems = [[NSMutableSet alloc] initWithCapacity:0];
@@ -503,5 +503,8 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 	return self;
 }
 
+- (id)initWithAddress:(NSString *)address withPort:(NSInteger)port {
+    return [self initWithName:nil withAddress:address withPort:port];
+}
 
 @end

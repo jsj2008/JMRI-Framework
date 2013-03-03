@@ -39,12 +39,13 @@
     WiThrottleService *wiThrottle;
     NSString *domain;
     NSString *hostName;
-    NSString *name;
+    NSString *_name;
     
 }
 
 #pragma mark - Initialization
 
+- (id)initWithName:(NSString *)name withAddress:(NSString *)address withPorts:(NSDictionary *)ports;
 - (id)initWithAddress:(NSString *)address withPorts:(NSDictionary *)ports;
 - (id)initWithWebServices:(NSDictionary *)services;
 
