@@ -11,8 +11,16 @@
 
 @implementation JMRIRoute
 
+- (void)queryFromJsonService:(JsonService *)service {
+    [service readItem:self.name ofType:JMRITypeRoute];
+}
+
 - (void)queryFromXmlIOService:(XMLIOService *)service {
     [service readItem:self.name ofType:JMRITypeRoute];
+}
+
+- (void)writeToJsonService:(JsonService *)service {
+    [service writeItem:self.name ofType:JMRITypeRoute state:self.state];
 }
 
 // note that WiThrottleService can only toggle the route state, but cannot set the route state

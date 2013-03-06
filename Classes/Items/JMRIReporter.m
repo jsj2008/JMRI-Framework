@@ -18,8 +18,16 @@
     return self;
 }
 
+- (void)queryFromJsonService:(JsonService *)service {
+    [service readItem:self.name ofType:JMRITypeReporter];
+}
+
 - (void)queryFromSimpleService:(SimpleService *)service {
     [service send:[NSString stringWithFormat:@"REPORTER %@", self.name]];
+}
+
+- (void)writeToJsonService:(JsonService *)service {
+    [service writeItem:self.name ofType:JMRITypeReporter value:self.value];
 }
 
 - (void)writeToSimpleService:(SimpleService *)service {

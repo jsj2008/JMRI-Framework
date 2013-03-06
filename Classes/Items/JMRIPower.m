@@ -17,12 +17,20 @@
     [self.service.webService readItem:JMRITypePower ofType:JMRITypePower initialValue:[[NSNumber numberWithInteger:self.state] stringValue]];
 }
 
+- (void)queryFromJsonService:(JsonService *)service {
+    [service readItem:JMRITypePower ofType:JMRITypePower];
+}
+
 - (void)queryFromSimpleService:(SimpleService *)service {
     [service send:[JMRITypePower uppercaseString]];
 }
 
 - (void)queryFromXmlIOService:(XMLIOService *)service {
     [service readItem:JMRITypePower ofType:JMRITypePower];
+}
+
+- (void)writeToJsonService:(JsonService *)service {
+    [service writeItem:JMRITypePower ofType:JMRITypePower state:self.state];
 }
 
 - (void)writeToSimpleService:(SimpleService *)service {

@@ -13,8 +13,16 @@
 
 #pragma mark - Operations
 
+- (void)queryFromJsonService:(JsonService *)service {
+    [service readItem:self.name ofType:JMRITypeLight];
+}
+
 - (void)queryFromSimpleService:(SimpleService *)service {
     [service send:[NSString stringWithFormat:@"LIGHT %@", self.name]];
+}
+
+- (void)writeToJsonService:(JsonService *)service {
+    [service writeItem:self.name ofType:JMRITypeLight state:self.state];
 }
 
 - (void)writeToSimpleService:(SimpleService *)service {

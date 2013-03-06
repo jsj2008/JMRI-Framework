@@ -11,8 +11,17 @@
 
 @implementation JMRISignalHead
 
+
+- (void)queryFromJsonService:(JsonService *)service {
+    [service readItem:self.name ofType:JMRITypeSignalHead];
+}
+
 - (void)queryFromSimpleService:(SimpleService *)service {
     [service send:[NSString stringWithFormat:@"SIGNALHEAD %@", self.name]];
+}
+
+- (void)writeToJsonService:(JsonService *)service {
+    [service writeItem:self.name ofType:JMRITypeSignalHead state:self.state];
 }
 
 - (void)writeToSimpleService:(SimpleService *)service {

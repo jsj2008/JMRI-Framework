@@ -11,12 +11,20 @@
 
 @implementation JMRITurnout
 
+- (void)queryFromJsonService:(JsonService *)service {
+    [service readItem:self.name ofType:JMRITypeTurnout];
+}
+
 - (void)queryFromSimpleService:(SimpleService *)service {
     [service send:[NSString stringWithFormat:@"TURNOUT %@", self.name]];
 }
 
 - (void)queryFromXmlIOService:(XMLIOService *)service {
     [service readItem:self.name ofType:JMRITypeTurnout];
+}
+
+- (void)writeToJsonService:(JsonService *)service {
+    [service writeItem:self.name ofType:JMRITypeTurnout state:self.state];
 }
 
 - (void)writeToSimpleService:(SimpleService *)service {

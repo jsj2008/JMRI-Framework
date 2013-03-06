@@ -11,12 +11,20 @@
 
 @implementation JMRISensor
 
+- (void)queryFromJsonService:(JsonService *)service {
+    [service readItem:self.name ofType:JMRITypeSensor];
+}
+
 - (void)queryFromSimpleService:(SimpleService *)service {
     [service send:[NSString stringWithFormat:@"SENSOR %@", self.name]];
 }
 
 - (void)queryFromXmlIOService:(XMLIOService *)service {
     [service readItem:self.name ofType:JMRITypeSensor];
+}
+
+- (void)writeToJsonService:(JsonService *)service {
+    [service writeItem:self.name ofType:JMRITypeSensor state:self.state];
 }
 
 - (void)writeToSimpleService:(SimpleService *)service {

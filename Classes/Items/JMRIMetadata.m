@@ -25,6 +25,10 @@
     // don't actually monitor, since metadata is fixed
 }
 
+- (void)queryFromJsonService:(JsonService *)service {
+    [service readItem:self.name ofType:self.type];
+}
+
 - (void)queryFromXmlIOService:(XMLIOService *)service {
     [service readItem:self.name ofType:self.type];
 }
