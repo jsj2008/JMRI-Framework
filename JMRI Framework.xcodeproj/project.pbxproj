@@ -192,6 +192,7 @@
 		487AA4B515AC33BE00F76F47 /* JMRIItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JMRIItem.m; path = Classes/Items/JMRIItem.m; sourceTree = "<group>"; };
 		487AA4BB15AC43DA00F76F47 /* JMRITurnout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; name = JMRITurnout.h; path = Classes/Items/JMRITurnout.h; sourceTree = "<group>"; };
 		487AA4BC15AC43DA00F76F47 /* JMRITurnout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JMRITurnout.m; path = Classes/Items/JMRITurnout.m; sourceTree = "<group>"; };
+		487AEFAA16E80EBC00E754DC /* ReadMe.md */ = {isa = PBXFileReference; lastKnownFileType = text; name = ReadMe.md; path = Classes/WebService/ReadMe.md; sourceTree = "<group>"; };
 		487E2B8F137EFF3F0004761D /* XMLIOServiceHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = XMLIOServiceHelper.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		487E2B90137EFF3F0004761D /* XMLIOServiceHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XMLIOServiceHelper.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		487F9375137509BB00FF9DBA /* XMLIOService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = XMLIOService.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -319,6 +320,7 @@
 				48BA51A515CD4D2A0066095E /* Panels */,
 				482BB4C316E3DE0900519F40 /* JsonService */,
 				483FD437145A392900BCED0D /* SimpleService */,
+				487AEFA916E80E8E00E754DC /* WebService */,
 				483C571A138E132000245381 /* WiThrottle */,
 				483C5718138E131200245381 /* XMLIO */,
 			);
@@ -420,6 +422,14 @@
 				48DCFB5315D705A00096D2D0 /* JMRISignalHead.m */,
 			);
 			name = Items;
+			sourceTree = "<group>";
+		};
+		487AEFA916E80E8E00E754DC /* WebService */ = {
+			isa = PBXGroup;
+			children = (
+				487AEFAA16E80EBC00E754DC /* ReadMe.md */,
+			);
+			name = WebService;
 			sourceTree = "<group>";
 		};
 		48B014B515B1CEB000997BD3 /* iOS */ = {
