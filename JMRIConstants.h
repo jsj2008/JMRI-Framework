@@ -24,6 +24,7 @@ extern NSString *const JMRITypeReporter;
 extern NSString *const JMRITypeRoster;
 extern NSString *const JMRITypeRoute;
 extern NSString *const JMRITypeSensor;
+extern NSString *const JMRITypeSignalHead;
 extern NSString *const JMRITypeTurnout;
 
 // JMRI Panel elements

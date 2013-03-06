@@ -23,6 +23,7 @@ NSString *const JMRITypeReporter = @"reporter";
 NSString *const JMRITypeRoster = @"roster";
 NSString *const JMRITypeRoute = @"route";
 NSString *const JMRITypeSensor = @"sensor";
+NSString *const JMRITypeSignalHead = @"signalHead";
 NSString *const JMRITypeTurnout = @"turnout";
 
 NSString *const JMRIPanelPositionableLabel = @"positionablelabel";
