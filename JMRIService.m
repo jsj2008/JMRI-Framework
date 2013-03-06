@@ -31,6 +31,12 @@
 - (id)initWithName:(NSString *)name withAddress:(NSString *)address withPorts:(NSDictionary *)ports {
     if ((self = [super init])) {
         [self commonInit];
+        if (ports[JMRIServiceJson]) {
+            self.jsonService = [[JsonService alloc] initWithName:name withAddress:address withPort:[ports[JMRIServiceJson] integerValue]];
+            self.requiresJsonService = YES;
+        } else {
+            self.useJsonService = NO;
+        }
         if ([ports valueForKey:JMRIServiceSimple]) {
             self.simpleService = [[SimpleService alloc] initWithName:name withAddress:address withPort:[[ports valueForKey:JMRIServiceSimple] integerValue]];
             self.requiresSimpleService = YES;
@@ -60,6 +66,13 @@
 - (id)initWithWebServices:(NSDictionary *)services {
     if ((self = [super init])) {
         [self commonInit];
+        if (services[JMRIServiceJson]) {
+            self.jsonService = services[JMRIServiceJson];
+            [self.jsonService startMonitoring];
+            self.requiresJsonService = YES;
+        } else {
+            self.useJsonService = NO;
+        }
         if ([services valueForKey:JMRIServiceSimple]) {
             self.simpleService = [services valueForKey:JMRIServiceSimple];
             [self.simpleService startMonitoring];
@@ -87,9 +100,11 @@
 
 - (void)commonInit {
     power = [[JMRIPower alloc] initWithName:JMRITypePower withService:self];
+    self.requiresJsonService = NO;
     self.requiresSimpleService = NO;
     self.requiresWiThrottleService = NO;
     self.requiresXmlIOService = NO;
+    self.useJsonService = YES;
     self.useSimpleService = YES;
     self.useWiThrottleService = YES;
     self.useXmlIOService = YES;
@@ -104,7 +119,9 @@
 #pragma mark - Properties
 
 - (NSArray *)addresses {
-    if (self.hasSimpleService) {
+    if (self.hasJsonService) {
+        return self.jsonService.addresses;
+    } else if (self.hasSimpleService) {
         return self.simpleService.addresses;
     } else if (self.hasWiThrottleService) {
         return self.wiThrottleService.addresses;
@@ -129,6 +146,27 @@
 @synthesize delegate;
 
 #pragma mark - Service properties
+
+- (JsonService *)jsonService {
+    return json;
+}
+
+- (void)setJsonService:(JsonService *)jsonService {
+    if (json == jsonService) {
+        return;
+    }
+    [json stopMonitoring];
+    [json stop];
+    json.delegate = nil;
+    json = jsonService;
+    json.delegate = self;
+    [json startMonitoring];
+    if (json) {
+        domain = json.domain;
+        hostName = json.hostName;
+        _name = json.name;
+    }
+}
 
 - (SimpleService *)simpleService {
     return simple;
@@ -294,6 +332,26 @@
         [self.turnouts setValue:turnoutObj forKey:turnout];
     }
     [((JMRITurnout *)[self.turnouts objectForKey:turnout]) setState:state updateService:NO];
+}
+
+#pragma mark - Json service delegate
+
+- (void)jsonService:(JsonService *)service didFailWithError:(NSError *)error {
+    if ([self.delegate respondsToSelector:@selector(JMRIService:didFailWithError:)]) {
+        [self.delegate JMRIService:self didFailWithError:error];
+    }
+}
+
+- (void)jsonService:(JsonService *)service didGetInput:(NSString *)input {
+    if ([self.delegate respondsToSelector:@selector(JMRIService:didGetInput:)]) {
+        [self.delegate JMRIService:self didGetInput:input];
+    }
+}
+
+- (void)jsonServiceDidOpenConnection:(JsonService *)service {
+    if ([self.delegate respondsToSelector:@selector(JMRIServiceDidOpenConnection:)]) {
+        [self.delegate JMRIServiceDidOpenConnection:self];
+    }
 }
 
 #pragma mark - Simple service delegate

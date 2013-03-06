@@ -18,9 +18,11 @@
 
 #pragma mark - Communications
 
+- (void)queryFromJsonService:(JsonService *)service;
 - (void)queryFromSimpleService:(SimpleService *)service;
 - (void)queryFromWiThrottleService:(WiThrottleService *)service;
 - (void)queryFromXmlIOService:(XMLIOService *)service;
+- (void)writeToJsonService:(JsonService *)service;
 - (void)writeToSimpleService:(SimpleService *)service;
 - (void)writeToWiThrottleService:(WiThrottleService *)service;
 - (void)writeToXmlIOService:(XMLIOService *)service;

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "JsonService.h"
 #import "SimpleService.h"
 #import "WiThrottleService.h"
 #import "XMLIOService.h"
@@ -34,6 +35,7 @@
 
 @interface JMRIService : NSObject <SimpleServiceDelegate, XMLIOServiceDelegate> {
     
+    JsonService *json;
     SimpleService *simple;
     XMLIOService *xmlio;
     WiThrottleService *wiThrottle;
@@ -63,15 +65,19 @@
 
 #pragma mark - Service properties
 
+@property (readwrite, strong) JsonService *jsonService;
 @property (readwrite, strong) SimpleService *simpleService;
 @property (readwrite, strong) WiThrottleService *wiThrottleService;
 @property (readwrite, strong) XMLIOService *webService;
+@property (readonly) Boolean hasJsonService;
 @property (readonly) Boolean hasSimpleService;
 @property (readonly) Boolean hasWiThrottleService;
 @property (readonly) Boolean hasWebService;
+@property Boolean requiresJsonService;
 @property Boolean requiresSimpleService;
 @property Boolean requiresWiThrottleService;
 @property Boolean requiresXmlIOService;
+@property Boolean useJsonService;
 @property Boolean useSimpleService;
 @property Boolean useWiThrottleService;
 @property Boolean useXmlIOService;
