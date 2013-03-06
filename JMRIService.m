@@ -7,6 +7,10 @@
 //
 
 #import "JMRIService.h"
+#import "JsonService.h"
+#import "SimpleService.h"
+#import "WiThrottleService.h"
+#import "XMLIOService.h"
 #import "JMRIConstants.h"
 #import "JMRIItem+Internal.h"
 #import "JMRILight.h"
@@ -17,7 +21,7 @@
 #import "JMRISignalHead.h"
 #import "JMRITurnout.h"
 
-@interface JMRIService (Private)
+@interface JMRIService (Private) <JsonServiceDelegate, SimpleServiceDelegate, XMLIOServiceDelegate>
 
 - (void)commonInit;
 

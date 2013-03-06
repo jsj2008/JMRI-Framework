@@ -7,6 +7,7 @@
 //
 
 #import "JMRIMetadata.h"
+#import "JMRIItem+Internal.h"
 
 @implementation JMRIMetadata
 

@@ -7,6 +7,10 @@
 //
 
 #import "JMRIService.h"
+#import "JsonService.h"
+#import "SimpleService.h"
+#import "WiThrottleService.h"
+#import "XMLIOService.h"
 #import "JMRIItem.h"
 
 @interface JMRIItem (Internal)

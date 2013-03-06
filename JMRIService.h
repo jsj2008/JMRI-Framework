@@ -7,13 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "JsonService.h"
-#import "SimpleService.h"
-#import "WiThrottleService.h"
-#import "XMLIOService.h"
 
 @class JMRIService;
+@class JMRINetService;
+@class JsonService;
+@class SimpleService;
+@class WiThrottleService;
+@class XMLIOService;
 @class JMRIItem;
+@class JMRIPower;
 
 #pragma mark - Delegatation Protocol
 
@@ -33,7 +35,7 @@
 
 #pragma mark - Interface
 
-@interface JMRIService : NSObject <SimpleServiceDelegate, XMLIOServiceDelegate> {
+@interface JMRIService : NSObject {
     
     JsonService *json;
     SimpleService *simple;
@@ -53,7 +55,7 @@
 
 #pragma mark - Object Handling
 
-- (NSComparisonResult)localizedCaseInsensitiveCompareByName:(JMRINetService*)aService;
+- (NSComparisonResult)localizedCaseInsensitiveCompareByName:(JMRINetService *)aService;
 
 #pragma mark - Properties
 
