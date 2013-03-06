@@ -120,7 +120,7 @@
 #pragma mark - JMRINetService items
 
 - (void)list:(NSString *)type {
-    [self write:@{@"type": @"list", @"data": @{@"type": type}}];
+    [self write:@{@"type": @"list", @"list": type}];
 }
 
 - (void)readItem:(NSString *)name ofType:(NSString *)type {
