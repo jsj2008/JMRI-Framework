@@ -19,7 +19,9 @@
 - (void)close;
 - (void)error:(NSError *)error;
 
+- (void)didGetItem:(NSDictionary *)json;
 - (void)didGetLightState:(NSDictionary *)json;
+- (void)didGetList:(NSDictionary *)json;
 - (void)didGetPowerState:(NSDictionary *)json;
 - (void)didGetReporterValue:(NSDictionary *)json;
 - (void)didGetSensorState:(NSDictionary *)json;
@@ -210,28 +212,37 @@
         } else {
             str = [[self.buffer stringByAppendingString:str] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
             self.buffer = @"";
-            NSArray *cmds = [str componentsSeparatedByString:separator];
-            for (NSString *cmd in cmds) {
-                NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[cmd dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&error];
+            NSArray *lines = [str componentsSeparatedByString:separator];
+            for (NSString *line in lines) {
+                NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[line dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&error];
                 if ([self.delegate respondsToSelector:@selector(jsonService:didGetInput:)]) {
                     [self.delegate jsonService:self didGetInput:json];
                 }
-                NSString *cmd = json[@"type"];
-                if ([cmd isEqualToString:JMRITypeLight]) {
-                    [self didGetLightState:json];
-                } else if ([cmd isEqualToString:JMRITypePower]) {
-                    [self didGetPowerState:json];
-                } else if ([cmd isEqualToString:JMRITypeReporter]) {
-                    [self didGetReporterValue:json];
-                } else if ([cmd isEqualToString:JMRITypeSensor]) {
-                    [self didGetSensorState:json];
-                } else if ([cmd isEqualToString:JMRITypeTurnout]) {
-                    [self didGetTurnoutState:json];
+                if ([json[@"type"] isEqualToString:JMRITypeList]) {
+                    [self didGetList:json];
+                } else {
+                    [self didGetItem:json];
                 }
             }
         }
     } else {
         NSLog(@"[IN] No data.");
+    }
+}
+
+- (void)didGetItem:(NSDictionary *)json {
+    if ([json[@"type"] isEqualToString:JMRITypeLight]) {
+        [self didGetLightState:json];
+    } else if ([json[@"type"] isEqualToString:JMRITypePower]) {
+        [self didGetPowerState:json];
+    } else if ([json[@"type"] isEqualToString:JMRITypeReporter]) {
+        [self didGetReporterValue:json];
+    } else if ([json[@"type"] isEqualToString:JMRITypeSensor]) {
+        [self didGetSensorState:json];
+    } else if ([json[@"type"] isEqualToString:JMRITypeTurnout]) {
+        [self didGetTurnoutState:json];
+    } else if ([json[@"type"] isEqualToString:JMRITypeList]) {
+        [self didGetList:json];
     }
 }
 
@@ -273,6 +284,12 @@
 - (void)didGetTurnoutState:(NSDictionary *)json {
     if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetTurnout:withState:)]) {
         [self.delegate JMRINetService:self didGetTurnout:json[@"data"][@"name"] withState:[json[@"data"][@"state"] integerValue]];
+    }
+}
+
+- (void)didGetList:(NSDictionary *)json {
+    for (NSDictionary *item in json[@"list"]) {
+        [self didGetItem:item];
     }
 }
 

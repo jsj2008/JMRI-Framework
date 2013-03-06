@@ -15,6 +15,7 @@ NSString *const JMRIServiceWiThrottle = @"wiThrottle";
 
 NSString *const JMRITypeFrame = @"frame";
 NSString *const JMRITypeLight = @"light";
+NSString *const JMRITypeList = @"list";
 NSString *const JMRITypeMemory = @"memory";
 NSString *const JMRITypeMetadata = @"metadata";
 NSString *const JMRITypePanel = @"panel";

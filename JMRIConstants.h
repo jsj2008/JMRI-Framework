@@ -16,6 +16,7 @@ extern NSString *const JMRIServiceWeb;
 // JMRI XMLIO item types
 extern NSString *const JMRITypeFrame;
 extern NSString *const JMRITypeLight;
+extern NSString *const JMRITypeList;
 extern NSString *const JMRITypeMemory;
 extern NSString *const JMRITypeMetadata;
 extern NSString *const JMRITypePanel;
