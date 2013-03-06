@@ -9,7 +9,6 @@
 #import "JsonService.h"
 #import "JMRIConstants.h"
 #import "JMRIPanel.h"
-#import "XMLIOService.h"
 #ifdef TARGET_OS_IPHONE
 #import "NSStream+JMRIExtensions.h"
 #endif
@@ -120,6 +119,10 @@
 
 #pragma mark - JMRINetService items
 
+- (void)list:(NSString *)type {
+    [self write:@{@"type": @"list", @"data": @{@"type": type}}];
+}
+
 - (void)readItem:(NSString *)name ofType:(NSString *)type {
     // {"type":"power","data":{"name":"CT1"}}
     // NSString *string = [NSString stringWithFormat:@"{\"type\":\"%@\",\"data\":{\"name\":\"%@\"}}\n", type, name];
@@ -136,7 +139,7 @@
 }
 
 - (void)writeItem:(NSString *)name ofType:(NSString *)type state:(NSUInteger)state {
-    [self write:@{@"type": type, @"data": @{@"name": name, @"state":[NSNumber numberWithInteger:state]}];
+    [self write:@{@"type": type, @"data": @{@"name": name, @"state":[NSNumber numberWithInteger:state]}}];
 }
 
 #pragma mark - NSStream delegate
@@ -207,7 +210,7 @@
                 if ([self.delegate respondsToSelector:@selector(jsonService:didGetInput:)]) {
                     [self.delegate jsonService:self didGetInput:json];
                 }
-                NSString *cmd = json[XMLIOItemType];
+                NSString *cmd = json[@"type"];
                 if ([cmd isEqualToString:JMRITypeLight]) {
                     [self didGetLightState:json];
                 } else if ([cmd isEqualToString:JMRITypePower]) {
