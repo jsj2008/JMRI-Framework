@@ -9,6 +9,7 @@
 #import "JMRIItem+Internal.h"
 #import "JMRIConstants.h"
 #import "JMRINetService.h"
+#import "JsonService.h"
 #import "SimpleService.h"
 #import "WiThrottleService.h"
 #import "XMLIOService.h"
@@ -44,13 +45,19 @@
 }
 
 - (void)query {
-    if (self.service.hasSimpleService && self.service.useSimpleService) {
+    if (self.service.hasJsonService && self.service.useJsonService) {
+        [self queryFromJsonService:self.service.jsonService];
+    } else if (self.service.hasSimpleService && self.service.useSimpleService) {
         [self queryFromSimpleService:self.service.simpleService];
     } else if (self.service.hasWiThrottleService && self.service.useWiThrottleService) {
         // WiThrottle has no explicit query mechanism
     } else if (self.service.hasWebService && self.service.useXmlIOService) {
         [self queryFromXmlIOService:self.service.webService];
     }
+}
+
+- (void)queryFromJsonService:(JsonService *)service {
+    // silently do nothing if not supported by protocol
 }
 
 - (void)queryFromSimpleService:(SimpleService *)service {
@@ -66,13 +73,19 @@
 }
 
 - (void)write {
-    if (self.service.hasSimpleService && self.service.useSimpleService) {
+    if (self.service.hasJsonService && self.service.useJsonService) {
+        [self writeToJsonService:self.service.jsonService];
+    } else if (self.service.hasSimpleService && self.service.useSimpleService) {
         [self writeToSimpleService:self.service.simpleService];
     } else if (self.service.hasWiThrottleService && self.service.useWiThrottleService) {
         [self writeToWiThrottleService:self.service.wiThrottleService];
     } else if (self.service.hasWebService && self.service.useXmlIOService) {
         [self writeToXmlIOService:self.service.webService];
     }
+}
+
+- (void)writeToJsonService:(JsonService *)service {
+    //silently do nothing if not supported by protocol
 }
 
 - (void)writeToSimpleService:(SimpleService *)service {
