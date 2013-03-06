@@ -9,6 +9,7 @@
 #import "JsonService.h"
 #import "JMRIConstants.h"
 #import "JMRIPanel.h"
+#import "XMLIOService.h"
 #ifdef TARGET_OS_IPHONE
 #import "NSStream+JMRIExtensions.h"
 #endif
@@ -134,6 +135,10 @@
     [self write:@{@"type": type, @"data": @{@"name": name, @"state": value}}];
 }
 
+- (void)writeItem:(NSString *)name ofType:(NSString *)type state:(NSUInteger)state {
+    [self write:@{@"type": type, @"data": @{@"name": name, @"state":[NSNumber numberWithInteger:state]}];
+}
+
 #pragma mark - NSStream delegate
 
 - (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode {
@@ -202,7 +207,7 @@
                 if ([self.delegate respondsToSelector:@selector(jsonService:didGetInput:)]) {
                     [self.delegate jsonService:self didGetInput:json];
                 }
-                NSString *cmd = [json valueForKey:XMLIOItemType];
+                NSString *cmd = json[XMLIOItemType];
                 if ([cmd isEqualToString:JMRITypeLight]) {
                     [self didGetLightState:json];
                 } else if ([cmd isEqualToString:JMRITypePower]) {

@@ -6,7 +6,7 @@
 //
 //
 
-#import <JMRI/JMRI.h>
+#import "JMRINetService.h"
 
 @interface JsonService : JMRINetService <NSStreamDelegate> {
     
@@ -18,7 +18,11 @@
 - (void)openConnection;
 - (void)closeConnection;
 
-- (void)write:(NSDictionary *)jsonObject;
+- (void)list:(NSString *)type;
+- (void)readItem:(NSString *)name ofType:(NSString *)type;
+- (void)readItem:(NSString *)name ofType:(NSString *)type initialValue:(NSString *)value;
+- (void)writeItem:(NSString *)name ofType:(NSString *)type value:(NSString *)value;
+- (void)writeItem:(NSString *)name ofType:(NSString *)type state:(NSUInteger)state;
 
 @end
 
