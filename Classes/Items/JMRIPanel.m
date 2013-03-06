@@ -27,9 +27,9 @@
                                                                       withRequest:request];
         [queue addOperation:helper];
 	} else if (!self.url) { // did not resolve
-		[self.service XMLIOService:self.service.webService didFailWithError:[NSError errorWithDomain:JMRIErrorDomain code:1025 userInfo:nil]];
+		[self.service.webService failWithError:[NSError errorWithDomain:JMRIErrorDomain code:1025 userInfo:nil]];
 	} else { // open connection
-		[self.service XMLIOService:self.service.webService didFailWithError:[NSError errorWithDomain:JMRIErrorDomain code:1026 userInfo:nil]];
+		[self.service.webService failWithError:[NSError errorWithDomain:JMRIErrorDomain code:1026 userInfo:nil]];
 	}
 }
 

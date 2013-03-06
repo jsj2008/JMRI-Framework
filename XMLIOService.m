@@ -229,6 +229,12 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
                   withName:name];
 }
 
+- (void)failWithError:(NSError *)error {
+    if ([self.delegate respondsToSelector:@selector(XMLIOService:didFailWithError:)]) {
+        [self.delegate XMLIOService:self didFailWithError:error];
+    }
+}
+
 - (void)sendThrottle:(NSUInteger)address commands:(NSDictionary *)commands {
     NSMutableString *s = [NSMutableString stringWithFormat:@"<throttle address=\"%lu\"", (unsigned long)address];
     if (commands) {

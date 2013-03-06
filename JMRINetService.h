@@ -19,7 +19,6 @@
 #define MIN_JMRI_VERSION @"2.14"
 
 #import <Foundation/Foundation.h>
-#import "JMRIConstants.h"
 
 @interface JMRINetService : NSObject <NSNetServiceDelegate> {
 
@@ -50,6 +49,7 @@
 - (void)startMonitoring;
 - (void)stop;
 - (void)stopMonitoring;
+- (void)failWithError:(NSError *)error;
 
 #pragma mark - JMRI object handling
 

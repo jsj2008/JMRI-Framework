@@ -132,6 +132,12 @@
     [self write:string];
 }
 
+- (void)failWithError:(NSError *)error {
+    if ([self.delegate respondsToSelector:@selector(simpleService:didFailWithError:)]) {
+        [self.delegate simpleService:self didFailWithError:error];
+    }
+}
+
 #pragma mark - NSStream delegate
 
 - (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode {

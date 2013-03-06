@@ -123,6 +123,10 @@ static JMRINetService *sharedNetService_ = nil;
 	}
 }
 
+- (void)failWithError:(NSError *)error {
+	[self doesNotRecognizeSelector:_cmd];
+}
+
 #pragma mark - Net service delegate
 
 - (void)netService:(NSNetService *)sender didNotResolve:(NSDictionary *)errorDict {

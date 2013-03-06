@@ -142,6 +142,12 @@
     [self write:@{@"type": type, @"data": @{@"name": name, @"state":[NSNumber numberWithInteger:state]}}];
 }
 
+- (void)failWithError:(NSError *)error {
+    if ([self.delegate respondsToSelector:@selector(jsonService:didFailWithError:)]) {
+        [self.delegate jsonService:self didFailWithError:error];
+    }
+}
+
 #pragma mark - NSStream delegate
 
 - (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode {
