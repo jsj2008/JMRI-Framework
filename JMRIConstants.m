@@ -8,6 +8,7 @@
 
 #import "JMRIConstants.h"
 
+NSString *const JMRIServiceJson = @"JsonService";
 NSString *const JMRIServiceSimple = @"JMRINetwork";
 NSString *const JMRIServiceWeb = @"WebServer";
 NSString *const JMRIServiceWiThrottle = @"wiThrottle";

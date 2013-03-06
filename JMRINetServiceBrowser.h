@@ -20,6 +20,7 @@
 #import "XMLIOService.h"
 #import "NSArray+JMRIExtensions.h"
 
+extern NSString *const JMRINetServiceJson;
 extern NSString *const JMRINetServiceSimple;
 extern NSString *const JMRINetServiceWiThrottle;
 extern NSString *const JMRINetServiceWeb;

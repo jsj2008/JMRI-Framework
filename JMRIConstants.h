@@ -8,6 +8,7 @@
 
 
 // Known service types
+extern NSString *const JMRIServiceJson;
 extern NSString *const JMRIServiceSimple;
 extern NSString *const JMRIServiceWiThrottle;
 extern NSString *const JMRIServiceWeb;
