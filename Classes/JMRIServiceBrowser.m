@@ -8,6 +8,15 @@
 
 #import "JMRIServiceBrowser.h"
 #import "JMRIConstants.h"
+#import "JMRIService.h"
+#import "JsonServiceBrowser.h"
+#import "SimpleServiceBrowser.h"
+#import "WiThrottleServiceBrowser.h"
+#import "XMLIOServiceBrowser.h"
+
+@interface JMRIServiceBrowser (Private) <JMRINetServiceBrowserDelegate>
+
+@end
 
 @implementation JMRIServiceBrowser
 

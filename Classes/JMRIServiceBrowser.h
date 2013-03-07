@@ -7,13 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "JMRIService.h"
-#import "JsonServiceBrowser.h"
-#import "SimpleServiceBrowser.h"
-#import "WiThrottleServiceBrowser.h"
-#import "XMLIOServiceBrowser.h"
 
-@interface JMRIServiceBrowser : NSObject <JMRINetServiceBrowserDelegate> {
+@class JMRIService;
+@class JsonServiceBrowser;
+@class SimpleServiceBrowser;
+@class WiThrottleServiceBrowser;
+@class XMLIOServiceBrowser;
+
+@interface JMRIServiceBrowser : NSObject {
     
 	BOOL searching;
     JsonServiceBrowser *jsonBrowser;
