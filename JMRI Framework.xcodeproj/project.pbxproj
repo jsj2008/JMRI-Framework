@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		4813F4871386DE8900718FFC /* NSArray+JMRIExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4813F4851386DE8900718FFC /* NSArray+JMRIExtensions.m */; };
-		482BB4BF16E3DDDD00519F40 /* JsonService.h in Headers */ = {isa = PBXBuildFile; fileRef = 482BB4BD16E3DDDD00519F40 /* JsonService.h */; };
-		482BB4C016E3DDDD00519F40 /* JsonService.h in Headers */ = {isa = PBXBuildFile; fileRef = 482BB4BD16E3DDDD00519F40 /* JsonService.h */; };
+		482BB4BF16E3DDDD00519F40 /* JsonService.h in Headers */ = {isa = PBXBuildFile; fileRef = 482BB4BD16E3DDDD00519F40 /* JsonService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		482BB4C016E3DDDD00519F40 /* JsonService.h in Headers */ = {isa = PBXBuildFile; fileRef = 482BB4BD16E3DDDD00519F40 /* JsonService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		482BB4C116E3DDDD00519F40 /* JsonService.m in Sources */ = {isa = PBXBuildFile; fileRef = 482BB4BE16E3DDDD00519F40 /* JsonService.m */; };
 		482BB4C216E3DDDD00519F40 /* JsonService.m in Sources */ = {isa = PBXBuildFile; fileRef = 482BB4BE16E3DDDD00519F40 /* JsonService.m */; };
-		482BB4C616E3DFA500519F40 /* JsonServiceBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 482BB4C416E3DFA500519F40 /* JsonServiceBrowser.h */; };
-		482BB4C716E3DFA500519F40 /* JsonServiceBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 482BB4C416E3DFA500519F40 /* JsonServiceBrowser.h */; };
+		482BB4C616E3DFA500519F40 /* JsonServiceBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 482BB4C416E3DFA500519F40 /* JsonServiceBrowser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		482BB4C716E3DFA500519F40 /* JsonServiceBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 482BB4C416E3DFA500519F40 /* JsonServiceBrowser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		482BB4C816E3DFA500519F40 /* JsonServiceBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 482BB4C516E3DFA500519F40 /* JsonServiceBrowser.m */; };
 		482BB4C916E3DFA500519F40 /* JsonServiceBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 482BB4C516E3DFA500519F40 /* JsonServiceBrowser.m */; };
 		483C571F138E139E00245381 /* XMLIOItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 483C571B138E139E00245381 /* XMLIOItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -537,12 +537,12 @@
 				48DCFB5515D705A00096D2D0 /* JMRISignalHead.h in Headers */,
 				48B014AD15B1CCFE00997BD3 /* NSArray+JMRIExtensions.h in Headers */,
 				48B014AE15B1CCFE00997BD3 /* NSStream+JMRIExtensions.h in Headers */,
+				482BB4C016E3DDDD00519F40 /* JsonService.h in Headers */,
+				482BB4C716E3DFA500519F40 /* JsonServiceBrowser.h in Headers */,
 				48B1DF4C15BAAFAC007DCD57 /* JMRIItem+Internal.h in Headers */,
 				48BA51A915CD51BE0066095E /* JMRIPanelHelper.h in Headers */,
 				48BA51B515CD97920066095E /* XMLPanelObject.h in Headers */,
 				48BA51BB15CDC2D20066095E /* XMLPanelImage.h in Headers */,
-				482BB4C016E3DDDD00519F40 /* JsonService.h in Headers */,
-				482BB4C716E3DFA500519F40 /* JsonServiceBrowser.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -585,12 +585,12 @@
 				48DCFB5415D705A00096D2D0 /* JMRISignalHead.h in Headers */,
 				487875CF15D9054D00BD3E0D /* NSArray+JMRIExtensions.h in Headers */,
 				483FD43F145BA5DB00BCED0D /* NSStream+JMRIExtensions.h in Headers */,
+				482BB4BF16E3DDDD00519F40 /* JsonService.h in Headers */,
+				482BB4C616E3DFA500519F40 /* JsonServiceBrowser.h in Headers */,
 				48B1DF4B15BAAF90007DCD57 /* JMRIItem+Internal.h in Headers */,
 				48BA51A815CD51BE0066095E /* JMRIPanelHelper.h in Headers */,
 				48BA51B415CD97920066095E /* XMLPanelObject.h in Headers */,
 				48BA51BA15CDC2D20066095E /* XMLPanelImage.h in Headers */,
-				482BB4BF16E3DDDD00519F40 /* JsonService.h in Headers */,
-				482BB4C616E3DFA500519F40 /* JsonServiceBrowser.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

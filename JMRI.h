@@ -14,6 +14,10 @@
 
 #import <JMRI/JMRIService.h>
 #import <JMRI/JMRIServiceBrowser.h>
+#import <JMRI/JsonService.h>
+#import <JMRI/SimpleService.h>
+#import <JMRI/WiThrottleService.h>
+#import <JMRI/XMLIOService.h>
 
 //  JMRI items
 
