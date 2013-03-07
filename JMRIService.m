@@ -235,6 +235,9 @@
     }
 }
 
+- (Boolean)hasJsonService {
+    return (self.jsonService != nil);
+}
 
 - (Boolean)hasSimpleService {
     return (self.simpleService != nil);
