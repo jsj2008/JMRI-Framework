@@ -16,11 +16,15 @@
 @synthesize services = _services;
 
 - (id)init {
-	return [self initForServices:[NSSet setWithObjects:JMRIServiceSimple, JMRIServiceWeb, JMRIServiceWiThrottle, nil]];
+	return [self initForServices:[NSSet setWithObjects:JMRIServiceJson, JMRIServiceSimple, JMRIServiceWeb, JMRIServiceWiThrottle, nil]];
 }
 
 - (id)initForServices:(NSSet *)services {
     if ((self = [super init])) {
+        if ([services containsObject:JMRIServiceJson]) {
+            jsonBrowser = [[JsonServiceBrowser alloc] init];
+            jsonBrowser.delegate = self;
+        }
         if ([services containsObject:JMRIServiceSimple]) {
             simpleBrowser = [[SimpleServiceBrowser alloc] init];
             simpleBrowser.delegate = self;
@@ -42,6 +46,7 @@
 #pragma mark - Service browser methods
 
 - (void)searchForServices {
+    [jsonBrowser searchForServices];
     [simpleBrowser searchForServices];
     [wiThrottleBrowser searchForServices];
     [webBrowser searchForServices];
@@ -56,6 +61,7 @@
 }
 
 - (void)stop {
+    [jsonBrowser stop];
     [simpleBrowser stop];
     [wiThrottleBrowser stop];
     [webBrowser stop];
@@ -106,7 +112,9 @@
     searching = moreComing;
     if ([self indexOfServiceWithName:aNetService.name] != NSNotFound) {
         JMRIService *service = [self serviceWithName:aNetService.name];
-        if ([aNetService.type isEqualToString:JMRIServiceSimple]) {
+        if ([aNetService.type isEqualToString:JMRIServiceJson]) {
+            service.jsonService = (JsonService *)aNetService;
+        } else if ([aNetService.type isEqualToString:JMRIServiceSimple]) {
             service.simpleService = (SimpleService *)aNetService;
         } else if ([aNetService.type isEqualToString:JMRIServiceWiThrottle]) {
             service.wiThrottleService = (WiThrottleService *)aNetService;
@@ -117,7 +125,7 @@
             [delegate JMRIServiceBrowser:self didChangeService:service moreComing:searching];
         }
     } else {
-        JMRIService *service = [[JMRIService alloc] initWithWebServices:[NSMutableDictionary dictionaryWithObject:aNetService forKey:aNetService.type]];
+        JMRIService *service = [[JMRIService alloc] initWithServices:[NSMutableDictionary dictionaryWithObject:aNetService forKey:aNetService.type]];
         [self.services addObject:service];
         if ([delegate respondsToSelector:@selector(JMRIServiceBrowser:didFindService:moreComing:)]) {
             [delegate JMRIServiceBrowser:self didFindService:service moreComing:searching];
@@ -129,14 +137,16 @@
     searching = moreComing;
     if ([self indexOfServiceWithName:aNetService.name] != NSNotFound) {
         JMRIService *service = [self serviceWithName:aNetService.name];
-        if ([aNetService.type isEqualToString:JMRIServiceSimple]) {
+        if ([aNetService.type isEqualToString:JMRIServiceJson]) {
+            service.jsonService = nil;
+        } else if ([aNetService.type isEqualToString:JMRIServiceSimple]) {
             service.simpleService = nil;
         } else if ([aNetService.type isEqualToString:JMRIServiceWiThrottle]) {
             service.wiThrottleService = nil;
         } else {
             service.webService = nil;
         }
-        if (service.hasSimpleService || service.hasWiThrottleService || service.hasWebService) {
+        if (service.hasJsonService || service.hasSimpleService || service.hasWiThrottleService || service.hasWebService) {
             if ([delegate respondsToSelector:@selector(JMRIServiceBrowser:didChangeService:moreComing:)]) {
                 [delegate JMRIServiceBrowser:self didChangeService:service moreComing:searching];
             }
