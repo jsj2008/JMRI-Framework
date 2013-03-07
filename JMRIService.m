@@ -270,6 +270,14 @@
 @synthesize signalHeads;
 @synthesize turnouts;
 
+- (void)list:(NSString *)type {
+    if (self.hasWebService && self.useXmlIOService) {
+        [self.webService list:type];
+    } else if (self.hasJsonService && self.useJsonService) {
+        [self.jsonService list:type];
+    }
+}
+
 - (void)monitor:(JMRIItem *)item {
     if (self.hasWebService && self.useXmlIOService) {
         [self.webService startMonitoring:item.name ofType:item.type];

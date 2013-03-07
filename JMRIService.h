@@ -100,6 +100,7 @@
 
 #pragma mark - JMRI element handling
 
+- (void)list:(NSString *)type;
 - (void)monitor:(JMRIItem *)item;
 - (void)stopMonitoring:(JMRIItem *)item;
 - (Boolean)isMonitoring:(JMRIItem *)item;
