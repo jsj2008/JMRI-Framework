@@ -51,7 +51,7 @@
 
 - (id)initWithName:(NSString *)name withAddress:(NSString *)address withPorts:(NSDictionary *)ports;
 - (id)initWithAddress:(NSString *)address withPorts:(NSDictionary *)ports;
-- (id)initWithWebServices:(NSDictionary *)services;
+- (id)initWithServices:(NSDictionary *)services;
 
 #pragma mark - Object Handling
 

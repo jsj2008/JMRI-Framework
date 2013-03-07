@@ -67,7 +67,7 @@
     return [self initWithName:nil withAddress:address withPorts:ports];
 }
 
-- (id)initWithWebServices:(NSDictionary *)services {
+- (id)initWithServices:(NSDictionary *)services {
     if ((self = [super init])) {
         [self commonInit];
         if (services[JMRIServiceJson]) {
