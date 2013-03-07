@@ -6,7 +6,7 @@
 //
 //
 
-#import <JMRI/JMRI.h>
+#import "JMRINetServiceBrowser.h"
 
 @interface JsonServiceBrowser : JMRINetServiceBrowser
 
