@@ -297,6 +297,19 @@
     return NO;
 }
 
+- (void)stopMonitoringAllItems {
+    if (self.hasWebService) {
+        [self.webService stopMonitoringAllItems];
+    }
+}
+
+- (void)stop {
+    [self.jsonService stop];
+    [self.simpleService stop];
+    [self.wiThrottleService stop];
+    [self.webService stop];
+}
+
 #pragma mark - JMRINetService delegate
 
 - (void)JMRINetService:(JMRINetService *)service didNotResolve:(NSDictionary *)errorDict {

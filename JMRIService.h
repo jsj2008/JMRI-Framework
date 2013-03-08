@@ -103,6 +103,9 @@
 - (void)list:(NSString *)type;
 - (void)monitor:(JMRIItem *)item;
 - (void)stopMonitoring:(JMRIItem *)item;
+- (void)stopMonitoringAllItems;
 - (Boolean)isMonitoring:(JMRIItem *)item;
+
+- (void)stop;
 
 @end
