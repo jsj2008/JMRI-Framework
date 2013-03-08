@@ -75,14 +75,22 @@
 
 @end
 
+#pragma mark -
+
 @protocol JMRINetServiceDelegate
 
+#pragma mark - Required
 @required
 - (void)JMRINetService:(JMRINetService *)service didNotResolve:(NSDictionary *)errorDict;
+- (void)JMRINetService:(JMRINetService *)service didFailWithError:(NSError *)error;
 
+#pragma mark - Bonjour resolution (optional)
 @optional
 - (void)JMRINetServiceDidResolveAddress:(JMRINetService *)service;
 - (void)JMRINetServiceWillResolve:(JMRINetService *)service;
+
+#pragma mark - JMRI items (optional)
+@optional
 - (void)JMRINetService:(JMRINetService *)service didGetLight:(NSString *)light withState:(NSUInteger)state;
 - (void)JMRINetService:(JMRINetService *)service didGetMemory:(NSString *)memory withValue:(NSString *)value;
 - (void)JMRINetService:(JMRINetService *)service didGetPowerState:(NSUInteger)state;
@@ -90,5 +98,11 @@
 - (void)JMRINetService:(JMRINetService *)service didGetSensor:(NSString *)sensor withState:(NSUInteger)state;
 - (void)JMRINetService:(JMRINetService *)service didGetSignalHead:(NSString *)signalHead withState:(NSUInteger)state;
 - (void)JMRINetService:(JMRINetService *)service didGetTurnout:(NSString *)turnout withState:(NSUInteger)state;
+
+#pragma mark - Service events (optional)
+@optional
+- (void)JMRINetService:(JMRINetService *)service didReceive:(NSString *)input;
+- (void)JMRINetService:(JMRINetService *)service didSend:(NSData *)data;
+- (void)JMRINetServiceDidOpenConnection:(JMRINetService *)service;
 
 @end

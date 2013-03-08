@@ -102,8 +102,8 @@
 }
 
 - (void)error:(NSError *)error {
-    if ([self.delegate respondsToSelector:@selector(jsonService:didFailWithError:)]) {
-        [self.delegate jsonService:self didFailWithError:error];
+    if ([self.delegate respondsToSelector:@selector(JMRINetService:didFailWithError:)]) {
+        [self.delegate JMRINetService:self didFailWithError:error];
     }
 }
 
@@ -145,8 +145,8 @@
 }
 
 - (void)failWithError:(NSError *)error {
-    if ([self.delegate respondsToSelector:@selector(jsonService:didFailWithError:)]) {
-        [self.delegate jsonService:self didFailWithError:error];
+    if ([self.delegate respondsToSelector:@selector(JMRINetService:didFailWithError:)]) {
+        [self.delegate JMRINetService:self didFailWithError:error];
     }
 }
 
@@ -159,8 +159,8 @@
                 NSLog(@"[IN] Nothing to see here.");
                 break;
             case NSStreamEventOpenCompleted:
-                if ([self.delegate respondsToSelector:@selector(jsonServiceDidOpenConnection:)]) {
-                    [self.delegate jsonServiceDidOpenConnection:self];
+                if ([self.delegate respondsToSelector:@selector(JMRINetServiceDidOpenConnection:)]) {
+                    [self.delegate JMRINetServiceDidOpenConnection:self];
                 }
                 break;
             case NSStreamEventHasBytesAvailable:
@@ -181,8 +181,8 @@
                 NSLog(@"[OUT] Nothing to see here.");
                 break;
             case NSStreamEventOpenCompleted:
-                if ([self.delegate respondsToSelector:@selector(jsonServiceDidOpenConnection:)]) {
-                    [self.delegate jsonServiceDidOpenConnection:self];
+                if ([self.delegate respondsToSelector:@selector(JMRINetServiceDidOpenConnection:)]) {
+                    [self.delegate JMRINetServiceDidOpenConnection:self];
                 }
                 break;
             case NSStreamEventHasSpaceAvailable:
@@ -215,8 +215,8 @@
             NSArray *lines = [str componentsSeparatedByString:separator];
             for (NSString *line in lines) {
                 NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[line dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&error];
-                if ([self.delegate respondsToSelector:@selector(jsonService:didGetInput:)]) {
-                    [self.delegate jsonService:self didGetInput:json];
+                if ([self.delegate respondsToSelector:@selector(JMRINetService:didReceive:)]) {
+                    [self.delegate JMRINetService:self didReceive:[json description]];
                 }
                 if ([json[@"type"] isEqualToString:JMRITypeList]) {
                     [self didGetList:json];

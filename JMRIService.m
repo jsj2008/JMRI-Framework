@@ -21,7 +21,7 @@
 #import "JMRISignalHead.h"
 #import "JMRITurnout.h"
 
-@interface JMRIService (Private) <JsonServiceDelegate, SimpleServiceDelegate, XMLIOServiceDelegate>
+@interface JMRIService (Private) <JMRINetServiceDelegate, SimpleServiceDelegate, XMLIOServiceDelegate>
 
 - (void)commonInit;
 
@@ -319,6 +319,12 @@
     }
 }
 
+- (void)JMRINetService:(JMRINetService *)service didFailWithError:(NSError *)error {
+    if ([self.delegate respondsToSelector:@selector(JMRIService:didFailWithError:)]) {
+        [self.delegate JMRIService:self didFailWithError:error];
+    }
+}
+
 - (void)JMRINetService:(JMRINetService *)service didGetLight:(NSString *)light withState:(NSUInteger)state {
     if (![self.lights objectForKey:light]) {
         JMRILight *lightObj = [[JMRILight alloc] initWithName:light withService:self];
@@ -362,35 +368,27 @@
     [((JMRITurnout *)[self.turnouts objectForKey:turnout]) setState:state updateService:NO];
 }
 
-#pragma mark - Json service delegate
-
-- (void)jsonService:(JsonService *)service didFailWithError:(NSError *)error {
-    if ([self.delegate respondsToSelector:@selector(JMRIService:didFailWithError:)]) {
-        [self.delegate JMRIService:self didFailWithError:error];
-    }
-}
-
-- (void)jsonService:(JsonService *)service didGetInput:(NSString *)input {
+- (void)JMRINetService:(JMRINetService *)service didReceive:(NSString *)input {
     if (self.logNetworkActivity) {
-        NSLog(@"JsonService received %@", input);
+        NSLog(@"Service %@ received %@", service.type, input);
     }
     if ([self.delegate respondsToSelector:@selector(JMRIService:didGetInput:)]) {
         [self.delegate JMRIService:self didGetInput:input];
     }
 }
 
-- (void)jsonServiceDidOpenConnection:(JsonService *)service {
+- (void)JMRINetServiceDidOpenConnection:(JMRINetService *)service {
     if (self.logNetworkActivity) {
-        NSLog(@"JsonService opened connection");
+        NSLog(@"Service %@ opened connection", service.type);
     }
     if ([self.delegate respondsToSelector:@selector(JMRIServiceDidOpenConnection:)]) {
         [self.delegate JMRIServiceDidOpenConnection:self];
     }
 }
 
-- (void)jsonService:(JsonService *)service didWrite:(NSData *)data {
+- (void)JMRINetService:(JsonService *)service didWrite:(NSData *)data {
     if (self.logNetworkActivity) {
-        NSLog(@"JsonService wrote %@", [data description]);
+        NSLog(@"Service %@ wrote %@", service.type, [data description]);
     }
 }
 
