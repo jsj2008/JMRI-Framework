@@ -93,7 +93,7 @@
 
 - (void)write:(NSDictionary *)jsonObject {
     NSError* error = nil;
-    if (![NSJSONSerialization writeJSONObject:jsonObject toStream:outputStream options:NSJSONWritingPrettyPrinted error:&error]) {
+    if (![NSJSONSerialization writeJSONObject:jsonObject toStream:outputStream options:0 error:&error]) {
         [self error:[NSError errorWithDomain:JMRIServiceJson code:1001 userInfo:nil]];
     }
     if (error != nil) {
