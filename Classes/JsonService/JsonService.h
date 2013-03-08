@@ -39,6 +39,7 @@
 
 @optional
 - (void)jsonService:(JsonService *)service didGetInput:(NSDictionary *)input;
+- (void)jsonService:(JsonService *)service didWrite:(NSData *)data;
 - (void)jsonServiceDidOpenConnection:(JsonService *)service;
 
 @end
