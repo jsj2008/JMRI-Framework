@@ -69,6 +69,11 @@
     [self.services addObject:[[JMRIService alloc] initWithAddress:address withPorts:ports]];
 }
 
+- (void)removeServiceWithName:(NSString *)name {
+    JMRIService *service = [self.services objectWithName:name];
+    [self.services removeObjectIdenticalTo:service];
+}
+
 - (void)stop {
     [jsonBrowser stop];
     [simpleBrowser stop];
