@@ -371,14 +371,26 @@
 }
 
 - (void)jsonService:(JsonService *)service didGetInput:(NSString *)input {
+    if (self.logNetworkActivity) {
+        NSLog(@"JsonService received %@", input);
+    }
     if ([self.delegate respondsToSelector:@selector(JMRIService:didGetInput:)]) {
         [self.delegate JMRIService:self didGetInput:input];
     }
 }
 
 - (void)jsonServiceDidOpenConnection:(JsonService *)service {
+    if (self.logNetworkActivity) {
+        NSLog(@"JsonService opened connection");
+    }
     if ([self.delegate respondsToSelector:@selector(JMRIServiceDidOpenConnection:)]) {
         [self.delegate JMRIServiceDidOpenConnection:self];
+    }
+}
+
+- (void)jsonService:(JsonService *)service didWrite:(NSData *)data {
+    if (self.logNetworkActivity) {
+        NSLog(@"JsonService wrote %@", [data description]);
     }
 }
 

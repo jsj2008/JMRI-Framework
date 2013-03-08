@@ -84,6 +84,8 @@
 @property Boolean useWiThrottleService;
 @property Boolean useXmlIOService;
 
+@property Boolean logNetworkActivity;
+
 #pragma mark - JMRI element properties
 
 @property (readonly) NSDictionary *lights;
