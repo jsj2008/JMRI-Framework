@@ -103,7 +103,7 @@
         [self error:error];
         return;
     }
-    [data appendData:[@"\n\r" dataUsingEncoding:NSUTF8StringEncoding]];
+    [data appendData:[@"\n" dataUsingEncoding:NSUTF8StringEncoding]];
     if ([outputStream hasSpaceAvailable]) {
         [outputStream write:data.bytes maxLength:data.length];
         if ([self.delegate respondsToSelector:@selector(JMRINetService:didSend:)]) {
