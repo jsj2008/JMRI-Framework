@@ -55,6 +55,7 @@
 
 - (id)initWithName:(NSString *)name withAddress:(NSString *)address withPort:(NSInteger)port {
     if ((self = [super initWithName:name withAddress:address withPort:port])) {
+        serviceVersion = MIN_JSON_VERSION;
         serviceType = JMRIServiceJson;
         NSInputStream* is;
         NSOutputStream* os;
@@ -310,7 +311,7 @@
 
 - (void)hello:(NSDictionary *)json {
     NSTimeInterval rate = [json[@"data"][@"heartbeat"] integerValue] / 1000.0;
-    NSLog(@"Setting heartbeat interval to %f", rate);
+    serviceVersion = json[@"data"][@"JMRI"];
     self.heartbeat = [NSTimer scheduledTimerWithTimeInterval:rate target:self selector:@selector(sendHeartbeat:) userInfo:nil repeats:YES];
     [self sendHeartbeat:nil];
 }
