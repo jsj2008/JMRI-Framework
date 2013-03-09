@@ -28,7 +28,12 @@
 - (void)didGetSignalHeadState:(NSDictionary *)json;
 - (void)didGetTurnoutState:(NSDictionary *)json;
 
+- (void)hello:(NSDictionary *)json;
+
+- (void)sendHeartbeat:(NSTimer *)timer;
+
 @property NSString *buffer;
+@property NSTimer *heartbeat;
 
 @end
 
@@ -93,11 +98,19 @@
 
 - (void)write:(NSDictionary *)jsonObject {
     NSError* error = nil;
-    if (![NSJSONSerialization writeJSONObject:jsonObject toStream:outputStream options:0 error:&error]) {
-        [self error:[NSError errorWithDomain:JMRIServiceJson code:1001 userInfo:nil]];
-    }
+    NSMutableData *data = [NSMutableData dataWithData:[NSJSONSerialization dataWithJSONObject:jsonObject options:0 error:&error]];
     if (error != nil) {
         [self error:error];
+        return;
+    }
+    [data appendData:[@"\n\r" dataUsingEncoding:NSUTF8StringEncoding]];
+    if ([outputStream hasSpaceAvailable]) {
+        [outputStream write:data.bytes maxLength:data.length];
+        if ([self.delegate respondsToSelector:@selector(JMRINetService:didSend:)]) {
+            [self.delegate JMRINetService:self didSend:data];
+        }
+    } else {
+        [self error:[NSError errorWithDomain:JMRIServiceSimple code:1001 userInfo:nil]];
     }
 }
 
@@ -243,6 +256,8 @@
         [self didGetTurnoutState:json];
     } else if ([json[@"type"] isEqualToString:JMRITypeList]) {
         [self didGetList:json];
+    } else if ([json[@"type"] isEqualToString:@"hello"]) {
+        [self hello:json];
     }
 }
 
@@ -291,6 +306,17 @@
     for (NSDictionary *item in json[@"list"]) {
         [self didGetItem:item];
     }
+}
+
+- (void)hello:(NSDictionary *)json {
+    NSTimeInterval rate = [json[@"data"][@"heartbeat"] integerValue] / 1000.0;
+    NSLog(@"Setting heartbeat interval to %f", rate);
+    self.heartbeat = [NSTimer scheduledTimerWithTimeInterval:rate target:self selector:@selector(sendHeartbeat:) userInfo:nil repeats:YES];
+    [self sendHeartbeat:nil];
+}
+
+- (void)sendHeartbeat:(NSTimer *)timer {
+    [self write:@{@"type": @"ping"}];
 }
 
 @end
