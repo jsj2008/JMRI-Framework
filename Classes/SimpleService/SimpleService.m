@@ -26,6 +26,8 @@
 - (void)didGetSignalHeadState:(NSString *)string;
 - (void)didGetTurnoutState:(NSString *)string;
 
+- (void)hello:(NSString *)string;
+
 @property NSString *buffer;
 
 @end
@@ -212,6 +214,8 @@
                     [self didGetSensorState:cmd];
                 } else if ([cmd hasPrefix:@"TURNOUT"]) {
                     [self didGetTurnoutState:cmd];
+                } else if ([cmd hasPrefix:@"JMRI"]) {
+                    [self hello:cmd];
                 }
             }
         }
@@ -313,6 +317,11 @@
         }
         [self.delegate JMRINetService:self didGetTurnout:[tokens objectAtIndex:1] withState:state];
     }
+}
+
+- (void)hello:(NSString *)string {
+    NSArray *tokens = [string componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    serviceVersion = tokens[1];
 }
 
 @end
