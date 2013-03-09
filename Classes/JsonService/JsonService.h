@@ -7,7 +7,7 @@
 //
 
 #import "JMRINetService.h"
-#define MIN_JSON_VERSION = @"3.2"
+#define MIN_JSON_VERSION @"3.2"
 
 @interface JsonService : JMRINetService <NSStreamDelegate> {
     
