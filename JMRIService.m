@@ -251,6 +251,18 @@
     return (self.webService != nil);
 }
 
+- (NSString *)version {
+    if (self.hasJsonService) {
+        return self.jsonService.version;
+    } else if (self.hasWebService) {
+        return self.webService.version;
+    } else if (self.hasSimpleService) {
+        return self.simpleService.version;
+    } else {
+        return self.wiThrottleService.version;
+    }
+}
+
 @synthesize requiresSimpleService = _requiresSimpleService;
 @synthesize requiresWiThrottleService = _requiresWiThrottleService;
 @synthesize requiresXmlIOService = _requiresXmlIOService;

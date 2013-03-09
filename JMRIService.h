@@ -85,6 +85,7 @@
 @property Boolean useXmlIOService;
 
 @property Boolean logNetworkActivity;
+@property (readonly, strong) NSString *version;
 
 #pragma mark - JMRI element properties
 
