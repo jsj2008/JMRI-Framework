@@ -189,11 +189,6 @@ typedef enum {
 
 @protocol XMLIOServiceDelegate <JMRINetServiceDelegate>
 
-#pragma mark Required Methods
-
-@required
-- (void)XMLIOService:(XMLIOService *)service didFailWithError:(NSError *)error;
-
 #pragma mark Optional Methods
 
 @optional

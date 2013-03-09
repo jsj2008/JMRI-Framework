@@ -392,39 +392,13 @@
     }
 }
 
-- (void)JMRINetService:(JsonService *)service didWrite:(NSData *)data {
+- (void)JMRINetService:(JMRINetService *)service didWrite:(NSData *)data {
     if (self.logNetworkActivity) {
         NSLog(@"Service %@ wrote %@", service.type, [data description]);
     }
 }
 
-#pragma mark - Simple service delegate
-
-- (void)simpleService:(SimpleService *)service didFailWithError:(NSError *)error {
-    if ([self.delegate respondsToSelector:@selector(JMRIService:didFailWithError:)]) {
-        [self.delegate JMRIService:self didFailWithError:error];
-    }
-}
-
-- (void)simpleService:(SimpleService *)service didGetInput:(NSString *)input {
-    if ([self.delegate respondsToSelector:@selector(JMRIService:didGetInput:)]) {
-        [self.delegate JMRIService:self didGetInput:input];
-    }
-}
-
-- (void)simpleServiceDidOpenConnection:(SimpleService *)service {
-    if ([self.delegate respondsToSelector:@selector(JMRIServiceDidOpenConnection:)]) {
-        [self.delegate JMRIServiceDidOpenConnection:self];
-    }
-}
-
 #pragma mark - Web service delegate
-
-- (void)XMLIOService:(XMLIOService *)service didFailWithError:(NSError *)error {
-    if ([self.delegate respondsToSelector:@selector(JMRIService:didFailWithError:)]) {
-        [self.delegate JMRIService:self didFailWithError:error];
-    }
-}
 
 - (void)XMLIOService:(XMLIOService *)service didListItems:(NSArray *)items ofType:(NSString *)type {
     if ([type isEqualToString:JMRITypeMemory]) {

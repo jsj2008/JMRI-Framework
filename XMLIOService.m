@@ -182,9 +182,9 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
                                                                           withName:aName];
         [queue addOperation:helper];
 	} else if (!self.url) { // did not resolve
-		[self.delegate XMLIOService:self didFailWithError:[NSError errorWithDomain:JMRIErrorDomain code:1025 userInfo:nil]];
+		[self.delegate JMRINetService:self didFailWithError:[NSError errorWithDomain:JMRIErrorDomain code:1025 userInfo:nil]];
 	} else { // open connection
-		[self.delegate XMLIOService:self didFailWithError:[NSError errorWithDomain:JMRIErrorDomain code:1026 userInfo:nil]];
+		[self.delegate JMRINetService:self didFailWithError:[NSError errorWithDomain:JMRIErrorDomain code:1026 userInfo:nil]];
 	}
 }
 
@@ -230,8 +230,8 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 }
 
 - (void)failWithError:(NSError *)error {
-    if ([self.delegate respondsToSelector:@selector(XMLIOService:didFailWithError:)]) {
-        [self.delegate XMLIOService:self didFailWithError:error];
+    if ([self.delegate respondsToSelector:@selector(JMRINetService:didFailWithError:)]) {
+        [self.delegate JMRINetService:self didFailWithError:error];
     }
 }
 
@@ -342,8 +342,8 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 		[monitoredItems containsObject:[helper.name stringByAppendingString:helper.type]]) {
 		[self readItem:helper.name ofType:helper.type];
     }
-	if ([self.delegate respondsToSelector:@selector(XMLIOService:didFailWithError:)]) {
-		[self.delegate XMLIOService:self didFailWithError:error];
+	if ([self.delegate respondsToSelector:@selector(JMRINetService:didFailWithError:)]) {
+		[self.delegate JMRINetService:self didFailWithError:error];
 	}
 	if (self.logTraffic) {
 		NSLog(@"XMLIOService connection failed. %lu connections remain open. Failed with operation: %lu (%@, a %@)", (unsigned long)[connections count], (unsigned long)helper.operation, helper.name, helper.type);
