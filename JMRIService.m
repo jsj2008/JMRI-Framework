@@ -377,6 +377,12 @@
     }
 }
 
+- (void)JMRINetService:(JMRINetService *)service didSend:(NSData *)data {
+    if (self.logNetworkActivity) {
+        NSLog(@"Service %@ sent %@", service.type, [NSString stringWithUTF8String:data.bytes]);
+    }
+}
+
 - (void)JMRINetServiceDidOpenConnection:(JMRINetService *)service {
     if (self.logNetworkActivity) {
         NSLog(@"Service %@ opened connection", service.type);
