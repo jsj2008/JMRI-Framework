@@ -21,20 +21,3 @@
 - (void)write:(NSString *)string;
 
 @end
-
-#pragma mark - Delegate protocol
-
-@protocol SimpleServiceDelegate <JMRINetServiceDelegate>
-
-#pragma mark Required Methods
-
-@required
-- (void)simpleService:(SimpleService *)service didFailWithError:(NSError *)error;
-
-#pragma mark Optional Methods
-
-@optional
-- (void)simpleService:(SimpleService *)service didGetInput:(NSString *)input;
-- (void)simpleServiceDidOpenConnection:(SimpleService *)service;
-
-@end

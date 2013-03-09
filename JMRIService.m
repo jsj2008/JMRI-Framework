@@ -21,7 +21,7 @@
 #import "JMRISignalHead.h"
 #import "JMRITurnout.h"
 
-@interface JMRIService (Private) <JMRINetServiceDelegate, SimpleServiceDelegate, XMLIOServiceDelegate>
+@interface JMRIService (Private) <JMRINetServiceDelegate, XMLIOServiceDelegate>
 
 - (void)commonInit;
 

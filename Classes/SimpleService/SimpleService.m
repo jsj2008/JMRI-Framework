@@ -99,8 +99,8 @@
 }
 
 - (void)error:(NSError *)error {
-    if ([self.delegate respondsToSelector:@selector(simpleService:didFailWithError:)]) {
-        [self.delegate simpleService:self didFailWithError:error];
+    if ([self.delegate respondsToSelector:@selector(JMRINetService:didFailWithError:)]) {
+        [self.delegate JMRINetService:self didFailWithError:error];
     }
 }
 
@@ -133,8 +133,8 @@
 }
 
 - (void)failWithError:(NSError *)error {
-    if ([self.delegate respondsToSelector:@selector(simpleService:didFailWithError:)]) {
-        [self.delegate simpleService:self didFailWithError:error];
+    if ([self.delegate respondsToSelector:@selector(JMRINetService:didFailWithError:)]) {
+        [self.delegate JMRINetService:self didFailWithError:error];
     }
 }
 
@@ -147,8 +147,8 @@
                 NSLog(@"[IN] Nothing to see here.");
                 break;
             case NSStreamEventOpenCompleted:
-                if ([self.delegate respondsToSelector:@selector(simpleServiceDidOpenConnection:)]) {
-                    [self.delegate simpleServiceDidOpenConnection:self];
+                if ([self.delegate respondsToSelector:@selector(JMRINetServiceDidOpenConnection:)]) {
+                    [self.delegate JMRINetServiceDidOpenConnection:self];
                 }
                 break;
             case NSStreamEventHasBytesAvailable:
@@ -169,8 +169,8 @@
                 NSLog(@"[OUT] Nothing to see here.");
                 break;
             case NSStreamEventOpenCompleted:
-                if ([self.delegate respondsToSelector:@selector(simpleServiceDidOpenConnection:)]) {
-                    [self.delegate simpleServiceDidOpenConnection:self];
+                if ([self.delegate respondsToSelector:@selector(JMRINetServiceDidOpenConnection:)]) {
+                    [self.delegate JMRINetServiceDidOpenConnection:self];
                 }
                 break;
             case NSStreamEventHasSpaceAvailable:
@@ -199,8 +199,8 @@
             self.buffer = @"";
             NSArray *cmds = [str componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
             for (NSString *cmd in cmds) {
-                if ([self.delegate respondsToSelector:@selector(simpleService:didGetInput:)]) {
-                    [self.delegate simpleService:self didGetInput:cmd];
+                if ([self.delegate respondsToSelector:@selector(JMRINetService:didReceive:)]) {
+                    [self.delegate JMRINetService:self didReceive:cmd];
                 }
                 if ([cmd hasPrefix:@"LIGHT"]) {
                     [self didGetLightState:cmd];
