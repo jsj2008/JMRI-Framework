@@ -56,12 +56,12 @@
 @protocol JMRIServiceBrowserDelegate
 
 @required
-- (void)JMRIServiceBrowser:(JMRIServiceBrowser *)browser didNotSearch:(NSDictionary *)errorDict;
+- (void)JMRIServiceBrowser:(JMRIServiceBrowser *)browser didNotSearch:(NSDictionary *)errorDict forType:(NSString *)type;
 
 @optional
 - (void)JMRIServiceDidResolveAddress:(JMRIService *)aJMRIService;
-- (void)JMRIServiceBrowserWillSearch:(JMRIServiceBrowser *)browser;
-- (void)JMRIServiceBrowserDidStopSearch:(JMRIServiceBrowser *)browser;
+- (void)JMRIServiceBrowserWillSearch:(JMRIServiceBrowser *)browser forType:(NSString *)type;
+- (void)JMRIServiceBrowserDidStopSearch:(JMRIServiceBrowser *)browser forType:(NSString *)type;
 - (void)JMRIServiceBrowser:(JMRIServiceBrowser *)browser didFindService:(JMRIService *)aJMRIService moreComing:(BOOL)moreComing;
 - (void)JMRIServiceBrowser:(JMRIServiceBrowser *)browser didRemoveService:(JMRIService *)aJMRIService moreComing:(BOOL)moreComing;
 - (void)JMRIServiceBrowser:(JMRIServiceBrowser *)browser didChangeService:(JMRIService *)aJMRIService moreComing:(BOOL)moreComing;

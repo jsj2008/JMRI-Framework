@@ -22,6 +22,13 @@
 
 @implementation XMLIOServiceBrowser
 
+- (id)init {
+	if ((self = [super init])) {
+        _type = JMRIServiceWeb;
+    }
+    return self;
+}
+
 - (void)searchForServices {
 	if (self.searching) {
 		[self.browser stop];

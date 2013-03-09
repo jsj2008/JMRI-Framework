@@ -8,8 +8,16 @@
 
 #import "SimpleServiceBrowser.h"
 #import "SimpleService.h"
+#import "JMRIConstants.h"
 
 @implementation SimpleServiceBrowser
+
+- (id)init {
+	if ((self = [super init])) {
+        _type = JMRIServiceSimple;
+    }
+    return self;
+}
 
 - (void)searchForServices {
 	if (self.searching) {

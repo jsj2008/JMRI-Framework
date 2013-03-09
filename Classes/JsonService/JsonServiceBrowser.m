@@ -8,8 +8,16 @@
 
 #import "JsonServiceBrowser.h"
 #import "JsonService.h"
+#import "JMRIConstants.h"
 
 @implementation JsonServiceBrowser
+
+- (id)init {
+	if ((self = [super init])) {
+        _type = JMRIServiceJson;
+    }
+    return self;
+}
 
 - (void)searchForServices {
 	if (self.searching) {

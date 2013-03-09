@@ -29,6 +29,7 @@ extern NSString *const JMRINetServiceWeb;
 
 	NSNetServiceBrowser *_browser;
 	BOOL _searching;
+    NSString *_type;
 	NSMutableArray *_services;
 }
 
@@ -52,6 +53,7 @@ extern NSString *const JMRINetServiceWeb;
 @property (readonly) BOOL searching;
 @property (nonatomic) NSMutableArray *services;
 @property (nonatomic) NSMutableSet *unresolvedServices;
+@property (readonly, strong) NSString *type;
 
 @end
 

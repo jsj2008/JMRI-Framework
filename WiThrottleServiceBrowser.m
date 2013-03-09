@@ -18,8 +18,16 @@
 
 #import "WiThrottleServiceBrowser.h"
 #import "WiThrottleService.h"
+#import "JMRIConstants.h"
 
 @implementation WiThrottleServiceBrowser
+
+- (id)init {
+	if ((self = [super init])) {
+        _type = JMRIServiceWiThrottle;
+    }
+    return self;
+}
 
 - (void)searchForServices {
 	[self.browser searchForServicesOfType:JMRINetServiceWiThrottle inDomain:@""];

@@ -103,22 +103,22 @@
 
 - (void)JMRINetServiceBrowser:(JMRINetServiceBrowser *)browser didNotSearch:(NSDictionary *)errorDict {
     searching = NO;
-    if ([delegate respondsToSelector:@selector(JMRIServiceBrowser:didNotSearch:)]) {
-        [delegate JMRIServiceBrowser:self didNotSearch:errorDict];
+    if ([delegate respondsToSelector:@selector(JMRIServiceBrowser:didNotSearch:forType:)]) {
+        [delegate JMRIServiceBrowser:self didNotSearch:errorDict forType:browser.type];
     }
 }
 
 - (void)JMRINetServiceBrowserWillSearch:(JMRINetServiceBrowser *)browser {
     searching = YES;
-    if ([delegate respondsToSelector:@selector(JMRIServiceBrowserWillSearch:)]) {
-        [delegate JMRIServiceBrowserWillSearch:self];
+    if ([delegate respondsToSelector:@selector(JMRIServiceBrowserWillSearch:forType:)]) {
+        [delegate JMRIServiceBrowserWillSearch:self forType:browser.type];
     }
 }
 
 - (void)JMRINetServiceBrowserDidStopSearch:(JMRINetServiceBrowser *)browser {
     searching = NO;
-    if ([delegate respondsToSelector:@selector(JMRIServiceBrowserDidStopSearch:)]) {
-        [delegate JMRIServiceBrowserDidStopSearch:self];
+    if ([delegate respondsToSelector:@selector(JMRIServiceBrowserDidStopSearch:forType:)]) {
+        [delegate JMRIServiceBrowserDidStopSearch:self forType:browser.type];
     }
 }
 
