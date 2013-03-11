@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		4813F4871386DE8900718FFC /* NSArray+JMRIExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4813F4851386DE8900718FFC /* NSArray+JMRIExtensions.m */; };
+		48280C2216EC900500925806 /* NSMutableArray+QueueExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 48280C2116EC900500925806 /* NSMutableArray+QueueExtensions.h */; };
+		48280C2316EC900500925806 /* NSMutableArray+QueueExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 48280C2116EC900500925806 /* NSMutableArray+QueueExtensions.h */; };
+		48280C2516EC909400925806 /* NSMutableArray+QueueExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 48280C2416EC909400925806 /* NSMutableArray+QueueExtensions.m */; };
+		48280C2616EC909400925806 /* NSMutableArray+QueueExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 48280C2416EC909400925806 /* NSMutableArray+QueueExtensions.m */; };
 		482BB4BF16E3DDDD00519F40 /* JsonService.h in Headers */ = {isa = PBXBuildFile; fileRef = 482BB4BD16E3DDDD00519F40 /* JsonService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		482BB4C016E3DDDD00519F40 /* JsonService.h in Headers */ = {isa = PBXBuildFile; fileRef = 482BB4BD16E3DDDD00519F40 /* JsonService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		482BB4C116E3DDDD00519F40 /* JsonService.m in Sources */ = {isa = PBXBuildFile; fileRef = 482BB4BE16E3DDDD00519F40 /* JsonService.m */; };
@@ -172,6 +176,8 @@
 /* Begin PBXFileReference section */
 		4813F4841386DE8900718FFC /* NSArray+JMRIExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; lineEnding = 0; path = "NSArray+JMRIExtensions.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4813F4851386DE8900718FFC /* NSArray+JMRIExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSArray+JMRIExtensions.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		48280C2116EC900500925806 /* NSMutableArray+QueueExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSMutableArray+QueueExtensions.h"; path = "Classes/NSMutableArray+QueueExtensions.h"; sourceTree = "<group>"; };
+		48280C2416EC909400925806 /* NSMutableArray+QueueExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSMutableArray+QueueExtensions.m"; path = "Classes/NSMutableArray+QueueExtensions.m"; sourceTree = "<group>"; };
 		482BB4BD16E3DDDD00519F40 /* JsonService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JsonService.h; path = Classes/JsonService/JsonService.h; sourceTree = "<group>"; };
 		482BB4BE16E3DDDD00519F40 /* JsonService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JsonService.m; path = Classes/JsonService/JsonService.m; sourceTree = "<group>"; };
 		482BB4C416E3DFA500519F40 /* JsonServiceBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JsonServiceBrowser.h; path = Classes/JsonService/JsonServiceBrowser.h; sourceTree = "<group>"; };
@@ -473,6 +479,8 @@
 				4813F4851386DE8900718FFC /* NSArray+JMRIExtensions.m */,
 				483FD43D145BA5DB00BCED0D /* NSStream+JMRIExtensions.h */,
 				483FD43E145BA5DB00BCED0D /* NSStream+JMRIExtensions.m */,
+				48280C2116EC900500925806 /* NSMutableArray+QueueExtensions.h */,
+				48280C2416EC909400925806 /* NSMutableArray+QueueExtensions.m */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -543,6 +551,7 @@
 				48BA51A915CD51BE0066095E /* JMRIPanelHelper.h in Headers */,
 				48BA51B515CD97920066095E /* XMLPanelObject.h in Headers */,
 				48BA51BB15CDC2D20066095E /* XMLPanelImage.h in Headers */,
+				48280C2316EC900500925806 /* NSMutableArray+QueueExtensions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -591,6 +600,7 @@
 				48BA51A815CD51BE0066095E /* JMRIPanelHelper.h in Headers */,
 				48BA51B415CD97920066095E /* XMLPanelObject.h in Headers */,
 				48BA51BA15CDC2D20066095E /* XMLPanelImage.h in Headers */,
+				48280C2216EC900500925806 /* NSMutableArray+QueueExtensions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -733,6 +743,7 @@
 				48DCFB5715D705A00096D2D0 /* JMRISignalHead.m in Sources */,
 				482BB4C216E3DDDD00519F40 /* JsonService.m in Sources */,
 				482BB4C916E3DFA500519F40 /* JsonServiceBrowser.m in Sources */,
+				48280C2616EC909400925806 /* NSMutableArray+QueueExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -778,6 +789,7 @@
 				48DCFB5615D705A00096D2D0 /* JMRISignalHead.m in Sources */,
 				482BB4C116E3DDDD00519F40 /* JsonService.m in Sources */,
 				482BB4C816E3DFA500519F40 /* JsonServiceBrowser.m in Sources */,
+				48280C2516EC909400925806 /* NSMutableArray+QueueExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
