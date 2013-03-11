@@ -44,13 +44,7 @@
 - (id)initWithNetService:(NSNetService *)service {
     if ((self = [super initWithNetService:service])) {
         serviceType = JMRIServiceJson;
-        NSInputStream* is;
-        NSOutputStream* os;
-        if ([service getInputStream:&is outputStream:&os]) {
-            inputStream = is;
-            outputStream = os;
-            [self open];
-        }
+        [self open];
     }
     return self;
 }
@@ -59,20 +53,7 @@
     if ((self = [super initWithName:name withAddress:address withPort:port])) {
         serviceVersion = MIN_JSON_VERSION;
         serviceType = JMRIServiceJson;
-        NSInputStream* is;
-        NSOutputStream* os;
-#if TARGET_OS_IPHONE
-        [NSStream getStreamsToHostNamed:address port:port inputStream:&is outputStream:&os];
-#else
-        [NSStream getStreamsToHost:[NSHost hostWithAddress:address] port:port inputStream:&is outputStream:&os];
-#endif
-        if (is != nil) {
-            inputStream = is;
-            outputStream = os;
-            [self open];
-        } else {
-            [self error:[[NSError alloc] initWithDomain:JMRIServiceJson code:1 userInfo:nil]];
-        }
+        [self open];
     }
     return self;
 }
@@ -87,6 +68,32 @@
     if (self.isOpen) {
         return;
     }
+    NSInputStream* is;
+    NSOutputStream* os;
+    if (self.service) {
+        if ([self.service getInputStream:&is outputStream:&os]) {
+            inputStream = is;
+            outputStream = os;
+        }
+    } else {
+#if TARGET_OS_IPHONE
+        [NSStream getStreamsToHostNamed:self.addresses[0]
+                                   port:self.port
+                            inputStream:&is
+                           outputStream:&os];
+#else
+        [NSStream getStreamsToHost:[NSHost hostWithAddress:self.addresses[0]]
+                              port:self.port
+                       inputStream:&is
+                      outputStream:&os];
+#endif
+        if (is != nil) {
+            inputStream = is;
+            outputStream = os;
+        } else {
+            [self error:[[NSError alloc] initWithDomain:JMRIServiceJson code:1 userInfo:nil]];
+        }
+    }
     self.buffer = @"";
     outputQueue = [[NSMutableArray alloc] init];
     self.useQueue = NO;
@@ -99,10 +106,13 @@
 }
 
 - (void)close {
+    [self.heartbeat invalidate];
     self.buffer = nil;
     outputQueue = nil;
     [inputStream close];
     [outputStream close];
+    inputStream = nil;
+    outputStream = nil;
 }
 
 - (void)write:(NSDictionary *)jsonObject {
@@ -125,6 +135,9 @@
     } else {
         if (self.useQueue) {
             [outputQueue enqueue:data];
+        }
+        if (!outputStream) {
+            [self open];
         } else {
             [self error:[NSError errorWithDomain:JMRIServiceJson code:1001 userInfo:@{@"stream": @"output", @"streamStatus": @(outputStream.streamStatus)}]];
         }
