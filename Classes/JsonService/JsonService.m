@@ -9,6 +9,7 @@
 #import "JsonService.h"
 #import "JMRIConstants.h"
 #import "JMRIPanel.h"
+#import "NSMutableArray+QueueExtensions.h"
 #ifdef TARGET_OS_IPHONE
 #import "NSStream+JMRIExtensions.h"
 #endif
@@ -18,6 +19,7 @@
 - (void)open;
 - (void)close;
 - (void)error:(NSError *)error;
+- (void)writeData:(NSData *)data;
 
 - (void)didGetItem:(NSDictionary *)json;
 - (void)didGetLightState:(NSDictionary *)json;
@@ -82,7 +84,12 @@
 #pragma mark - Private methods
 
 - (void)open {
+    if (self.isOpen) {
+        return;
+    }
     self.buffer = @"";
+    outputQueue = [[NSMutableArray alloc] init];
+    self.useQueue = NO;
     inputStream.delegate = self;
     outputStream.delegate = self;
     [inputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
@@ -93,6 +100,7 @@
 
 - (void)close {
     self.buffer = nil;
+    outputQueue = nil;
     [inputStream close];
     [outputStream close];
 }
@@ -105,13 +113,21 @@
         return;
     }
     [data appendData:[@"\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    [self writeData:data];
+}
+
+- (void)writeData:(NSData *)data {
     if ([outputStream hasSpaceAvailable]) {
         [outputStream write:data.bytes maxLength:data.length];
         if ([self.delegate respondsToSelector:@selector(JMRINetService:didSend:)]) {
             [self.delegate JMRINetService:self didSend:data];
         }
     } else {
-        [self error:[NSError errorWithDomain:JMRIServiceJson code:1001 userInfo:nil]];
+        if (self.useQueue) {
+            [outputQueue enqueue:data];
+        } else {
+            [self error:[NSError errorWithDomain:JMRIServiceJson code:1001 userInfo:@{@"stream": @"output", @"streamStatus": @(outputStream.streamStatus)}]];
+        }
     }
 }
 
@@ -131,6 +147,12 @@
 - (void)closeConnection {
     // if we ever need to send a closing message - do it here
     [self close];
+}
+
+- (Boolean)isOpen {
+    NSStreamStatus i = inputStream.streamStatus;
+    NSStreamStatus o = outputStream.streamStatus;
+    return i >= NSStreamStatusOpen && i < NSStreamStatusAtEnd && o >= NSStreamStatusOpen && o < NSStreamStatusAtEnd;
 }
 
 #pragma mark - JMRINetService items
@@ -180,6 +202,9 @@
             case NSStreamEventHasBytesAvailable:
                 [self didGetInput:inputStream];
                 break;
+            case NSStreamEventHasSpaceAvailable:
+                // should never be called, OutputStream only
+                break;
             case NSStreamEventErrorOccurred:
                 NSLog(@"[IN] An error!");
                 break;
@@ -187,6 +212,7 @@
                 NSLog(@"[IN] Over.");
                 break;
             default:
+                // should never be called, all events are listed
                 break;
         }
     } else { // event in outputStream
@@ -199,7 +225,13 @@
                     [self.delegate JMRINetServiceDidOpenConnection:self];
                 }
                 break;
+            case NSStreamEventHasBytesAvailable:
+                // should never be called, InputStream only
+                break;
             case NSStreamEventHasSpaceAvailable:
+                if (![outputQueue isEmpty]) {
+                    [self writeData:[outputQueue dequeue]];
+                }
                 break;
             case NSStreamEventErrorOccurred:
                 NSLog(@"[OUT] An error!");
@@ -207,6 +239,7 @@
             case NSStreamEventEndEncountered:
                 NSLog(@"[OUT] Over.");
             default:
+                // should never be called, all events are listed
                 break;
         }
     }

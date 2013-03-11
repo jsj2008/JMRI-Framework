@@ -11,8 +11,9 @@
 
 @interface JsonService : JMRINetService <NSStreamDelegate> {
     
-    NSInputStream* inputStream;
-    NSOutputStream* outputStream;
+    NSInputStream *inputStream;
+    NSOutputStream *outputStream;
+    NSMutableArray *outputQueue;
     
 }
 
@@ -24,5 +25,7 @@
 - (void)readItem:(NSString *)name ofType:(NSString *)type initialValue:(NSString *)value;
 - (void)writeItem:(NSString *)name ofType:(NSString *)type value:(NSString *)value;
 - (void)writeItem:(NSString *)name ofType:(NSString *)type state:(NSUInteger)state;
+
+@property Boolean useQueue;
 
 @end
