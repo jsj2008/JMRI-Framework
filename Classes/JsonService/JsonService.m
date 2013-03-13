@@ -25,6 +25,7 @@
 - (void)didGetLightState:(NSDictionary *)json;
 - (void)didGetList:(NSDictionary *)json;
 - (void)didGetMemoryValue:(NSDictionary *)json;
+- (void)didGetMetadata:(NSDictionary *)json;
 - (void)didGetPowerState:(NSDictionary *)json;
 - (void)didGetReporterValue:(NSDictionary *)json;
 - (void)didGetSensorState:(NSDictionary *)json;
@@ -296,6 +297,8 @@
         [self didGetLightState:json];
     } else if ([json[@"type"] isEqualToString:JMRITypeMemory]) {
         [self didGetMemoryValue:json];
+    } else if ([json[@"type"] isEqualToString:JMRITypeMetadata]) {
+        [self didGetMetadata:json];
     } else if ([json[@"type"] isEqualToString:JMRITypePower]) {
         [self didGetPowerState:json];
     } else if ([json[@"type"] isEqualToString:JMRITypeReporter]) {
@@ -321,6 +324,12 @@
     if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetMemory:withValue:)]) {
         NSString *string = json[@"data"][@"memory"];
         [self.delegate JMRINetService:self didGetMemory:json[@"data"][@"name"] withValue:string];
+    }
+}
+
+- (void)didGetMetadata:(NSDictionary *)json {
+    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetMetadata:withValue:)]) {
+        [self.delegate JMRINetService:self didGetMetadata:json[@"data"][@"name"] withValue:json[@"data"][@"value"]];
     }
 }
 

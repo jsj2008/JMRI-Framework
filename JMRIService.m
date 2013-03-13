@@ -353,6 +353,10 @@
     [((JMRIMemory *)[self.memoryVariables objectForKey:memory]) setValue:value updateService:NO];
 }
 
+- (void)JMRINetService:(JMRINetService *)service didGetMetadata:(NSString *)metadata withValue:(NSString *)value {
+    [self.metadata setValue:value forKey:metadata];
+}
+
 - (void)JMRINetService:(JMRINetService *)service didGetPowerState:(NSUInteger)state {
     [self.power setState:state updateService:NO];
 }
