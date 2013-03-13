@@ -322,8 +322,7 @@
 
 - (void)didGetMemoryValue:(NSDictionary *)json {
     if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetMemory:withValue:)]) {
-        NSString *string = json[@"data"][@"memory"];
-        [self.delegate JMRINetService:self didGetMemory:json[@"data"][@"name"] withValue:string];
+        [self.delegate JMRINetService:self didGetMemory:json[@"data"][@"name"] withValue:json[@"data"][@"memory"]];
     }
 }
 
@@ -341,12 +340,7 @@
 
 - (void)didGetReporterValue:(NSDictionary *)json {
     if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetReporter:withValue:)]) {
-        NSString *string = json[@"data"][@"report"];
-        NSArray *tokens = [string componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-        string = [[[string stringByReplacingOccurrencesOfString:[tokens objectAtIndex:0] withString:@""]
-                   stringByReplacingOccurrencesOfString:[tokens objectAtIndex:1] withString:@""]
-                  stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-        [self.delegate JMRINetService:self didGetReporter:json[@"data"][@"name"] withValue:string];
+        [self.delegate JMRINetService:self didGetReporter:json[@"data"][@"name"] withValue:json[@"data"][@"report"]];
     }
 }
 

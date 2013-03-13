@@ -347,7 +347,7 @@
 
 - (void)JMRINetService:(JMRINetService *)service didGetMemory:(NSString *)memory withValue:(NSString *)value {
     if (![self.memoryVariables objectForKey:memory]) {
-        JMRIReporter *reporterObj = [[JMRIReporter alloc] initWithName:memory withService:self];
+        JMRIMemory *reporterObj = [[JMRIMemory alloc] initWithName:memory withService:self];
         [self.memoryVariables setValue:reporterObj forKey:memory];
     }
     [((JMRIMemory *)[self.memoryVariables objectForKey:memory]) setValue:value updateService:NO];
