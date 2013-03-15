@@ -322,7 +322,7 @@
 
 - (void)didGetMemoryValue:(NSDictionary *)json {
     if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetMemory:withValue:withProperties:)]) {
-        [self.delegate JMRINetService:self didGetMemory:json[@"data"][@"name"] withValue:json[@"data"][@"memory"] withProperties:json];
+        [self.delegate JMRINetService:self didGetMemory:json[@"data"][@"name"] withValue:json[@"data"][@"value"] withProperties:json];
     }
 }
 
