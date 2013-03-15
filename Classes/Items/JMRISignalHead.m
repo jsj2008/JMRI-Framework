@@ -11,7 +11,6 @@
 
 @implementation JMRISignalHead
 
-
 - (void)queryFromJsonService:(JsonService *)service {
     [service readItem:self.name ofType:JMRITypeSignalHead];
 }

@@ -11,8 +11,8 @@
 
 @implementation JMRIMetadata
 
-- (id)initWithName:(NSString *)name withService:(JMRIService *)service {
-    if ((self = [super initWithName:name withService:service])) {
+- (id)initWithName:(NSString *)name withService:(JMRIService *)service withProperties:(NSDictionary *)properties {
+    if ((self = [super initWithName:name withService:service withProperties:properties])) {
         _state = JMRIItemStateStateless;
         self.majorVersion = 0;
         self.minorVersion = 0;

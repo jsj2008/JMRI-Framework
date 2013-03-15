@@ -337,17 +337,17 @@
     }
 }
 
-- (void)JMRINetService:(JMRINetService *)service didGetLight:(NSString *)light withState:(NSUInteger)state {
+- (void)JMRINetService:(JMRINetService *)service didGetLight:(NSString *)light withState:(NSUInteger)state withProperties:(NSDictionary *)properties {
     if (![self.lights objectForKey:light]) {
-        JMRILight *lightObj = [[JMRILight alloc] initWithName:light withService:self];
+        JMRILight *lightObj = [[JMRILight alloc] initWithName:light withService:self withProperties:properties];
         [self.lights setValue:lightObj forKey:light];
     }
     [((JMRILight *)[self.lights objectForKey:light]) setState:state updateService:NO];
 }
 
-- (void)JMRINetService:(JMRINetService *)service didGetMemory:(NSString *)memory withValue:(NSString *)value {
+- (void)JMRINetService:(JMRINetService *)service didGetMemory:(NSString *)memory withValue:(NSString *)value withProperties:(NSDictionary *)properties {
     if (![self.memoryVariables objectForKey:memory]) {
-        JMRIMemory *reporterObj = [[JMRIMemory alloc] initWithName:memory withService:self];
+        JMRIMemory *reporterObj = [[JMRIMemory alloc] initWithName:memory withService:self withProperties:properties];
         [self.memoryVariables setValue:reporterObj forKey:memory];
     }
     [((JMRIMemory *)[self.memoryVariables objectForKey:memory]) setValue:value updateService:NO];
@@ -361,32 +361,32 @@
     [self.power setState:state updateService:NO];
 }
 
-- (void)JMRINetService:(JMRINetService *)service didGetReporter:(NSString *)reporter withValue:(NSString *)value {
+- (void)JMRINetService:(JMRINetService *)service didGetReporter:(NSString *)reporter withValue:(NSString *)value withProperties:(NSDictionary *)properties {
     if (![self.memoryVariables objectForKey:reporter]) {
-        JMRIReporter *reporterObj = [[JMRIReporter alloc] initWithName:reporter withService:self];
+        JMRIReporter *reporterObj = [[JMRIReporter alloc] initWithName:reporter withService:self withProperties:properties];
         [self.memoryVariables setValue:reporterObj forKey:reporter];
     }
     [((JMRIMemory *)[self.memoryVariables objectForKey:reporter]) setValue:value updateService:NO];
 }
 
-- (void)JMRINetService:(JMRINetService *)service didGetSensor:(NSString *)sensor withState:(NSUInteger)state {
+- (void)JMRINetService:(JMRINetService *)service didGetSensor:(NSString *)sensor withState:(NSUInteger)state withProperties:(NSDictionary *)properties {
     if (![self.sensors objectForKey:sensor]) {
-        JMRISensor *turnoutObj = [[JMRISensor alloc] initWithName:sensor withService:self];
+        JMRISensor *turnoutObj = [[JMRISensor alloc] initWithName:sensor withService:self withProperties:properties];
         [self.sensors setValue:turnoutObj forKey:sensor];
     }
     [((JMRISensor *)[self.sensors objectForKey:sensor]) setState:state updateService:NO];
 }
 
-- (void)JMRINetService:(JMRINetService *)service didGetSignalHead:(NSString *)signalHead withState:(NSUInteger)state {
+- (void)JMRINetService:(JMRINetService *)service didGetSignalHead:(NSString *)signalHead withState:(NSUInteger)state withProperties:(NSDictionary *)properties {
     if (![self.signalHeads objectForKey:signalHead]) {
-        JMRISignalHead *signalHeadObj = [[JMRISignalHead alloc] initWithName:signalHead withService:self];
+        JMRISignalHead *signalHeadObj = [[JMRISignalHead alloc] initWithName:signalHead withService:self withProperties:properties];
         [self.signalHeads setValue:signalHeadObj forKey:signalHead];
     }
     [((JMRISignalHead *)[self.signalHeads objectForKey:signalHead]) setState:state updateService:NO];
 }
-- (void)JMRINetService:(JMRINetService *)service didGetTurnout:(NSString *)turnout withState:(NSUInteger)state {
+- (void)JMRINetService:(JMRINetService *)service didGetTurnout:(NSString *)turnout withState:(NSUInteger)state withProperties:(NSDictionary *)properties {
     if (![self.turnouts objectForKey:turnout]) {
-        JMRITurnout *turnoutObj = [[JMRITurnout alloc] initWithName:turnout withService:self];
+        JMRITurnout *turnoutObj = [[JMRITurnout alloc] initWithName:turnout withService:self withProperties:properties];
         [self.turnouts setValue:turnoutObj forKey:turnout];
     }
     [((JMRITurnout *)[self.turnouts objectForKey:turnout]) setState:state updateService:NO];

@@ -26,7 +26,8 @@
 
 #pragma mark Initializers
 
-- (id)initWithName:(NSString*)name withService:(JMRIService*)service;
+- (id)initWithName:(NSString *)name withService:(JMRIService *)service;
+- (id)initWithName:(NSString *)name withService:(JMRIService *)service withProperties:(NSDictionary *)properties;
 
 #pragma mark - Communications
 

@@ -225,7 +225,7 @@
 }
 
 - (void)didGetLightState:(NSString *)string {
-    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetLight:withState:)]) {
+    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetLight:withState:withProperties:)]) {
         NSUInteger state;
         NSArray *tokens = [string componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         if ([[tokens objectAtIndex:2] isEqualToString:@"ON"]) {
@@ -235,7 +235,7 @@
         } else {
             state = JMRIItemStateUnknown;
         }
-        [self.delegate JMRINetService:self didGetLight:[tokens objectAtIndex:1] withState:state];
+        [self.delegate JMRINetService:self didGetLight:[tokens objectAtIndex:1] withState:state withProperties:nil];
     }
 }
 
@@ -254,17 +254,17 @@
 }
 
 - (void)didGetReporterValue:(NSString *)string {
-    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetReporter:withValue:)]) {
+    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetReporter:withValue:withProperties:)]) {
         NSArray *tokens = [string componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         string = [[[string stringByReplacingOccurrencesOfString:[tokens objectAtIndex:0] withString:@""]
                    stringByReplacingOccurrencesOfString:[tokens objectAtIndex:1] withString:@""]
                   stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-        [self.delegate JMRINetService:self didGetReporter:[tokens objectAtIndex:1] withValue:string];
+        [self.delegate JMRINetService:self didGetReporter:[tokens objectAtIndex:1] withValue:string withProperties:nil];
     }
 }
 
 - (void)didGetSensorState:(NSString *)string {
-    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetSensor:withState:)]) {
+    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetSensor:withState:withProperties:)]) {
         NSUInteger state;
         NSArray *tokens = [string componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         if ([[tokens objectAtIndex:2] isEqualToString:@"ACTIVE"]) {
@@ -274,12 +274,12 @@
         } else {
             state = JMRIItemStateUnknown;
         }
-        [self.delegate JMRINetService:self didGetSensor:[tokens objectAtIndex:1] withState:state];
+        [self.delegate JMRINetService:self didGetSensor:[tokens objectAtIndex:1] withState:state withProperties:nil];
     }
 }
 
 - (void)didGetSignalHeadState:(NSString *)string {
-    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetSignalHead:withState:)]) {
+    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetSignalHead:withState:withProperties:)]) {
         NSUInteger state = JMRISignalAppearanceDark;
         NSArray *tokens = [string componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         // since dark is the default/fallback state, we aren't checking for it.
@@ -300,12 +300,12 @@
         } else if ([[tokens objectAtIndex:2] isEqualToString:JMRIPanelSignalYellow]) {
             state = JMRISignalAppearanceYellow;
         }
-        [self.delegate JMRINetService:self didGetSignalHead:[tokens objectAtIndex:1] withState:state];
+        [self.delegate JMRINetService:self didGetSignalHead:[tokens objectAtIndex:1] withState:state withProperties:nil];
     }
 }
 
 - (void)didGetTurnoutState:(NSString *)string {
-    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetTurnout:withState:)]) {
+    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetTurnout:withState:withProperties:)]) {
         NSUInteger state;
         NSArray *tokens = [string componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         if ([[tokens objectAtIndex:2] isEqualToString:@"THROWN"]) {
@@ -315,7 +315,7 @@
         } else {
             state = JMRIItemStateUnknown;
         }
-        [self.delegate JMRINetService:self didGetTurnout:[tokens objectAtIndex:1] withState:state];
+        [self.delegate JMRINetService:self didGetTurnout:[tokens objectAtIndex:1] withState:state withProperties:nil];
     }
 }
 

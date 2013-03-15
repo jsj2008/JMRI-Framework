@@ -11,13 +11,6 @@
 
 @implementation JMRIMemory
 
-- (id)initWithName:(NSString *)name withService:(JMRIService *)service {
-    if ((self = [super initWithName:name withService:service])) {
-        _state = JMRIItemStateStateless;
-    }
-    return self;
-}
-
 - (void)queryFromJsonService:(JsonService *)service {
     [service readItem:self.name ofType:self.type];
 }

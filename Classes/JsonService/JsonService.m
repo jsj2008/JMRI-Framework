@@ -315,14 +315,14 @@
 }
 
 - (void)didGetLightState:(NSDictionary *)json {
-    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetLight:withState:)]) {
-        [self.delegate JMRINetService:self didGetLight:json[@"data"][@"name"] withState:[json[@"data"][@"state"] integerValue]];
+    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetLight:withState:withProperties:)]) {
+        [self.delegate JMRINetService:self didGetLight:json[@"data"][@"name"] withState:[json[@"data"][@"state"] integerValue] withProperties:json];
     }
 }
 
 - (void)didGetMemoryValue:(NSDictionary *)json {
-    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetMemory:withValue:)]) {
-        [self.delegate JMRINetService:self didGetMemory:json[@"data"][@"name"] withValue:json[@"data"][@"memory"]];
+    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetMemory:withValue:withProperties:)]) {
+        [self.delegate JMRINetService:self didGetMemory:json[@"data"][@"name"] withValue:json[@"data"][@"memory"] withProperties:json];
     }
 }
 
@@ -339,26 +339,26 @@
 }
 
 - (void)didGetReporterValue:(NSDictionary *)json {
-    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetReporter:withValue:)]) {
-        [self.delegate JMRINetService:self didGetReporter:json[@"data"][@"name"] withValue:json[@"data"][@"report"]];
+    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetReporter:withValue:withProperties:)]) {
+        [self.delegate JMRINetService:self didGetReporter:json[@"data"][@"name"] withValue:json[@"data"][@"report"] withProperties:json];
     }
 }
 
 - (void)didGetSensorState:(NSDictionary *)json {
-    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetSensor:withState:)]) {
-        [self.delegate JMRINetService:self didGetSensor:json[@"data"][@"name"] withState:[json[@"data"][@"state"] integerValue]];
+    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetSensor:withState:withProperties:)]) {
+        [self.delegate JMRINetService:self didGetSensor:json[@"data"][@"name"] withState:[json[@"data"][@"state"] integerValue] withProperties:json];
     }
 }
 
 - (void)didGetSignalHeadState:(NSDictionary *)json {
-    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetSignalHead:withState:)]) {
-        [self.delegate JMRINetService:self didGetSignalHead:json[@"data"][@"name"] withState:[json[@"data"][@"state"] integerValue]];
+    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetSignalHead:withState:withProperties:)]) {
+        [self.delegate JMRINetService:self didGetSignalHead:json[@"data"][@"name"] withState:[json[@"data"][@"state"] integerValue] withProperties:json];
     }
 }
 
 - (void)didGetTurnoutState:(NSDictionary *)json {
-    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetTurnout:withState:)]) {
-        [self.delegate JMRINetService:self didGetTurnout:json[@"data"][@"name"] withState:[json[@"data"][@"state"] integerValue]];
+    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetTurnout:withState:withProperties:)]) {
+        [self.delegate JMRINetService:self didGetTurnout:json[@"data"][@"name"] withState:[json[@"data"][@"state"] integerValue] withProperties:json];
     }
 }
 

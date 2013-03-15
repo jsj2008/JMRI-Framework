@@ -19,10 +19,24 @@
 #pragma mark - Initializers
 
 - (id)initWithName:(NSString *)name withService:(JMRIService *)service {
+    return [self initWithName:name withService:service withProperties:nil];
+}
+
+- (id)initWithName:(NSString *)name withService:(JMRIService *)service withProperties:(NSDictionary *)properties {
     if ((self = [super init])) {
         self.name = name;
         self.service = service;
-        _state = JMRIItemStateUnknown;
+        self.comment = properties[@"comment"];
+        self.userName = properties[@"userName"];
+        self.inverted = [properties[@"inverted"] boolValue];
+        if (properties[@"state"]) {
+            _state = [properties[@"state"] integerValue];
+        } else if (properties[@"value"]) {
+            _state = JMRIItemStateStateless;
+            _value = properties[@"value"];
+        } else {
+            _state = JMRIItemStateUnknown;
+        }
     }
     return self;
 }
