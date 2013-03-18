@@ -27,6 +27,21 @@ NSString *const JMRITypeSensor = @"sensor";
 NSString *const JMRITypeSignalHead = @"signalHead";
 NSString *const JMRITypeTurnout = @"turnout";
 
+// Well known sensor and memory names
+NSString *const JMRIMemoryCurrentTime = @"IMCURRENTTIME";
+NSString *const JMRIMemoryRateFactor = @"IMRATEFACTOR";
+NSString *const JMRIMetadataJMRIVersion = @"JMRIVERSION";
+NSString *const JMRIMetadataJMRICanonicalVersion = @"JMRIVERCANON";
+NSString *const JMRIMetadataJMRIMajorVersion = @"JMRIVERMAJOR";
+NSString *const JMRIMetadataJMRIMinorVersion = @"JMRIVERMINOR";
+NSString *const JMRIMetadataJMRITestVersion = @"JMRIVERTEST";
+NSString *const JMRIMetadataJVMVendor = @"JVMVENDOR";
+NSString *const JMRIMetadataJVMVersion = @"JVMVERSION";
+NSString *const JMRIMetadataVersionMajor = @"major";
+NSString *const JMRIMetadataVersionMinor = @"minor";
+NSString *const JMRIMetadataVersionTest = @"test";
+NSString *const JMRISensorClockRunning = @"ISCLOCKRUNNING";
+
 NSString *const JMRIPanelPositionableLabel = @"positionablelabel";
 NSString *const JMRIPanelSensorIcon = @"sensoricon";
 NSString *const JMRIPanelSignalHeadIcon = @"signalheadicon";

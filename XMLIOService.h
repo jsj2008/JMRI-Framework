@@ -83,21 +83,6 @@ extern NSString *const XMLIOThrottleF26;
 extern NSString *const XMLIOThrottleF27;
 extern NSString *const XMLIOThrottleF28;
 
-// JMRI XMLIO common names
-extern NSString *const XMLIOMemoryCurrentTime;
-extern NSString *const XMLIOMemoryRateFactor;
-extern NSString *const XMLIOMetadataJMRIVersion;
-extern NSString *const XMLIOMetadataJMRICanonicalVersion;
-extern NSString *const XMLIOMetadataJMRIMajorVersion;
-extern NSString *const XMLIOMetadataJMRIMinorVersion;
-extern NSString *const XMLIOMetadataJMRITestVersion;
-extern NSString *const XMLIOMetadataJVMVendor;
-extern NSString *const XMLIOMetadataJVMVersion;
-extern NSString *const XMLIOMetadataVersionMajor;
-extern NSString *const XMLIOMetadataVersionMinor;
-extern NSString *const XMLIOMetadataVersionTest;
-extern NSString *const XMLIOSensorClockRunning;
-
 // NSNotification userInfo keys
 extern NSString *const XMLIOServiceDidListItems;
 extern NSString *const XMLIOServiceDidReadItem;

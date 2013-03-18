@@ -86,21 +86,6 @@ NSString *const XMLIOThrottleF26 = @"F26";
 NSString *const XMLIOThrottleF27 = @"F27";
 NSString *const XMLIOThrottleF28 = @"F28";
 
-// Well known sensor and memory names
-NSString *const XMLIOMemoryCurrentTime = @"IMCURRENTTIME";
-NSString *const XMLIOMemoryRateFactor = @"IMRATEFACTOR";
-NSString *const XMLIOMetadataJMRIVersion = @"JMRIVERSION";
-NSString *const XMLIOMetadataJMRICanonicalVersion = @"JMRIVERCANON";
-NSString *const XMLIOMetadataJMRIMajorVersion = @"JMRIVERMAJOR";
-NSString *const XMLIOMetadataJMRIMinorVersion = @"JMRIVERMINOR";
-NSString *const XMLIOMetadataJMRITestVersion = @"JMRIVERTEST";
-NSString *const XMLIOMetadataJVMVendor = @"JVMVENDOR";
-NSString *const XMLIOMetadataJVMVersion = @"JVMVERSION";
-NSString *const XMLIOMetadataVersionMajor = @"major";
-NSString *const XMLIOMetadataVersionMinor = @"minor";
-NSString *const XMLIOMetadataVersionTest = @"test";
-NSString *const XMLIOSensorClockRunning = @"ISCLOCKRUNNING";
-
 // NSNotification posting
 NSString *const XMLIOServiceDidListItems = @"XMLIOServiceDidListItems";
 NSString *const XMLIOServiceDidReadItem = @"XMLIOServiceDidReadItem";
@@ -408,7 +393,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 																	value, XMLIOItemValueKey,
 																	nil]];
 	}
-    if ([name isEqualToString:XMLIOMetadataJMRIVersion] && [[item class] isSubclassOfClass:[XMLIOMetadata class]] && [(XMLIOMetadata *)item majorVersion] != 0) {
+    if ([name isEqualToString:JMRIMetadataJMRIVersion] && [[item class] isSubclassOfClass:[XMLIOMetadata class]] && [(XMLIOMetadata *)item majorVersion] != 0) {
         serviceVersion = [NSString stringWithFormat:@"%li.%li.%li",
                            (long)[(XMLIOMetadata *)item majorVersion],
                            (long)[(XMLIOMetadata *)item minorVersion],

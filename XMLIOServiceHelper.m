@@ -170,12 +170,12 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
 			if ([self.delegate respondsToSelector:@selector(XMLIOServiceHelper:didListItems:ofType:)]) {
 				[self.delegate XMLIOServiceHelper:self didListItems:[items allValues] ofType:self.type];
 			}
-            if ([self.type isEqualToString:JMRITypeMetadata] && [self.delegate respondsToSelector:@selector(XMLIOServiceHelper:didReadItem:withName:ofType:withValue:)] && [[items allKeys] containsObject:XMLIOMetadataJMRIVersion]) {
+            if ([self.type isEqualToString:JMRITypeMetadata] && [self.delegate respondsToSelector:@selector(XMLIOServiceHelper:didReadItem:withName:ofType:withValue:)] && [[items allKeys] containsObject:JMRIMetadataJMRIVersion]) {
                 [self.delegate XMLIOServiceHelper:self 
-                                      didReadItem:[items objectForKey:XMLIOMetadataJMRIVersion]
-                                         withName:XMLIOMetadataJMRIVersion
+                                      didReadItem:[items objectForKey:JMRIMetadataJMRIVersion]
+                                         withName:JMRIMetadataJMRIVersion
                                            ofType:JMRITypeMetadata
-                                        withValue:[[items objectForKey:XMLIOMetadataJMRIVersion] value]];
+                                        withValue:[[items objectForKey:JMRIMetadataJMRIVersion] value]];
             }
 			break;
 		case XMLIOOperationRead:
@@ -241,9 +241,9 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
                 [(XMLIOItem *)newElement setValue:nil];
             }
             if ([elementName isEqualToString:JMRITypeMetadata]) {
-                [(XMLIOMetadata *)newElement setMajorVersion:[[attributeDict objectForKey:XMLIOMetadataVersionMajor] integerValue]];
-                [(XMLIOMetadata *)newElement setMinorVersion:[[attributeDict objectForKey:XMLIOMetadataVersionMinor] integerValue]];
-                [(XMLIOMetadata *)newElement setTestVersion:[[attributeDict objectForKey:XMLIOMetadataVersionTest] integerValue]];
+                [(XMLIOMetadata *)newElement setMajorVersion:[[attributeDict objectForKey:JMRIMetadataVersionMajor] integerValue]];
+                [(XMLIOMetadata *)newElement setMinorVersion:[[attributeDict objectForKey:JMRIMetadataVersionMinor] integerValue]];
+                [(XMLIOMetadata *)newElement setTestVersion:[[attributeDict objectForKey:JMRIMetadataVersionTest] integerValue]];
             }
         } else if ([elementName isEqualToString:XMLIOXMLThrottle]) {
             XMLIOThrottle *t = [self.delegate.throttles objectForKey:[attributeDict objectForKey:XMLIOThrottleAddress]];

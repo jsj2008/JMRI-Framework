@@ -28,6 +28,21 @@ extern NSString *const JMRITypeSensor;
 extern NSString *const JMRITypeSignalHead;
 extern NSString *const JMRITypeTurnout;
 
+// JMRI XMLIO common names
+extern NSString *const JMRIMemoryCurrentTime;
+extern NSString *const JMRIMemoryRateFactor;
+extern NSString *const JMRIMetadataJMRIVersion;
+extern NSString *const JMRIMetadataJMRICanonicalVersion;
+extern NSString *const JMRIMetadataJMRIMajorVersion;
+extern NSString *const JMRIMetadataJMRIMinorVersion;
+extern NSString *const JMRIMetadataJMRITestVersion;
+extern NSString *const JMRIMetadataJVMVendor;
+extern NSString *const JMRIMetadataJVMVersion;
+extern NSString *const JMRIMetadataVersionMajor;
+extern NSString *const JMRIMetadataVersionMinor;
+extern NSString *const JMRIMetadataVersionTest;
+extern NSString *const JMRISensorClockRunning;
+
 // JMRI Panel elements
 extern NSString *const JMRIPanelPositionableLabel;
 extern NSString *const JMRIPanelSensorIcon;
