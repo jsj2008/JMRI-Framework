@@ -29,6 +29,8 @@
 - (void)JMRIServiceDidResolveAddress:(JMRIService *)service;
 - (void)JMRIServiceWillResolve:(JMRIService *)service;
 - (void)JMRIServiceDidOpenConnection:(JMRIService *)service;
+- (void)JMRIService:(JMRIService *)service didStart:(JMRINetService *)netService;
+- (void)JMRIService:(JMRIService *)service didStop:(JMRINetService *)netService;
 - (void)JMRIService:(JMRIService *)service didGetInput:(NSString *)input;
 
 @end

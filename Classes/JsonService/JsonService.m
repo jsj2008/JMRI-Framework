@@ -115,6 +115,9 @@
     [outputStream close];
     inputStream = nil;
     outputStream = nil;
+    if ([self.delegate respondsToSelector:@selector(JMRINetServiceDidStop:)]) {
+        [self.delegate JMRINetServiceDidStop:self];
+    }
 }
 
 - (void)write:(NSDictionary *)jsonObject {
@@ -373,6 +376,9 @@
     serviceVersion = json[@"data"][@"JMRI"];
     self.heartbeat = [NSTimer scheduledTimerWithTimeInterval:rate target:self selector:@selector(sendHeartbeat:) userInfo:nil repeats:YES];
     [self sendHeartbeat:nil];
+    if ([self.delegate respondsToSelector:@selector(JMRINetServiceDidStart:)]) {
+        [self.delegate JMRINetServiceDidStart:self];
+    }
 }
 
 - (void)sendHeartbeat:(NSTimer *)timer {

@@ -110,5 +110,7 @@
 - (void)JMRINetService:(JMRINetService *)service didReceive:(NSString *)input;
 - (void)JMRINetService:(JMRINetService *)service didSend:(NSData *)data;
 - (void)JMRINetServiceDidOpenConnection:(JMRINetService *)service;
+- (void)JMRINetServiceDidStart:(JMRINetService *)service;
+- (void)JMRINetServiceDidStop:(JMRINetService *)service;
 
 @end

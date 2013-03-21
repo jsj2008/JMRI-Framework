@@ -416,6 +416,20 @@
     }
 }
 
+- (void)JMRINetServiceDidStart:(JMRINetService *)service {
+    NSLog(@"Service %@ started", service.type);
+    if ([self.delegate respondsToSelector:@selector(JMRIService:didStart:)]) {
+        [self.delegate JMRIService:self didStart:service];
+    }
+}
+
+- (void)JMRINetServiceDidStop:(JMRINetService *)service {
+    NSLog(@"Service %@ stopped", service.type);
+    if ([self.delegate respondsToSelector:@selector(JMRIService:didStop:)]) {
+        [self.delegate JMRIService:self didStop:service];
+    }
+}
+
 - (void)JMRINetService:(JMRINetService *)service didWrite:(NSData *)data {
     if (self.logNetworkActivity) {
         NSLog(@"Service %@ wrote %@", service.type, [data description]);
