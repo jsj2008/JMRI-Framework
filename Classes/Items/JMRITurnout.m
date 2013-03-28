@@ -67,4 +67,10 @@
     return JMRITypeTurnout;
 }
 
+- (NSDictionary *)dataDictionary {
+    NSMutableDictionary *data = [NSMutableDictionary dictionaryWithDictionary:[super dataDictionary]];
+    [data setValue:[NSNumber numberWithBool:self.inverted] forKey:@"inverted"];
+    return data;
+}
+
 @end

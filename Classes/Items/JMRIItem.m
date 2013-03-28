@@ -189,4 +189,12 @@
 @synthesize service = _service;
 @synthesize userName = _userName;
 
+- (NSDictionary *)dataDictionary {
+    if (self.state == JMRIItemStateStateless) {
+        return @{@"name": self.name, @"comment": self.comment, @"value": self.value, @"userName": self.userName};
+    } else {
+        return @{@"name": self.name, @"comment": self.comment, @"state": [NSNumber numberWithInteger:self.state], @"userName": self.userName};
+    }
+}
+
 @end

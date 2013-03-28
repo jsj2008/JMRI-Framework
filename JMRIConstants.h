@@ -24,10 +24,20 @@ extern NSString *const JMRITypePanel;
 extern NSString *const JMRITypePower;
 extern NSString *const JMRITypeReporter;
 extern NSString *const JMRITypeRoster;
+extern NSString *const JMRITypeRosterEntry;
 extern NSString *const JMRITypeRoute;
 extern NSString *const JMRITypeSensor;
 extern NSString *const JMRITypeSignalHead;
 extern NSString *const JMRITypeTurnout;
+
+extern NSString *const JMRIListLights;
+extern NSString *const JMRIListMemories;
+extern NSString *const JMRIListPanels;
+extern NSString *const JMRIListReporters;
+extern NSString *const JMRIListRoutes;
+extern NSString *const JMRIListSensors;
+extern NSString *const JMRIListSignalHeads;
+extern NSString *const JMRIListTurnouts;
 
 // JMRI XMLIO common names
 extern NSString *const JMRIMemoryCurrentTime;

@@ -72,5 +72,6 @@
 @property NSString* userName;
 @property NSString* value;
 @property (readonly) NSString* type;
+@property (strong, readonly) NSDictionary* dataDictionary;
 
 @end

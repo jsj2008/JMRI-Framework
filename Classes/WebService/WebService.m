@@ -7,6 +7,7 @@
 //
 
 #import "WebService.h"
+#import "JMRIItem.h"
 
 @interface WebService ()
 
@@ -31,26 +32,41 @@
 
 - (id)initWithNetService:(NSNetService *)service {
 	if ((self = [super initWithNetService:service])) {
-        serviceType = JMRIServiceWeb;
-		_openConnections = 0;
-		self.JSONPath = @"json/";
-        [self readItem:JMRIMetadataJMRICanonicalVersion ofType:JMRITypeMetadata];
+        [self commonInit];
 	}
 	return self;
 }
 
 - (id)initWithName:(NSString *)name withAddress:(NSString *)address withPort:(NSInteger)port {
 	if ((self = [super initWithName:name withAddress:address withPort:port])) {
-        serviceType = JMRIServiceWeb;
-		_openConnections = 0;
-		self.JSONPath = @"json/";
-        [self readItem:JMRIMetadataJMRICanonicalVersion ofType:JMRITypeMetadata];
+        [self commonInit];
 	}
 	return self;
 }
 
 - (id)initWithAddress:(NSString *)address withPort:(NSInteger)port {
     return [self initWithName:nil withAddress:address withPort:port];
+}
+
+- (void)commonInit {
+    serviceType = JMRIServiceWeb;
+    _openConnections = 0;
+    self.JSONPath = @"json/";
+    collections = @{
+                    JMRITypeFrame: JMRITypeFrame,
+                    JMRITypeLight: JMRIListLights,
+                    JMRITypeMemory: JMRIListMemories,
+                    JMRITypeMetadata: JMRITypeMetadata,
+                    JMRITypePanel: JMRIListPanels,
+                    JMRITypePower: JMRITypePower,
+                    JMRITypeReporter: JMRIListReporters,
+                    JMRITypeRoster: JMRITypeRoster,
+                    JMRITypeRoute: JMRIListRoutes,
+                    JMRITypeSensor: JMRIListSensors,
+                    JMRITypeSignalHead: JMRIListSignalHeads,
+                    JMRITypeTurnout: JMRIListTurnouts
+                    };
+    [self readItem:JMRIMetadataJMRICanonicalVersion ofType:JMRITypeMetadata];
 }
 
 #pragma mark - Properties
@@ -87,11 +103,18 @@
                            }];
 }
 
-- (void)write:(NSDictionary *)jsonObject {
-    NSString *path = [NSString stringWithFormat:@"%@/%@", jsonObject[@"type"], jsonObject[@"data"][@"name"]];
+- (void)write:(NSDictionary *)jsonObject method:(NSString *)method {
+    // need to pluralize type
+    NSError *error = nil;
+    NSData *data = [NSJSONSerialization dataWithJSONObject:jsonObject options:0 error:&error];
+    NSString *path = [NSString stringWithFormat:@"%@/%@", [collections valueForKey:jsonObject[@"type"]], jsonObject[@"data"][@"name"]];
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[self.url URLByAppendingPathComponent:path]
                                                            cachePolicy:NSURLRequestReloadIgnoringCacheData
                                                        timeoutInterval:self.timeoutInterval];
+    request.HTTPMethod = method;
+    request.HTTPBody = data;
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:[[NSNumber numberWithUnsignedInteger:data.length] stringValue] forHTTPHeaderField:@"Content-Length"];
     _openConnections++;
     [NSURLConnection sendAsynchronousRequest:request
                                        queue:[NSOperationQueue currentQueue]
@@ -104,22 +127,35 @@
 #pragma mark - JMRINetService items
 
 - (void)list:(NSString *)type {
-    [self write:@{@"type": @"list", @"list": type}];
+    [self read:[collections valueForKey:type]];
 }
 
 - (void)readItem:(NSString *)name ofType:(NSString *)type {
-    // {"type":"power","data":{"name":"CT1"}}
-    // NSString *string = [NSString stringWithFormat:@"{\"type\":\"%@\",\"data\":{\"name\":\"%@\"}}\n", type, name];
-    [self write:@{@"type": type, @"data": @{@"name": name}}];
+    [self read:[NSString stringWithFormat:@"%@/%@", type, name]];
 }
 
 - (void)writeItem:(NSString *)name ofType:(NSString *)type value:(NSString *)value {
-    //NSString *string = [NSString stringWithFormat:@"{\"type\":\"%@\",\"data\":{\"name\":\"%@\",\"state\":\"%@\"}}\n", type, name, value];
-    [self write:@{@"type": type, @"data": @{@"name": name, @"state": value}}];
+    [self write:@{@"name": name, @"state": value} method:@"POST"];
 }
 
 - (void)writeItem:(NSString *)name ofType:(NSString *)type state:(NSUInteger)state {
-    [self write:@{@"type": type, @"data": @{@"name": name, @"state":[NSNumber numberWithInteger:state]}}];
+    [self write:@{@"name": name, @"state":[NSNumber numberWithInteger:state]} method:@"POST"];
+}
+
+- (void)writeItem:(JMRIItem *)item {
+    [self write:item.dataDictionary method:@"POST"];
+}
+
+- (void)createItem:(NSString *)name ofType:(NSString *)type withState:(NSUInteger)state {
+    [self write:@{@"name": name, @"state":[NSNumber numberWithInteger:state]} method:@"PUT"];
+}
+
+- (void)createItem:(NSString *)name ofType:(NSString *)type withValue:(NSString *)value {
+    [self write:@{@"name": name, @"value":value} method:@"PUT"];
+}
+
+- (void)createItem:(JMRIItem *)item {
+    [self write:item.dataDictionary method:@"PUT"];
 }
 
 - (void)failWithError:(NSError *)error {

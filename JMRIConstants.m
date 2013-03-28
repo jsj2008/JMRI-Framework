@@ -23,10 +23,20 @@ NSString *const JMRITypePanel = @"panel";
 NSString *const JMRITypePower = @"power";
 NSString *const JMRITypeReporter = @"reporter";
 NSString *const JMRITypeRoster = @"roster";
+NSString *const JMRITypeRosterEntry = @"rosterEntry";
 NSString *const JMRITypeRoute = @"route";
 NSString *const JMRITypeSensor = @"sensor";
 NSString *const JMRITypeSignalHead = @"signalHead";
 NSString *const JMRITypeTurnout = @"turnout";
+
+NSString *const JMRIListLights = @"lights";
+NSString *const JMRIListMemories = @"memories";
+NSString *const JMRIListPanels = @"panels";
+NSString *const JMRIListReporters = @"reporters";
+NSString *const JMRIListRoutes = @"routes";
+NSString *const JMRIListSensors = @"sensors";
+NSString *const JMRIListSignalHeads = @"signalHeads";
+NSString *const JMRIListTurnouts = @"turnouts";
 
 // Well known sensor and memory names
 NSString *const JMRIMemoryCurrentTime = @"IMCURRENTTIME";

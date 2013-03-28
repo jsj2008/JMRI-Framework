@@ -8,6 +8,7 @@
 
 #import "JsonService.h"
 #import "JMRIConstants.h"
+#import "JMRIItem.h"
 #import "JMRIPanel.h"
 #import "NSMutableArray+QueueExtensions.h"
 #ifdef TARGET_OS_IPHONE
@@ -43,8 +44,7 @@
 
 - (id)initWithNetService:(NSNetService *)service {
     if ((self = [super initWithNetService:service])) {
-        serviceType = JMRIServiceJson;
-        [self open];
+        [self commonInit];
     }
     return self;
 }
@@ -52,14 +52,32 @@
 - (id)initWithName:(NSString *)name withAddress:(NSString *)address withPort:(NSInteger)port {
     if ((self = [super initWithName:name withAddress:address withPort:port])) {
         serviceVersion = MIN_JSON_VERSION;
-        serviceType = JMRIServiceJson;
-        [self open];
+        [self commonInit];
     }
     return self;
 }
 
 - (id)initWithAddress:(NSString *)address withPort:(NSInteger)port {
     return [self initWithName:nil withAddress:address withPort:port];
+}
+
+- (void)commonInit {
+    serviceType = JMRIServiceJson;
+    collections = @{
+                    JMRITypeFrame: JMRITypeFrame,
+                    JMRITypeLight: JMRIListLights,
+                    JMRITypeMemory: JMRIListMemories,
+                    JMRITypeMetadata: JMRITypeMetadata,
+                    JMRITypePanel: JMRIListPanels,
+                    JMRITypePower: JMRITypePower,
+                    JMRITypeReporter: JMRIListReporters,
+                    JMRITypeRoster: JMRITypeRoster,
+                    JMRITypeRoute: JMRIListRoutes,
+                    JMRITypeSensor: JMRIListSensors,
+                    JMRITypeSignalHead: JMRIListSignalHeads,
+                    JMRITypeTurnout: JMRIListTurnouts
+                    };
+    [self open];
 }
 
 #pragma mark - Public methods
@@ -180,6 +198,24 @@
 
 - (void)writeItem:(NSString *)name ofType:(NSString *)type state:(NSUInteger)state {
     [self write:@{@"type": type, @"data": @{@"name": name, @"state":[NSNumber numberWithInteger:state]}}];
+}
+
+- (void)writeItem:(JMRIItem *)item {
+    [self write:@{@"type": item.type, @"data": item.dataDictionary}];
+}
+
+- (void)createItem:(NSString *)name ofType:(NSString *)type withState:(NSUInteger)state {
+    [self write:@{@"type": type, @"data": @{@"name": name, @"state":[NSNumber numberWithInteger:state], @"method": @"put"}}];
+}
+
+- (void)createItem:(NSString *)name ofType:(NSString *)type withValue:(NSString *)value {
+    [self write:@{@"type": type, @"data": @{@"name": name, @"value":value, @"method": @"put"}}];
+}
+
+- (void)createItem:(JMRIItem *)item {
+    NSMutableDictionary *data = [NSMutableDictionary dictionaryWithDictionary:item.dataDictionary];
+    [data setValue:@"put" forKey:@"method"];
+    [self write:@{@"type": item.type, @"data": data}];
 }
 
 - (void)failWithError:(NSError *)error {
