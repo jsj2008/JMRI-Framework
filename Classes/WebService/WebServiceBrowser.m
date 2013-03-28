@@ -16,11 +16,11 @@
 //  Created by Randall Wood on 11/5/2011.
 //
 
-#import "XMLIOServiceBrowser.h"
+#import "WebServiceBrowser.h"
 #import "XMLIOService.h"
 #import "JMRIConstants.h"
 
-@implementation XMLIOServiceBrowser
+@implementation WebServiceBrowser
 
 - (id)init {
 	if ((self = [super init])) {

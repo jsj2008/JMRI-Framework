@@ -19,7 +19,7 @@
 #import "JMRINetServiceBrowser.h"
 
 
-@interface XMLIOServiceBrowser : JMRINetServiceBrowser {
+@interface WebServiceBrowser : JMRINetServiceBrowser {
 
 }
 
