@@ -16,8 +16,6 @@
 
 @interface JsonService ()
 
-- (void)open;
-- (void)close;
 - (void)error:(NSError *)error;
 - (void)writeData:(NSData *)data;
 
@@ -64,7 +62,7 @@
     return [self initWithName:nil withAddress:address withPort:port];
 }
 
-#pragma mark - Private methods
+#pragma mark - Public methods
 
 - (void)open {
     if (self.isOpen) {
@@ -120,6 +118,14 @@
     }
 }
 
+- (Boolean)isOpen {
+    NSStreamStatus i = inputStream.streamStatus;
+    NSStreamStatus o = outputStream.streamStatus;
+    return i >= NSStreamStatusOpen && i < NSStreamStatusAtEnd && o >= NSStreamStatusOpen && o < NSStreamStatusAtEnd;
+}
+
+#pragma mark - Private methods
+
 - (void)write:(NSDictionary *)jsonObject {
     NSError* error = nil;
     NSMutableData *data = [NSMutableData dataWithData:[NSJSONSerialization dataWithJSONObject:jsonObject options:0 error:&error]];
@@ -153,24 +159,6 @@
     if ([self.delegate respondsToSelector:@selector(JMRINetService:didFailWithError:)]) {
         [self.delegate JMRINetService:self didFailWithError:error];
     }
-}
-
-#pragma mark - Public methods
-
-- (void)openConnection {
-    [self open];
-    // if we ever need to handshake - do it here
-}
-
-- (void)closeConnection {
-    // if we ever need to send a closing message - do it here
-    [self close];
-}
-
-- (Boolean)isOpen {
-    NSStreamStatus i = inputStream.streamStatus;
-    NSStreamStatus o = outputStream.streamStatus;
-    return i >= NSStreamStatusOpen && i < NSStreamStatusAtEnd && o >= NSStreamStatusOpen && o < NSStreamStatusAtEnd;
 }
 
 #pragma mark - JMRINetService items

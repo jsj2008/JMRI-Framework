@@ -127,6 +127,18 @@ static JMRINetService *sharedNetService_ = nil;
 	[self doesNotRecognizeSelector:_cmd];
 }
 
+- (void)open {
+	[self doesNotRecognizeSelector:_cmd];
+}
+
+- (void)close {
+    [self doesNotRecognizeSelector:_cmd];
+}
+
+- (Boolean)isOpen {
+    return NO;
+}
+
 #pragma mark - Net service delegate
 
 - (void)netService:(NSNetService *)sender didNotResolve:(NSDictionary *)errorDict {

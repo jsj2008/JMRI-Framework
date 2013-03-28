@@ -50,10 +50,9 @@
 - (void)stop;
 - (void)stopMonitoring;
 - (void)failWithError:(NSError *)error;
-/* I'd like to make these public methods of all JMRINetService delegates, but need to think about how to design this.
 - (void)open;
 - (void)close;
- */
+
 @property (readonly, getter = isOpen) Boolean isOpen;
 
 #pragma mark - JMRI object handling

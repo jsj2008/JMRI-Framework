@@ -15,8 +15,6 @@
 
 @interface SimpleService ()
 
-- (void)open;
-- (void)close;
 - (void)error:(NSError *)error;
 
 - (void)didGetLightState:(NSString *)string;
@@ -73,7 +71,7 @@
     return [self initWithName:nil withAddress:address withPort:port];
 }
 
-#pragma mark - Private methods
+#pragma mark - Public methods
 
 - (void)open {
     self.buffer = @"";
@@ -91,6 +89,14 @@
     [outputStream close];
 }
 
+- (Boolean)isOpen {
+    NSStreamStatus i = inputStream.streamStatus;
+    NSStreamStatus o = outputStream.streamStatus;
+    return i >= NSStreamStatusOpen && i < NSStreamStatusAtEnd && o >= NSStreamStatusOpen && o < NSStreamStatusAtEnd;
+}
+
+#pragma mark - Private methods
+
 - (void)write:(NSString *)string {
     if ([outputStream hasSpaceAvailable]) {
         [outputStream write:[[string dataUsingEncoding:NSASCIIStringEncoding] bytes]
@@ -104,18 +110,6 @@
     if ([self.delegate respondsToSelector:@selector(JMRINetService:didFailWithError:)]) {
         [self.delegate JMRINetService:self didFailWithError:error];
     }
-}
-
-#pragma mark - Public methods
-
-- (void)openConnection {
-    [self open];
-    // if we ever need to handshake - do it here
-}
-
-- (void)closeConnection {
-    // if we ever need to send a closing message - do it here
-    [self close];
 }
 
 #pragma mark - JMRINetService items

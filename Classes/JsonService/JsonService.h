@@ -17,9 +17,6 @@
     
 }
 
-- (void)openConnection;
-- (void)closeConnection;
-
 - (void)list:(NSString *)type;
 - (void)readItem:(NSString *)name ofType:(NSString *)type;
 - (void)readItem:(NSString *)name ofType:(NSString *)type initialValue:(NSString *)value;

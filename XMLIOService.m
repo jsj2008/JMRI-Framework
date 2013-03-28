@@ -126,7 +126,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 @synthesize XMLIOPath;
 @synthesize throttles;
 
-- (BOOL)openConnection {
+- (Boolean)isOpen {
 	return ([connections count]);
 }
 
@@ -271,6 +271,11 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
         [[connections objectForKey:request] cancel];
     }
     [connections removeAllObjects];
+}
+
+- (void)close {
+    [self cancelAllConnections];
+    [self stopMonitoringAllItems];
 }
 
 #pragma mark - JMRI XMLIO service rethreading

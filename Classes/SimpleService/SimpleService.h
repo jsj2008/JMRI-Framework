@@ -15,9 +15,6 @@
 
 }
 
-- (void)openConnection;
-- (void)closeConnection;
-
 - (void)write:(NSString *)string;
 
 @end
