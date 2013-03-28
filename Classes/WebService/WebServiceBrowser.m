@@ -1,5 +1,5 @@
 /*
- Copyright 2011 Randall Wood DBA Alexandria Software at http://www.alexandriasoftware.com. All rights reserved.
+ Copyright 2011, 2012, 2013 Randall Wood DBA Alexandria Software at http://www.alexandriasoftware.com. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  
@@ -10,14 +10,14 @@
  THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 //
-//  XMLIOServiceBrowser.m
+//  WebServiceBrowser.m
 //  JMRI Framework
 //
 //  Created by Randall Wood on 11/5/2011.
 //
 
 #import "WebServiceBrowser.h"
-#import "XMLIOService.h"
+#import "WebService.h"
 #import "JMRIConstants.h"
 
 @implementation WebServiceBrowser
@@ -37,7 +37,7 @@
 }
 
 - (void)addServiceWithAddress:(NSString *)address withPort:(NSInteger)port {
-	XMLIOService *service = [[XMLIOService alloc] initWithAddress:address withPort:port];
+	WebService *service = [[WebService alloc] initWithAddress:address withPort:port];
 	[self.services addObject:service];
 }
 
@@ -45,7 +45,7 @@
     NSDictionary *txtRecords = [NSNetService dictionaryFromTXTRecordData:[sender TXTRecordData]];
     if ([txtRecords objectForKey:JMRITXTRecordKeyJMRI] &&
         ![self containsService:sender]) {
-		XMLIOService *service = [[XMLIOService alloc] initWithNetService:sender];
+		WebService *service = [[WebService alloc] initWithNetService:sender];
 		[self.services addObject:service];
         [self.unresolvedServices removeObject:sender];
 		if ([self.delegate respondsToSelector:@selector(JMRINetServiceBrowser:didFindService:moreComing:)]) {

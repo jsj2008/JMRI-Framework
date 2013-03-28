@@ -10,8 +10,9 @@
 
 NSString *const JMRIServiceJson = @"JsonService";
 NSString *const JMRIServiceSimple = @"JMRINetwork";
-NSString *const JMRIServiceWeb = @"WebServer";
+NSString *const JMRIServiceWeb = @"WebService (Json)";
 NSString *const JMRIServiceWiThrottle = @"wiThrottle";
+NSString *const JMRIServiceXmlIO = @"WebService (XmlIO)";
 
 NSString *const JMRITypeFrame = @"frame";
 NSString *const JMRITypeLight = @"light";

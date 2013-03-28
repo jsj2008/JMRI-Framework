@@ -12,6 +12,7 @@
 @class JMRINetService;
 @class JsonService;
 @class SimpleService;
+@class WebService;
 @class WiThrottleService;
 @class XMLIOService;
 @class JMRIItem;
@@ -41,8 +42,9 @@
     
     JsonService *json;
     SimpleService *simple;
-    XMLIOService *xmlio;
+    WebService *web;
     WiThrottleService *wiThrottle;
+    XMLIOService *xmlio;
     NSString *domain;
     NSString *hostName;
     NSString *_name;
@@ -71,18 +73,22 @@
 
 @property (readwrite, strong) JsonService *jsonService;
 @property (readwrite, strong) SimpleService *simpleService;
+@property (readwrite, strong) WebService *webService;
 @property (readwrite, strong) WiThrottleService *wiThrottleService;
-@property (readwrite, strong) XMLIOService *webService;
+@property (readwrite, strong) XMLIOService *xmlIOService;
 @property (readonly) Boolean hasJsonService;
 @property (readonly) Boolean hasSimpleService;
-@property (readonly) Boolean hasWiThrottleService;
 @property (readonly) Boolean hasWebService;
+@property (readonly) Boolean hasWiThrottleService;
+@property (readonly) Boolean hasXmlIOService;
 @property Boolean requiresJsonService;
 @property Boolean requiresSimpleService;
+@property Boolean requiresWebService;
 @property Boolean requiresWiThrottleService;
 @property Boolean requiresXmlIOService;
 @property Boolean useJsonService;
 @property Boolean useSimpleService;
+@property Boolean useWebService;
 @property Boolean useWiThrottleService;
 @property Boolean useXmlIOService;
 

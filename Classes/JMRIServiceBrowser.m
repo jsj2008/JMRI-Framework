@@ -11,8 +11,8 @@
 #import "JMRIService.h"
 #import "JsonServiceBrowser.h"
 #import "SimpleServiceBrowser.h"
+#import "WebServiceBrowser.h"
 #import "WiThrottleServiceBrowser.h"
-#import "XMLIOServiceBrowser.h"
 
 @interface JMRIServiceBrowser (Private) <JMRINetServiceBrowserDelegate>
 
@@ -39,7 +39,7 @@
             simpleBrowser.delegate = self;
         }
         if ([services containsObject:JMRIServiceWeb]) {
-            webBrowser = [[XMLIOServiceBrowser alloc] init];
+            webBrowser = [[WebServiceBrowser alloc] init];
             webBrowser.delegate = self;
         }
         if ([services containsObject:JMRIServiceWiThrottle]) {
@@ -130,10 +130,10 @@
             service.jsonService = (JsonService *)aNetService;
         } else if ([aNetService.type isEqualToString:JMRIServiceSimple]) {
             service.simpleService = (SimpleService *)aNetService;
-        } else if ([aNetService.type isEqualToString:JMRIServiceWiThrottle]) {
-            service.wiThrottleService = (WiThrottleService *)aNetService;
+        } else if ([aNetService.type isEqualToString:JMRIServiceWeb]) {
+            service.webService = (WebService *)aNetService;
         } else {
-            service.webService = (XMLIOService *)aNetService;
+            service.wiThrottleService = (WiThrottleService *)aNetService;
         }
         if ([delegate respondsToSelector:@selector(JMRIServiceBrowser:didChangeService:moreComing:)]) {
             [delegate JMRIServiceBrowser:self didChangeService:service moreComing:searching];
@@ -155,12 +155,13 @@
             service.jsonService = nil;
         } else if ([aNetService.type isEqualToString:JMRIServiceSimple]) {
             service.simpleService = nil;
-        } else if ([aNetService.type isEqualToString:JMRIServiceWiThrottle]) {
-            service.wiThrottleService = nil;
-        } else {
+        } else if ([aNetService.type isEqualToString:JMRIServiceWeb]) {
             service.webService = nil;
+            service.xmlIOService = nil;
+        } else {
+            service.wiThrottleService = nil;
         }
-        if (service.hasJsonService || service.hasSimpleService || service.hasWiThrottleService || service.hasWebService) {
+        if (service.hasJsonService || service.hasSimpleService || service.hasWebService || service.hasWiThrottleService || service.hasXmlIOService) {
             if ([delegate respondsToSelector:@selector(JMRIServiceBrowser:didChangeService:moreComing:)]) {
                 [delegate JMRIServiceBrowser:self didChangeService:service moreComing:searching];
             }

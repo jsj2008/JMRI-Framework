@@ -10,8 +10,9 @@
 // Known service types
 extern NSString *const JMRIServiceJson;
 extern NSString *const JMRIServiceSimple;
-extern NSString *const JMRIServiceWiThrottle;
 extern NSString *const JMRIServiceWeb;
+extern NSString *const JMRIServiceWiThrottle;
+extern NSString *const JMRIServiceXmlIO;
 
 // JMRI XMLIO item types
 extern NSString *const JMRITypeFrame;
@@ -75,5 +76,7 @@ typedef enum {
 } JMRISignalAppearances;
 
 typedef enum {
+    JMRIWebServiceJsonReadOnly = 510,
+    JMRIWebServiceJsonUnsupported = 511,
     JMRIXMLUnexpectedRootElement = 512
 } JMRIErrorCodes;

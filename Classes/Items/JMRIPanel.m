@@ -9,6 +9,7 @@
 #import "JMRIPanel.h"
 #import "JMRIPanelHelper.h"
 #import "JMRIItem+Internal.h"
+#import "WebService.h"
 #if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
 #else
@@ -34,7 +35,7 @@
 }
 
 - (NSURL *)url {
-    if (!self.service.hasWebService || self.service.webService.port == -1) {
+    if (!self.service.hasXmlIOService || self.service.webService.port == -1) {
 		return nil;
 	}
 	return [[NSURL URLWithString:[NSString stringWithFormat:@"http://%@:%li/panel/%@", self.service.hostName, (long)self.service.webService.port, self.name, nil]] absoluteURL];

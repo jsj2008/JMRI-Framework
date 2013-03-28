@@ -9,6 +9,7 @@
 #import "JMRIService.h"
 #import "JsonService.h"
 #import "SimpleService.h"
+#import "WebService.h"
 #import "WiThrottleService.h"
 #import "XMLIOService.h"
 #import "JMRIConstants.h"
@@ -47,17 +48,17 @@
         } else {
             self.useSimpleService = NO;
         }
+        if ([ports valueForKey:JMRIServiceWeb]) {
+            self.webService = [[WebService alloc] initWithName:name withAddress:address withPort:[[ports valueForKey:JMRIServiceWeb] integerValue]];
+            self.requiresWebService = YES;
+        } else {
+            self.useWebService = NO;
+        }
         if ([ports valueForKey:JMRIServiceWiThrottle]) {
             self.wiThrottleService = [[WiThrottleService alloc] initWithName:name withAddress:address withPort:[[ports valueForKey:JMRIServiceWiThrottle] integerValue]];
             self.requiresWiThrottleService = YES;
         } else {
             self.useWiThrottleService = NO;
-        }
-        if ([ports valueForKey:JMRIServiceWeb]) {
-            self.webService = [[XMLIOService alloc] initWithName:name withAddress:address withPort:[[ports valueForKey:JMRIServiceWeb] integerValue]];
-            self.requiresXmlIOService = YES;
-        } else {
-            self.useXmlIOService = NO;
         }
     }
     return self;
@@ -84,19 +85,19 @@
         } else {
             self.useSimpleService = NO;
         }
+        if ([services valueForKey:JMRIServiceWeb]) {
+            self.webService = [services valueForKey:JMRIServiceWeb];
+            [self.webService startMonitoring];
+            self.requiresWebService = YES;
+        } else {
+            self.useWebService = NO;
+        }
         if ([services valueForKey:JMRIServiceWiThrottle]) {
             self.wiThrottleService = [services valueForKey:JMRIServiceWiThrottle];
             [self.wiThrottleService startMonitoring];
             self.requiresWiThrottleService = YES;
         } else {
             self.useWiThrottleService = NO;
-        }
-        if ([services valueForKey:JMRIServiceWeb]) {
-            self.webService = [services valueForKey:JMRIServiceWeb];
-            [self.webService startMonitoring];
-            self.requiresXmlIOService = YES;
-        } else {
-            self.useXmlIOService = NO;
         }
     }
     return self;
@@ -106,12 +107,14 @@
     power = [[JMRIPower alloc] initWithName:JMRITypePower withService:self];
     self.requiresJsonService = NO;
     self.requiresSimpleService = NO;
+    self.requiresWebService = NO;
     self.requiresWiThrottleService = NO;
     self.requiresXmlIOService = NO;
     self.useJsonService = YES;
     self.useSimpleService = YES;
+    self.useWebService = YES;
     self.useWiThrottleService = YES;
-    self.useXmlIOService = YES;
+    self.useXmlIOService = NO;
 }
 
 #pragma mark - Object Handling
@@ -127,10 +130,10 @@
         return self.jsonService.addresses;
     } else if (self.hasSimpleService) {
         return self.simpleService.addresses;
-    } else if (self.hasWiThrottleService) {
-        return self.wiThrottleService.addresses;
     } else if (self.hasWebService) {
         return self.webService.addresses;
+    } else if (self.hasWiThrottleService) {
+        return self.wiThrottleService.addresses;
     }
     return nil;
 }
@@ -193,24 +196,24 @@
     }
 }
 
-- (XMLIOService *)webService {
-    return xmlio;
+- (WebService *)webService {
+    return web;
 }
 
-- (void)setWebService:(XMLIOService *)webService {
-    if (xmlio == webService) {
+- (void)setWebService:(WebService *)webService {
+    if (web == webService) {
         return;
     }
-    [xmlio stopMonitoring];
-    [xmlio stop];
-    xmlio.delegate = nil;
-    xmlio = webService;
-    xmlio.delegate = self;
-    [xmlio startMonitoring];
-    if (xmlio) {
-        domain = xmlio.domain;
-        hostName = xmlio.hostName;
-        _name = xmlio.name;
+    [web stopMonitoring];
+    [web stop];
+    web.delegate = nil;
+    web = webService;
+    web.delegate = self;
+    [web startMonitoring];
+    if (web) {
+        domain = web.domain;
+        hostName = web.hostName;
+        _name = web.name;
     }
 }
 
@@ -235,6 +238,22 @@
     }
 }
 
+- (XMLIOService *)xmlIOService {
+    return xmlio;
+}
+
+- (void)setXmlIOService:(XMLIOService *)xmlIOService {
+    if (xmlio == xmlIOService) {
+        return;
+    }
+    [xmlio stopMonitoring];
+    [xmlio stop];
+    xmlio.delegate = nil;
+    xmlio = xmlIOService;
+    xmlio.delegate = self;
+    [xmlio startMonitoring];
+}
+
 - (Boolean)hasJsonService {
     return (self.jsonService != nil);
 }
@@ -243,12 +262,16 @@
     return (self.simpleService != nil);
 }
 
+- (Boolean)hasWebService {
+    return (self.webService != nil);
+}
+
 - (Boolean)hasWiThrottleService {
     return (self.wiThrottleService != nil);
 }
 
-- (Boolean)hasWebService {
-    return (self.webService != nil);
+- (Boolean)hasXmlIOService {
+    return (self.xmlIOService != nil);
 }
 
 - (NSString *)version {
@@ -256,6 +279,8 @@
         return self.jsonService.version;
     } else if (self.hasWebService) {
         return self.webService.version;
+    } else if (self.hasXmlIOService) {
+        return self.xmlIOService.version;
     } else if (self.hasSimpleService) {
         return self.simpleService.version;
     } else {
@@ -283,43 +308,46 @@
 @synthesize turnouts;
 
 - (void)list:(NSString *)type {
-    if (self.hasWebService && self.useXmlIOService) {
+    if (self.hasWebService && self.useWebService) {
         [self.webService list:type];
+    } else if (self.hasXmlIOService && self.useXmlIOService) {
+        [self.xmlIOService list:type];
     } else if (self.hasJsonService && self.useJsonService) {
         [self.jsonService list:type];
     }
 }
 
 - (void)monitor:(JMRIItem *)item {
-    if (self.hasWebService && self.useXmlIOService) {
-        [self.webService startMonitoring:item.name ofType:item.type];
+    if (self.hasXmlIOService && self.useXmlIOService) {
+        [self.xmlIOService startMonitoring:item.name ofType:item.type];
     }
 }
 
 - (void)stopMonitoring:(JMRIItem *)item {
-    if (self.hasWebService) {
-        [self.webService stopMonitoring:item.name ofType:item.type];
+    if (self.hasXmlIOService) {
+        [self.xmlIOService stopMonitoring:item.name ofType:item.type];
     }
 }
 
 - (Boolean)isMonitoring:(JMRIItem *)item {
-    if (self.hasWebService) {
-        return [self.webService isMonitoring:item.name ofType:item.type];
+    if (self.hasXmlIOService) {
+        return [self.xmlIOService isMonitoring:item.name ofType:item.type];
     }
     return NO;
 }
 
 - (void)stopMonitoringAllItems {
-    if (self.hasWebService) {
-        [self.webService stopMonitoringAllItems];
+    if (self.hasXmlIOService) {
+        [self.xmlIOService stopMonitoringAllItems];
     }
 }
 
 - (void)stop {
     [self.jsonService stop];
     [self.simpleService stop];
-    [self.wiThrottleService stop];
     [self.webService stop];
+    [self.wiThrottleService stop];
+    [self.xmlIOService stop];
 }
 
 #pragma mark - JMRINetService delegate
@@ -332,6 +360,41 @@
 }
 
 - (void)JMRINetService:(JMRINetService *)service didFailWithError:(NSError *)error {
+    if ([error.domain isEqualToString:JMRIErrorDomain]) {
+        if (error.code == JMRIWebServiceJsonUnsupported) {
+            // assume connection to JMRI 2.14.X server and that no other service is available
+            if (service.service) {
+                self.xmlIOService = [[XMLIOService alloc] initWithNetService:service.service];
+            } else {
+                self.xmlIOService = [[XMLIOService alloc] initWithName:service.name
+                                                           withAddress:service.addresses[0]
+                                                              withPort:service.port];
+            }
+            self.useXmlIOService = YES;
+            self.requiresXmlIOService = self.requiresWebService;
+            self.useWebService = NO;
+            self.requiresWebService = NO;
+            self.webService = nil;
+            return; // don't pass on this error, we've handled it
+        } else if (error.code == JMRIWebServiceJsonReadOnly) {
+            if (!self.useJsonService && !self.useXmlIOService) {
+                // use the Json service if the JMRI server supports it, otherwise switch to XmlIO
+                if (service.service) {
+                    self.xmlIOService = [[XMLIOService alloc] initWithNetService:service.service];
+                } else {
+                    self.xmlIOService = [[XMLIOService alloc] initWithName:service.name
+                                                               withAddress:service.addresses[0]
+                                                                  withPort:service.port];
+                }
+                self.useXmlIOService = YES;
+                self.requiresXmlIOService = self.requiresWebService;
+                self.useWebService = NO;
+                self.requiresWebService = NO;
+                self.webService = nil;
+            }
+            return; // don't pass on this error, we've handled it
+        }
+    }
     if ([self.delegate respondsToSelector:@selector(JMRIService:didFailWithError:)]) {
         [self.delegate JMRIService:self didFailWithError:error];
     }
@@ -436,7 +499,7 @@
     }
 }
 
-#pragma mark - Web service delegate
+#pragma mark - XmlIO service delegate
 
 - (void)XMLIOService:(XMLIOService *)service didListItems:(NSArray *)items ofType:(NSString *)type {
     if ([type isEqualToString:JMRITypeMemory]) {

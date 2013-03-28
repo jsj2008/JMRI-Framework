@@ -14,7 +14,7 @@
 #pragma mark - Operations
 
 - (void)monitorWithXmlIOService {
-    [self.service.webService readItem:JMRITypePower ofType:JMRITypePower initialValue:[[NSNumber numberWithInteger:self.state] stringValue]];
+    [self.service.xmlIOService readItem:JMRITypePower ofType:JMRITypePower initialValue:[[NSNumber numberWithInteger:self.state] stringValue]];
 }
 
 - (void)queryFromJsonService:(JsonService *)service {

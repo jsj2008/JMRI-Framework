@@ -65,8 +65,8 @@
         [self queryFromSimpleService:self.service.simpleService];
     } else if (self.service.hasWiThrottleService && self.service.useWiThrottleService) {
         // WiThrottle has no explicit query mechanism
-    } else if (self.service.hasWebService && self.service.useXmlIOService) {
-        [self queryFromXmlIOService:self.service.webService];
+    } else if (self.service.hasXmlIOService && self.service.useXmlIOService) {
+        [self queryFromXmlIOService:self.service.xmlIOService];
     }
 }
 
@@ -93,8 +93,8 @@
         [self writeToSimpleService:self.service.simpleService];
     } else if (self.service.hasWiThrottleService && self.service.useWiThrottleService) {
         [self writeToWiThrottleService:self.service.wiThrottleService];
-    } else if (self.service.hasWebService && self.service.useXmlIOService) {
-        [self writeToXmlIOService:self.service.webService];
+    } else if (self.service.hasXmlIOService && self.service.useXmlIOService) {
+        [self writeToXmlIOService:self.service.xmlIOService];
     }
 }
 

@@ -102,7 +102,7 @@
         [outputStream write:[[string dataUsingEncoding:NSASCIIStringEncoding] bytes]
             maxLength:[string lengthOfBytesUsingEncoding:NSASCIIStringEncoding]];
     } else {
-        [self error:[NSError errorWithDomain:JMRIServiceSimple code:1001 userInfo:nil]];
+        [self error:[NSError errorWithDomain:JMRIErrorDomain code:1001 userInfo:nil]];
     }
 }
 

@@ -150,7 +150,7 @@
         if (!outputStream) {
             [self open];
         } else {
-            [self error:[NSError errorWithDomain:JMRIServiceJson code:1001 userInfo:@{@"stream": @"output", @"streamStatus": @(outputStream.streamStatus)}]];
+            [self error:[NSError errorWithDomain:JMRIErrorDomain code:1001 userInfo:@{@"stream": @"output", @"streamStatus": @(outputStream.streamStatus)}]];
         }
     }
 }

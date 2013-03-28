@@ -12,7 +12,7 @@
 @class JsonServiceBrowser;
 @class SimpleServiceBrowser;
 @class WiThrottleServiceBrowser;
-@class XMLIOServiceBrowser;
+@class WebServiceBrowser;
 
 @interface JMRIServiceBrowser : NSObject {
     
@@ -20,7 +20,7 @@
     JsonServiceBrowser *jsonBrowser;
     SimpleServiceBrowser *simpleBrowser;
     WiThrottleServiceBrowser *wiThrottleBrowser;
-    XMLIOServiceBrowser *webBrowser;
+    WebServiceBrowser *webBrowser;
     
 }
 

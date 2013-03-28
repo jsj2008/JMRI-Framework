@@ -22,14 +22,18 @@
 		482BB4C916E3DFA500519F40 /* JsonServiceBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 482BB4C516E3DFA500519F40 /* JsonServiceBrowser.m */; };
 		483C571F138E139E00245381 /* XMLIOItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 483C571B138E139E00245381 /* XMLIOItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		483C5720138E139E00245381 /* XMLIOItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 483C571C138E139E00245381 /* XMLIOItem.m */; };
+		483ED7D817042FD100389649 /* WebService.h in Headers */ = {isa = PBXBuildFile; fileRef = 483ED7D617042FD100389649 /* WebService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		483ED7D917042FD100389649 /* WebService.h in Headers */ = {isa = PBXBuildFile; fileRef = 483ED7D617042FD100389649 /* WebService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		483ED7DA17042FD100389649 /* WebService.m in Sources */ = {isa = PBXBuildFile; fileRef = 483ED7D717042FD100389649 /* WebService.m */; };
+		483ED7DB17042FD100389649 /* WebService.m in Sources */ = {isa = PBXBuildFile; fileRef = 483ED7D717042FD100389649 /* WebService.m */; };
 		483FD433145A391300BCED0D /* SimpleService.h in Headers */ = {isa = PBXBuildFile; fileRef = 483FD431145A391300BCED0D /* SimpleService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		483FD435145A391300BCED0D /* SimpleService.m in Sources */ = {isa = PBXBuildFile; fileRef = 483FD432145A391300BCED0D /* SimpleService.m */; };
 		483FD43F145BA5DB00BCED0D /* NSStream+JMRIExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 483FD43D145BA5DB00BCED0D /* NSStream+JMRIExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		483FD441145BA5DB00BCED0D /* NSStream+JMRIExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 483FD43E145BA5DB00BCED0D /* NSStream+JMRIExtensions.m */; };
 		483FD449145BCD5D00BCED0D /* SimpleServiceBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 483FD447145BCD5D00BCED0D /* SimpleServiceBrowser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		483FD44B145BCD5D00BCED0D /* SimpleServiceBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 483FD448145BCD5D00BCED0D /* SimpleServiceBrowser.m */; };
-		48642FBD137A5DD900B93C86 /* XMLIOServiceBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 48642FBB137A5DD900B93C86 /* XMLIOServiceBrowser.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		48642FBE137A5DD900B93C86 /* XMLIOServiceBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 48642FBC137A5DD900B93C86 /* XMLIOServiceBrowser.m */; };
+		48642FBD137A5DD900B93C86 /* WebServiceBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 48642FBB137A5DD900B93C86 /* WebServiceBrowser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		48642FBE137A5DD900B93C86 /* WebServiceBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 48642FBC137A5DD900B93C86 /* WebServiceBrowser.m */; };
 		48642FCC137A5F3400B93C86 /* WiThrottleServiceBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 48642FCA137A5F3400B93C86 /* WiThrottleServiceBrowser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48642FCD137A5F3400B93C86 /* WiThrottleServiceBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 48642FCB137A5F3400B93C86 /* WiThrottleServiceBrowser.m */; };
 		487875CF15D9054D00BD3E0D /* NSArray+JMRIExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 4813F4841386DE8900718FFC /* NSArray+JMRIExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -59,7 +63,7 @@
 		48B0148E15B1CBF600997BD3 /* XMLIOObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4884955C1395653B0086790D /* XMLIOObject.m */; };
 		48B0148F15B1CBF600997BD3 /* XMLIORoster.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E71B6A139490E7003AB481 /* XMLIORoster.m */; };
 		48B0149015B1CBF600997BD3 /* XMLIOService.m in Sources */ = {isa = PBXBuildFile; fileRef = 487F9376137509BB00FF9DBA /* XMLIOService.m */; };
-		48B0149115B1CBF600997BD3 /* XMLIOServiceBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 48642FBC137A5DD900B93C86 /* XMLIOServiceBrowser.m */; };
+		48B0149115B1CBF600997BD3 /* WebServiceBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 48642FBC137A5DD900B93C86 /* WebServiceBrowser.m */; };
 		48B0149215B1CBF600997BD3 /* XMLIOServiceHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 487E2B90137EFF3F0004761D /* XMLIOServiceHelper.m */; };
 		48B0149315B1CBF600997BD3 /* XMLIOThrottle.m in Sources */ = {isa = PBXBuildFile; fileRef = 48849564139565860086790D /* XMLIOThrottle.m */; };
 		48B0149415B1CBF600997BD3 /* JMRINetService.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F65A1113796DEF0086D4E3 /* JMRINetService.m */; };
@@ -81,7 +85,7 @@
 		48B014A515B1CCFE00997BD3 /* XMLIOObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 4884955B1395653B0086790D /* XMLIOObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48B014A615B1CCFE00997BD3 /* XMLIORoster.h in Headers */ = {isa = PBXBuildFile; fileRef = 48E71B69139490E7003AB481 /* XMLIORoster.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48B014A715B1CCFE00997BD3 /* XMLIOService.h in Headers */ = {isa = PBXBuildFile; fileRef = 487F9375137509BB00FF9DBA /* XMLIOService.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		48B014A815B1CCFE00997BD3 /* XMLIOServiceBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 48642FBB137A5DD900B93C86 /* XMLIOServiceBrowser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		48B014A815B1CCFE00997BD3 /* WebServiceBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 48642FBB137A5DD900B93C86 /* WebServiceBrowser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48B014A915B1CCFE00997BD3 /* XMLIOServiceHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 487E2B8F137EFF3F0004761D /* XMLIOServiceHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48B014AA15B1CCFE00997BD3 /* XMLIOThrottle.h in Headers */ = {isa = PBXBuildFile; fileRef = 48849563139565860086790D /* XMLIOThrottle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48B014AB15B1CCFE00997BD3 /* JMRINetService.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F65A1013796DEF0086D4E3 /* JMRINetService.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -184,21 +188,22 @@
 		482BB4C516E3DFA500519F40 /* JsonServiceBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JsonServiceBrowser.m; path = Classes/JsonService/JsonServiceBrowser.m; sourceTree = "<group>"; };
 		483C571B138E139E00245381 /* XMLIOItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = XMLIOItem.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		483C571C138E139E00245381 /* XMLIOItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XMLIOItem.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		483ED7D617042FD100389649 /* WebService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebService.h; path = Classes/WebService/WebService.h; sourceTree = "<group>"; };
+		483ED7D717042FD100389649 /* WebService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebService.m; path = Classes/WebService/WebService.m; sourceTree = "<group>"; };
 		483FD431145A391300BCED0D /* SimpleService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimpleService.h; path = Classes/SimpleService/SimpleService.h; sourceTree = "<group>"; };
 		483FD432145A391300BCED0D /* SimpleService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SimpleService.m; path = Classes/SimpleService/SimpleService.m; sourceTree = "<group>"; };
 		483FD43D145BA5DB00BCED0D /* NSStream+JMRIExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSStream+JMRIExtensions.h"; path = "Classes/NSStream+JMRIExtensions.h"; sourceTree = "<group>"; };
 		483FD43E145BA5DB00BCED0D /* NSStream+JMRIExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSStream+JMRIExtensions.m"; path = "Classes/NSStream+JMRIExtensions.m"; sourceTree = "<group>"; };
 		483FD447145BCD5D00BCED0D /* SimpleServiceBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimpleServiceBrowser.h; path = Classes/SimpleService/SimpleServiceBrowser.h; sourceTree = "<group>"; };
 		483FD448145BCD5D00BCED0D /* SimpleServiceBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SimpleServiceBrowser.m; path = Classes/SimpleService/SimpleServiceBrowser.m; sourceTree = "<group>"; };
-		48642FBB137A5DD900B93C86 /* XMLIOServiceBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = XMLIOServiceBrowser.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		48642FBC137A5DD900B93C86 /* XMLIOServiceBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XMLIOServiceBrowser.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		48642FBB137A5DD900B93C86 /* WebServiceBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = WebServiceBrowser.h; path = Classes/WebService/WebServiceBrowser.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		48642FBC137A5DD900B93C86 /* WebServiceBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = WebServiceBrowser.m; path = Classes/WebService/WebServiceBrowser.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		48642FCA137A5F3400B93C86 /* WiThrottleServiceBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; lineEnding = 0; path = WiThrottleServiceBrowser.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		48642FCB137A5F3400B93C86 /* WiThrottleServiceBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = WiThrottleServiceBrowser.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		487AA4B415AC33BD00F76F47 /* JMRIItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; name = JMRIItem.h; path = Classes/Items/JMRIItem.h; sourceTree = "<group>"; };
 		487AA4B515AC33BE00F76F47 /* JMRIItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JMRIItem.m; path = Classes/Items/JMRIItem.m; sourceTree = "<group>"; };
 		487AA4BB15AC43DA00F76F47 /* JMRITurnout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; name = JMRITurnout.h; path = Classes/Items/JMRITurnout.h; sourceTree = "<group>"; };
 		487AA4BC15AC43DA00F76F47 /* JMRITurnout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JMRITurnout.m; path = Classes/Items/JMRITurnout.m; sourceTree = "<group>"; };
-		487AEFAA16E80EBC00E754DC /* ReadMe.md */ = {isa = PBXFileReference; lastKnownFileType = text; name = ReadMe.md; path = Classes/WebService/ReadMe.md; sourceTree = "<group>"; };
 		487E2B8F137EFF3F0004761D /* XMLIOServiceHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = XMLIOServiceHelper.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		487E2B90137EFF3F0004761D /* XMLIOServiceHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XMLIOServiceHelper.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		487F9375137509BB00FF9DBA /* XMLIOService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = XMLIOService.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -370,8 +375,6 @@
 				48E71B6A139490E7003AB481 /* XMLIORoster.m */,
 				487F9375137509BB00FF9DBA /* XMLIOService.h */,
 				487F9376137509BB00FF9DBA /* XMLIOService.m */,
-				48642FBB137A5DD900B93C86 /* XMLIOServiceBrowser.h */,
-				48642FBC137A5DD900B93C86 /* XMLIOServiceBrowser.m */,
 				487E2B8F137EFF3F0004761D /* XMLIOServiceHelper.h */,
 				487E2B90137EFF3F0004761D /* XMLIOServiceHelper.m */,
 				48849563139565860086790D /* XMLIOThrottle.h */,
@@ -433,7 +436,10 @@
 		487AEFA916E80E8E00E754DC /* WebService */ = {
 			isa = PBXGroup;
 			children = (
-				487AEFAA16E80EBC00E754DC /* ReadMe.md */,
+				483ED7D617042FD100389649 /* WebService.h */,
+				483ED7D717042FD100389649 /* WebService.m */,
+				48642FBB137A5DD900B93C86 /* WebServiceBrowser.h */,
+				48642FBC137A5DD900B93C86 /* WebServiceBrowser.m */,
 			);
 			name = WebService;
 			sourceTree = "<group>";
@@ -525,7 +531,7 @@
 				48B014A515B1CCFE00997BD3 /* XMLIOObject.h in Headers */,
 				48B014A615B1CCFE00997BD3 /* XMLIORoster.h in Headers */,
 				48B014A715B1CCFE00997BD3 /* XMLIOService.h in Headers */,
-				48B014A815B1CCFE00997BD3 /* XMLIOServiceBrowser.h in Headers */,
+				48B014A815B1CCFE00997BD3 /* WebServiceBrowser.h in Headers */,
 				48B014A915B1CCFE00997BD3 /* XMLIOServiceHelper.h in Headers */,
 				48B014AA15B1CCFE00997BD3 /* XMLIOThrottle.h in Headers */,
 				48B014AF15B1CCFE00997BD3 /* JMRIService.h in Headers */,
@@ -547,6 +553,7 @@
 				48B014AE15B1CCFE00997BD3 /* NSStream+JMRIExtensions.h in Headers */,
 				482BB4C016E3DDDD00519F40 /* JsonService.h in Headers */,
 				482BB4C716E3DFA500519F40 /* JsonServiceBrowser.h in Headers */,
+				483ED7D917042FD100389649 /* WebService.h in Headers */,
 				48B1DF4C15BAAFAC007DCD57 /* JMRIItem+Internal.h in Headers */,
 				48BA51A915CD51BE0066095E /* JMRIPanelHelper.h in Headers */,
 				48BA51B515CD97920066095E /* XMLPanelObject.h in Headers */,
@@ -567,7 +574,7 @@
 				48E71B6D139490E7003AB481 /* XMLIORoster.h in Headers */,
 				483C571F138E139E00245381 /* XMLIOItem.h in Headers */,
 				487E2B91137EFF3F0004761D /* XMLIOServiceHelper.h in Headers */,
-				48642FBD137A5DD900B93C86 /* XMLIOServiceBrowser.h in Headers */,
+				48642FBD137A5DD900B93C86 /* WebServiceBrowser.h in Headers */,
 				48642FCC137A5F3400B93C86 /* WiThrottleServiceBrowser.h in Headers */,
 				48F65A2F137979530086D4E3 /* JMRINetService.h in Headers */,
 				488859541375B202001EAD5B /* JMRINetServiceBrowser.h in Headers */,
@@ -596,6 +603,7 @@
 				483FD43F145BA5DB00BCED0D /* NSStream+JMRIExtensions.h in Headers */,
 				482BB4BF16E3DDDD00519F40 /* JsonService.h in Headers */,
 				482BB4C616E3DFA500519F40 /* JsonServiceBrowser.h in Headers */,
+				483ED7D817042FD100389649 /* WebService.h in Headers */,
 				48B1DF4B15BAAF90007DCD57 /* JMRIItem+Internal.h in Headers */,
 				48BA51A815CD51BE0066095E /* JMRIPanelHelper.h in Headers */,
 				48BA51B415CD97920066095E /* XMLPanelObject.h in Headers */,
@@ -717,7 +725,7 @@
 				48B0148E15B1CBF600997BD3 /* XMLIOObject.m in Sources */,
 				48B0148F15B1CBF600997BD3 /* XMLIORoster.m in Sources */,
 				48B0149015B1CBF600997BD3 /* XMLIOService.m in Sources */,
-				48B0149115B1CBF600997BD3 /* XMLIOServiceBrowser.m in Sources */,
+				48B0149115B1CBF600997BD3 /* WebServiceBrowser.m in Sources */,
 				48B0149215B1CBF600997BD3 /* XMLIOServiceHelper.m in Sources */,
 				48B0149315B1CBF600997BD3 /* XMLIOThrottle.m in Sources */,
 				48B0149415B1CBF600997BD3 /* JMRINetService.m in Sources */,
@@ -744,6 +752,7 @@
 				482BB4C216E3DDDD00519F40 /* JsonService.m in Sources */,
 				482BB4C916E3DFA500519F40 /* JsonServiceBrowser.m in Sources */,
 				48280C2616EC909400925806 /* NSMutableArray+QueueExtensions.m in Sources */,
+				483ED7DB17042FD100389649 /* WebService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -755,7 +764,7 @@
 				488859511375B1F4001EAD5B /* JMRINetServiceBrowser.m in Sources */,
 				48F65A1313796DEF0086D4E3 /* JMRINetService.m in Sources */,
 				48F65A81137984C40086D4E3 /* WiThrottleService.m in Sources */,
-				48642FBE137A5DD900B93C86 /* XMLIOServiceBrowser.m in Sources */,
+				48642FBE137A5DD900B93C86 /* WebServiceBrowser.m in Sources */,
 				48642FCD137A5F3400B93C86 /* WiThrottleServiceBrowser.m in Sources */,
 				487E2B92137EFF3F0004761D /* XMLIOServiceHelper.m in Sources */,
 				4813F4871386DE8900718FFC /* NSArray+JMRIExtensions.m in Sources */,
@@ -790,6 +799,7 @@
 				482BB4C116E3DDDD00519F40 /* JsonService.m in Sources */,
 				482BB4C816E3DFA500519F40 /* JsonServiceBrowser.m in Sources */,
 				48280C2516EC909400925806 /* NSMutableArray+QueueExtensions.m in Sources */,
+				483ED7DA17042FD100389649 /* WebService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
