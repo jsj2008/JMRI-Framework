@@ -19,9 +19,8 @@
 
 - (void)list:(NSString *)type;
 - (void)readItem:(NSString *)name ofType:(NSString *)type;
-- (void)readItem:(NSString *)name ofType:(NSString *)type initialValue:(NSString *)value;
-- (void)writeItem:(NSString *)name ofType:(NSString *)type value:(NSString *)value;
 - (void)writeItem:(NSString *)name ofType:(NSString *)type state:(NSUInteger)state;
+- (void)writeItem:(NSString *)name ofType:(NSString *)type value:(NSString *)value;
 
 @property Boolean useQueue;
 

@@ -173,10 +173,6 @@
     [self write:@{@"type": type, @"data": @{@"name": name}}];
 }
 
-- (void)readItem:(NSString *)name ofType:(NSString *)type initialValue:(NSString *)value {
-    [self readItem:name ofType:type];
-}
-
 - (void)writeItem:(NSString *)name ofType:(NSString *)type value:(NSString *)value {
     //NSString *string = [NSString stringWithFormat:@"{\"type\":\"%@\",\"data\":{\"name\":\"%@\",\"state\":\"%@\"}}\n", type, name, value];
     [self write:@{@"type": type, @"data": @{@"name": name, @"state": value}}];
