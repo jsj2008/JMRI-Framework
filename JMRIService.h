@@ -99,7 +99,7 @@
 #pragma mark - JMRI element properties
 
 @property (readonly) NSDictionary *lights;
-@property (readonly) NSDictionary *memoryVariables;
+@property (readonly) NSDictionary *memories;
 @property (readonly) NSDictionary *metadata;
 @property (readonly) NSDictionary *panels;
 @property (readonly) JMRIPower *power;

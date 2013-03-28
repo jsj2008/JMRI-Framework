@@ -297,7 +297,7 @@
 
 #pragma mark - JMRI Elements
 
-@synthesize memoryVariables;
+@synthesize memories;
 @synthesize panels;
 @synthesize power;
 @synthesize reporters;
@@ -409,11 +409,11 @@
 }
 
 - (void)JMRINetService:(JMRINetService *)service didGetMemory:(NSString *)memory withValue:(NSString *)value withProperties:(NSDictionary *)properties {
-    if (![self.memoryVariables objectForKey:memory]) {
+    if (![self.memories objectForKey:memory]) {
         JMRIMemory *reporterObj = [[JMRIMemory alloc] initWithName:memory withService:self withProperties:properties];
-        [self.memoryVariables setValue:reporterObj forKey:memory];
+        [self.memories setValue:reporterObj forKey:memory];
     }
-    [((JMRIMemory *)[self.memoryVariables objectForKey:memory]) setValue:value updateService:NO];
+    [((JMRIMemory *)[self.memories objectForKey:memory]) setValue:value updateService:NO];
 }
 
 - (void)JMRINetService:(JMRINetService *)service didGetMetadata:(NSString *)metadata withValue:(NSString *)value {
@@ -425,11 +425,11 @@
 }
 
 - (void)JMRINetService:(JMRINetService *)service didGetReporter:(NSString *)reporter withValue:(NSString *)value withProperties:(NSDictionary *)properties {
-    if (![self.memoryVariables objectForKey:reporter]) {
+    if (![self.memories objectForKey:reporter]) {
         JMRIReporter *reporterObj = [[JMRIReporter alloc] initWithName:reporter withService:self withProperties:properties];
-        [self.memoryVariables setValue:reporterObj forKey:reporter];
+        [self.memories setValue:reporterObj forKey:reporter];
     }
-    [((JMRIMemory *)[self.memoryVariables objectForKey:reporter]) setValue:value updateService:NO];
+    [((JMRIMemory *)[self.memories objectForKey:reporter]) setValue:value updateService:NO];
 }
 
 - (void)JMRINetService:(JMRINetService *)service didGetSensor:(NSString *)sensor withState:(NSUInteger)state withProperties:(NSDictionary *)properties {
@@ -504,7 +504,7 @@
 - (void)XMLIOService:(XMLIOService *)service didListItems:(NSArray *)items ofType:(NSString *)type {
     if ([type isEqualToString:JMRITypeMemory]) {
         for (XMLIOItem *i in items) {
-            [self setValueInList:self.memoryVariables forItem:i];
+            [self setValueInList:self.memories forItem:i];
         }
     } else if ([type isEqualToString:JMRITypeMetadata]) {
         for (XMLIOItem *i in items) {
@@ -529,7 +529,7 @@
 
 - (void)XMLIOService:(XMLIOService *)service didReadItem:(XMLIOItem *)item withName:(NSString *)aName ofType:(NSString *)type withValue:(NSString *)value {
     if ([type isEqualToString:JMRITypeMemory]) {
-        [self setValueInList:self.memoryVariables forItem:item];
+        [self setValueInList:self.memories forItem:item];
     } else if ([type isEqualToString:JMRITypeMetadata]) {
         [self setValueInList:self.metadata forItem:item];
     } else if ([type isEqualToString:JMRITypePower]) {
