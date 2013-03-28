@@ -76,6 +76,9 @@ typedef enum {
 } JMRISignalAppearances;
 
 typedef enum {
+    JMRIMalformedRequest = 400,
+    JMRIItemNotFound = 404,
+    JMRIInternalError = 500,
     JMRIWebServiceJsonReadOnly = 510,
     JMRIWebServiceJsonUnsupported = 511,
     JMRIXMLUnexpectedRootElement = 512
