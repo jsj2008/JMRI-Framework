@@ -201,7 +201,7 @@
 }
 
 - (void)writeItem:(JMRIItem *)item {
-    [self write:@{@"type": item.type, @"data": item.dataDictionary}];
+    [self write:@{@"type": item.type, @"data": item.properties}];
 }
 
 - (void)createItem:(NSString *)name ofType:(NSString *)type withState:(NSUInteger)state {
@@ -213,7 +213,7 @@
 }
 
 - (void)createItem:(JMRIItem *)item {
-    NSMutableDictionary *data = [NSMutableDictionary dictionaryWithDictionary:item.dataDictionary];
+    NSMutableDictionary *data = [NSMutableDictionary dictionaryWithDictionary:item.properties];
     [data setValue:@"put" forKey:@"method"];
     [self write:@{@"type": item.type, @"data": data}];
 }

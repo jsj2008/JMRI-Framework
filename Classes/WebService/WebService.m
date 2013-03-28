@@ -143,7 +143,7 @@
 }
 
 - (void)writeItem:(JMRIItem *)item {
-    [self write:item.dataDictionary method:@"POST"];
+    [self write:item.properties method:@"POST"];
 }
 
 - (void)createItem:(NSString *)name ofType:(NSString *)type withState:(NSUInteger)state {
@@ -155,7 +155,7 @@
 }
 
 - (void)createItem:(JMRIItem *)item {
-    [self write:item.dataDictionary method:@"PUT"];
+    [self write:item.properties method:@"PUT"];
 }
 
 - (void)failWithError:(NSError *)error {
