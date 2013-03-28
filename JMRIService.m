@@ -552,8 +552,15 @@
     if (self.logNetworkActivity) {
         NSLog(@"XMLIO%@ opened new connection. %lu connections are open.", service, (unsigned long)service.openConnections);
     }
+    if ([self.delegate respondsToSelector:@selector(JMRIServiceDidOpenConnection:)]) {
+        [self.delegate JMRIServiceDidOpenConnection:self];
+    }
 }
+
 - (void)XMLIOServiceDidFinishLoading:(XMLIOService *)service { // need to log response being consumed by XMLIOServiceHelper
+    if ([self.delegate respondsToSelector:@selector(JMRIServiceDidCloseConnection:)]) {
+        [self.delegate JMRIServiceDidCloseConnection:self];
+    }
 }
 
 - (void)setStateInList:(NSDictionary *)list forItem:(XMLIOItem *)item {
