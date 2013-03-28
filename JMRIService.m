@@ -310,10 +310,10 @@
 - (void)list:(NSString *)type {
     if (self.hasWebService && self.useWebService) {
         [self.webService list:type];
-    } else if (self.hasXmlIOService && self.useXmlIOService) {
-        [self.xmlIOService list:type];
     } else if (self.hasJsonService && self.useJsonService) {
         [self.jsonService list:type];
+    } else if (self.hasXmlIOService && self.useXmlIOService) {
+        [self.xmlIOService list:type];
     }
 }
 
