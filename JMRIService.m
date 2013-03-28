@@ -457,7 +457,7 @@
 
 - (void)JMRINetService:(JMRINetService *)service didReceive:(NSString *)input {
     if (self.logNetworkActivity) {
-        NSLog(@"Service %@ received %@", service.type, input);
+        NSLog(@"%@ received %@", service.type, input);
     }
     if ([self.delegate respondsToSelector:@selector(JMRIService:didGetInput:)]) {
         [self.delegate JMRIService:self didGetInput:input];
@@ -466,13 +466,13 @@
 
 - (void)JMRINetService:(JMRINetService *)service didSend:(NSData *)data {
     if (self.logNetworkActivity) {
-        NSLog(@"Service %@ sent %@", service.type, [NSString stringWithUTF8String:data.bytes]);
+        NSLog(@"%@ sent %@", service.type, [NSString stringWithUTF8String:data.bytes]);
     }
 }
 
 - (void)JMRINetServiceDidOpenConnection:(JMRINetService *)service {
     if (self.logNetworkActivity) {
-        NSLog(@"Service %@ opened connection", service.type);
+        NSLog(@"%@ opened connection", service.type);
     }
     if ([self.delegate respondsToSelector:@selector(JMRIServiceDidOpenConnection:)]) {
         [self.delegate JMRIServiceDidOpenConnection:self];
@@ -480,14 +480,14 @@
 }
 
 - (void)JMRINetServiceDidStart:(JMRINetService *)service {
-    NSLog(@"Service %@ started", service.type);
+    NSLog(@"%@ started", service.type);
     if ([self.delegate respondsToSelector:@selector(JMRIService:didStart:)]) {
         [self.delegate JMRIService:self didStart:service];
     }
 }
 
 - (void)JMRINetServiceDidStop:(JMRINetService *)service {
-    NSLog(@"Service %@ stopped", service.type);
+    NSLog(@"%@ stopped", service.type);
     if ([self.delegate respondsToSelector:@selector(JMRIService:didStop:)]) {
         [self.delegate JMRIService:self didStop:service];
     }
@@ -495,7 +495,7 @@
 
 - (void)JMRINetService:(JMRINetService *)service didWrite:(NSData *)data {
     if (self.logNetworkActivity) {
-        NSLog(@"Service %@ wrote %@", service.type, [data description]);
+        NSLog(@"%@ wrote %@", service.type, [data description]);
     }
 }
 
@@ -550,7 +550,7 @@
 - (void)XMLIOService:(XMLIOService *)service didGetThrottle:(XMLIOThrottle *)throttle withAddress:(NSUInteger)address {}
 - (void)XMLIOService:(XMLIOService *)service didConnectWithRequest:(NSURLRequest *)request {
     if (self.logNetworkActivity) {
-        NSLog(@"XMLIOService %@ opened new connection. %lu connections are open.", service, (unsigned long)service.openConnections);
+        NSLog(@"XMLIO%@ opened new connection. %lu connections are open.", service, (unsigned long)service.openConnections);
     }
 }
 - (void)XMLIOServiceDidFinishLoading:(XMLIOService *)service { // need to log response being consumed by XMLIOServiceHelper
