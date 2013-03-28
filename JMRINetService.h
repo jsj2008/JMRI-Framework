@@ -24,7 +24,6 @@
 
 	NSNetService *netService;
     NSTimeInterval timeoutInterval;
-	BOOL logTraffic;
     NSString *manualName;
 	NSString *manualAddress;
 	NSInteger manualPort;
@@ -63,7 +62,6 @@
 
 @property (weak, nonatomic) id delegate;
 @property NSNetService *service;
-@property BOOL logTraffic;
 @property NSTimeInterval timeoutInterval;
 @property (readonly) BOOL resolved;
 @property (readonly) NSString *version;

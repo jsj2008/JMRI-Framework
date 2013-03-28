@@ -127,7 +127,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 @synthesize throttles;
 
 - (Boolean)isOpen {
-	return ([connections count]);
+	return (self.openConnections);
 }
 
 - (NSURL *)url {
@@ -143,6 +143,10 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 	return [[NSURL URLWithString:[NSString stringWithFormat:@"http://%@:%li%@", self.hostName, (long)self.port, self.XMLIOPath, nil]] absoluteURL];
 }
 
+- (NSUInteger)openConnections {
+    return [connections count];
+}
+
 #pragma mark - XMLIO methods
 
 - (void)conductOperation:(NSUInteger)operation 
@@ -156,8 +160,8 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
         [request setHTTPMethod:@"POST"];
         [request setHTTPBody:[[NSString stringWithFormat:@"<?xml version=\"1.0\" encoding=\"UTF-8\"?><xmlio>%@</xmlio>", query]
                               dataUsingEncoding:NSUTF8StringEncoding]];
-        if (self.logTraffic) {
-            NSLog(@"Sending %@ to %@", [NSString stringWithUTF8String:[[request HTTPBody] bytes]], self.url);
+        if ([self.delegate respondsToSelector:@selector(JMRINetService:didSend:)]) {
+            [self.delegate JMRINetService:self didSend:request.HTTPBody];
         }
         NSOperationQueue *queue = [[NSOperationQueue alloc] init];
         XMLIOServiceHelper *helper = [[XMLIOServiceHelper alloc] initWithDelegate:self
@@ -198,13 +202,6 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
              withXMLString:[NSString stringWithFormat:@"<%@ name=\"%@\" value=\"%@\" />", type, name, value]
                   withType:type
                   withName:name];
-    if (self.logTraffic) {
-        NSLog(@"Monitoring: %@", monitoredItems);
-        NSLog(@"Open Requests:");
-        for (NSData *key in [connections allKeys]) {
-            NSLog(@"%@", [NSString stringWithUTF8String:[key bytes]]);
-        }
-    }
 }
 
 - (void)writeItem:(NSString *)name ofType:(NSString *)type value:(NSString *)value {
@@ -335,9 +332,6 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 	if ([self.delegate respondsToSelector:@selector(JMRINetService:didFailWithError:)]) {
 		[self.delegate JMRINetService:self didFailWithError:error];
 	}
-	if (self.logTraffic) {
-		NSLog(@"XMLIOService connection failed. %lu connections remain open. Failed with operation: %lu (%@, a %@)", (unsigned long)[connections count], (unsigned long)helper.operation, helper.name, helper.type);
-	}
 }
 
 - (void)XMLIOServiceHelper:(XMLIOServiceHelper *)helper didConnectWithRequest:(NSURLRequest *)request {
@@ -348,9 +342,6 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
         return;
     }
     [connections setObject:helper forKey:[request HTTPBody]];
-    if (self.logTraffic) {
-        NSLog(@"XMLIOService opened new connection. %lu connections are open.", (unsigned long)[connections count]);
-    }
     if ([self.delegate respondsToSelector:@selector(XMLIOService:didConnectWithRequest:)]) {
         [self.delegate XMLIOService:self didConnectWithRequest:request];
     }
@@ -465,9 +456,9 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 	if ([self.delegate respondsToSelector:@selector(XMLIOServiceDidFinishLoading:)]) {
 		[self.delegate XMLIOServiceDidFinishLoading:self];
 	}
-	if (self.logTraffic) {
-		NSLog(@"XMLIOService has just closed a connection. %lu connections remain open.", (unsigned long)[connections count]);
-	}
+    if ([self.delegate respondsToSelector:@selector(JMRINetService:didReceive:)]) {
+        [self.delegate JMRINetService:self didReceive:[[NSString alloc] initWithData:helper.connectionData encoding:NSUTF8StringEncoding]];
+    }
 }
 
 #pragma mark - Net service delegate

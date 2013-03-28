@@ -44,6 +44,7 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
 @synthesize operation = operation_;
 @synthesize request = request_;
 @synthesize type = type_;
+@synthesize connectionData = connectionData;
 
 - (id)initWithDelegate:(id)delegate withOperation:(NSUInteger)operation withRequest:(NSURLRequest *)request withType:(NSString *)type withName:(NSString *)name {
     if ((self = [super init])) {
@@ -139,9 +140,6 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     NSLog(@"Finished loading");
 	NSXMLParser *parser;
-	if ([self.delegate logTraffic]) {
-		NSLog(@"Received: %@", [NSString stringWithUTF8String:[connectionData bytes]]);
-	}
 	if ([self.delegate respondsToSelector:@selector(XMLIOServiceHelperDidFinishLoading:)]) {
 		[self.delegate XMLIOServiceHelperDidFinishLoading:self];
 	}

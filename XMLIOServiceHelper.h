@@ -49,6 +49,7 @@
 @property (strong) NSString *name;
 @property (strong) NSString *type;
 @property (strong) NSURLRequest *request;
+@property (strong, readonly) NSData *connectionData;
 
 @end
 

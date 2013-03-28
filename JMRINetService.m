@@ -49,7 +49,6 @@ static JMRINetService *sharedNetService_ = nil;
         NSDictionary *txtRecords = [NSNetService dictionaryFromTXTRecordData:[service TXTRecordData]];
 		self.service = service;
 		[self.service setDelegate:self];
-		self.logTraffic = NO;
 		self.timeoutInterval = 60;
         if ([txtRecords objectForKey:JMRITXTRecordKeyJMRI]) {
             serviceVersion = [[NSString alloc] initWithUTF8String:[[txtRecords objectForKey:JMRITXTRecordKeyJMRI] bytes]];
@@ -63,7 +62,6 @@ static JMRINetService *sharedNetService_ = nil;
 - (id)initWithName:(NSString *)name withAddress:(NSString *)address withPort:(NSInteger)port {
 	if ((self = [super init])) {
 		self.service = nil;
-		self.logTraffic = NO;
         manualName = name;
 		manualAddress = address;
 		manualPort = port;
@@ -166,7 +164,6 @@ static JMRINetService *sharedNetService_ = nil;
 
 @synthesize delegate;
 @synthesize service = netService;
-@synthesize logTraffic;
 @synthesize timeoutInterval;
 @synthesize version = serviceVersion;
 @synthesize type = serviceType;

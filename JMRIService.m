@@ -485,8 +485,13 @@
 }
 
 - (void)XMLIOService:(XMLIOService *)service didGetThrottle:(XMLIOThrottle *)throttle withAddress:(NSUInteger)address {}
-- (void)XMLIOService:(XMLIOService *)service didConnectWithRequest:(NSURLRequest *)request {}
-- (void)XMLIOServiceDidFinishLoading:(XMLIOService *)service {}
+- (void)XMLIOService:(XMLIOService *)service didConnectWithRequest:(NSURLRequest *)request {
+    if (self.logNetworkActivity) {
+        NSLog(@"XMLIOService %@ opened new connection. %lu connections are open.", service, (unsigned long)service.openConnections);
+    }
+}
+- (void)XMLIOServiceDidFinishLoading:(XMLIOService *)service { // need to log response being consumed by XMLIOServiceHelper
+}
 
 - (void)setStateInList:(NSDictionary *)list forItem:(XMLIOItem *)item {
     if ([list objectForKey:item.name]) {

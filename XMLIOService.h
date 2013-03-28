@@ -166,6 +166,7 @@ typedef enum {
 @property (readonly) NSURL* url;
 @property (nonatomic) NSString* XMLIOPath;
 @property (nonatomic) NSMutableDictionary* throttles;
+@property (readonly) NSUInteger openConnections;
 
 @end
 
