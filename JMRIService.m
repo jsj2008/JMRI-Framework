@@ -360,6 +360,48 @@
     [self.xmlIOService stop];
 }
 
+#pragma mark - Utilities
+
+- (NSString *)collectionForType:(NSString *)type {
+    if (!_collections) {
+        _collections = @{
+                         JMRITypeLight: JMRIListLights,
+                         JMRITypeMemory: JMRIListMemories,
+                         JMRITypePanel: JMRIListPanels,
+                         JMRITypeReporter: JMRIListReporters,
+                         JMRITypeRosterEntry: JMRITypeRoster,
+                         JMRITypeRoute: JMRIListRoutes,
+                         JMRITypeSensor: JMRIListSensors,
+                         JMRITypeSignalHead: JMRIListSignalHeads,
+                         JMRITypeTurnout: JMRIListTurnouts
+                         };
+    }
+    if (_collections[type]) {
+        return _collections[type];
+    }
+    return type;
+}
+
+- (NSString *)typeForCollection:(NSString *)collection {
+    if (!_types) {
+        _types = @{
+                   JMRIListLights: JMRITypeLight,
+                   JMRIListMemories: JMRITypeMemory,
+                   JMRIListPanels: JMRITypePanel,
+                   JMRIListReporters: JMRITypeReporter,
+                   JMRITypeRoster: JMRITypeRosterEntry,
+                   JMRIListRoutes: JMRITypeRoute,
+                   JMRIListSensors: JMRITypeSensor,
+                   JMRIListSignalHeads: JMRITypeSignalHead,
+                   JMRIListTurnouts: JMRITypeTurnout
+                   };
+    }
+    if (_types[collection]) {
+        return _types[collection];
+    }
+    return collection;
+}
+
 #pragma mark - JMRINetService delegate
 
 - (void)JMRINetService:(JMRINetService *)service didNotResolve:(NSDictionary *)errorDict {

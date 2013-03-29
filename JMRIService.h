@@ -51,6 +51,8 @@
     NSString *hostName;
     NSString *_name;
     
+    NSDictionary *_collections;
+    NSDictionary *_types;
 }
 
 #pragma mark - Initialization
@@ -120,5 +122,10 @@
 - (Boolean)isMonitoring:(JMRIItem *)item;
 
 - (void)stop;
+
+#pragma mark - Utilities
+
+- (NSString *)collectionForType:(NSString *)type;
+- (NSString *)typeForCollection:(NSString *)collection;
 
 @end
