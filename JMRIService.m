@@ -193,6 +193,14 @@
         hostName = json.hostName;
         _name = json.name;
     }
+    // Do not want to use the XmlIOService if the JsonService is available
+    if (self.hasXmlIOService) {
+        self.xmlIOService = nil;
+        self.useXmlIOService = NO;
+        if (self.hasWebService) {
+            self.useWebService = YES;
+        }
+    }
 }
 
 - (SimpleService *)simpleService {
@@ -234,6 +242,16 @@
         domain = web.domain;
         hostName = web.hostName;
         _name = web.name;
+    }
+    // Use the XmlIOService if the JsonService is not available
+    if (!self.hasJsonService && !self.hasXmlIOService) {
+        if (web.service) {
+            self.xmlIOService = [[XMLIOService alloc] initWithNetService:web.service];
+        } else {
+            self.xmlIOService = [[XMLIOService alloc] initWithName:web.name withAddress:web.addresses[0] withPort:web.port];
+        }
+        self.useWebService = NO;
+        self.useXmlIOService = YES;
     }
 }
 
@@ -649,7 +667,7 @@
     }
 }
 
-#pragma mark - Private methods 
+#pragma mark - Private methods
 
 - (void)setStateInList:(NSDictionary *)list forItem:(XMLIOItem *)item {
     if ([list objectForKey:item.name]) {
