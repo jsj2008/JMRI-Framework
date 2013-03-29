@@ -14,7 +14,7 @@ extern NSString *const JMRIServiceWeb;
 extern NSString *const JMRIServiceWiThrottle;
 extern NSString *const JMRIServiceXmlIO;
 
-// JMRI XMLIO item types
+// JMRI item types
 extern NSString *const JMRITypeFrame;
 extern NSString *const JMRITypeLight;
 extern NSString *const JMRITypeList;
@@ -30,6 +30,7 @@ extern NSString *const JMRITypeSensor;
 extern NSString *const JMRITypeSignalHead;
 extern NSString *const JMRITypeTurnout;
 
+// JMRI collections (where the collection name != contained item type)
 extern NSString *const JMRIListLights;
 extern NSString *const JMRIListMemories;
 extern NSString *const JMRIListPanels;
@@ -39,7 +40,7 @@ extern NSString *const JMRIListSensors;
 extern NSString *const JMRIListSignalHeads;
 extern NSString *const JMRIListTurnouts;
 
-// JMRI XMLIO common names
+// JMRI known item names
 extern NSString *const JMRIMemoryCurrentTime;
 extern NSString *const JMRIMemoryRateFactor;
 extern NSString *const JMRIMetadataJMRIVersion;
@@ -54,15 +55,23 @@ extern NSString *const JMRIMetadataVersionMinor;
 extern NSString *const JMRIMetadataVersionTest;
 extern NSString *const JMRISensorClockRunning;
 
-// JMRI Panel elements
+// JMRI panel elements
 extern NSString *const JMRIPanelPositionableLabel;
 extern NSString *const JMRIPanelSensorIcon;
 extern NSString *const JMRIPanelSignalHeadIcon;
 extern NSString *const JMRIPanelTurnoutIcon;
 
+// JMRI zeroconf elements
 extern NSString *const JMRITXTRecordKeyJMRI;
+
+// Framework notifications
+extern NSString *const JMRINotificationStateChange;
+extern NSString *const JMRINotificationItemAdded;
+
+// Framework error domain
 extern NSString *const JMRIErrorDomain;
 
+// JMRI states
 typedef enum {
 	JMRIItemStateUnknown = 0,
 	JMRIItemStateActive = 2,
@@ -73,6 +82,7 @@ typedef enum {
     JMRIItemStateStateless = INT_MAX
 } JMRIItemStates;
 
+// Signal head appearances
 typedef enum {
     JMRISignalAppearanceDark = 0,
     JMRISignalAppearanceRed = 1,
@@ -85,6 +95,7 @@ typedef enum {
     JMRISignalAppearanceFlashLunar = 80
 } JMRISignalAppearances;
 
+// Framework error codes
 typedef enum {
     JMRIMalformedRequest = 400,
     JMRIItemNotFound = 404,

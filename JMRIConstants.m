@@ -8,12 +8,14 @@
 
 #import "JMRIConstants.h"
 
+// Known service types
 NSString *const JMRIServiceJson = @"JsonService";
 NSString *const JMRIServiceSimple = @"JMRINetwork";
 NSString *const JMRIServiceWeb = @"WebService (Json)";
 NSString *const JMRIServiceWiThrottle = @"wiThrottle";
 NSString *const JMRIServiceXmlIO = @"WebService (XmlIO)";
 
+// JMRI item types
 NSString *const JMRITypeFrame = @"frame";
 NSString *const JMRITypeLight = @"light";
 NSString *const JMRITypeList = @"list";
@@ -29,6 +31,7 @@ NSString *const JMRITypeSensor = @"sensor";
 NSString *const JMRITypeSignalHead = @"signalHead";
 NSString *const JMRITypeTurnout = @"turnout";
 
+// JMRI collections (where the collection name != contained item type)
 NSString *const JMRIListLights = @"lights";
 NSString *const JMRIListMemories = @"memories";
 NSString *const JMRIListPanels = @"panels";
@@ -38,7 +41,7 @@ NSString *const JMRIListSensors = @"sensors";
 NSString *const JMRIListSignalHeads = @"signalHeads";
 NSString *const JMRIListTurnouts = @"turnouts";
 
-// Well known sensor and memory names
+// JMRI known item names
 NSString *const JMRIMemoryCurrentTime = @"IMCURRENTTIME";
 NSString *const JMRIMemoryRateFactor = @"IMRATEFACTOR";
 NSString *const JMRIMetadataJMRIVersion = @"JMRIVERSION";
@@ -53,11 +56,19 @@ NSString *const JMRIMetadataVersionMinor = @"minor";
 NSString *const JMRIMetadataVersionTest = @"test";
 NSString *const JMRISensorClockRunning = @"ISCLOCKRUNNING";
 
+// JMRI panel elements
 NSString *const JMRIPanelPositionableLabel = @"positionablelabel";
 NSString *const JMRIPanelSensorIcon = @"sensoricon";
 NSString *const JMRIPanelSignalHeadIcon = @"signalheadicon";
 NSString *const JMRIPanelTurnoutIcon = @"turnouticon";
 
+// JMRI zeroconf elements
 NSString *const JMRITXTRecordKeyJMRI = @"jmri";
+
+// Framework notifications
+NSString *const JMRINotificationStateChange = @"JMRINotificationStateChange";
+NSString *const JMRINotificationItemAdded = @"JMRINotificationItemAdded";
+
+// Framework error domain
 NSString *const JMRIErrorDomain = @"JMRIError";
 
