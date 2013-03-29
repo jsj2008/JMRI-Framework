@@ -103,11 +103,11 @@
                            }];
 }
 
-- (void)write:(NSDictionary *)jsonObject method:(NSString *)method {
+- (void)write:(NSDictionary *)jsonObject type:(NSString *)type method:(NSString *)method {
     // need to pluralize type
     NSError *error = nil;
     NSData *data = [NSJSONSerialization dataWithJSONObject:jsonObject options:0 error:&error];
-    NSString *path = [NSString stringWithFormat:@"%@/%@", [collections valueForKey:jsonObject[@"type"]], jsonObject[@"data"][@"name"]];
+    NSString *path = [NSString stringWithFormat:@"%@/%@", [collections valueForKey:type], jsonObject[@"data"][@"name"]];
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[self.url URLByAppendingPathComponent:path]
                                                            cachePolicy:NSURLRequestReloadIgnoringCacheData
                                                        timeoutInterval:self.timeoutInterval];
@@ -135,27 +135,27 @@
 }
 
 - (void)writeItem:(NSString *)name ofType:(NSString *)type value:(NSString *)value {
-    [self write:@{@"name": name, @"state": value} method:@"POST"];
+    [self write:@{@"name": name, @"state": value} type:type method:@"POST"];
 }
 
 - (void)writeItem:(NSString *)name ofType:(NSString *)type state:(NSUInteger)state {
-    [self write:@{@"name": name, @"state":[NSNumber numberWithInteger:state]} method:@"POST"];
+    [self write:@{@"name": name, @"state":[NSNumber numberWithInteger:state]} type:type method:@"POST"];
 }
 
-- (void)writeItem:(JMRIItem *)item {
-    [self write:item.properties method:@"POST"];
+- (void)writeItem:(JMRIItem *)item ofType:(NSString *)type {
+    [self write:item.properties type:type method:@"POST"];
 }
 
 - (void)createItem:(NSString *)name ofType:(NSString *)type withState:(NSUInteger)state {
-    [self write:@{@"name": name, @"state":[NSNumber numberWithInteger:state]} method:@"PUT"];
+    [self write:@{@"name": name, @"state":[NSNumber numberWithInteger:state]} type:type method:@"PUT"];
 }
 
 - (void)createItem:(NSString *)name ofType:(NSString *)type withValue:(NSString *)value {
-    [self write:@{@"name": name, @"value":value} method:@"PUT"];
+    [self write:@{@"name": name, @"value":value} type:type method:@"PUT"];
 }
 
-- (void)createItem:(JMRIItem *)item {
-    [self write:item.properties method:@"PUT"];
+- (void)createItem:(JMRIItem *)item ofType:(NSString *)type {
+    [self write:item.properties type:type method:@"PUT"];
 }
 
 - (void)failWithError:(NSError *)error {

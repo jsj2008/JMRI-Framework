@@ -21,6 +21,10 @@
     [service send:[NSString stringWithFormat:@"LIGHT %@", self.name]];
 }
 
+- (void)queryFromWebService:(WebService *)service {
+    [service readItem:self.name ofType:JMRITypeLight];
+}
+
 - (void)writeToJsonService:(JsonService *)service {
     [service writeItem:self.name ofType:JMRITypeLight state:self.state];
 }
@@ -39,6 +43,10 @@
             break;
     }
     [service send:[NSString stringWithFormat:@"LIGHT %@ %@", self.name, state]];
+}
+
+- (void)writeToWebService:(WebService *)service {
+    [service writeItem:self.name ofType:JMRITypeLight state:self.state];
 }
 
 - (NSString *)type {

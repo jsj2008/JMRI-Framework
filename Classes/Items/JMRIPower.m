@@ -25,6 +25,10 @@
     [service send:[JMRITypePower uppercaseString]];
 }
 
+- (void)queryFromWebService:(WebService *)service {
+    [service readItem:JMRITypePower ofType:JMRITypePower];
+}
+
 - (void)queryFromXmlIOService:(XMLIOService *)service {
     [service readItem:JMRITypePower ofType:JMRITypePower];
 }
@@ -44,6 +48,10 @@
         default:
             break;
     }
+}
+
+- (void)writeToWebService:(WebService *)service {
+    [service writeItem:JMRITypePower ofType:JMRITypePower state:self.state];
 }
 
 - (void)writeToWiThrottleService:(WiThrottleService *)service {

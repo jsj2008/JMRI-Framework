@@ -19,6 +19,10 @@
     [service send:[NSString stringWithFormat:@"SIGNALHEAD %@", self.name]];
 }
 
+- (void)queryFromWebService:(WebService *)service {
+    [service readItem:self.name ofType:JMRITypeSignalHead];
+}
+
 - (void)writeToJsonService:(JsonService *)service {
     [service writeItem:self.name ofType:JMRITypeSignalHead state:self.state];
 }
@@ -58,6 +62,10 @@
             break;
     }
     [service send:[NSString stringWithFormat:@"SIGNALHEAD %@ %@", self.name, state]];
+}
+
+- (void)writeToWebService:(WebService *)service {
+    [service writeItem:self.name ofType:JMRITypeSignalHead state:self.state];
 }
 
 @end

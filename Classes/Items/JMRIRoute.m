@@ -15,11 +15,19 @@
     [service readItem:self.name ofType:JMRITypeRoute];
 }
 
+- (void)queryFromWebService:(WebService *)service {
+    [service readItem:self.name ofType:JMRITypeRoute];
+}
+
 - (void)queryFromXmlIOService:(XMLIOService *)service {
     [service readItem:self.name ofType:JMRITypeRoute];
 }
 
 - (void)writeToJsonService:(JsonService *)service {
+    [service writeItem:self.name ofType:JMRITypeRoute state:self.state];
+}
+
+- (void)writeToWebService:(WebService *)service {
     [service writeItem:self.name ofType:JMRITypeRoute state:self.state];
 }
 

@@ -67,6 +67,8 @@
         [self queryFromJsonService:self.service.jsonService];
     } else if (self.service.hasSimpleService && self.service.useSimpleService) {
         [self queryFromSimpleService:self.service.simpleService];
+    } else if (self.service.hasWebService && self.service.useWebService) {
+        [self queryFromWebService:self.service.webService];
     } else if (self.service.hasWiThrottleService && self.service.useWiThrottleService) {
         // WiThrottle has no explicit query mechanism
     } else if (self.service.hasXmlIOService && self.service.useXmlIOService) {
@@ -79,6 +81,10 @@
 }
 
 - (void)queryFromSimpleService:(SimpleService *)service {
+    // silently do nothing if not supported by protocol
+}
+
+- (void)queryFromWebService:(WebService *)service {
     // silently do nothing if not supported by protocol
 }
 
@@ -97,6 +103,8 @@
         [self writeToSimpleService:self.service.simpleService];
     } else if (self.service.hasWiThrottleService && self.service.useWiThrottleService) {
         [self writeToWiThrottleService:self.service.wiThrottleService];
+    } else if (self.service.hasWebService && self.service.useWebService) {
+        [self writeToWebService:self.service.webService];
     } else if (self.service.hasXmlIOService && self.service.useXmlIOService) {
         [self writeToXmlIOService:self.service.xmlIOService];
     }
@@ -107,6 +115,10 @@
 }
 
 - (void)writeToSimpleService:(SimpleService *)service {
+    // silently do nothing if not supported by protocol
+}
+
+- (void)writeToWebService:(WebService *)service {
     // silently do nothing if not supported by protocol
 }
 

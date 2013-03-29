@@ -19,6 +19,10 @@
     [service send:[NSString stringWithFormat:@"SENSOR %@", self.name]];
 }
 
+- (void)queryFromWebService:(WebService *)service {
+    [service readItem:self.name ofType:JMRITypeSensor];
+}
+
 - (void)queryFromXmlIOService:(XMLIOService *)service {
     [service readItem:self.name ofType:JMRITypeSensor];
 }
@@ -41,6 +45,10 @@
             break;
     }
     [service send:[NSString stringWithFormat:@"SENSOR %@ %@", self.name, state]];
+}
+
+- (void)writeToWebService:(WebService *)service {
+    [service writeItem:self.name ofType:JMRITypeSensor state:self.state];
 }
 
 - (void)writeToXmlIOService:(XMLIOService *)service {

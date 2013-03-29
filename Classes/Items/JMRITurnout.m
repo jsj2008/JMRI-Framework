@@ -19,6 +19,10 @@
     [service send:[NSString stringWithFormat:@"TURNOUT %@", self.name]];
 }
 
+- (void)queryFromWebService:(WebService *)service {
+    [service readItem:self.name ofType:JMRITypeTurnout];
+}
+
 - (void)queryFromXmlIOService:(XMLIOService *)service {
     [service readItem:self.name ofType:JMRITypeTurnout];
 }
@@ -41,6 +45,10 @@
             break;
     }
     [service send:[NSString stringWithFormat:@"TURNOUT %@ %@", self.name, state]];
+}
+
+- (void)writeToWebService:(WebService *)service {
+    [service writeItem:self.name ofType:JMRITypeTurnout state:self.state];
 }
 
 - (void)writeToWiThrottleService:(WiThrottleService *)service {
