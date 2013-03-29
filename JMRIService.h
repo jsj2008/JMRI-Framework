@@ -99,17 +99,17 @@
 
 #pragma mark - JMRI element properties
 
-@property (readonly) NSDictionary *lights;
-@property (readonly) NSDictionary *memories;
-@property (readonly) NSDictionary *metadata;
-@property (readonly) NSDictionary *panels;
+@property (readonly) NSMutableDictionary *lights;
+@property (readonly) NSMutableDictionary *memories;
+@property (readonly) NSMutableDictionary *metadata;
+@property (readonly) NSMutableDictionary *panels;
 @property (readonly) JMRIPower *power;
-@property (readonly) NSDictionary *reporters;
-@property (readonly) NSDictionary *roster;
-@property (readonly) NSDictionary *routes;
-@property (readonly) NSDictionary *sensors;
-@property (readonly) NSDictionary *signalHeads;
-@property (readonly) NSDictionary *turnouts;
+@property (readonly) NSMutableDictionary *reporters;
+@property (readonly) NSMutableDictionary *roster;
+@property (readonly) NSMutableDictionary *routes;
+@property (readonly) NSMutableDictionary *sensors;
+@property (readonly) NSMutableDictionary *signalHeads;
+@property (readonly) NSMutableDictionary *turnouts;
 
 #pragma mark - JMRI element handling
 

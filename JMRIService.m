@@ -106,7 +106,16 @@
 }
 
 - (void)commonInit {
-    power = [[JMRIPower alloc] initWithName:JMRITypePower withService:self];
+    _lights = [NSMutableDictionary dictionaryWithCapacity:0];
+    _memories = [NSMutableDictionary dictionaryWithCapacity:0];
+    _metadata = [NSMutableDictionary dictionaryWithCapacity:0];
+    _panels = [NSMutableDictionary dictionaryWithCapacity:0];
+    _reporters = [NSMutableDictionary dictionaryWithCapacity:0];
+    _roster = [NSMutableDictionary dictionaryWithCapacity:0];
+    _sensors = [NSMutableDictionary dictionaryWithCapacity:0];
+    _signalHeads = [NSMutableDictionary dictionaryWithCapacity:0];
+    _turnouts = [NSMutableDictionary dictionaryWithCapacity:0];
+    _power = [[JMRIPower alloc] initWithName:JMRITypePower withService:self];
     self.requiresJsonService = NO;
     self.requiresSimpleService = NO;
     self.requiresWebService = NO;
@@ -307,16 +316,6 @@
 @synthesize useXmlIOService = _useXmlIOService;
 
 #pragma mark - JMRI Elements
-
-@synthesize memories;
-@synthesize panels;
-@synthesize power;
-@synthesize reporters;
-@synthesize roster;
-@synthesize routes;
-@synthesize sensors;
-@synthesize signalHeads;
-@synthesize turnouts;
 
 - (void)list:(NSString *)type {
     if (self.hasWebService && self.useWebService) {
