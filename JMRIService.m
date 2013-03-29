@@ -433,7 +433,12 @@
 }
 
 - (void)JMRINetService:(JMRINetService *)service didGetMetadata:(NSString *)metadata withValue:(NSString *)value {
-    [self.metadata setValue:value forKey:metadata];
+    if (![self.metadata objectForKey:metadata]) {
+        [self.metadata setValue:value forKey:metadata];
+        [[NSNotificationCenter defaultCenter] postNotificationName:JMRINotificationItemAdded
+                                                            object:self
+                                                          userInfo:@{JMRIAddedItem: metadata, JMRIList: self.metadata}];
+    }
 }
 
 - (void)JMRINetService:(JMRINetService *)service didGetPowerState:(NSUInteger)state {
