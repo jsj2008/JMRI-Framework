@@ -137,7 +137,7 @@
         if ([self.delegate respondsToSelector:@selector(item:didChangeState:)]) {
             [self.delegate item:self didChangeState:self.state];
         }
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"changedState" object:self];
+        [[NSNotificationCenter defaultCenter] postNotificationName:JMRINotificationStateChange object:self];
     }
 }    
 
@@ -170,7 +170,7 @@
             if ([self.delegate respondsToSelector:@selector(item:didGetValue:)]) {
                 [self.delegate item:self didGetValue:self.value];
             }
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"changedValue" object:self];
+            [[NSNotificationCenter defaultCenter] postNotificationName:JMRINotificationStateChange object:self];
         }
     } else {
         [self setState:[value integerValue] updateService:update];
