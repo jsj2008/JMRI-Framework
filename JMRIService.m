@@ -115,7 +115,7 @@
     _sensors = [NSMutableDictionary dictionaryWithCapacity:0];
     _signalHeads = [NSMutableDictionary dictionaryWithCapacity:0];
     _turnouts = [NSMutableDictionary dictionaryWithCapacity:0];
-    _power = [[JMRIPower alloc] initWithName:JMRITypePower withService:self];
+    _power = [NSMutableDictionary dictionaryWithCapacity:0];
     self.requiresJsonService = NO;
     self.requiresSimpleService = NO;
     self.requiresWebService = NO;
@@ -485,7 +485,15 @@
 }
 
 - (void)JMRINetService:(JMRINetService *)service didGetPowerState:(NSUInteger)state {
-    [self.power setState:state updateService:NO];
+    if (![self.power objectForKey:JMRITypePower]) {
+        JMRIPower *powerObj = [[JMRIPower alloc] initWithName:JMRITypePower withService:self withProperties:nil];
+        [powerObj setState:state updateService:NO];
+        [self.power setValue:powerObj forKey:JMRITypePower];
+        [[NSNotificationCenter defaultCenter] postNotificationName:JMRINotificationItemAdded
+                                                            object:self
+                                                          userInfo:@{JMRIAddedItem: powerObj, JMRIList: self.power}];
+    }
+    [((JMRIPower *)[self.power objectForKey:JMRITypePower]) setState:state updateService:NO];
 }
 
 - (void)JMRINetService:(JMRINetService *)service didGetReporter:(NSString *)reporter withValue:(NSString *)value withProperties:(NSDictionary *)properties {
@@ -587,7 +595,9 @@
             [self setValueInList:self.metadata forItem:i];
         }
     } else if ([type isEqualToString:JMRITypePower]) {
-        [self.power setState:[((XMLIOItem *)[items objectAtIndex:0]).value integerValue] updateService:NO];
+        for (XMLIOItem *i in items) {
+            [self setStateInList:self.power forItem:i];
+        }
     } else if ([type isEqualToString:JMRITypeRoute]) {
         for (XMLIOItem *i in items) {
             [self setStateInList:self.routes forItem:i];
@@ -609,7 +619,7 @@
     } else if ([type isEqualToString:JMRITypeMetadata]) {
         [self setValueInList:self.metadata forItem:item];
     } else if ([type isEqualToString:JMRITypePower]) {
-        [self.power setState:[value integerValue] updateService:NO];
+        [self setStateInList:self.power forItem:item];
     } else if ([type isEqualToString:JMRITypeRoute]) {
         [self setStateInList:self.routes forItem:item];
     } else if ([type isEqualToString:JMRITypeSensor]) {
