@@ -404,14 +404,20 @@
     if (![self.lights objectForKey:light]) {
         JMRILight *lightObj = [[JMRILight alloc] initWithName:light withService:self withProperties:properties];
         [self.lights setValue:lightObj forKey:light];
+        [[NSNotificationCenter defaultCenter] postNotificationName:JMRINotificationItemAdded
+                                                            object:self
+                                                          userInfo:@{JMRIAddedItem: lightObj, JMRIList: self.lights}];
     }
     [((JMRILight *)[self.lights objectForKey:light]) setState:state updateService:NO];
 }
 
 - (void)JMRINetService:(JMRINetService *)service didGetMemory:(NSString *)memory withValue:(NSString *)value withProperties:(NSDictionary *)properties {
     if (![self.memories objectForKey:memory]) {
-        JMRIMemory *reporterObj = [[JMRIMemory alloc] initWithName:memory withService:self withProperties:properties];
-        [self.memories setValue:reporterObj forKey:memory];
+        JMRIMemory *memoryObj = [[JMRIMemory alloc] initWithName:memory withService:self withProperties:properties];
+        [self.memories setValue:memoryObj forKey:memory];
+        [[NSNotificationCenter defaultCenter] postNotificationName:JMRINotificationItemAdded
+                                                            object:self
+                                                          userInfo:@{JMRIAddedItem: memoryObj, JMRIList: self.memories}];
     }
     [((JMRIMemory *)[self.memories objectForKey:memory]) setValue:value updateService:NO];
 }
@@ -428,14 +434,20 @@
     if (![self.memories objectForKey:reporter]) {
         JMRIReporter *reporterObj = [[JMRIReporter alloc] initWithName:reporter withService:self withProperties:properties];
         [self.memories setValue:reporterObj forKey:reporter];
+        [[NSNotificationCenter defaultCenter] postNotificationName:JMRINotificationItemAdded
+                                                            object:self
+                                                          userInfo:@{JMRIAddedItem: reporterObj, JMRIList: self.reporters}];
     }
     [((JMRIMemory *)[self.memories objectForKey:reporter]) setValue:value updateService:NO];
 }
 
 - (void)JMRINetService:(JMRINetService *)service didGetSensor:(NSString *)sensor withState:(NSUInteger)state withProperties:(NSDictionary *)properties {
     if (![self.sensors objectForKey:sensor]) {
-        JMRISensor *turnoutObj = [[JMRISensor alloc] initWithName:sensor withService:self withProperties:properties];
-        [self.sensors setValue:turnoutObj forKey:sensor];
+        JMRISensor *sensorObj = [[JMRISensor alloc] initWithName:sensor withService:self withProperties:properties];
+        [self.sensors setValue:sensorObj forKey:sensor];
+        [[NSNotificationCenter defaultCenter] postNotificationName:JMRINotificationItemAdded
+                                                            object:self
+                                                          userInfo:@{JMRIAddedItem: sensorObj, JMRIList: self.sensors}];
     }
     [((JMRISensor *)[self.sensors objectForKey:sensor]) setState:state updateService:NO];
 }
@@ -444,6 +456,9 @@
     if (![self.signalHeads objectForKey:signalHead]) {
         JMRISignalHead *signalHeadObj = [[JMRISignalHead alloc] initWithName:signalHead withService:self withProperties:properties];
         [self.signalHeads setValue:signalHeadObj forKey:signalHead];
+        [[NSNotificationCenter defaultCenter] postNotificationName:JMRINotificationItemAdded
+                                                            object:self
+                                                          userInfo:@{JMRIAddedItem: signalHeadObj, JMRIList: self.signalHeads}];
     }
     [((JMRISignalHead *)[self.signalHeads objectForKey:signalHead]) setState:state updateService:NO];
 }
@@ -451,6 +466,9 @@
     if (![self.turnouts objectForKey:turnout]) {
         JMRITurnout *turnoutObj = [[JMRITurnout alloc] initWithName:turnout withService:self withProperties:properties];
         [self.turnouts setValue:turnoutObj forKey:turnout];
+        [[NSNotificationCenter defaultCenter] postNotificationName:JMRINotificationItemAdded
+                                                            object:self
+                                                          userInfo:@{JMRIAddedItem: turnoutObj, JMRIList: self.turnouts}];
     }
     [((JMRITurnout *)[self.turnouts objectForKey:turnout]) setState:state updateService:NO];
 }

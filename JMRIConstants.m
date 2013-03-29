@@ -69,6 +69,10 @@ NSString *const JMRITXTRecordKeyJMRI = @"jmri";
 NSString *const JMRINotificationStateChange = @"JMRINotificationStateChange";
 NSString *const JMRINotificationItemAdded = @"JMRINotificationItemAdded";
 
+// Framework notification userInfo dictionary keys
+extern NSString *const JMRIAddedItem = @"item";
+extern NSString *const JMRIList = @"list";
+
 // Framework error domain
 NSString *const JMRIErrorDomain = @"JMRIError";
 

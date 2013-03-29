@@ -68,6 +68,10 @@ extern NSString *const JMRITXTRecordKeyJMRI;
 extern NSString *const JMRINotificationStateChange;
 extern NSString *const JMRINotificationItemAdded;
 
+// Framework notification userInfo dictionary keys
+extern NSString *const JMRIAddedItem;
+extern NSString *const JMRIList;
+
 // Framework error domain
 extern NSString *const JMRIErrorDomain;
 
