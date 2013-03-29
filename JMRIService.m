@@ -29,6 +29,8 @@
 - (void)setStateInList:(NSDictionary *)list forItem:(XMLIOItem *)item;
 - (void)setValueInList:(NSDictionary *)list forItem:(XMLIOItem *)item;
 
+- (void)itemAddedToList:(NSNotification *)notification;
+
 @end
 
 @implementation JMRIService
@@ -115,6 +117,15 @@
     self.useWebService = YES;
     self.useWiThrottleService = YES;
     self.useXmlIOService = NO;
+    // Observe self so we can use the delegate does not also have to subscribe to notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(itemAddedToList:)
+                                                 name:JMRINotificationItemAdded
+                                               object:self];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Object Handling
@@ -581,6 +592,8 @@
     }
 }
 
+#pragma mark - Private methods 
+
 - (void)setStateInList:(NSDictionary *)list forItem:(XMLIOItem *)item {
     if ([list objectForKey:item.name]) {
         ((JMRIItem *)[list objectForKey:item.name]).state = [item.value integerValue];
@@ -594,6 +607,12 @@
         ((JMRIItem *)[list objectForKey:item.name]).value = item.value;
     } else {
         [list setValue:[item JMRIItemForService:self] forKey:item.name];
+    }
+}
+
+- (void)itemAddedToList:(NSNotification *)notification {
+    if ([self.delegate respondsToSelector:@selector(JMRIService:didAddItem:toList:)]) {
+        [self.delegate JMRIService:self didAddItem:notification.userInfo[JMRIAddedItem] toList:notification.userInfo[JMRIList]];
     }
 }
 

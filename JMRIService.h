@@ -34,6 +34,7 @@
 - (void)JMRIService:(JMRIService *)service didStart:(JMRINetService *)netService;
 - (void)JMRIService:(JMRIService *)service didStop:(JMRINetService *)netService;
 - (void)JMRIService:(JMRIService *)service didGetInput:(NSString *)input;
+- (void)JMRIService:(JMRIService *)service didAddItem:(JMRIItem *)item toList:(NSDictionary *)list;
 
 @end
 
