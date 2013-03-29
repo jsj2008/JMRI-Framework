@@ -95,7 +95,7 @@
 @optional
 - (void)JMRINetService:(JMRINetService *)service didGetLight:(NSString *)light withState:(NSUInteger)state withProperties:(NSDictionary *)properties;
 - (void)JMRINetService:(JMRINetService *)service didGetMemory:(NSString *)memory withValue:(NSString *)value withProperties:(NSDictionary *)properties;
-- (void)JMRINetService:(JMRINetService *)service didGetMetadata:(NSString *)metadata withValue:(NSString *)value;
+- (void)JMRINetService:(JMRINetService *)service didGetMetadata:(NSString *)metadata withValue:(NSString *)value withProperties:(NSDictionary *)properties;
 - (void)JMRINetService:(JMRINetService *)service didGetPowerState:(NSUInteger)state;
 - (void)JMRINetService:(JMRINetService *)service didGetReporter:(NSString *)reporter withValue:(NSString *)value withProperties:(NSDictionary *)properties;
 - (void)JMRINetService:(JMRINetService *)service didGetSensor:(NSString *)sensor withState:(NSUInteger)state withProperties:(NSDictionary *)properties;

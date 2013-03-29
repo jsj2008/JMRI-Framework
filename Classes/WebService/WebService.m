@@ -230,8 +230,8 @@
 }
 
 - (void)didGetMetadata:(NSDictionary *)json {
-    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetMetadata:withValue:)]) {
-        [self.delegate JMRINetService:self didGetMetadata:json[@"data"][@"name"] withValue:json[@"data"][@"value"]];
+    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetMetadata:withValue:withProperties:)]) {
+        [self.delegate JMRINetService:self didGetMetadata:json[@"data"][@"name"] withValue:json[@"data"][@"value"] withProperties:json];
     }
     if ([json[@"data"][@"name"] isEqualToString:JMRIMetadataJMRICanonicalVersion]) {
         if ([json[@"data"][@"value"] compare:JMRI_WEB_JSON_RECOMMENDED_VERSION options:NSNumericSearch] == NSOrderedAscending) {

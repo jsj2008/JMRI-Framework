@@ -350,8 +350,8 @@
 }
 
 - (void)didGetMetadata:(NSDictionary *)json {
-    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetMetadata:withValue:)]) {
-        [self.delegate JMRINetService:self didGetMetadata:json[@"data"][@"name"] withValue:json[@"data"][@"value"]];
+    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetMetadata:withValue:withProperties:)]) {
+        [self.delegate JMRINetService:self didGetMetadata:json[@"data"][@"name"] withValue:json[@"data"][@"value"] withProperties:json];
     }
 }
 

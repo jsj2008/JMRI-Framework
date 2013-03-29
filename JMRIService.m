@@ -432,12 +432,13 @@
     [((JMRIMemory *)[self.memories objectForKey:memory]) setValue:value updateService:NO];
 }
 
-- (void)JMRINetService:(JMRINetService *)service didGetMetadata:(NSString *)metadata withValue:(NSString *)value {
+- (void)JMRINetService:(JMRINetService *)service didGetMetadata:(NSString *)metadata withValue:(NSString *)value withProperties:(NSDictionary *)properties {
     if (![self.metadata objectForKey:metadata]) {
-        [self.metadata setValue:value forKey:metadata];
+        JMRIMetadata *metadataObj = [[JMRIMetadata alloc] initWithName:metadata withService:self withProperties:properties];
+        [self.metadata setValue:metadataObj forKey:metadata];
         [[NSNotificationCenter defaultCenter] postNotificationName:JMRINotificationItemAdded
                                                             object:self
-                                                          userInfo:@{JMRIAddedItem: metadata, JMRIList: self.metadata}];
+                                                          userInfo:@{JMRIAddedItem: metadataObj, JMRIList: self.metadata}];
     }
 }
 
