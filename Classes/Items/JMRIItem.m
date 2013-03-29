@@ -26,8 +26,12 @@
     if ((self = [super init])) {
         self.name = name;
         self.service = service;
-        self.comment = properties[@"comment"];
-        self.userName = properties[@"userName"];
+        if (properties[@"comment"] != [NSNull null]) {
+            self.comment = properties[@"comment"];
+        }
+        if (properties[@"userName"] != [NSNull null]) {
+            self.userName = properties[@"userName"];
+        }
         self.inverted = [properties[@"inverted"] boolValue];
         if (properties[@"state"]) {
             _state = [properties[@"state"] integerValue];
