@@ -74,4 +74,8 @@
 @property (readonly) NSString* type;
 @property (readonly) NSDictionary* properties;
 
+#pragma mark - Utilities
+
+- (NSComparisonResult)localizedCaseInsensitiveCompareByUserName:(JMRIItem *)item;
+
 @end

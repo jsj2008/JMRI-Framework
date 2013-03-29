@@ -197,4 +197,17 @@
     }
 }
 
+#pragma mark - Utilities
+
+- (NSComparisonResult)localizedCaseInsensitiveCompareByUserName:(JMRIItem *)item {
+	if (self.userName && item.userName) {
+		return [self.userName localizedCaseInsensitiveCompare:item.userName];
+	} else if (self.userName && item.name) {
+		return [self.userName localizedCaseInsensitiveCompare:item.name];
+ 	} else if (self.name && item.userName) {
+		return [self.name localizedCaseInsensitiveCompare:item.userName];
+	}
+	return [self.name localizedCaseInsensitiveCompare:item.name];
+}
+
 @end
