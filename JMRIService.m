@@ -31,6 +31,8 @@
 
 - (void)itemAddedToList:(NSNotification *)notification;
 
+- (void)queryPower;
+
 @end
 
 @implementation JMRIService
@@ -336,7 +338,9 @@
 #pragma mark - JMRI Elements
 
 - (void)list:(NSString *)type {
-    if (self.hasWebService && self.useWebService) {
+    if ([type isEqualToString:JMRITypePower]) {
+        [self queryPower];
+    } else if (self.hasWebService && self.useWebService) {
         [self.webService list:type];
     } else if (self.hasJsonService && self.useJsonService) {
         [self.jsonService list:type];
@@ -689,6 +693,14 @@
     if ([self.delegate respondsToSelector:@selector(JMRIService:didAddItem:toList:)]) {
         [self.delegate JMRIService:self didAddItem:notification.userInfo[JMRIAddedItem] toList:notification.userInfo[JMRIList]];
     }
+}
+
+// Handle power specially when listing, since most services do not allow power to be listed
+- (void)queryPower {
+    if (!self.power[JMRITypePower]) {
+        [self.power setValue:[[JMRIPower alloc] initWithName:JMRITypePower withService:self] forKey:JMRITypePower];
+    }
+    [(JMRIPower *)self.power[JMRITypePower] query];
 }
 
 @end
