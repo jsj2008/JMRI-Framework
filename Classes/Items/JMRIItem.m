@@ -150,9 +150,6 @@
                 [self write];
             }
         }
-        if ([self.delegate respondsToSelector:@selector(item:didChangeState:)]) {
-            [self.delegate item:self didChangeState:self.state];
-        }
         [[NSNotificationCenter defaultCenter] postNotificationName:JMRINotificationStateChange object:self];
     }
 }    
@@ -183,9 +180,6 @@
                     [self write];
                 }
             }
-            if ([self.delegate respondsToSelector:@selector(item:didGetValue:)]) {
-                [self.delegate item:self didGetValue:self.value];
-            }
             [[NSNotificationCenter defaultCenter] postNotificationName:JMRINotificationStateChange object:self];
         }
     } else {
@@ -199,7 +193,6 @@
 }
 
 @synthesize comment = _comment;
-@synthesize delegate = _delegate;
 @synthesize inverted = _inverted;
 @synthesize name = _name;
 @synthesize service = _service;

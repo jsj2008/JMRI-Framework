@@ -10,17 +10,6 @@
 #import "JMRIConstants.h"
 
 @class JMRIService;
-@class JMRIItem;
-
-#pragma mark Delegation
-
-@protocol JMRIItemDelegate<NSObject>
-
-@required
-- (void)item:(JMRIItem*)item didChangeState:(NSUInteger)state;
-- (void)item:(JMRIItem*)item didGetValue:(NSString *)value;
-
-@end
 
 @protocol JMRIItem <NSObject>
 
@@ -40,8 +29,6 @@
 
 - (NSString *)comment;
 - (void)setComment:(NSString *)comment;
-- (id<JMRIItemDelegate>)delegate;
-- (void)setDelegate:(id<JMRIItemDelegate>)delegate;
 - (Boolean)inverted;
 - (void)setInverted:(Boolean)inverted;
 - (NSString *)name;
@@ -64,7 +51,6 @@
 #pragma mark - Properties
 
 @property NSString* comment;
-@property (assign) id<JMRIItemDelegate> delegate;
 @property Boolean inverted;
 @property NSString* name;
 @property JMRIService* service;
