@@ -77,16 +77,8 @@
     return NO;
 }
 
-- (NSString *)comment {
-    return nil;
-}
-
 - (NSString *)name {
     return JMRITypePower;
-}
-
-- (NSString *)userName {
-    return nil;
 }
 
 - (NSString *)type {
