@@ -33,8 +33,9 @@
         simpleBrowser.delegate = self;
         webBrowser = [[WebServiceBrowser alloc] init];
         webBrowser.delegate = self;
-        wiThrottleBrowser = [[WiThrottleServiceBrowser alloc] init];
-        wiThrottleBrowser.delegate = self;
+        // uncomment following two lines when re-enabling the WiThrottle service
+        //wiThrottleBrowser = [[WiThrottleServiceBrowser alloc] init];
+        //wiThrottleBrowser.delegate = self;
         self.services = [NSMutableArray arrayWithCapacity:0];
         searching = NO;
     }
@@ -42,6 +43,10 @@
 }
 
 - (id)initForServices:(NSSet *)services {
+    // remove or comment following three lines when re-enabling the WiThrottle service
+    NSMutableSet *sanitize = [[NSMutableSet alloc] initWithSet:services];
+    [sanitize removeObject:JMRIServiceWiThrottle];
+    services = [[NSSet alloc] initWithSet:sanitize];
 	if ((self = [self init])) {
         _requiredServices = services;
     }
