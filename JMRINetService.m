@@ -110,9 +110,7 @@ static JMRINetService *sharedNetService_ = nil;
 }
 
 - (void)stop {
-	if (self.service) {
-		[self.service stop];
-	}
+    [self stopMonitoring];
 }
 
 - (void)stopMonitoring {
