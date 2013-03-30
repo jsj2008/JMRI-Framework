@@ -86,7 +86,7 @@
 }
 
 - (NSString *)userName {
-    return JMRITypePower;
+    return nil;
 }
 
 - (NSString *)type {
