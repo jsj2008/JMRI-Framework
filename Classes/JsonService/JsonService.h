@@ -16,7 +16,6 @@
     NSInputStream *inputStream;
     NSOutputStream *outputStream;
     NSMutableArray *outputQueue;
-    NSDictionary *collections;
     
 }
 

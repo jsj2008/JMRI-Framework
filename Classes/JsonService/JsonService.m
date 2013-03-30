@@ -63,20 +63,6 @@
 
 - (void)commonInit {
     serviceType = JMRIServiceJson;
-    collections = @{
-                    JMRITypeFrame: JMRITypeFrame,
-                    JMRITypeLight: JMRIListLights,
-                    JMRITypeMemory: JMRIListMemories,
-                    JMRITypeMetadata: JMRITypeMetadata,
-                    JMRITypePanel: JMRIListPanels,
-                    JMRITypePower: JMRITypePower,
-                    JMRITypeReporter: JMRIListReporters,
-                    JMRITypeRoster: JMRITypeRoster,
-                    JMRITypeRoute: JMRIListRoutes,
-                    JMRITypeSensor: JMRIListSensors,
-                    JMRITypeSignalHead: JMRIListSignalHeads,
-                    JMRITypeTurnout: JMRIListTurnouts
-                    };
     [self open];
 }
 
