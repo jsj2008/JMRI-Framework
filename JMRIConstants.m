@@ -9,11 +9,11 @@
 #import "JMRIConstants.h"
 
 // Known service types
-NSString *const JMRIServiceJson = @"JsonService";
-NSString *const JMRIServiceSimple = @"JMRINetwork";
-NSString *const JMRIServiceWeb = @"WebService (Json)";
-NSString *const JMRIServiceWiThrottle = @"wiThrottle";
-NSString *const JMRIServiceXmlIO = @"WebService (XmlIO)";
+NSString *const JMRIServiceJson = @"jsonService";
+NSString *const JMRIServiceSimple = @"simpleService";
+NSString *const JMRIServiceWeb = @"webService";
+NSString *const JMRIServiceWiThrottle = @"wiThrottleService";
+NSString *const JMRIServiceXmlIO = @"xmlIOService";
 
 // JMRI item types
 NSString *const JMRITypeFrame = @"frame";
