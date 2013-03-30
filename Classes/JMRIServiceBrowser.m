@@ -23,31 +23,27 @@
 @synthesize delegate;
 @synthesize searching;
 @synthesize services = _services;
+@synthesize requiredServices = _requiredServices;
 
 - (id)init {
-	return [self initForServices:[NSSet setWithObjects:JMRIServiceJson, JMRIServiceSimple, JMRIServiceWeb, JMRIServiceWiThrottle, nil]];
+    if ((self = [super init])) {
+        jsonBrowser = [[JsonServiceBrowser alloc] init];
+        jsonBrowser.delegate = self;
+        simpleBrowser = [[SimpleServiceBrowser alloc] init];
+        simpleBrowser.delegate = self;
+        webBrowser = [[WebServiceBrowser alloc] init];
+        webBrowser.delegate = self;
+        wiThrottleBrowser = [[WiThrottleServiceBrowser alloc] init];
+        wiThrottleBrowser.delegate = self;
+        self.services = [NSMutableArray arrayWithCapacity:0];
+        searching = NO;
+    }
+    return self;
 }
 
 - (id)initForServices:(NSSet *)services {
-    if ((self = [super init])) {
-        if ([services containsObject:JMRIServiceJson]) {
-            jsonBrowser = [[JsonServiceBrowser alloc] init];
-            jsonBrowser.delegate = self;
-        }
-        if ([services containsObject:JMRIServiceSimple]) {
-            simpleBrowser = [[SimpleServiceBrowser alloc] init];
-            simpleBrowser.delegate = self;
-        }
-        if ([services containsObject:JMRIServiceWeb]) {
-            webBrowser = [[WebServiceBrowser alloc] init];
-            webBrowser.delegate = self;
-        }
-        if ([services containsObject:JMRIServiceWiThrottle]) {
-            wiThrottleBrowser = [[WiThrottleServiceBrowser alloc] init];
-            wiThrottleBrowser.delegate = self;
-        }
-        self.services = [NSMutableArray arrayWithCapacity:0];
-        searching = NO;
+	if ((self = [self init])) {
+        _requiredServices = services;
     }
     return self;
 }
@@ -62,7 +58,7 @@
 }
 
 - (void)addServiceWithName:(NSString *)name withAddress:(NSString *)address withPorts:(NSDictionary *)ports {
-    [self.services addObject:[[JMRIService alloc] initWithName:name withAddress:address withPorts:ports]];    
+    [self.services addObject:[[JMRIService alloc] initWithName:name withAddress:address withPorts:ports]];
 }
 
 - (void)addServiceWithAddress:(NSString *)address withPorts:(NSDictionary *)ports {
@@ -124,6 +120,7 @@
 
 - (void)JMRINetServiceBrowser:(JMRINetServiceBrowser *)browser didFindService:(JMRINetService *)aNetService moreComing:(BOOL)moreComing {
     searching = moreComing;
+    Boolean notify = YES;
     if ([self indexOfServiceWithName:aNetService.name] != NSNotFound) {
         JMRIService *service = [self serviceWithName:aNetService.name];
         if ([aNetService.type isEqualToString:JMRIServiceJson]) {
@@ -135,13 +132,29 @@
         } else {
             service.wiThrottleService = (WiThrottleService *)aNetService;
         }
-        if ([delegate respondsToSelector:@selector(JMRIServiceBrowser:didChangeService:moreComing:)]) {
+        if (self.requiredServices) {
+            for (NSString *required in self.requiredServices) {
+                if (![service valueForKey:required]) {
+                    notify = NO;
+                    break;
+                }
+            }
+        }
+        if (notify && [delegate respondsToSelector:@selector(JMRIServiceBrowser:didChangeService:moreComing:)]) {
             [delegate JMRIServiceBrowser:self didChangeService:service moreComing:searching];
         }
     } else {
         JMRIService *service = [[JMRIService alloc] initWithServices:[NSMutableDictionary dictionaryWithObject:aNetService forKey:aNetService.type]];
         [self.services addObject:service];
-        if ([delegate respondsToSelector:@selector(JMRIServiceBrowser:didFindService:moreComing:)]) {
+        if (self.requiredServices) {
+            for (NSString *required in self.requiredServices) {
+                if (![service valueForKey:required]) {
+                    notify = NO;
+                    break;
+                }
+            }
+        }
+        if (notify && [delegate respondsToSelector:@selector(JMRIServiceBrowser:didFindService:moreComing:)]) {
             [delegate JMRIServiceBrowser:self didFindService:service moreComing:searching];
         }
     }
@@ -161,7 +174,14 @@
         } else {
             service.wiThrottleService = nil;
         }
-        if (service.hasJsonService || service.hasSimpleService || service.hasWebService || service.hasWiThrottleService || service.hasXmlIOService) {
+        Boolean retain = (!self.requiredServices);
+        for (NSString *required in self.requiredServices) {
+            if (![service valueForKey:required]) {
+                retain = NO;
+                break;
+            }
+        }
+        if (retain && (service.hasJsonService || service.hasSimpleService || service.hasWebService || service.hasWiThrottleService || service.hasXmlIOService)) {
             if ([delegate respondsToSelector:@selector(JMRIServiceBrowser:didChangeService:moreComing:)]) {
                 [delegate JMRIServiceBrowser:self didChangeService:service moreComing:searching];
             }
