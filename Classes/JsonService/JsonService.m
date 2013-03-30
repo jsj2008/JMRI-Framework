@@ -182,7 +182,7 @@
 #pragma mark - JMRINetService items
 
 - (void)list:(NSString *)type {
-    [self write:@{@"type": @"list", @"list": type}];
+    [self write:@{@"type": @"list", @"list": [self.delegate collectionForType:type]}];
 }
 
 - (void)readItem:(NSString *)name ofType:(NSString *)type {

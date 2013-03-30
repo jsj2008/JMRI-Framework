@@ -14,7 +14,6 @@
 @interface WebService : JMRINetService {
 
     NSUInteger _openConnections;
-    NSDictionary *collections;
 
 }
 

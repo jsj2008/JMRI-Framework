@@ -81,7 +81,7 @@
 
 @protocol JMRINetServiceDelegate
 
-#pragma mark - Required
+#pragma mark - Error handings (required)
 @required
 - (void)JMRINetService:(JMRINetService *)service didNotResolve:(NSDictionary *)errorDict;
 - (void)JMRINetService:(JMRINetService *)service didFailWithError:(NSError *)error;
@@ -109,5 +109,10 @@
 - (void)JMRINetServiceDidOpenConnection:(JMRINetService *)service;
 - (void)JMRINetServiceDidStart:(JMRINetService *)service;
 - (void)JMRINetServiceDidStop:(JMRINetService *)service;
+
+#pragma mark - Service support (required)
+@required
+- (NSString *)collectionForType:(NSString *)type;
+- (NSString *)typeForCollection:(NSString *)collection;
 
 @end

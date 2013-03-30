@@ -52,20 +52,6 @@
     serviceType = JMRIServiceWeb;
     _openConnections = 0;
     self.JSONPath = @"json/";
-    collections = @{
-                    JMRITypeFrame: JMRITypeFrame,
-                    JMRITypeLight: JMRIListLights,
-                    JMRITypeMemory: JMRIListMemories,
-                    JMRITypeMetadata: JMRITypeMetadata,
-                    JMRITypePanel: JMRIListPanels,
-                    JMRITypePower: JMRITypePower,
-                    JMRITypeReporter: JMRIListReporters,
-                    JMRITypeRoster: JMRITypeRoster,
-                    JMRITypeRoute: JMRIListRoutes,
-                    JMRITypeSensor: JMRIListSensors,
-                    JMRITypeSignalHead: JMRIListSignalHeads,
-                    JMRITypeTurnout: JMRIListTurnouts
-                    };
     [self readItem:JMRIMetadataJMRICanonicalVersion ofType:JMRITypeMetadata];
 }
 
@@ -107,7 +93,7 @@
     // need to pluralize type
     NSError *error = nil;
     NSData *data = [NSJSONSerialization dataWithJSONObject:jsonObject options:0 error:&error];
-    NSString *path = [NSString stringWithFormat:@"%@/%@", [collections valueForKey:type], jsonObject[@"data"][@"name"]];
+    NSString *path = [NSString stringWithFormat:@"%@/%@", [self.delegate collectionForType:type], jsonObject[@"data"][@"name"]];
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[self.url URLByAppendingPathComponent:path]
                                                            cachePolicy:NSURLRequestReloadIgnoringCacheData
                                                        timeoutInterval:self.timeoutInterval];
@@ -127,7 +113,7 @@
 #pragma mark - JMRINetService items
 
 - (void)list:(NSString *)type {
-    [self read:[collections valueForKey:type]];
+    [self read:[self.delegate collectionForType:type]];
 }
 
 - (void)readItem:(NSString *)name ofType:(NSString *)type {
