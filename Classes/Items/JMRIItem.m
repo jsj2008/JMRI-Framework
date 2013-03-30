@@ -200,9 +200,15 @@
 
 - (NSDictionary *)properties {
     if (self.state == JMRIItemStateStateless) {
-        return @{@"name": self.name, @"comment": self.comment, @"value": self.value, @"userName": self.userName};
+        return @{@"name": (self.name) ? self.name : [NSNull null],
+                 @"comment": (self.comment) ? self.comment : [NSNull null],
+                 @"value": (self.value) ? self.value : [NSNull null],
+                 @"userName": (self.userName) ? self.userName : [NSNull null]};
     } else {
-        return @{@"name": self.name, @"comment": self.comment, @"state": [NSNumber numberWithInteger:self.state], @"userName": self.userName};
+        return @{@"name": (self.name) ? self.name : [NSNull null],
+                 @"comment": (self.comment) ? self.comment : [NSNull null],
+                 @"state": [NSNumber numberWithInteger:self.state],
+                 @"userName": (self.userName) ? self.userName : [NSNull null]};
     }
 }
 
