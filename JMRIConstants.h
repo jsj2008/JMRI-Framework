@@ -76,8 +76,10 @@ extern NSString *const JMRIList;
 extern NSString *const JMRIErrorDomain;
 
 // JMRI states
+// Need to maintain two Unknown states due to inconsistencies in JMRI
 typedef enum {
 	JMRIItemStateUnknown = 0,
+    JMRIBeanStateUnknown = 1,
 	JMRIItemStateActive = 2,
 	JMRIItemStateClosed = 2,
 	JMRIItemStateInactive = 4,

@@ -144,7 +144,7 @@
     if (_state != JMRIItemStateStateless && _state != state) {
         _state = state;
         if (update) {
-            if (_state == JMRIItemStateUnknown) {
+            if (_state == JMRIItemStateUnknown || _state == JMRIBeanStateUnknown) {
                 [self query];
             } else {
                 [self write];
