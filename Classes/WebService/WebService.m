@@ -145,9 +145,7 @@
 }
 
 - (void)failWithError:(NSError *)error {
-    if ([self.delegate respondsToSelector:@selector(JMRINetService:didFailWithError:)]) {
-        [self.delegate JMRINetService:self didFailWithError:error];
-    }
+    [self.delegate JMRINetService:self didFailWithError:error];
 }
 
 #pragma mark - Response handlers
@@ -167,9 +165,7 @@
                     NSLog(@"%@", error.description);
             }
         } else {
-            if ([self.delegate respondsToSelector:@selector(JMRINetService:didReceive:)]) {
-                [self.delegate JMRINetService:self didReceive:[json description]];
-            }
+            [self.delegate JMRINetService:self didReceive:[json description]];
             if ([json[@"type"] isEqualToString:JMRITypeList]) {
                 [self didGetList:json];
             } else {
@@ -177,9 +173,7 @@
             }
         }
     } else {
-        if ([self.delegate respondsToSelector:@selector(JMRINetService:didFailWithError:)]) {
-            [self.delegate JMRINetService:self didFailWithError:error];
-        }
+        [self.delegate JMRINetService:self didFailWithError:error];
     }
 }
 
@@ -204,21 +198,15 @@
 }
 
 - (void)didGetLightState:(NSDictionary *)json {
-    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetLight:withState:withProperties:)]) {
-        [self.delegate JMRINetService:self didGetLight:json[@"data"][@"name"] withState:[json[@"data"][@"state"] integerValue] withProperties:json[@"data"]];
-    }
+    [self.delegate JMRINetService:self didGetLight:json[@"data"][@"name"] withState:[json[@"data"][@"state"] integerValue] withProperties:json[@"data"]];
 }
 
 - (void)didGetMemoryValue:(NSDictionary *)json {
-    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetMemory:withValue:withProperties:)]) {
-        [self.delegate JMRINetService:self didGetMemory:json[@"data"][@"name"] withValue:json[@"data"][@"value"] withProperties:json[@"data"]];
-    }
+    [self.delegate JMRINetService:self didGetMemory:json[@"data"][@"name"] withValue:json[@"data"][@"value"] withProperties:json[@"data"]];
 }
 
 - (void)didGetMetadata:(NSDictionary *)json {
-    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetMetadata:withValue:withProperties:)]) {
-        [self.delegate JMRINetService:self didGetMetadata:json[@"data"][@"name"] withValue:json[@"data"][@"value"] withProperties:json[@"data"]];
-    }
+    [self.delegate JMRINetService:self didGetMetadata:json[@"data"][@"name"] withValue:json[@"data"][@"value"] withProperties:json[@"data"]];
     if ([json[@"data"][@"name"] isEqualToString:JMRIMetadataJMRICanonicalVersion]) {
         if ([json[@"data"][@"value"] compare:JMRI_WEB_JSON_RECOMMENDED_VERSION options:NSNumericSearch] == NSOrderedAscending) {
             [self.delegate JMRINetService:self
@@ -230,33 +218,23 @@
 }
 
 - (void)didGetPowerState:(NSDictionary *)json {
-    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetPowerState:)]) {
-        [self.delegate JMRINetService:self didGetPowerState:[json[@"data"][@"state"] integerValue]];
-    }
+    [self.delegate JMRINetService:self didGetPowerState:[json[@"data"][@"state"] integerValue]];
 }
 
 - (void)didGetReporterValue:(NSDictionary *)json {
-    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetReporter:withValue:withProperties:)]) {
-        [self.delegate JMRINetService:self didGetReporter:json[@"data"][@"name"] withValue:json[@"data"][@"report"] withProperties:json[@"data"]];
-    }
+    [self.delegate JMRINetService:self didGetReporter:json[@"data"][@"name"] withValue:json[@"data"][@"report"] withProperties:json[@"data"]];
 }
 
 - (void)didGetSensorState:(NSDictionary *)json {
-    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetSensor:withState:withProperties:)]) {
-        [self.delegate JMRINetService:self didGetSensor:json[@"data"][@"name"] withState:[json[@"data"][@"state"] integerValue] withProperties:json[@"data"]];
-    }
+    [self.delegate JMRINetService:self didGetSensor:json[@"data"][@"name"] withState:[json[@"data"][@"state"] integerValue] withProperties:json[@"data"]];
 }
 
 - (void)didGetSignalHeadState:(NSDictionary *)json {
-    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetSignalHead:withState:withProperties:)]) {
-        [self.delegate JMRINetService:self didGetSignalHead:json[@"data"][@"name"] withState:[json[@"data"][@"state"] integerValue] withProperties:json[@"data"]];
-    }
+    [self.delegate JMRINetService:self didGetSignalHead:json[@"data"][@"name"] withState:[json[@"data"][@"state"] integerValue] withProperties:json[@"data"]];
 }
 
 - (void)didGetTurnoutState:(NSDictionary *)json {
-    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetTurnout:withState:withProperties:)]) {
-        [self.delegate JMRINetService:self didGetTurnout:json[@"data"][@"name"] withState:[json[@"data"][@"state"] integerValue] withProperties:json[@"data"]];
-    }
+    [self.delegate JMRINetService:self didGetTurnout:json[@"data"][@"name"] withState:[json[@"data"][@"state"] integerValue] withProperties:json[@"data"]];
 }
 
 - (void)didGetList:(NSDictionary *)json {

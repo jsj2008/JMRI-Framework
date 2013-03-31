@@ -85,23 +85,17 @@ NSString *const JMRINetServiceWiThrottle = @"_withrottle._tcp.";
 
 - (void)netServiceBrowserWillSearch:(NSNetServiceBrowser *)browser {
 	_searching = YES;
-	if ([self.delegate respondsToSelector:@selector(JMRINetServiceBrowserWillSearch:)]) {
-		[self.delegate JMRINetServiceBrowserWillSearch:self];
-	}
+    [self.delegate JMRINetServiceBrowserWillSearch:self];
 }
 
 - (void)netServiceBrowserDidStopSearch:(NSNetServiceBrowser *)aNetServiceBrowser {
 	_searching = NO;
-	if ([self.delegate respondsToSelector:@selector(JMRINetServiceBrowserDidStopSearch:)]) {
-		[self.delegate JMRINetServiceBrowserDidStopSearch:self];
-	}
+	[self.delegate JMRINetServiceBrowserDidStopSearch:self];
 }
 
 - (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser didNotSearch:(NSDictionary *)errorDict {
 	_searching = NO;
-	if ([self.delegate respondsToSelector:@selector(JMRINetServiceBrowser:didNotSearch:)]) {
-		[self.delegate JMRINetServiceBrowser:self didNotSearch:errorDict];
-	}
+	[self.delegate JMRINetServiceBrowser:self didNotSearch:errorDict];
 }
 
 - (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser didFindService:(NSNetService *)aNetService moreComing:(BOOL)moreComing {
@@ -121,9 +115,7 @@ NSString *const JMRINetServiceWiThrottle = @"_withrottle._tcp.";
     } else {
         service = [[JMRINetService alloc] initWithNetService:aNetService];
     }
-	if ([self.delegate respondsToSelector:@selector(JMRINetServiceBrowser:didRemoveService:moreComing:)]) {
-		[self.delegate JMRINetServiceBrowser:self didRemoveService:service moreComing:moreComing];
-	}
+	[self.delegate JMRINetServiceBrowser:self didRemoveService:service moreComing:moreComing];
 }
 
 #pragma mark - Net service delegate
@@ -135,9 +127,7 @@ NSString *const JMRINetServiceWiThrottle = @"_withrottle._tcp.";
 	//service = [[[JMRINetService alloc] initWithNetService:aNetService];
 	//[self.services addObject:service];
     //[self.unresolvedServices removeObject:sender];
-	//if ([self.delegate respondsToSelector:@selector(JMRINetServiceBrowser:didFindService:moreComing:)]) {
-	//	[self.delegate JMRINetServiceBrowser:self didFindService:service moreComing:moreComing];
-	//}	
+	//[self.delegate JMRINetServiceBrowser:self didFindService:service moreComing:moreComing];
 }
 
 - (void)netService:(NSNetService *)sender didNotResolve:(NSDictionary *)errorDict {

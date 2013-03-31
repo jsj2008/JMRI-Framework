@@ -35,9 +35,7 @@
     if (![self containsService:sender]) {
 		SimpleService *service = [[SimpleService alloc] initWithNetService:sender];
 		[self.services addObject:service];
-		if ([self.delegate respondsToSelector:@selector(JMRINetServiceBrowser:didFindService:moreComing:)]) {
-			[self.delegate JMRINetServiceBrowser:self didFindService:service moreComing:_searching];
-		}
+		[self.delegate JMRINetServiceBrowser:self didFindService:service moreComing:_searching];
 	}
 }
 

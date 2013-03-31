@@ -86,13 +86,13 @@
 - (void)JMRINetService:(JMRINetService *)service didNotResolve:(NSDictionary *)errorDict;
 - (void)JMRINetService:(JMRINetService *)service didFailWithError:(NSError *)error;
 
-#pragma mark - Bonjour resolution (optional)
-@optional
+#pragma mark - Bonjour resolution (required)
+@required
 - (void)JMRINetServiceDidResolveAddress:(JMRINetService *)service;
 - (void)JMRINetServiceWillResolve:(JMRINetService *)service;
 
-#pragma mark - JMRI items (optional)
-@optional
+#pragma mark - JMRI items (required)
+@required
 - (void)JMRINetService:(JMRINetService *)service didGetLight:(NSString *)light withState:(NSUInteger)state withProperties:(NSDictionary *)properties;
 - (void)JMRINetService:(JMRINetService *)service didGetMemory:(NSString *)memory withValue:(NSString *)value withProperties:(NSDictionary *)properties;
 - (void)JMRINetService:(JMRINetService *)service didGetMetadata:(NSString *)metadata withValue:(NSString *)value withProperties:(NSDictionary *)properties;
@@ -102,8 +102,8 @@
 - (void)JMRINetService:(JMRINetService *)service didGetSignalHead:(NSString *)signalHead withState:(NSUInteger)state withProperties:(NSDictionary *)properties;
 - (void)JMRINetService:(JMRINetService *)service didGetTurnout:(NSString *)turnout withState:(NSUInteger)state withProperties:(NSDictionary *)properties;
 
-#pragma mark - Service events (optional)
-@optional
+#pragma mark - Service events (required)
+@required
 - (void)JMRINetService:(JMRINetService *)service didReceive:(NSString *)input;
 - (void)JMRINetService:(JMRINetService *)service didSend:(NSData *)data;
 - (void)JMRINetServiceDidOpenConnection:(JMRINetService *)service;

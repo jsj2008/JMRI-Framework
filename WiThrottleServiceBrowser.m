@@ -37,9 +37,7 @@
 	WiThrottleService *service;
 	service = [[WiThrottleService alloc] initWithNetService:aNetService];
 	[self.services addObject:service];
-	if ([self.delegate respondsToSelector:@selector(JMRINetServiceBrowser:didFindService:moreComing:)]) {
-		[self.delegate JMRINetServiceBrowser:self didFindService:service moreComing:moreComing];
-	}	
+	[self.delegate JMRINetServiceBrowser:self didFindService:service moreComing:moreComing];
 }
 
 @end

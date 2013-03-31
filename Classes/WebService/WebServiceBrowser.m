@@ -48,9 +48,7 @@
 		WebService *service = [[WebService alloc] initWithNetService:sender];
 		[self.services addObject:service];
         [self.unresolvedServices removeObject:sender];
-		if ([self.delegate respondsToSelector:@selector(JMRINetServiceBrowser:didFindService:moreComing:)]) {
-			[self.delegate JMRINetServiceBrowser:self didFindService:service moreComing:_searching];
-		}
+		[self.delegate JMRINetServiceBrowser:self didFindService:service moreComing:_searching];
 	}
 }
 

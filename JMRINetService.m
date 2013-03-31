@@ -98,7 +98,7 @@ static JMRINetService *sharedNetService_ = nil;
 - (void)resolveWithTimeout:(NSTimeInterval)timeout {
 	if (self.service) {
 		[self.service resolveWithTimeout:timeout];
-	} else if ([self.delegate respondsToSelector:@selector(JMRINetServiceDidResolveAddress:)]) {
+	} else {
 		[self.delegate JMRINetServiceDidResolveAddress:self];
 	}
 }
@@ -139,23 +139,17 @@ static JMRINetService *sharedNetService_ = nil;
 
 - (void)netService:(NSNetService *)sender didNotResolve:(NSDictionary *)errorDict {
 	NSLog(@"%@ failed to resolve: %@", self.name, errorDict);
-	if ([self.delegate respondsToSelector:@selector(JMRINetService:didNotResolve:)]) {
-		[self.delegate JMRINetService:self didNotResolve:errorDict];
-	}
+    [self.delegate JMRINetService:self didNotResolve:errorDict];
 }
 
 - (void)netServiceDidResolveAddress:(NSNetService *)sender {
 	NSLog(@"%@ resolved", self.name);
-	if ([self.delegate respondsToSelector:@selector(JMRINetServiceDidResolveAddress:)]) {
-		[self.delegate JMRINetServiceDidResolveAddress:self];
-	}
+    [self.delegate JMRINetServiceDidResolveAddress:self];
 }
 
 - (void)netServiceWillResolve:(NSNetService *)sender {
 	NSLog(@"%@ will resolve", self.name);
-	if ([self.delegate respondsToSelector:@selector(JMRINetServiceWillResolve:)]) {
-		[self.delegate JMRINetServiceWillResolve:self];
-	}
+    [self.delegate JMRINetServiceWillResolve:self];
 }
 
 #pragma mark - Object properties

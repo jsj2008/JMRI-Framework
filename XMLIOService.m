@@ -160,9 +160,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
         [request setHTTPMethod:@"POST"];
         [request setHTTPBody:[[NSString stringWithFormat:@"<?xml version=\"1.0\" encoding=\"UTF-8\"?><xmlio>%@</xmlio>", query]
                               dataUsingEncoding:NSUTF8StringEncoding]];
-        if ([self.delegate respondsToSelector:@selector(JMRINetService:didSend:)]) {
-            [self.delegate JMRINetService:self didSend:request.HTTPBody];
-        }
+        [self.delegate JMRINetService:self didSend:request.HTTPBody];
         NSOperationQueue *queue = [[NSOperationQueue alloc] init];
         XMLIOServiceHelper *helper = [[XMLIOServiceHelper alloc] initWithDelegate:self
                                                                      withOperation:operation
@@ -212,9 +210,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 }
 
 - (void)failWithError:(NSError *)error {
-    if ([self.delegate respondsToSelector:@selector(JMRINetService:didFailWithError:)]) {
-        [self.delegate JMRINetService:self didFailWithError:error];
-    }
+    [self.delegate JMRINetService:self didFailWithError:error];
 }
 
 - (void)sendThrottle:(NSUInteger)address commands:(NSDictionary *)commands {
@@ -329,9 +325,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 		[monitoredItems containsObject:[helper.name stringByAppendingString:helper.type]]) {
 		[self readItem:helper.name ofType:helper.type];
     }
-	if ([self.delegate respondsToSelector:@selector(JMRINetService:didFailWithError:)]) {
-		[self.delegate JMRINetService:self didFailWithError:error];
-	}
+    [self.delegate JMRINetService:self didFailWithError:error];
 }
 
 - (void)XMLIOServiceHelper:(XMLIOServiceHelper *)helper didConnectWithRequest:(NSURLRequest *)request {
@@ -342,9 +336,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
         return;
     }
     [connections setObject:helper forKey:[request HTTPBody]];
-    if ([self.delegate respondsToSelector:@selector(XMLIOService:didConnectWithRequest:)]) {
-        [self.delegate XMLIOService:self didConnectWithRequest:request];
-    }
+    [self.delegate XMLIOService:self didConnectWithRequest:request];
 }
 
 - (void)XMLIOServiceHelper:(XMLIOServiceHelper *)helper didListItems:(NSArray *)items ofType:(NSString *)type {
@@ -456,9 +448,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 	if ([self.delegate respondsToSelector:@selector(XMLIOServiceDidFinishLoading:)]) {
 		[self.delegate XMLIOServiceDidFinishLoading:self];
 	}
-    if ([self.delegate respondsToSelector:@selector(JMRINetService:didReceive:)]) {
-        [self.delegate JMRINetService:self didReceive:[[NSString alloc] initWithData:helper.connectionData encoding:NSUTF8StringEncoding]];
-    }
+    [self.delegate JMRINetService:self didReceive:[[NSString alloc] initWithData:helper.connectionData encoding:NSUTF8StringEncoding]];
 }
 
 #pragma mark - Net service delegate

@@ -117,9 +117,7 @@
     [outputStream close];
     inputStream = nil;
     outputStream = nil;
-    if ([self.delegate respondsToSelector:@selector(JMRINetServiceDidStop:)]) {
-        [self.delegate JMRINetServiceDidStop:self];
-    }
+    [self.delegate JMRINetServiceDidStop:self];
 }
 
 - (Boolean)isOpen {
@@ -144,9 +142,7 @@
 - (void)writeData:(NSData *)data {
     if ([outputStream hasSpaceAvailable]) {
         [outputStream write:data.bytes maxLength:data.length];
-        if ([self.delegate respondsToSelector:@selector(JMRINetService:didSend:)]) {
-            [self.delegate JMRINetService:self didSend:data];
-        }
+        [self.delegate JMRINetService:self didSend:data];
     } else {
         if (self.useQueue) {
             [outputQueue enqueue:data];
@@ -160,9 +156,7 @@
 }
 
 - (void)error:(NSError *)error {
-    if ([self.delegate respondsToSelector:@selector(JMRINetService:didFailWithError:)]) {
-        [self.delegate JMRINetService:self didFailWithError:error];
-    }
+    [self.delegate JMRINetService:self didFailWithError:error];
 }
 
 #pragma mark - JMRINetService items
@@ -205,9 +199,7 @@
 }
 
 - (void)failWithError:(NSError *)error {
-    if ([self.delegate respondsToSelector:@selector(JMRINetService:didFailWithError:)]) {
-        [self.delegate JMRINetService:self didFailWithError:error];
-    }
+    [self.delegate JMRINetService:self didFailWithError:error];
 }
 
 #pragma mark - NSStream delegate
@@ -219,9 +211,7 @@
                 NSLog(@"[IN] Nothing to see here.");
                 break;
             case NSStreamEventOpenCompleted:
-                if ([self.delegate respondsToSelector:@selector(JMRINetServiceDidOpenConnection:)]) {
-                    [self.delegate JMRINetServiceDidOpenConnection:self];
-                }
+                [self.delegate JMRINetServiceDidOpenConnection:self];
                 break;
             case NSStreamEventHasBytesAvailable:
                 [self didGetInput:inputStream];
@@ -245,9 +235,7 @@
                 NSLog(@"[OUT] Nothing to see here.");
                 break;
             case NSStreamEventOpenCompleted:
-                if ([self.delegate respondsToSelector:@selector(JMRINetServiceDidOpenConnection:)]) {
-                    [self.delegate JMRINetServiceDidOpenConnection:self];
-                }
+                [self.delegate JMRINetServiceDidOpenConnection:self];
                 break;
             case NSStreamEventHasBytesAvailable:
                 // should never be called, InputStream only
@@ -286,9 +274,7 @@
             NSArray *lines = [str componentsSeparatedByString:separator];
             for (NSString *line in lines) {
                 NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[line dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&error];
-                if ([self.delegate respondsToSelector:@selector(JMRINetService:didReceive:)]) {
-                    [self.delegate JMRINetService:self didReceive:[json description]];
-                }
+                [self.delegate JMRINetService:self didReceive:[json description]];
                 if ([json[@"type"] isEqualToString:JMRITypeList]) {
                     [self didGetList:json];
                 } else {
@@ -324,51 +310,35 @@
 }
 
 - (void)didGetLightState:(NSDictionary *)json {
-    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetLight:withState:withProperties:)]) {
-        [self.delegate JMRINetService:self didGetLight:json[@"data"][@"name"] withState:[json[@"data"][@"state"] integerValue] withProperties:json[@"data"]];
-    }
+    [self.delegate JMRINetService:self didGetLight:json[@"data"][@"name"] withState:[json[@"data"][@"state"] integerValue] withProperties:json[@"data"]];
 }
 
 - (void)didGetMemoryValue:(NSDictionary *)json {
-    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetMemory:withValue:withProperties:)]) {
-        [self.delegate JMRINetService:self didGetMemory:json[@"data"][@"name"] withValue:json[@"data"][@"value"] withProperties:json[@"data"]];
-    }
+    [self.delegate JMRINetService:self didGetMemory:json[@"data"][@"name"] withValue:json[@"data"][@"value"] withProperties:json[@"data"]];
 }
 
 - (void)didGetMetadata:(NSDictionary *)json {
-    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetMetadata:withValue:withProperties:)]) {
-        [self.delegate JMRINetService:self didGetMetadata:json[@"data"][@"name"] withValue:json[@"data"][@"value"] withProperties:json[@"data"]];
-    }
+    [self.delegate JMRINetService:self didGetMetadata:json[@"data"][@"name"] withValue:json[@"data"][@"value"] withProperties:json[@"data"]];
 }
 
 - (void)didGetPowerState:(NSDictionary *)json {
-    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetPowerState:)]) {
-        [self.delegate JMRINetService:self didGetPowerState:[json[@"data"][@"state"] integerValue]];
-    }
+    [self.delegate JMRINetService:self didGetPowerState:[json[@"data"][@"state"] integerValue]];
 }
 
 - (void)didGetReporterValue:(NSDictionary *)json {
-    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetReporter:withValue:withProperties:)]) {
-        [self.delegate JMRINetService:self didGetReporter:json[@"data"][@"name"] withValue:json[@"data"][@"report"] withProperties:json[@"data"]];
-    }
+    [self.delegate JMRINetService:self didGetReporter:json[@"data"][@"name"] withValue:json[@"data"][@"report"] withProperties:json[@"data"]];
 }
 
 - (void)didGetSensorState:(NSDictionary *)json {
-    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetSensor:withState:withProperties:)]) {
-        [self.delegate JMRINetService:self didGetSensor:json[@"data"][@"name"] withState:[json[@"data"][@"state"] integerValue] withProperties:json[@"data"]];
-    }
+    [self.delegate JMRINetService:self didGetSensor:json[@"data"][@"name"] withState:[json[@"data"][@"state"] integerValue] withProperties:json[@"data"]];
 }
 
 - (void)didGetSignalHeadState:(NSDictionary *)json {
-    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetSignalHead:withState:withProperties:)]) {
-        [self.delegate JMRINetService:self didGetSignalHead:json[@"data"][@"name"] withState:[json[@"data"][@"state"] integerValue] withProperties:json[@"data"]];
-    }
+    [self.delegate JMRINetService:self didGetSignalHead:json[@"data"][@"name"] withState:[json[@"data"][@"state"] integerValue] withProperties:json[@"data"]];
 }
 
 - (void)didGetTurnoutState:(NSDictionary *)json {
-    if ([self.delegate respondsToSelector:@selector(JMRINetService:didGetTurnout:withState:withProperties:)]) {
-        [self.delegate JMRINetService:self didGetTurnout:json[@"data"][@"name"] withState:[json[@"data"][@"state"] integerValue] withProperties:json[@"data"]];
-    }
+    [self.delegate JMRINetService:self didGetTurnout:json[@"data"][@"name"] withState:[json[@"data"][@"state"] integerValue] withProperties:json[@"data"]];
 }
 
 - (void)didGetList:(NSDictionary *)json {
@@ -382,9 +352,7 @@
     serviceVersion = json[@"data"][@"JMRI"];
     self.heartbeat = [NSTimer scheduledTimerWithTimeInterval:rate target:self selector:@selector(sendHeartbeat:) userInfo:nil repeats:YES];
     [self sendHeartbeat:nil];
-    if ([self.delegate respondsToSelector:@selector(JMRINetServiceDidStart:)]) {
-        [self.delegate JMRINetServiceDidStart:self];
-    }
+    [self.delegate JMRINetServiceDidStart:self];
 }
 
 - (void)sendHeartbeat:(NSTimer *)timer {
