@@ -20,12 +20,7 @@
 #import "XMLIOService.h"
 #import "XMLIOFunction.h"
 #import "JMRIService.h"
-#import "JMRIMemory.h"
-#import "JMRIMetadata.h"
-#import "JMRIPower.h"
-#import "JMRISensor.h"
-#import "JMRIRoute.h"
-#import "JMRITurnout.h"
+#import "JMRIConstants.h"
 
 @implementation XMLIOItem
 
