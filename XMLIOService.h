@@ -20,7 +20,6 @@
 #import "XMLIOItem.h"
 #import "XMLIOServiceHelper.h"
 
-@class JMRIPower;
 @class JMRITurnout;
 
 // JMRI XMLIO throttle type
