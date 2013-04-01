@@ -53,7 +53,7 @@
 @property NSString* comment;
 @property Boolean inverted;
 @property NSString* name;
-@property JMRIService* service;
+@property (nonatomic, strong) JMRIService* service;
 @property NSUInteger state;
 @property NSString* userName;
 @property NSString* value;

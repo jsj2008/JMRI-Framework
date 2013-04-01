@@ -25,7 +25,6 @@
 - (id)initWithName:(NSString *)name withService:(JMRIService *)service withProperties:(NSDictionary *)properties {
     if ((self = [super init])) {
         self.name = name;
-        self.service = service;
         if (properties[@"comment"] != [NSNull null]) {
             self.comment = properties[@"comment"];
         }
@@ -41,6 +40,7 @@
         } else {
             _state = JMRIItemStateUnknown;
         }
+        self.service = service;
     }
     return self;
 }
@@ -184,6 +184,22 @@
         }
     } else {
         [self setState:[value integerValue] updateService:update];
+    }
+}
+
+- (void)setService:(JMRIService *)service {
+    if (_service != nil) {
+        [[_service valueForKey:[_service collectionForType:self.type]] removeObjectForKey:self.name];
+    }
+    _service = nil;
+    _service = service;
+    if (service != nil) {
+        [[service valueForKey:[service collectionForType:self.type]] setValue:self forKey:self.name];
+        [[NSNotificationCenter defaultCenter] postNotificationName:JMRINotificationItemAdded
+                                                            object:service
+                                                          userInfo:@{
+                                                     JMRIAddedItem: self,
+                                                          JMRIList: [service valueForKey:[service collectionForType:self.type]]}];
     }
 }
 
