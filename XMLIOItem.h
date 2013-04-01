@@ -46,7 +46,6 @@
 }
 
 - (NSComparisonResult)localizedCaseInsensitiveCompareByUserName:(XMLIOItem *)item;
-- (JMRIItem *)JMRIItemForService:(JMRIService *)service;
 
 # pragma mark Standard properties
 
@@ -56,6 +55,10 @@
 @property (nonatomic) NSString* value;
 @property (nonatomic) NSString* comment;
 @property (nonatomic) BOOL inverted;
+
+#pragma mark Object properties
+
+@property (readonly) NSDictionary *properties;
 
 #pragma mark Roster properties
 
