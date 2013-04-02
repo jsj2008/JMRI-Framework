@@ -126,8 +126,9 @@
 - (void)JMRINetServiceBrowser:(JMRINetServiceBrowser *)browser didFindService:(JMRINetService *)aNetService moreComing:(BOOL)moreComing {
     searching = moreComing;
     Boolean notify = YES;
+    JMRIService *service;
     if ([self indexOfServiceWithName:aNetService.name] != NSNotFound) {
-        JMRIService *service = [self serviceWithName:aNetService.name];
+        service = [self serviceWithName:aNetService.name];
         if ([aNetService.type isEqualToString:JMRIServiceJson]) {
             service.jsonService = (JsonService *)aNetService;
         } else if ([aNetService.type isEqualToString:JMRIServiceSimple]) {
@@ -149,7 +150,7 @@
             [delegate JMRIServiceBrowser:self didChangeService:service moreComing:searching];
         }
     } else {
-        JMRIService *service = [[JMRIService alloc] initWithServices:[NSMutableDictionary dictionaryWithObject:aNetService forKey:aNetService.type]];
+        service = [[JMRIService alloc] initWithServices:[NSMutableDictionary dictionaryWithObject:aNetService forKey:aNetService.type]];
         [self.services addObject:service];
         if (self.requiredServices) {
             for (NSString *required in self.requiredServices) {
@@ -162,6 +163,13 @@
         if (notify && [delegate respondsToSelector:@selector(JMRIServiceBrowser:didFindService:moreComing:)]) {
             [delegate JMRIServiceBrowser:self didFindService:service moreComing:searching];
         }
+    }
+    if (notify) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:JMRINotificationBonjourServiceAdded
+                                                            object:self
+                                                          userInfo:@{
+                                           JMRIAddedBonjourService: aNetService,
+                                                JMRIChangedService: service}];
     }
 }
 
@@ -196,6 +204,11 @@
                 [delegate JMRIServiceBrowser:self didRemoveService:service moreComing:searching];
             }
         }
+        [[NSNotificationCenter defaultCenter] postNotificationName:JMRINotificationBonjourServiceRemoved
+                                                            object:self
+                                                          userInfo:@{
+                                         JMRIRemovedBonjourService: aNetService,
+                                                JMRIChangedService: service}];
     }
 }
 

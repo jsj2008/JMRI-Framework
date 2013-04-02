@@ -68,10 +68,15 @@ NSString *const JMRITXTRecordKeyJMRI = @"jmri";
 // Framework notifications
 NSString *const JMRINotificationStateChange = @"JMRINotificationStateChange";
 NSString *const JMRINotificationItemAdded = @"JMRINotificationItemAdded";
+NSString *const JMRINotificationBonjourServiceAdded = @"JMRINotificationBonjourServiceAdded";
+NSString *const JMRINotificationBonjourServiceRemoved = @"JMRINotificationBonjourServiceRemoved";
 
 // Framework notification userInfo dictionary keys
 NSString *const JMRIAddedItem = @"item";
+NSString *const JMRIChangedService = @"JMRIChangedService";
 NSString *const JMRIList = @"list";
+NSString *const JMRIAddedBonjourService = @"JMRIAddedBonjourService";
+NSString *const JMRIRemovedBonjourService = @"JMRIRemovedBonjourService";
 
 // Framework error domain
 NSString *const JMRIErrorDomain = @"JMRIError";
