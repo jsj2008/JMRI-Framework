@@ -61,7 +61,7 @@
 #pragma mark - Object properties
 
 @property (weak, nonatomic) id delegate;
-@property NSNetService *service;
+@property NSNetService *bonjourService;
 @property NSTimeInterval timeoutInterval;
 @property (readonly) BOOL resolved;
 @property (readonly) NSString *version;

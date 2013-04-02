@@ -47,8 +47,8 @@ static JMRINetService *sharedNetService_ = nil;
 - (id)initWithNetService:(NSNetService *)service {
 	if ((self = [super init])) {
         NSDictionary *txtRecords = [NSNetService dictionaryFromTXTRecordData:[service TXTRecordData]];
-		self.service = service;
-		[self.service setDelegate:self];
+		self.bonjourService = service;
+		[self.bonjourService setDelegate:self];
 		self.timeoutInterval = 60;
         if ([txtRecords objectForKey:JMRITXTRecordKeyJMRI]) {
             serviceVersion = [[NSString alloc] initWithUTF8String:[[txtRecords objectForKey:JMRITXTRecordKeyJMRI] bytes]];
@@ -61,7 +61,7 @@ static JMRINetService *sharedNetService_ = nil;
 
 - (id)initWithName:(NSString *)name withAddress:(NSString *)address withPort:(NSInteger)port {
 	if ((self = [super init])) {
-		self.service = nil;
+		self.bonjourService = nil;
         manualName = name;
 		manualAddress = address;
 		manualPort = port;
@@ -96,16 +96,16 @@ static JMRINetService *sharedNetService_ = nil;
  * @param  NSTimeInterval
  */
 - (void)resolveWithTimeout:(NSTimeInterval)timeout {
-	if (self.service) {
-		[self.service resolveWithTimeout:timeout];
+	if (self.bonjourService) {
+		[self.bonjourService resolveWithTimeout:timeout];
 	} else {
 		[self.delegate JMRINetServiceDidResolveAddress:self];
 	}
 }
 
 - (void)startMonitoring {
-	if (self.service) {
-		[self.service startMonitoring];
+	if (self.bonjourService) {
+		[self.bonjourService startMonitoring];
 	}
 }
 
@@ -114,8 +114,8 @@ static JMRINetService *sharedNetService_ = nil;
 }
 
 - (void)stopMonitoring {
-	if (self.service) {
-		[self.service stopMonitoring];
+	if (self.bonjourService) {
+		[self.bonjourService stopMonitoring];
 	}
 }
 
@@ -155,7 +155,7 @@ static JMRINetService *sharedNetService_ = nil;
 #pragma mark - Object properties
 
 @synthesize delegate;
-@synthesize service = netService;
+@synthesize bonjourService = netService;
 @synthesize timeoutInterval;
 @synthesize version = serviceVersion;
 @synthesize type = serviceType;
@@ -167,36 +167,36 @@ static JMRINetService *sharedNetService_ = nil;
 #pragma mark - Net service properties
 
 - (NSArray *)addresses {
-	if (self.service) {
-		return [self.service addresses];
+	if (self.bonjourService) {
+		return [self.bonjourService addresses];
 	}
 	return [NSArray arrayWithObject:manualAddress];
 }
 
 - (NSString *)domain {
-	if (self.service) {
-		return [self.service domain];
+	if (self.bonjourService) {
+		return [self.bonjourService domain];
 	}
 	return nil;
 }
 
 - (NSString *)hostName {
-	if (self.service) {
-		return [self.service hostName];
+	if (self.bonjourService) {
+		return [self.bonjourService hostName];
 	}
 	return manualAddress;
 }
 
 - (NSString *)name {
-	if (self.service) {
-		return ([[self.service name] hasPrefix:@"JMRI on "]) ? [[self.service name] substringFromIndex:8] : [self.service name];
+	if (self.bonjourService) {
+		return ([[self.bonjourService name] hasPrefix:@"JMRI on "]) ? [[self.bonjourService name] substringFromIndex:8] : [self.bonjourService name];
 	}
     return (manualName) ? manualName : manualAddress;
 }
 
 - (NSInteger)port {
-	if (self.service) {
-		return [self.service port];
+	if (self.bonjourService) {
+		return [self.bonjourService port];
 	}
 	return manualPort;
 }

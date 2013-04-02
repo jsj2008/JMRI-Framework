@@ -244,8 +244,8 @@
     }
     // Use the XmlIOService if the JsonService is not available
     if (!self.hasJsonService && !self.hasXmlIOService) {
-        if (web.service) {
-            self.xmlIOService = [[XMLIOService alloc] initWithNetService:web.service];
+        if (web.bonjourService) {
+            self.xmlIOService = [[XMLIOService alloc] initWithNetService:web.bonjourService];
         } else {
             self.xmlIOService = [[XMLIOService alloc] initWithName:web.name withAddress:web.addresses[0] withPort:web.port];
         }
@@ -434,8 +434,8 @@
     if ([error.domain isEqualToString:JMRIErrorDomain]) {
         if (error.code == JMRIWebServiceJsonUnsupported) {
             // assume connection to JMRI 2.14.X server and that no other service is available
-            if (service.service) {
-                self.xmlIOService = [[XMLIOService alloc] initWithNetService:service.service];
+            if (service.bonjourService) {
+                self.xmlIOService = [[XMLIOService alloc] initWithNetService:service.bonjourService];
             } else {
                 self.xmlIOService = [[XMLIOService alloc] initWithName:service.name
                                                            withAddress:service.addresses[0]
@@ -450,8 +450,8 @@
         } else if (error.code == JMRIWebServiceJsonReadOnly) {
             if (!self.useJsonService && !self.useXmlIOService) {
                 // use the Json service if the JMRI server supports it, otherwise switch to XmlIO
-                if (service.service) {
-                    self.xmlIOService = [[XMLIOService alloc] initWithNetService:service.service];
+                if (service.bonjourService) {
+                    self.xmlIOService = [[XMLIOService alloc] initWithNetService:service.bonjourService];
                 } else {
                     self.xmlIOService = [[XMLIOService alloc] initWithName:service.name
                                                                withAddress:service.addresses[0]
