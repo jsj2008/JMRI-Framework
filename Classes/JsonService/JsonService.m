@@ -74,8 +74,8 @@
     }
     NSInputStream* is;
     NSOutputStream* os;
-    if (self.service) {
-        if ([self.service getInputStream:&is outputStream:&os]) {
+    if (self.bonjourService) {
+        if ([self.bonjourService getInputStream:&is outputStream:&os]) {
             inputStream = is;
             outputStream = os;
         }
