@@ -198,7 +198,11 @@
 }
 
 - (void)didGetLightState:(NSDictionary *)json {
-    [self.delegate JMRINetService:self didGetLight:json[@"data"][@"name"] withState:[json[@"data"][@"state"] integerValue] withProperties:json[@"data"]];
+    NSUInteger state = [json[@"data"][@"state"] integerValue];
+    if (state == JMRIBeanStateUnknown) {
+        state = JMRIItemStateUnknown;
+    }
+    [self.delegate JMRINetService:self didGetLight:json[@"data"][@"name"] withState:state withProperties:json[@"data"]];
 }
 
 - (void)didGetMemoryValue:(NSDictionary *)json {
@@ -218,7 +222,11 @@
 }
 
 - (void)didGetPowerState:(NSDictionary *)json {
-    [self.delegate JMRINetService:self didGetPowerState:[json[@"data"][@"state"] integerValue]];
+    NSUInteger state = [json[@"data"][@"state"] integerValue];
+    if (state == JMRIBeanStateUnknown) {
+        state = JMRIItemStateUnknown;
+    }
+    [self.delegate JMRINetService:self didGetPowerState:state];
 }
 
 - (void)didGetReporterValue:(NSDictionary *)json {
@@ -226,7 +234,11 @@
 }
 
 - (void)didGetSensorState:(NSDictionary *)json {
-    [self.delegate JMRINetService:self didGetSensor:json[@"data"][@"name"] withState:[json[@"data"][@"state"] integerValue] withProperties:json[@"data"]];
+    NSUInteger state = [json[@"data"][@"state"] integerValue];
+    if (state == JMRIBeanStateUnknown) {
+        state = JMRIItemStateUnknown;
+    }
+    [self.delegate JMRINetService:self didGetSensor:json[@"data"][@"name"] withState:state withProperties:json[@"data"]];
 }
 
 - (void)didGetSignalHeadState:(NSDictionary *)json {
@@ -234,7 +246,11 @@
 }
 
 - (void)didGetTurnoutState:(NSDictionary *)json {
-    [self.delegate JMRINetService:self didGetTurnout:json[@"data"][@"name"] withState:[json[@"data"][@"state"] integerValue] withProperties:json[@"data"]];
+    NSUInteger state = [json[@"data"][@"state"] integerValue];
+    if (state == JMRIBeanStateUnknown) {
+        state = JMRIItemStateUnknown;
+    }
+    [self.delegate JMRINetService:self didGetTurnout:json[@"data"][@"name"] withState:state withProperties:json[@"data"]];
 }
 
 - (void)didGetList:(NSDictionary *)json {
