@@ -6,7 +6,7 @@
 //
 //
 
-#import <JMRI/JMRI.h>
+#import "JMRIItem.h"
 
 @interface JMRIMemory : JMRIItem
 
