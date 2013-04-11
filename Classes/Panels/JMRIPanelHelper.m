@@ -13,6 +13,7 @@
 #import "JMRIService.h"
 #import "JMRISensor.h"
 #import "JMRISignalHead.h"
+#import "JMRITurnout.h"
 #import "JMRIPanelImage.h"
 
 // entities

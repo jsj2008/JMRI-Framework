@@ -16,6 +16,7 @@
 #import "JMRIItem+Internal.h"
 #import "JMRILight.h"
 #import "JMRIMemory.h"
+#import "JMRIMetadata.h"
 #import "JMRIPower.h"
 #import "JMRIReporter.h"
 #import "JMRISensor.h"
