@@ -200,6 +200,7 @@
                                                           userInfo:@{
                                                      JMRIAddedItem: self,
                                                           JMRIList: [service valueForKey:[service collectionForType:self.type]]}];
+        [self monitor];
     }
 }
 
