@@ -112,6 +112,7 @@
     _panels = [NSMutableDictionary dictionaryWithCapacity:0];
     _reporters = [NSMutableDictionary dictionaryWithCapacity:0];
     _roster = [NSMutableDictionary dictionaryWithCapacity:0];
+    _routes = [NSMutableDictionary dictionaryWithCapacity:0];
     _sensors = [NSMutableDictionary dictionaryWithCapacity:0];
     _signalHeads = [NSMutableDictionary dictionaryWithCapacity:0];
     _turnouts = [NSMutableDictionary dictionaryWithCapacity:0];
