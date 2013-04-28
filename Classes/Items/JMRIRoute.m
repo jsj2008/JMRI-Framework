@@ -37,7 +37,7 @@
 }
 
 - (void)writeToXmlIOService:(XMLIOService *)service {
-    [service writeItem:self.name ofType:JMRITypeRoute value:@"set"];
+    [service writeItem:self.name ofType:JMRITypeRoute value:[NSNumber numberWithInteger:JMRIItemStateActive].stringValue];
 }
 
 - (NSString *)type {
