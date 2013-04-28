@@ -109,6 +109,7 @@ typedef enum {
 // Framework error codes
 typedef enum {
     JMRIMalformedRequest = 400,
+    JMRICannotCreateItem = 403,
     JMRIItemNotFound = 404,
     JMRIInternalError = 500,
     JMRIWebServiceJsonReadOnly = 510,

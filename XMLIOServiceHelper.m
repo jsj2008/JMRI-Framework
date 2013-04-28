@@ -330,14 +330,26 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
 }
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
-    NSLog(@"Error %ld, Description: %@, Line: %ld, Column: %ld", 
-		  (long)[parseError code],
-		  [[parser parserError] localizedDescription],
-		  (long)[parser lineNumber],
-		  (long)[parser columnNumber]);
 	if ([self.delegate respondsToSelector:@selector(XMLIOServiceHelper:didFailWithError:)]) {
-		[self.delegate XMLIOServiceHelper:self didFailWithError:parseError];
-	}
+        switch (parseError.code) {
+            case NSXMLParserPrematureDocumentEndError: // NSXMLParserErrorDomain code 5
+                [self.delegate XMLIOServiceHelper:self didFailWithError:[NSError errorWithDomain:JMRIErrorDomain code:JMRICannotCreateItem userInfo:@{@"item": self.name, @"type": self.type}]];
+                break;
+            default:
+                NSLog(@"Error %ld, Description: %@, Line: %ld, Column: %ld",
+                      (long)[parseError code],
+                      [[parser parserError] localizedDescription],
+                      (long)[parser lineNumber],
+                      (long)[parser columnNumber]);
+                [self.delegate XMLIOServiceHelper:self didFailWithError:parseError];
+        }
+	} else {
+        NSLog(@"Error %ld, Description: %@, Line: %ld, Column: %ld",
+              (long)[parseError code],
+              [[parser parserError] localizedDescription],
+              (long)[parser lineNumber],
+              (long)[parser columnNumber]);
+    }
 }
 
 @end
