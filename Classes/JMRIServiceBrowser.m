@@ -37,6 +37,7 @@
         //wiThrottleBrowser = [[WiThrottleServiceBrowser alloc] init];
         //wiThrottleBrowser.delegate = self;
         self.services = [NSMutableArray arrayWithCapacity:0];
+        _requiredServices = nil;
         searching = NO;
     }
     return self;
