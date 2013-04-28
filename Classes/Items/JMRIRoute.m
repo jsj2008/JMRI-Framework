@@ -24,11 +24,11 @@
 }
 
 - (void)writeToJsonService:(JsonService *)service {
-    [service writeItem:self.name ofType:JMRITypeRoute state:self.state];
+    [service writeItem:self.name ofType:JMRITypeRoute state:JMRIItemStateActive];
 }
 
 - (void)writeToWebService:(WebService *)service {
-    [service writeItem:self.name ofType:JMRITypeRoute state:self.state];
+    [service writeItem:self.name ofType:JMRITypeRoute state:JMRIItemStateActive];
 }
 
 // note that WiThrottleService can only toggle the route state, but cannot set the route state
@@ -37,7 +37,7 @@
 }
 
 - (void)writeToXmlIOService:(XMLIOService *)service {
-    [service writeItem:self.name ofType:JMRITypeRoute value:self.value];
+    [service writeItem:self.name ofType:JMRITypeRoute value:@"set"];
 }
 
 - (NSString *)type {
