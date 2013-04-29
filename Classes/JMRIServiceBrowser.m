@@ -44,9 +44,14 @@
 }
 
 - (id)initForServices:(NSSet *)services {
-    // remove or comment following three lines when re-enabling the WiThrottle service
     NSMutableSet *sanitize = [[NSMutableSet alloc] initWithSet:services];
+    // remove or comment the following line when re-enabling the WiThrottle service
     [sanitize removeObject:JMRIServiceWiThrottle];
+    // allow XmlIO service to be required, even though it can't be browsed (it uses the same port/zeroconf advertisement as the Web service)
+    if ([sanitize containsObject:JMRIServiceXmlIO]) {
+        [sanitize addObject:JMRIServiceWeb];
+        [sanitize removeObject:JMRIServiceXmlIO];
+    }
     services = [[NSSet alloc] initWithSet:sanitize];
 	if ((self = [self init])) {
         _requiredServices = services;
