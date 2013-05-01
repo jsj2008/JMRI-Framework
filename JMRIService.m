@@ -76,36 +76,38 @@
     return [self initWithName:nil withAddress:address withPorts:ports];
 }
 
-- (id)initWithServices:(NSDictionary *)services {
+- (id)initWithServices:(NSSet *)services {
     if ((self = [super init])) {
         [self commonInit];
-        if (services[JMRIServiceJson]) {
-            self.jsonService = services[JMRIServiceJson];
-            [self.jsonService startMonitoring];
-            self.requiresJsonService = YES;
-        } else {
-            self.useJsonService = NO;
-        }
-        if ([services valueForKey:JMRIServiceSimple]) {
-            self.simpleService = [services valueForKey:JMRIServiceSimple];
-            [self.simpleService startMonitoring];
-            self.requiresSimpleService = YES;
-        } else {
-            self.useSimpleService = NO;
-        }
-        if ([services valueForKey:JMRIServiceWeb]) {
-            self.webService = [services valueForKey:JMRIServiceWeb];
-            [self.webService startMonitoring];
-            self.requiresWebService = YES;
-        } else {
-            self.useWebService = NO;
-        }
-        if ([services valueForKey:JMRIServiceWiThrottle]) {
-            self.wiThrottleService = [services valueForKey:JMRIServiceWiThrottle];
-            [self.wiThrottleService startMonitoring];
-            self.requiresWiThrottleService = YES;
-        } else {
-            self.useWiThrottleService = NO;
+        for (JMRINetService *service in services) {
+            if ([service.type isEqualToString:JMRIServiceJson]) {
+                self.jsonService = (JsonService *)service;
+                [self.jsonService startMonitoring];
+                self.requiresJsonService = YES;
+            } else {
+                self.useJsonService = NO;
+            }
+            if ([service.type isEqualToString:JMRIServiceSimple]) {
+                self.simpleService = (SimpleService *)service;
+                [self.simpleService startMonitoring];
+                self.requiresSimpleService = YES;
+            } else {
+                self.useSimpleService = NO;
+            }
+            if ([service.type isEqualToString:JMRIServiceWeb]) {
+                self.webService = (WebService *)service;
+                [self.webService startMonitoring];
+                self.requiresWebService = YES;
+            } else {
+                self.useWebService = NO;
+            }
+            if ([service.type isEqualToString:JMRIServiceWiThrottle]) {
+                self.wiThrottleService = (WiThrottleService *)service;
+                [self.wiThrottleService startMonitoring];
+                self.requiresWiThrottleService = YES;
+            } else {
+                self.useWiThrottleService = NO;
+            }
         }
     }
     return self;

@@ -9,6 +9,7 @@
 #import "JMRIServiceBrowser.h"
 #import "JMRIConstants.h"
 #import "JMRIService.h"
+#import "JMRIService+Internal.h"
 #import "JsonServiceBrowser.h"
 #import "SimpleServiceBrowser.h"
 #import "WebServiceBrowser.h"
@@ -165,7 +166,7 @@
             [delegate JMRIServiceBrowser:self didChangeService:service moreComing:searching];
         }
     } else {
-        service = [[JMRIService alloc] initWithServices:[NSMutableDictionary dictionaryWithObject:aNetService forKey:aNetService.type]];
+        service = [[JMRIService alloc] initWithServices:[NSSet setWithObject:aNetService]];
         [self.services addObject:service];
         if (self.requiredServices) {
             for (NSString *required in self.requiredServices) {

@@ -169,6 +169,8 @@
 		48E71B6E139490E7003AB481 /* XMLIORoster.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E71B6A139490E7003AB481 /* XMLIORoster.m */; };
 		48EA3A9A15D6DE08001C33A0 /* JMRIPanelImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 48EA3A9715D6DE08001C33A0 /* JMRIPanelImage.m */; };
 		48EA3A9B15D6DE08001C33A0 /* JMRIPanelImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 48EA3A9715D6DE08001C33A0 /* JMRIPanelImage.m */; };
+		48F0E905173127BB00A1FA3D /* JMRIService+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F0E904173126FC00A1FA3D /* JMRIService+Internal.h */; };
+		48F0E906173127CF00A1FA3D /* JMRIService+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F0E904173126FC00A1FA3D /* JMRIService+Internal.h */; };
 		48F65A1313796DEF0086D4E3 /* JMRINetService.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F65A1113796DEF0086D4E3 /* JMRINetService.m */; };
 		48F65A2F137979530086D4E3 /* JMRINetService.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F65A1013796DEF0086D4E3 /* JMRINetService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48F65A80137984C40086D4E3 /* WiThrottleService.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F65A7E137984C40086D4E3 /* WiThrottleService.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -262,6 +264,7 @@
 		48E71B6A139490E7003AB481 /* XMLIORoster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XMLIORoster.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		48EA3A9615D6DE08001C33A0 /* JMRIPanelImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JMRIPanelImage.h; path = Classes/Panels/JMRIPanelImage.h; sourceTree = "<group>"; };
 		48EA3A9715D6DE08001C33A0 /* JMRIPanelImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JMRIPanelImage.m; path = Classes/Panels/JMRIPanelImage.m; sourceTree = "<group>"; };
+		48F0E904173126FC00A1FA3D /* JMRIService+Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMRIService+Internal.h"; sourceTree = "<group>"; };
 		48F65A1013796DEF0086D4E3 /* JMRINetService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; lineEnding = 0; path = JMRINetService.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		48F65A1113796DEF0086D4E3 /* JMRINetService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = JMRINetService.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		48F65A7E137984C40086D4E3 /* WiThrottleService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; lineEnding = 0; path = WiThrottleService.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -471,6 +474,7 @@
 				4888594E1375B1F4001EAD5B /* JMRINetServiceBrowser.h */,
 				4888594F1375B1F4001EAD5B /* JMRINetServiceBrowser.m */,
 				48D4AD7B15514149000B964C /* JMRIService.h */,
+				48F0E904173126FC00A1FA3D /* JMRIService+Internal.h */,
 				48D4AD7C15514149000B964C /* JMRIService.m */,
 				48D4AD871559132D000B964C /* JMRIServiceBrowser.h */,
 				48D4AD881559132D000B964C /* JMRIServiceBrowser.m */,
@@ -559,6 +563,7 @@
 				48BA51B515CD97920066095E /* XMLPanelObject.h in Headers */,
 				48BA51BB15CDC2D20066095E /* XMLPanelImage.h in Headers */,
 				48280C2316EC900500925806 /* NSMutableArray+QueueExtensions.h in Headers */,
+				48F0E906173127CF00A1FA3D /* JMRIService+Internal.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -605,6 +610,7 @@
 				482BB4C616E3DFA500519F40 /* JsonServiceBrowser.h in Headers */,
 				483ED7D817042FD100389649 /* WebService.h in Headers */,
 				48B1DF4B15BAAF90007DCD57 /* JMRIItem+Internal.h in Headers */,
+				48F0E905173127BB00A1FA3D /* JMRIService+Internal.h in Headers */,
 				48BA51A815CD51BE0066095E /* JMRIPanelHelper.h in Headers */,
 				48BA51B415CD97920066095E /* XMLPanelObject.h in Headers */,
 				48BA51BA15CDC2D20066095E /* XMLPanelImage.h in Headers */,
