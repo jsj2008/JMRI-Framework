@@ -45,19 +45,25 @@
             self.useJsonService = NO;
         }
         if ([ports valueForKey:JMRIServiceSimple]) {
-            self.simpleService = [[SimpleService alloc] initWithName:name withAddress:address withPort:[[ports valueForKey:JMRIServiceSimple] integerValue]];
+            self.simpleService = [[SimpleService alloc] initWithName:name withAddress:address withPort:[ports[JMRIServiceSimple] integerValue]];
             self.requiresSimpleService = YES;
         } else {
             self.useSimpleService = NO;
         }
         if ([ports valueForKey:JMRIServiceWeb]) {
-            self.webService = [[WebService alloc] initWithName:name withAddress:address withPort:[[ports valueForKey:JMRIServiceWeb] integerValue]];
+            self.webService = [[WebService alloc] initWithName:name withAddress:address withPort:[ports[JMRIServiceWeb] integerValue]];
+            self.requiresWebService = YES;
+        } else {
+            self.useWebService = NO;
+        }
+        if ([ports valueForKey:JMRIServiceXmlIO] && ![ports valueForKey:JMRIServiceWeb]) {
+            self.webService = [[WebService alloc] initWithName:name withAddress:address withPort:[ports[JMRIServiceXmlIO] integerValue]];
             self.requiresWebService = YES;
         } else {
             self.useWebService = NO;
         }
         if ([ports valueForKey:JMRIServiceWiThrottle]) {
-            self.wiThrottleService = [[WiThrottleService alloc] initWithName:name withAddress:address withPort:[[ports valueForKey:JMRIServiceWiThrottle] integerValue]];
+            self.wiThrottleService = [[WiThrottleService alloc] initWithName:name withAddress:address withPort:[ports[JMRIServiceWiThrottle] integerValue]];
             self.requiresWiThrottleService = YES;
         } else {
             self.useWiThrottleService = NO;
