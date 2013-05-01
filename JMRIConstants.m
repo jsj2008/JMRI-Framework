@@ -70,6 +70,9 @@ NSString *const JMRINotificationStateChange = @"JMRINotificationStateChange";
 NSString *const JMRINotificationItemAdded = @"JMRINotificationItemAdded";
 NSString *const JMRINotificationBonjourServiceAdded = @"JMRINotificationBonjourServiceAdded";
 NSString *const JMRINotificationBonjourServiceRemoved = @"JMRINotificationBonjourServiceRemoved";
+NSString *const JMRINotificationBrowserDidNotSearch = @"JMRINotificationBrowserDidNotSearch";
+NSString *const JMRINotificationBrowserDidStopSearch = @"JMRINotificationBrowserDidStopSearch";
+NSString *const JMRINotificationBrowserWillSearch = @"JMRINotificationBrowserWillSearch";
 
 // Framework notification userInfo dictionary keys
 NSString *const JMRIAddedItem = @"item";
@@ -77,6 +80,7 @@ NSString *const JMRIChangedService = @"JMRIChangedService";
 NSString *const JMRIList = @"list";
 NSString *const JMRIAddedBonjourService = @"JMRIAddedBonjourService";
 NSString *const JMRIRemovedBonjourService = @"JMRIRemovedBonjourService";
+NSString *const JMRIType = @"type";
 
 // Framework error domain
 NSString *const JMRIErrorDomain = @"JMRIError";

@@ -113,6 +113,9 @@
     if ([delegate respondsToSelector:@selector(JMRIServiceBrowser:didNotSearch:forType:)]) {
         [delegate JMRIServiceBrowser:self didNotSearch:errorDict forType:browser.type];
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:JMRINotificationBrowserDidNotSearch
+                                                        object:self
+                                                      userInfo:errorDict];
 }
 
 - (void)JMRINetServiceBrowserWillSearch:(JMRINetServiceBrowser *)browser {
@@ -120,6 +123,9 @@
     if ([delegate respondsToSelector:@selector(JMRIServiceBrowserWillSearch:forType:)]) {
         [delegate JMRIServiceBrowserWillSearch:self forType:browser.type];
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:JMRINotificationBrowserWillSearch
+                                                        object:self
+                                                      userInfo:nil];
 }
 
 - (void)JMRINetServiceBrowserDidStopSearch:(JMRINetServiceBrowser *)browser {
@@ -127,6 +133,9 @@
     if ([delegate respondsToSelector:@selector(JMRIServiceBrowserDidStopSearch:forType:)]) {
         [delegate JMRIServiceBrowserDidStopSearch:self forType:browser.type];
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:JMRINotificationBrowserDidStopSearch
+                                                        object:self
+                                                      userInfo:@{JMRIType: browser.type}];
 }
 
 - (void)JMRINetServiceBrowser:(JMRINetServiceBrowser *)browser didFindService:(JMRINetService *)aNetService moreComing:(BOOL)moreComing {
