@@ -55,15 +55,40 @@
     NSDictionary *_types;
 }
 
-#pragma mark - Initialization
+#pragma mark - Initialization & disposal
+/** @name Initialization & disposal */
 
+/**
+ Manually create a JMRI service definition.
+ 
+ If you are using a JMRIServiceBrowser, you should use [JMRIServiceBrowser addServiceWithName:withAddress:withPorts:] instead.
+ 
+ The ports dictionary maps services that can be enabled in JMRI to ports, and can have the following keys:
+ - *JMRIServiceJson*
+ - *JMRIServiceSimple*
+ - *JMRIServiceWeb*
+ - *JMRIServiceWiThrottle*
+ - *JMRIServiceXmlIO* (ignored if JMRIServiceWeb is used as a key)
+ 
+ @param name The name of the service.
+ @param address The domain name or IP address of the service.
+ @param ports A dictionary mapping services to ports.
+ @sa [JMRIServiceBrowser addServiceWithName:withAddress:withPorts:]
+ */
 - (id)initWithName:(NSString *)name withAddress:(NSString *)address withPorts:(NSDictionary *)ports;
+/**
+ Manually create a JMRI service definition, using the address as the name.
+ 
+ This method calls initWithName:withAddress:withPorts: using the address as the name.
+
+ If you are using a JMRIServiceBrowser, you should use [JMRIServiceBrowser addServiceWithAddress:withPorts:] instead.
+
+ @param address The domain name or IP address of the service.
+ @param ports A dictionary mapping services to ports.
+ @see initWithName:withAddress:withPorts:
+ @sa [JMRIServiceBrowser addServiceWithAddress:withPorts:]
+ */
 - (id)initWithAddress:(NSString *)address withPorts:(NSDictionary *)ports;
-- (id)initWithServices:(NSDictionary *)services;
-
-#pragma mark - Object Handling
-
-- (NSComparisonResult)localizedCaseInsensitiveCompareByName:(JMRINetService *)aService;
 
 #pragma mark - Properties
 
@@ -115,17 +140,90 @@
 
 #pragma mark - JMRI element handling
 
-- (void)list:(NSString *)type;
-- (void)monitor:(JMRIItem *)item;
-- (void)stopMonitoring:(JMRIItem *)item;
-- (void)stopMonitoringAllItems;
-- (Boolean)isMonitoring:(JMRIItem *)item;
+/**
+ Request a list of items of a certain type from the JMRI service.
 
+ This method will silently fail if the JMRI server is only publishing Simple and WiThrottle services.
+ 
+ @param type The type of items to list
+ */
+- (void)list:(NSString *)type;
+/**
+ Request that the JMRI service provide status updates for an item.
+ 
+ You should rarely need to invoke this method; use [JMRIItem monitor] instead.
+ 
+ Since the JSON, Simple, and WiThrottle services all automatically monitor items, and the Web service
+ does not provide a monitoring capability, this method does nothing unless the XmlIO service is in use.
+ 
+ @param item The item to monitor.
+ @see [JMRIItem monitor]
+ */
+- (void)monitor:(JMRIItem *)item;
+/**
+ Stop requesting that the JMRI service provide status updates for an item.
+ 
+ You should rarely need to invoke this method; use [JMRIItem stopMonitoring] instead.
+ 
+ Since the JSON, Simple, and WiThrottle services all automatically monitor items, and the Web service
+ does not provide a monitoring capability, this method does nothing unless the XmlIO service is in use. Note
+ that the services that automatically monitor items cannot be stopped from providing updates to an item's
+ state without breaking the connection to the service.
+ 
+ @param item The item to stop monitoring.
+ @see [JMRIItem stopMonitoring]
+ */
+- (void)stopMonitoring:(JMRIItem *)item;
+/**
+ Stop requesting that the JMRI service provide status updates for all items.
+ 
+ Since the JSON, Simple, and WiThrottle services all automatically monitor items, and the Web service
+ does not provide a monitoring capability, this method does nothing unless the XmlIO service is in use. Note
+ that the services that automatically monitor items cannot be stopped from providing updates to an item's
+ state without breaking the connection to the service.
+ */
+- (void)stopMonitoringAllItems;
+/**
+ Is the JMRI service monitoring an item?
+ 
+ Returns YES if the XmlIO service is monitoring an item, and NO in all other cases.
+ 
+ Since the JSON, Simple, and WiThrottle services all automatically monitor items, and the Web service
+ does not provide a monitoring capability, this method returns NO unless the XmlIO service is monitoring the item.
+ Note that the services that automatically monitor items cannot be stopped from providing updates to an item's
+ state without breaking the connection to the service.
+ 
+ @param item The item to stop monitoring.
+ */
+- (Boolean)isMonitoring:(JMRIItem *)item;
+/**
+ Stop all network connections to a JMRI service.
+ 
+ Cleanly closes the JSON, Simple, and WiThrottle service connections and stops any XmlIO monitoring.
+ */
 - (void)stop;
 
 #pragma mark - Utilities
 
+/**
+ Return the collection name that represents a JMRI item type.
+
+ Some JMRI items are listed in collections, the name of which is not formed by simply tacking an _S_ onto
+ the end of the type. This method uses a dictionary to get the collection token for a given type.
+ 
+ @param type The token for the type
+ @return The collection for the type
+ */
 - (NSString *)collectionForType:(NSString *)type;
+/**
+ Return the type name for a given collection.
+ 
+ Some JMRI items are listed in collections, the name of which is not formed by simply tacking an _S_ onto
+ the end of the type. This method uses a dictionary to get type string for a given collection name.
+ 
+ @param type The name of the collection
+ @return The type of JMRI item in the collection
+ */
 - (NSString *)typeForCollection:(NSString *)collection;
 
 @end
