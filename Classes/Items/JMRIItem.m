@@ -19,7 +19,10 @@
 #pragma mark - Initializers
 
 - (id)initWithName:(NSString *)name withService:(JMRIService *)service {
-    return [self initWithName:name withService:service withProperties:nil];
+    if ((self = [self initWithName:name withService:service withProperties:nil])) {
+        [self query];
+    }
+    return self;
 }
 
 - (id)initWithName:(NSString *)name withService:(JMRIService *)service withProperties:(NSDictionary *)properties {
