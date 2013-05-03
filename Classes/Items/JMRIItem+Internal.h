@@ -34,4 +34,8 @@
 - (void)writeToWiThrottleService:(WiThrottleService *)service;
 - (void)writeToXmlIOService:(XMLIOService *)service;
 
+#pragma mark - Utilities
+
+- (NSComparisonResult)localizedCaseInsensitiveCompareByUserName:(JMRIItem *)item;
+
 @end

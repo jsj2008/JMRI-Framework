@@ -121,21 +121,68 @@
 @property Boolean useWiThrottleService;
 @property Boolean useXmlIOService;
 
+/**
+ Be verbose about network activity in NSLog.
+ 
+ Default is NO.
+ */
 @property Boolean logNetworkActivity;
+/**
+ The JMRI server version.
+ 
+ This property may be difficult to determine accurately for JMRI versions earlier than 3.2. 
+ JMRI servers older than 2.14 will always return 2.14 in the Web or XmlIO services.
+ */
 @property (readonly, strong) NSString *version;
 
 #pragma mark - JMRI element properties
+/** @name JMRI Elements */
 
+/**
+ JMRI lights.
+ */
 @property (readonly) NSMutableDictionary *lights;
+/**
+ JMRI memory objects.
+ */
 @property (readonly) NSMutableDictionary *memories;
+/**
+ Information about JMRI itself.
+ */
 @property (readonly) NSMutableDictionary *metadata;
+/**
+ JMRI CTC panels.
+ */
 @property (readonly) NSMutableDictionary *panels;
+/**
+ JMRI track power.
+ 
+ Note that this dictionary will always have only one element in it.
+ */
 @property (readonly) NSMutableDictionary *power;
+/**
+ JMRI reporters.
+ */
 @property (readonly) NSMutableDictionary *reporters;
+/**
+ JMRI roster entries.
+ */
 @property (readonly) NSMutableDictionary *roster;
+/**
+ JMRI routes.
+ */
 @property (readonly) NSMutableDictionary *routes;
+/**
+ JMRI sensors.
+ */
 @property (readonly) NSMutableDictionary *sensors;
+/**
+ JMRI signal heads.
+ */
 @property (readonly) NSMutableDictionary *signalHeads;
+/**
+ JMRI turnouts.
+ */
 @property (readonly) NSMutableDictionary *turnouts;
 
 #pragma mark - JMRI element handling
@@ -204,6 +251,7 @@
 - (void)stop;
 
 #pragma mark - Utilities
+/** @name Utilities */
 
 /**
  Return the collection name that represents a JMRI item type.
@@ -221,7 +269,7 @@
  Some JMRI items are listed in collections, the name of which is not formed by simply tacking an _S_ onto
  the end of the type. This method uses a dictionary to get type string for a given collection name.
  
- @param type The name of the collection
+ @param collection The name of the collection
  @return The type of JMRI item in the collection
  */
 - (NSString *)typeForCollection:(NSString *)collection;
