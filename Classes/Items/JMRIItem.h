@@ -51,7 +51,7 @@
  Monitor the item's status in JMRI.
  
  Since the JSON, Simple, and WiThrottle services all automatically monitor items, and the Web service
- does not provide a monitoring capability, this method acts like query XmlIO service is in use.
+ does not provide a monitoring capability, this method acts like query when XmlIO service is not in use.
  */
 - (void)monitor;
 /**
