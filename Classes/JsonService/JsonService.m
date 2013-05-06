@@ -69,7 +69,7 @@
 #pragma mark - Public methods
 
 - (void)open {
-    if (self.isOpen) {
+    if (self.isOpen || self.isOpening) {
         return;
     }
     NSInputStream* is;
@@ -100,7 +100,7 @@
     }
     self.buffer = @"";
     outputQueue = [[NSMutableArray alloc] init];
-    self.useQueue = NO;
+    self.useQueue = YES;
     inputStream.delegate = self;
     outputStream.delegate = self;
     [inputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
@@ -120,6 +120,12 @@
     [self.delegate JMRINetServiceDidStop:self];
 }
 
+- (Boolean)isOpening {
+    NSStreamStatus i = inputStream.streamStatus;
+    NSStreamStatus o = outputStream.streamStatus;
+    return i == NSStreamStatusOpening || o == NSStreamStatusOpening;
+}
+
 - (Boolean)isOpen {
     NSStreamStatus i = inputStream.streamStatus;
     NSStreamStatus o = outputStream.streamStatus;
@@ -130,12 +136,11 @@
 
 - (void)write:(NSDictionary *)jsonObject {
     NSError* error = nil;
-    NSMutableData *data = [NSMutableData dataWithData:[NSJSONSerialization dataWithJSONObject:jsonObject options:0 error:&error]];
+    NSData *data = [NSJSONSerialization dataWithJSONObject:jsonObject options:0 error:&error];
     if (error != nil) {
         [self error:error];
         return;
     }
-    [data appendData:[@"\n" dataUsingEncoding:NSUTF8StringEncoding]];
     [self writeData:data];
 }
 
@@ -149,7 +154,7 @@
         }
         if (!outputStream) {
             [self open];
-        } else {
+        } else if (!self.isOpening) {
             [self error:[NSError errorWithDomain:JMRIErrorDomain code:1001 userInfo:@{@"stream": @"output", @"streamStatus": @(outputStream.streamStatus)}]];
         }
     }
@@ -236,14 +241,13 @@
                 break;
             case NSStreamEventOpenCompleted:
                 [self.delegate JMRINetServiceDidOpenConnection:self];
-                break;
-            case NSStreamEventHasBytesAvailable:
-                // should never be called, InputStream only
-                break;
             case NSStreamEventHasSpaceAvailable:
                 if (![outputQueue isEmpty]) {
                     [self writeData:[outputQueue dequeue]];
                 }
+                break;
+            case NSStreamEventHasBytesAvailable:
+                // should never be called, InputStream only
                 break;
             case NSStreamEventErrorOccurred:
                 NSLog(@"[OUT] An error!");

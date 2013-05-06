@@ -7,7 +7,7 @@
 //
 
 #import "JMRINetService.h"
-#define MIN_JSON_VERSION @"3.2"
+#define MIN_JSON_VERSION @"3.3.6"
 
 @class JMRIItem;
 
@@ -28,6 +28,7 @@
 - (void)createItem:(NSString *)name ofType:(NSString *)type withValue:(NSString *)value;
 - (void)createItem:(JMRIItem *)item;
 
+@property (readonly) Boolean isOpening;
 @property Boolean useQueue;
 
 @end
