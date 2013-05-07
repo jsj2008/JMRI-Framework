@@ -74,11 +74,12 @@ extern NSString *const JMRINotificationBrowserDidStopSearch;
 extern NSString *const JMRINotificationBrowserWillSearch;
 
 // Framework notification userInfo dictionary keys
+extern NSString *const JMRIAddedBonjourService;
 extern NSString *const JMRIAddedItem;
 extern NSString *const JMRIChangedService;
 extern NSString *const JMRIList;
-extern NSString *const JMRIAddedBonjourService;
 extern NSString *const JMRIRemovedBonjourService;
+extern NSString *const JMRIServiceKey;
 extern NSString *const JMRIType;
 
 // Framework error domain

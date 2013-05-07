@@ -75,11 +75,12 @@ NSString *const JMRINotificationBrowserDidStopSearch = @"JMRINotificationBrowser
 NSString *const JMRINotificationBrowserWillSearch = @"JMRINotificationBrowserWillSearch";
 
 // Framework notification userInfo dictionary keys
+NSString *const JMRIAddedBonjourService = @"JMRIAddedBonjourService";
 NSString *const JMRIAddedItem = @"item";
 NSString *const JMRIChangedService = @"JMRIChangedService";
 NSString *const JMRIList = @"list";
-NSString *const JMRIAddedBonjourService = @"JMRIAddedBonjourService";
 NSString *const JMRIRemovedBonjourService = @"JMRIRemovedBonjourService";
+NSString *const JMRIServiceKey = @"service";
 NSString *const JMRIType = @"type";
 
 // Framework error domain

@@ -536,6 +536,7 @@
     }
     [((JMRISignalHead *)[self.signalHeads objectForKey:signalHead]) setState:state updateService:NO];
 }
+
 - (void)JMRINetService:(JMRINetService *)service didGetTurnout:(NSString *)turnout withState:(NSUInteger)state withProperties:(NSDictionary *)properties {
     if (![self.turnouts objectForKey:turnout]) {
         (void) [[JMRITurnout alloc] initWithName:turnout withService:self withProperties:properties];
@@ -659,6 +660,13 @@
     if ([self.delegate respondsToSelector:@selector(JMRIService:didAddItem:toList:)]) {
         [self.delegate JMRIService:self didAddItem:notification.userInfo[JMRIAddedItem] toList:notification.userInfo[JMRIList]];
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:JMRINotificationItemAdded
+                                                        object:self
+                                                      userInfo:@{
+                                                JMRIServiceKey: self,
+                                                 JMRIAddedItem: notification.userInfo[JMRIAddedItem],
+                                                      JMRIList: notification.userInfo[JMRIList],
+                                                      JMRIType: ((JMRIItem *)notification.userInfo[JMRIAddedItem]).type}];
 }
 
 // Handle power specially when listing, since most services do not allow power to be listed
