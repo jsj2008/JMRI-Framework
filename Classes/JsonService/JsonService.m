@@ -263,11 +263,12 @@
 
 // Needs to work on data directly to pass to NSJSONSerialization
 - (void)didGetInput:(NSInputStream *)stream {
-    uint8_t buf[1024];
+    int max_len = 10240; // little larger than the max size of a packet
+    uint8_t buf[max_len];
     NSUInteger len = 0;
     NSString *separator = @"\n\r";
     NSError *error = nil;
-    len = [stream read:buf maxLength:1024];
+    len = [stream read:buf maxLength:max_len];
     if (len) {
         NSString *str = [[NSString alloc] initWithBytes:buf length:len encoding:NSASCIIStringEncoding];
         if ([str rangeOfString:separator].location == NSNotFound) {
