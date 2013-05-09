@@ -7,6 +7,7 @@
 //
 
 #import "JMRIService.h"
+#import "JMRIService+Internal.h"
 #import "JsonService.h"
 #import "SimpleService.h"
 #import "WebService.h"
@@ -26,8 +27,6 @@
 @interface JMRIService (Private) <JMRINetServiceDelegate, XMLIOServiceDelegate>
 
 - (void)commonInit;
-
-- (void)itemAddedToList:(NSNotification *)notification;
 
 - (void)queryPower;
 
@@ -135,11 +134,6 @@
     self.useWebService = YES;
     self.useWiThrottleService = YES;
     self.useXmlIOService = NO;
-    // Observe self so we can use the delegate does not also have to subscribe to notifications
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(itemAddedToList:)
-                                                 name:JMRINotificationItemAdded
-                                               object:self];
 }
 
 - (void)dealloc {
@@ -656,17 +650,18 @@
 
 #pragma mark - Private methods
 
-- (void)itemAddedToList:(NSNotification *)notification {
+// Post a notification when an item is added to a list
+- (void)item:(JMRIItem *)item addedToList:(NSDictionary *)list {
     if ([self.delegate respondsToSelector:@selector(JMRIService:didAddItem:toList:)]) {
-        [self.delegate JMRIService:self didAddItem:notification.userInfo[JMRIAddedItem] toList:notification.userInfo[JMRIList]];
+        [self.delegate JMRIService:self didAddItem:item toList:list];
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:JMRINotificationItemAdded
                                                         object:self
                                                       userInfo:@{
                                                 JMRIServiceKey: self,
-                                                 JMRIAddedItem: notification.userInfo[JMRIAddedItem],
-                                                      JMRIList: notification.userInfo[JMRIList],
-                                                      JMRIType: ((JMRIItem *)notification.userInfo[JMRIAddedItem]).type}];
+                                                 JMRIAddedItem: item,
+                                                      JMRIList: list,
+                                                      JMRIType: item.type}];
 }
 
 // Handle power specially when listing, since most services do not allow power to be listed

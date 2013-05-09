@@ -18,4 +18,6 @@
 
 - (NSComparisonResult)localizedCaseInsensitiveCompareByName:(JMRINetService *)aService;
 
+- (void)item:(JMRIItem *)item addedToList:(NSDictionary *)list;
+
 @end

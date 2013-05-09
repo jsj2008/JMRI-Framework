@@ -7,6 +7,7 @@
 //
 
 #import "JMRIItem+Internal.h"
+#import "JMRIService+Internal.h"
 #import "JMRIConstants.h"
 #import "JMRINetService.h"
 #import "JsonService.h"
@@ -198,11 +199,7 @@
     _service = service;
     if (service != nil) {
         [[service valueForKey:[service collectionForType:self.type]] setValue:self forKey:self.name];
-        [[NSNotificationCenter defaultCenter] postNotificationName:JMRINotificationItemAdded
-                                                            object:service
-                                                          userInfo:@{
-                                                     JMRIAddedItem: self,
-                                                          JMRIList: [service valueForKey:[service collectionForType:self.type]]}];
+        [service item:self addedToList:[service valueForKey:[service collectionForType:self.type]]];
         [self monitor];
     }
 }
