@@ -158,6 +158,11 @@
 		48D4AD8B1559132D000B964C /* JMRIServiceBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D4AD881559132D000B964C /* JMRIServiceBrowser.m */; };
 		48DA6CD713B63E5800E3643D /* XMLIOFunction.h in Headers */ = {isa = PBXBuildFile; fileRef = 48DA6CD513B63E5800E3643D /* XMLIOFunction.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48DA6CD913B63E5800E3643D /* XMLIOFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DA6CD613B63E5800E3643D /* XMLIOFunction.m */; };
+		48DAC70E173DC5E300211579 /* libSocketRocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48DAC707173DC52900211579 /* libSocketRocket.a */; };
+		48DAC70F173DC5EB00211579 /* SocketRocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48DAC709173DC52900211579 /* SocketRocket.framework */; };
+		48DAC711173DC65B00211579 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 48DAC710173DC65B00211579 /* libicucore.dylib */; };
+		48DAC713173DC66500211579 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48DAC712173DC66500211579 /* CFNetwork.framework */; };
+		48DAC715173DC67100211579 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48DAC714173DC67100211579 /* Security.framework */; };
 		48DCFB5415D705A00096D2D0 /* JMRISignalHead.h in Headers */ = {isa = PBXBuildFile; fileRef = 48DCFB5215D705A00096D2D0 /* JMRISignalHead.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48DCFB5515D705A00096D2D0 /* JMRISignalHead.h in Headers */ = {isa = PBXBuildFile; fileRef = 48DCFB5215D705A00096D2D0 /* JMRISignalHead.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48DCFB5615D705A00096D2D0 /* JMRISignalHead.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DCFB5315D705A00096D2D0 /* JMRISignalHead.m */; };
@@ -178,6 +183,44 @@
 		AA747D9F0F9514B9006C5449 /* Framework_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* Framework_Prefix.pch */; settings = {ATTRIBUTES = (Public, ); }; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		48DAC706173DC52900211579 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 48DAC6FF173DC52800211579 /* SocketRocket.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F6B2082D1450F597009315AF;
+			remoteInfo = SocketRocket;
+		};
+		48DAC708173DC52900211579 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 48DAC6FF173DC52800211579 /* SocketRocket.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F668C880153E91210044DBAC;
+			remoteInfo = SocketRocketOSX;
+		};
+		48DAC70A173DC52900211579 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 48DAC6FF173DC52800211579 /* SocketRocket.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F6BDA802145900D200FE3253;
+			remoteInfo = SRWebSocketTests;
+		};
+		48DAC70C173DC52900211579 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 48DAC6FF173DC52800211579 /* SocketRocket.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F62417E314D52F3C003CE997;
+			remoteInfo = TestChat;
+		};
+		48DAC718173DC6C300211579 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 48DAC6FF173DC52800211579 /* SocketRocket.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F6B2082C1450F597009315AF;
+			remoteInfo = SocketRocket;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		4813F4841386DE8900718FFC /* NSArray+JMRIExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; lineEnding = 0; path = "NSArray+JMRIExtensions.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -258,6 +301,10 @@
 		48D4AD881559132D000B964C /* JMRIServiceBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = JMRIServiceBrowser.m; path = Classes/JMRIServiceBrowser.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		48DA6CD513B63E5800E3643D /* XMLIOFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLIOFunction.h; sourceTree = "<group>"; };
 		48DA6CD613B63E5800E3643D /* XMLIOFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLIOFunction.m; sourceTree = "<group>"; };
+		48DAC6FF173DC52800211579 /* SocketRocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SocketRocket.xcodeproj; path = SocketRocket/SocketRocket.xcodeproj; sourceTree = "<group>"; };
+		48DAC710173DC65B00211579 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		48DAC712173DC66500211579 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		48DAC714173DC67100211579 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		48DCFB5215D705A00096D2D0 /* JMRISignalHead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JMRISignalHead.h; path = Classes/Items/JMRISignalHead.h; sourceTree = "<group>"; };
 		48DCFB5315D705A00096D2D0 /* JMRISignalHead.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JMRISignalHead.m; path = Classes/Items/JMRISignalHead.m; sourceTree = "<group>"; };
 		48E71B69139490E7003AB481 /* XMLIORoster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = XMLIORoster.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -279,6 +326,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48DAC70F173DC5EB00211579 /* SocketRocket.framework in Frameworks */,
 				48B014B415B1CEA600997BD3 /* Cocoa.framework in Frameworks */,
 				48B0149B15B1CC2400997BD3 /* Foundation.framework in Frameworks */,
 			);
@@ -288,6 +336,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48DAC715173DC67100211579 /* Security.framework in Frameworks */,
+				48DAC713173DC66500211579 /* CFNetwork.framework in Frameworks */,
+				48DAC711173DC65B00211579 /* libicucore.dylib in Frameworks */,
+				48DAC70E173DC5E300211579 /* libSocketRocket.a in Frameworks */,
 				AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -307,6 +359,9 @@
 		0867D691FE84028FC02AAC07 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				48DAC714173DC67100211579 /* Security.framework */,
+				48DAC712173DC66500211579 /* CFNetwork.framework */,
+				48DAC710173DC65B00211579 /* libicucore.dylib */,
 				08FB77AEFE84172EC02AAC07 /* Classes */,
 				32C88DFF0371C24200C91783 /* Other Sources */,
 				0867D69AFE84028FC02AAC07 /* Frameworks */,
@@ -319,6 +374,7 @@
 		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				48DAC6FF173DC52800211579 /* SocketRocket.xcodeproj */,
 				48B014B615B1CEB700997BD3 /* OS X */,
 				48B014B515B1CEB000997BD3 /* iOS */,
 			);
@@ -514,6 +570,17 @@
 			name = Panels;
 			sourceTree = "<group>";
 		};
+		48DAC700173DC52800211579 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				48DAC707173DC52900211579 /* libSocketRocket.a */,
+				48DAC709173DC52900211579 /* SocketRocket.framework */,
+				48DAC70B173DC52900211579 /* SRWebSocketTests.octest */,
+				48DAC70D173DC52900211579 /* TestChat.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -651,6 +718,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				48DAC719173DC6C300211579 /* PBXTargetDependency */,
 			);
 			name = libJMRI;
 			productName = Framework;
@@ -679,6 +747,12 @@
 			mainGroup = 0867D691FE84028FC02AAC07 /* Framework */;
 			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 48DAC700173DC52800211579 /* Products */;
+					ProjectRef = 48DAC6FF173DC52800211579 /* SocketRocket.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				D2AAC07D0554694100DB518D /* libJMRI */,
@@ -686,6 +760,37 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		48DAC707173DC52900211579 /* libSocketRocket.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSocketRocket.a;
+			remoteRef = 48DAC706173DC52900211579 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		48DAC709173DC52900211579 /* SocketRocket.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SocketRocket.framework;
+			remoteRef = 48DAC708173DC52900211579 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		48DAC70B173DC52900211579 /* SRWebSocketTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SRWebSocketTests.octest;
+			remoteRef = 48DAC70A173DC52900211579 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		48DAC70D173DC52900211579 /* TestChat.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = TestChat.app;
+			remoteRef = 48DAC70C173DC52900211579 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		48B0146F15B1CB6400997BD3 /* Resources */ = {
@@ -810,6 +915,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		48DAC719173DC6C300211579 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SocketRocket;
+			targetProxy = 48DAC718173DC6C300211579 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		1DEB921F08733DC00010E9CD /* Debug */ = {
