@@ -20,6 +20,8 @@
 - (void)error:(NSError *)error;
 - (void)writeData:(NSData *)data;
 
+- (void)getJsonFromInput;
+
 - (void)didGetItem:(NSDictionary *)json;
 - (void)didGetLightState:(NSDictionary *)json;
 - (void)didGetList:(NSDictionary *)json;
@@ -35,7 +37,7 @@
 
 - (void)sendHeartbeat:(NSTimer *)timer;
 
-@property NSString *buffer;
+@property NSMutableData *buffer;
 @property NSTimer *heartbeat;
 
 @end
@@ -98,7 +100,7 @@
             [self error:[[NSError alloc] initWithDomain:JMRIServiceJson code:1 userInfo:nil]];
         }
     }
-    self.buffer = @"";
+    self.buffer = [[NSMutableData alloc] init];
     outputQueue = [[NSMutableArray alloc] init];
     self.useQueue = YES;
     inputStream.delegate = self;
@@ -263,22 +265,51 @@
 
 // Needs to work on data directly to pass to NSJSONSerialization
 - (void)didGetInput:(NSInputStream *)stream {
-    int max_len = 10240; // little larger than the max size of a packet
+    NSInteger max_len = 10240; // little larger than the max size of a packet
     uint8_t buf[max_len];
     NSUInteger len = 0;
-    NSString *separator = @"\n\r";
-    NSError *error = nil;
     len = [stream read:buf maxLength:max_len];
     if (len) {
-        NSString *str = [[NSString alloc] initWithBytes:buf length:len encoding:NSASCIIStringEncoding];
-        if ([str rangeOfString:separator].location == NSNotFound) {
-            self.buffer = [self.buffer stringByAppendingString:str];
-        } else {
-            str = [[self.buffer stringByAppendingString:str] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-            self.buffer = @"";
-            NSArray *lines = [str componentsSeparatedByString:separator];
-            for (NSString *line in lines) {
-                NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[line dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&error];
+        [self.buffer appendData:[NSData dataWithBytes:buf length:len]];
+        [self getJsonFromInput];
+    } else {
+        NSLog(@"[IN] No data.");
+    }
+}
+
+- (void)getJsonFromInput {
+    @synchronized(self) {
+        NSError *error = nil;
+        NSData *objStart = [@"{" dataUsingEncoding:NSUTF8StringEncoding];
+        NSData *objEnd = [@"}" dataUsingEncoding:NSUTF8StringEncoding];
+        NSUInteger objects = 1;
+        NSRange jsonObj = [self.buffer rangeOfData:objStart options:0 range:NSMakeRange(0, self.buffer.length)];
+        if (jsonObj.length) {
+            const char* startBytes = [objStart bytes];
+            const char* endBytes = [objEnd bytes];
+            const char* bufferBytes = [self.buffer bytes];
+            jsonObj.length = 0;
+            for (NSUInteger i = jsonObj.location + objStart.length; i < self.buffer.length; i++) {
+                if (objects) {
+                    if (bufferBytes[i] == startBytes[0]) {
+                        objects++;
+                    } else if (bufferBytes[i] == endBytes[0]) {
+                        objects--;
+                    }
+                } else {
+                    jsonObj.length = i - jsonObj.location + objEnd.length;
+                    break;
+                }
+            }
+        }
+        if (jsonObj.length && jsonObj.location) { // remove anything before the first object
+            [self.buffer replaceBytesInRange:NSMakeRange(0, jsonObj.location - 1) withBytes:NULL length:0];
+        }
+        if (jsonObj.length) {
+            jsonObj.location = 0;
+            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[self.buffer subdataWithRange:jsonObj] options:0 error:&error];
+            [self.buffer replaceBytesInRange:jsonObj withBytes:NULL length:0];
+            if (!error) {
                 [self.delegate JMRINetService:self didReceive:[json description]];
                 if ([json[@"type"] isEqualToString:JMRITypeList]) {
                     [self didGetList:json];
@@ -286,9 +317,10 @@
                     [self didGetItem:json];
                 }
             }
+            if (self.buffer.length) {
+                [self getJsonFromInput];
+            }
         }
-    } else {
-        NSLog(@"[IN] No data.");
     }
 }
 
