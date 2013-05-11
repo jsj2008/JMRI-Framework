@@ -359,9 +359,6 @@
 		0867D691FE84028FC02AAC07 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
-				48DAC714173DC67100211579 /* Security.framework */,
-				48DAC712173DC66500211579 /* CFNetwork.framework */,
-				48DAC710173DC65B00211579 /* libicucore.dylib */,
 				08FB77AEFE84172EC02AAC07 /* Classes */,
 				32C88DFF0371C24200C91783 /* Other Sources */,
 				0867D69AFE84028FC02AAC07 /* Frameworks */,
@@ -506,7 +503,10 @@
 		48B014B515B1CEB000997BD3 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				48DAC712173DC66500211579 /* CFNetwork.framework */,
 				AACBBE490F95108600F1A2B1 /* Foundation.framework */,
+				48DAC714173DC67100211579 /* Security.framework */,
+				48DAC710173DC65B00211579 /* libicucore.dylib */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
