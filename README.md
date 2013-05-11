@@ -8,6 +8,16 @@ Installation & Use
 
 *Forthcoming, once I recall my notes on how I use this*
 
+Framework Dependencies
+----------------------
+
+Your .app must link the following frameworks and dylibs
+
+- libicucore.dylib
+- CFNetwork.framework
+- Security.framework
+- Foundation.framework
+
 Future Capabilities
 -------------------
 
