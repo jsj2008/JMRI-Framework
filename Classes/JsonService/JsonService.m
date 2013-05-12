@@ -21,10 +21,11 @@
 - (void)writeData:(NSData *)data;
 
 - (void)getJsonFromInput;
+- (NSRange)rangeOfJson:(NSUInteger)location start:(NSData *)start end:(NSData *)end;
 
 - (void)didGetItem:(NSDictionary *)json;
 - (void)didGetLightState:(NSDictionary *)json;
-- (void)didGetList:(NSDictionary *)json;
+- (void)didGetList:(NSObject *)json;
 - (void)didGetMemoryValue:(NSDictionary *)json;
 - (void)didGetMetadata:(NSDictionary *)json;
 - (void)didGetPowerState:(NSDictionary *)json;
@@ -282,45 +283,77 @@
         NSError *error = nil;
         NSData *objStart = [@"{" dataUsingEncoding:NSUTF8StringEncoding];
         NSData *objEnd = [@"}" dataUsingEncoding:NSUTF8StringEncoding];
-        NSUInteger objects = 1;
+        NSData *arrStart = [@"[" dataUsingEncoding:NSUTF8StringEncoding];
+        NSData *arrEnd = [@"]" dataUsingEncoding:NSUTF8StringEncoding];
         NSRange jsonObj = [self.buffer rangeOfData:objStart options:0 range:NSMakeRange(0, self.buffer.length)];
-        if (jsonObj.length) {
-            const char* startBytes = [objStart bytes];
-            const char* endBytes = [objEnd bytes];
+        NSRange jsonArr = [self.buffer rangeOfData:arrStart options:0 range:NSMakeRange(0, self.buffer.length)];
+        NSRange jsonRange = jsonArr;
+        Boolean isObject = NO;
+        const char* startBytes = [arrStart bytes];
+        const char* endBytes = [arrEnd bytes];
+        if ((jsonObj.length && !jsonArr.length) || (jsonObj.location < jsonArr.location)) {
+            isObject = YES;
+            jsonRange = jsonObj;
+            startBytes = [objStart bytes];
+            endBytes = [objEnd bytes];
+        }
+        NSUInteger objects = 1;
+        NSLog(@"%@", [[NSString alloc] initWithBytes:[self.buffer bytes] length:self.buffer.length encoding:NSUTF8StringEncoding]);
+        if (jsonRange.length) {
+            jsonRange.length = 0; // reset for later checks don't fail on incomplete objects
             const char* bufferBytes = [self.buffer bytes];
-            jsonObj.length = 0;
-            for (NSUInteger i = jsonObj.location + objStart.length; i < self.buffer.length; i++) {
+            for (NSUInteger i = jsonRange.location + objStart.length; i < self.buffer.length; i++) {
                 if (objects) {
                     if (bufferBytes[i] == startBytes[0]) {
                         objects++;
+                        NSLog(@"Incrementing to %lu", (unsigned long)objects);
                     } else if (bufferBytes[i] == endBytes[0]) {
                         objects--;
+                        NSLog(@"Decrementing to %lu", (unsigned long)objects);
                     }
-                } else {
-                    jsonObj.length = i - jsonObj.location + objEnd.length;
+                }
+                if (!objects) {
+                    jsonRange.length = i - jsonRange.location + objEnd.length;
                     break;
                 }
             }
         }
-        if (jsonObj.length && jsonObj.location) { // remove anything before the first object
-            [self.buffer replaceBytesInRange:NSMakeRange(0, jsonObj.location - 1) withBytes:NULL length:0];
+        NSLog(@"jsonRange location: %lu, length: %lu", (unsigned long)jsonRange.location, (unsigned long)jsonRange.length);
+        if (jsonRange.length && jsonRange.location) { // remove anything before the first object
+            [self.buffer replaceBytesInRange:NSMakeRange(0, jsonRange.location) withBytes:NULL length:0];
         }
-        if (jsonObj.length) {
-            jsonObj.location = 0;
-            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[self.buffer subdataWithRange:jsonObj] options:0 error:&error];
-            [self.buffer replaceBytesInRange:jsonObj withBytes:NULL length:0];
+        if (jsonRange.length) {
+            jsonRange.location = 0;
+            NSData *temp = [self.buffer subdataWithRange:jsonRange];
+            NSLog(@"%@", [[NSString alloc] initWithBytes:[temp bytes] length:temp.length encoding:NSUTF8StringEncoding]);
+            NSObject *json = [NSJSONSerialization JSONObjectWithData:[self.buffer subdataWithRange:jsonRange] options:0 error:&error];
+            [self.buffer replaceBytesInRange:jsonRange withBytes:NULL length:0];
             if (!error) {
                 [self.delegate JMRINetService:self didReceive:[json description]];
-                if ([json[@"type"] isEqualToString:JMRITypeList]) {
-                    [self didGetList:json];
+                if (isObject) {
+                    if ([((NSDictionary *)json)[@"type"] isEqualToString:JMRITypeList]) {
+                        [self didGetList:json];
+                    } else {
+                        [self didGetItem:(NSDictionary *)json];
+                    }
                 } else {
-                    [self didGetItem:json];
+                    [self didGetList:json];
                 }
+            } else {
+                NSLog(@"JSONService error processing JSON: %@", error.debugDescription);
             }
             if (self.buffer.length) {
+                NSLog(@"More to go");
                 [self getJsonFromInput];
             }
         }
+    }
+}
+
+- (NSRange)rangeOfJson:(NSUInteger)location start:(NSData *)start end:(NSData *)end {
+    @synchronized (self) {
+        NSRange range = NSMakeRange(location, 0);
+        return range;
     }
 }
 
@@ -394,9 +427,15 @@
     [self.delegate JMRINetService:self didGetTurnout:json[@"data"][@"name"] withState:state withProperties:json[@"data"]];
 }
 
-- (void)didGetList:(NSDictionary *)json {
-    for (NSDictionary *item in json[@"list"]) {
-        [self didGetItem:item];
+- (void)didGetList:(NSObject *)json {
+    if ([json isKindOfClass:[NSDictionary class]]) {
+        for (NSDictionary *item in ((NSDictionary *)json)[@"list"]) {
+            [self didGetItem:item];
+        }
+    } else {
+        for (NSDictionary *item in (NSArray *)json) {
+            [self didGetItem:item];
+        }
     }
 }
 
