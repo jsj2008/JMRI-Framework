@@ -298,7 +298,6 @@
             endBytes = [objEnd bytes];
         }
         NSUInteger objects = 1;
-        NSLog(@"%@", [[NSString alloc] initWithBytes:[self.buffer bytes] length:self.buffer.length encoding:NSUTF8StringEncoding]);
         if (jsonRange.length) {
             jsonRange.length = 0; // reset for later checks don't fail on incomplete objects
             const char* bufferBytes = [self.buffer bytes];
@@ -306,10 +305,8 @@
                 if (objects) {
                     if (bufferBytes[i] == startBytes[0]) {
                         objects++;
-                        NSLog(@"Incrementing to %lu", (unsigned long)objects);
                     } else if (bufferBytes[i] == endBytes[0]) {
                         objects--;
-                        NSLog(@"Decrementing to %lu", (unsigned long)objects);
                     }
                 }
                 if (!objects) {
@@ -318,14 +315,11 @@
                 }
             }
         }
-        NSLog(@"jsonRange location: %lu, length: %lu", (unsigned long)jsonRange.location, (unsigned long)jsonRange.length);
         if (jsonRange.length && jsonRange.location) { // remove anything before the first object
             [self.buffer replaceBytesInRange:NSMakeRange(0, jsonRange.location) withBytes:NULL length:0];
         }
         if (jsonRange.length) {
             jsonRange.location = 0;
-            NSData *temp = [self.buffer subdataWithRange:jsonRange];
-            NSLog(@"%@", [[NSString alloc] initWithBytes:[temp bytes] length:temp.length encoding:NSUTF8StringEncoding]);
             NSObject *json = [NSJSONSerialization JSONObjectWithData:[self.buffer subdataWithRange:jsonRange] options:0 error:&error];
             [self.buffer replaceBytesInRange:jsonRange withBytes:NULL length:0];
             if (!error) {
@@ -343,7 +337,6 @@
                 NSLog(@"JSONService error processing JSON: %@", error.debugDescription);
             }
             if (self.buffer.length) {
-                NSLog(@"More to go");
                 [self getJsonFromInput];
             }
         }
