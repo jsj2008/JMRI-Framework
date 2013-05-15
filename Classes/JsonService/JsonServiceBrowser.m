@@ -32,7 +32,8 @@
 }
 
 - (void)netServiceDidResolveAddress:(NSNetService *)sender {
-    if (![self containsService:sender]) {
+    NSDictionary *txtRecords = [NSNetService dictionaryFromTXTRecordData:[sender TXTRecordData]];
+    if ([txtRecords objectForKey:JMRITXTRecordKeyJSON] && ![self containsService:sender]) {
 		JsonService *service = [[JsonService alloc] initWithNetService:sender];
 		[self.services addObject:service];
 		[self.delegate JMRINetServiceBrowser:self didFindService:service moreComing:_searching];
