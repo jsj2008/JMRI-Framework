@@ -46,12 +46,12 @@ static JMRINetService *sharedNetService_ = nil;
 
 - (id)initWithNetService:(NSNetService *)service {
 	if ((self = [super init])) {
-        NSDictionary *txtRecords = [NSNetService dictionaryFromTXTRecordData:[service TXTRecordData]];
+        _txtRecords = [NSNetService dictionaryFromTXTRecordData:[service TXTRecordData]];
 		self.bonjourService = service;
 		[self.bonjourService setDelegate:self];
 		self.timeoutInterval = 60;
-        if ([txtRecords objectForKey:JMRITXTRecordKeyJMRI]) {
-            serviceVersion = [[NSString alloc] initWithUTF8String:[[txtRecords objectForKey:JMRITXTRecordKeyJMRI] bytes]];
+        if (self.txtRecords[JMRITXTRecordKeyJMRI]) {
+            serviceVersion = [[NSString alloc] initWithUTF8String:[self.txtRecords[JMRITXTRecordKeyJMRI] bytes]];
         } else {
             serviceVersion = MIN_JMRI_VERSION;
         }
@@ -61,6 +61,7 @@ static JMRINetService *sharedNetService_ = nil;
 
 - (id)initWithName:(NSString *)name withAddress:(NSString *)address withPort:(NSInteger)port {
 	if ((self = [super init])) {
+        _txtRecords = nil;
 		self.bonjourService = nil;
         manualName = name;
 		manualAddress = address;

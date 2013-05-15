@@ -66,6 +66,7 @@
 @property (readonly) BOOL resolved;
 @property (readonly) NSString *version;
 @property (readonly) NSString *type;
+@property (readonly) NSDictionary *txtRecords;
 
 #pragma mark - Net service properties
 
