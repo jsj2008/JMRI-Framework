@@ -26,7 +26,7 @@
 }
 
 - (void)queryFromWebService:(WebService *)service {
-    [service readItem:JMRITypePower ofType:JMRITypePower];
+    [service list:JMRITypePower]; // treat specially since the power indicator has no name
 }
 
 - (void)queryFromXmlIOService:(XMLIOService *)service {
