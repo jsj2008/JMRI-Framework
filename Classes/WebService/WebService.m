@@ -276,7 +276,6 @@
 - (void)hello:(NSDictionary *)json {
     serviceVersion = json[@"data"][JMRITXTRecordKeyJMRI];
     if (json[@"data"][JMRITXTRecordKeyJSON]) {
-        NSLog(@"What up with this?");
         [self.delegate useJsonServiceWithURL:[self socketURL]];
     }
 }

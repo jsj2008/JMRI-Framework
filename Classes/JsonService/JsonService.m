@@ -100,7 +100,6 @@
     if (self.isOpen || self.isOpening) {
         return;
     }
-    NSLog(@"Dude!");
     if (self.webSocketURL) {
         if (!self.webSocket) {
             self.webSocket = [[SRWebSocket alloc] initWithURL:self.webSocketURL];
