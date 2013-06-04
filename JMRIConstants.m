@@ -17,10 +17,13 @@ NSString *const JMRIServiceXmlIO = @"xmlIOService";
 
 // JMRI item types
 NSString *const JMRITypeFrame = @"frame";
+NSString *const JMRITypeHello = @"hello";
+NSString *const JMRITypeGoodbye = @"goodbye";
 NSString *const JMRITypeLight = @"light";
 NSString *const JMRITypeList = @"list";
 NSString *const JMRITypeMemory = @"memory";
 NSString *const JMRITypeMetadata = @"metadata";
+NSString *const JMRITypeNetworkServices = @"networkServices";
 NSString *const JMRITypePanel = @"panel";
 NSString *const JMRITypePower = @"power";
 NSString *const JMRITypeReporter = @"reporter";
@@ -64,6 +67,7 @@ NSString *const JMRIPanelTurnoutIcon = @"turnouticon";
 
 // JMRI zeroconf elements
 NSString *const JMRITXTRecordKeyJMRI = @"jmri";
+NSString *const JMRITXTRecordKeyJSON = @"json";
 
 // Framework notifications
 NSString *const JMRINotificationStateChange = @"JMRINotificationStateChange";

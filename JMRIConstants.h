@@ -16,10 +16,13 @@ extern NSString *const JMRIServiceXmlIO;
 
 // JMRI item types
 extern NSString *const JMRITypeFrame;
+extern NSString *const JMRITypeHello;
+extern NSString *const JMRITypeGoodbye;
 extern NSString *const JMRITypeLight;
 extern NSString *const JMRITypeList;
 extern NSString *const JMRITypeMemory;
 extern NSString *const JMRITypeMetadata;
+extern NSString *const JMRITypeNetworkServices;
 extern NSString *const JMRITypePanel;
 extern NSString *const JMRITypePower;
 extern NSString *const JMRITypeReporter;
@@ -63,6 +66,7 @@ extern NSString *const JMRIPanelTurnoutIcon;
 
 // JMRI zeroconf elements
 extern NSString *const JMRITXTRecordKeyJMRI;
+extern NSString *const JMRITXTRecordKeyJSON;
 
 // Framework notifications
 extern NSString *const JMRINotificationStateChange;
@@ -117,7 +121,6 @@ typedef enum {
     JMRICannotCreateItem = 403,
     JMRIItemNotFound = 404,
     JMRIInternalError = 500,
-    JMRIWebServiceJsonReadOnly = 510,
     JMRIWebServiceJsonUnsupported = 511,
     JMRIXMLUnexpectedRootElement = 512
 } JMRIErrorCodes;

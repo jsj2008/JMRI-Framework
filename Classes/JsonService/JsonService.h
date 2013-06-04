@@ -19,6 +19,8 @@
     
 }
 
+- (id)initWithName:(NSString *)name withURL:(NSURL *)URL;
+
 - (void)list:(NSString *)type;
 - (void)readItem:(NSString *)name ofType:(NSString *)type;
 - (void)writeItem:(NSString *)name ofType:(NSString *)type state:(NSUInteger)state;
@@ -30,5 +32,6 @@
 
 @property (readonly) Boolean isOpening;
 @property Boolean useQueue;
+@property (strong) NSURL* webSocketURL;
 
 @end

@@ -196,6 +196,7 @@
         hostName = json.hostName;
         _name = json.name;
     }
+    self.useJsonService = YES;
     // Do not want to use the XmlIOService if the JsonService is available
     if (self.hasXmlIOService) {
         self.xmlIOService = nil;
@@ -246,15 +247,14 @@
         hostName = web.hostName;
         _name = web.name;
     }
-    // Use the XmlIOService if the JsonService is not available
-    if (!self.hasJsonService && !self.hasXmlIOService) {
-        if (web.bonjourService) {
+    if (web.bonjourService) {
+        if (!web.txtRecords[JMRITXTRecordKeyJSON]) {
             self.xmlIOService = [[XMLIOService alloc] initWithNetService:web.bonjourService];
-        } else {
-            self.xmlIOService = [[XMLIOService alloc] initWithName:web.name withAddress:web.addresses[0] withPort:web.port];
+            self.useWebService = NO;
+            self.useXmlIOService = YES;
         }
-        self.useWebService = NO;
-        self.useXmlIOService = YES;
+    } else {
+        [web list:JMRITypeHello];
     }
 }
 
@@ -451,23 +451,6 @@
             self.requiresWebService = NO;
             self.webService = nil;
             return; // don't pass on this error, we've handled it
-        } else if (error.code == JMRIWebServiceJsonReadOnly) {
-            if (!self.useJsonService && !self.useXmlIOService) {
-                // use the Json service if the JMRI server supports it, otherwise switch to XmlIO
-                if (service.bonjourService) {
-                    self.xmlIOService = [[XMLIOService alloc] initWithNetService:service.bonjourService];
-                } else {
-                    self.xmlIOService = [[XMLIOService alloc] initWithName:service.name
-                                                               withAddress:service.addresses[0]
-                                                                  withPort:service.port];
-                }
-                self.useXmlIOService = YES;
-                self.requiresXmlIOService = self.requiresWebService;
-                self.useWebService = NO;
-                self.requiresWebService = NO;
-                self.webService = nil;
-            }
-            return; // don't pass on this error, we've handled it
         }
     }
     if ([self.delegate respondsToSelector:@selector(JMRIService:didFailWithError:)]) {
@@ -579,6 +562,26 @@
 - (void)JMRINetService:(JMRINetService *)service didWrite:(NSData *)data {
     if (self.logNetworkActivity) {
         NSLog(@"%@ wrote %@", service.type, [data description]);
+    }
+}
+
+- (void)useJsonServiceWithURL:(NSURL *)url {
+    if (!self.jsonService) {
+        self.jsonService = [[JsonService alloc] initWithName:self.name withURL:url];
+    } else {
+        self.jsonService.webSocketURL = url;
+    }
+}
+
+- (void)useXmlIOServiceWithName:(NSString *)name withAddress:(NSString *)address withPort:(NSUInteger)port {
+    if (!self.hasJsonService && !self.hasXmlIOService) {
+        if (web.bonjourService) {
+            self.xmlIOService = [[XMLIOService alloc] initWithNetService:web.bonjourService];
+        } else {
+            self.xmlIOService = [[XMLIOService alloc] initWithName:web.name withAddress:web.addresses[0] withPort:web.port];
+        }
+        self.useWebService = NO;
+        self.useXmlIOService = YES;
     }
 }
 

@@ -11,11 +11,12 @@
 #import "JMRIItem.h"
 #import "JMRIPanel.h"
 #import "NSMutableArray+QueueExtensions.h"
+#import "SocketRocket/SRWebSocket.h"
 #ifdef TARGET_OS_IPHONE
 #import "NSStream+JMRIExtensions.h"
 #endif
 
-@interface JsonService ()
+@interface JsonService () <SRWebSocketDelegate>
 
 - (void)error:(NSError *)error;
 - (void)writeData:(NSData *)data;
@@ -23,6 +24,7 @@
 - (void)getJsonFromInput;
 - (NSRange)rangeOfJson:(NSUInteger)location start:(NSData *)start end:(NSData *)end;
 
+- (void)hello:(NSDictionary *)json;
 - (void)didGetItem:(NSDictionary *)json;
 - (void)didGetLightState:(NSDictionary *)json;
 - (void)didGetList:(NSObject *)json;
@@ -40,13 +42,20 @@
 
 @property NSMutableData *buffer;
 @property NSTimer *heartbeat;
+@property (strong) SRWebSocket *webSocket;
+@property Boolean webSocketIsOpening;
+@property Boolean webSocketIsOpen;
 
 @end
 
 @implementation JsonService
 
+@synthesize webSocketURL = _webSocketURL;
+
 - (id)initWithNetService:(NSNetService *)service {
     if ((self = [super initWithNetService:service])) {
+        _webSocketURL = nil;
+        _webSocket = nil;
         [self commonInit];
     }
     return self;
@@ -54,6 +63,8 @@
 
 - (id)initWithName:(NSString *)name withAddress:(NSString *)address withPort:(NSInteger)port {
     if ((self = [super initWithName:name withAddress:address withPort:port])) {
+        _webSocketURL = nil;
+        _webSocket = nil;
         serviceVersion = MIN_JSON_VERSION;
         [self commonInit];
     }
@@ -64,8 +75,22 @@
     return [self initWithName:nil withAddress:address withPort:port];
 }
 
+- (id)initWithName:(NSString *)name withURL:(NSURL *)URL {
+    if ((self = [super initWithName:name withAddress:URL.host withPort:[URL.port integerValue]])) {
+        _webSocketURL = URL;
+        _webSocket = [[SRWebSocket alloc] initWithURL:URL];
+        _webSocket.delegate = self;
+        _webSocketIsOpening = NO;
+        _webSocketIsOpen = NO;
+        serviceVersion = MIN_JSON_VERSION;
+        [self commonInit];
+    }
+    return self;
+}
+
 - (void)commonInit {
     serviceType = JMRIServiceJson;
+    outputQueue = [[NSMutableArray alloc] initWithCapacity:0];
     [self open];
 }
 
@@ -73,6 +98,15 @@
 
 - (void)open {
     if (self.isOpen || self.isOpening) {
+        return;
+    }
+    NSLog(@"Dude!");
+    if (self.webSocketURL) {
+        if (!self.webSocket) {
+            self.webSocket = [[SRWebSocket alloc] initWithURL:self.webSocketURL];
+        }
+        [self.webSocket open];
+        self.webSocketIsOpening = YES;
         return;
     }
     NSInputStream* is;
@@ -124,15 +158,32 @@
 }
 
 - (Boolean)isOpening {
+    if (self.webSocket) {
+        return self.webSocketIsOpening;
+    }
     NSStreamStatus i = inputStream.streamStatus;
     NSStreamStatus o = outputStream.streamStatus;
     return i == NSStreamStatusOpening || o == NSStreamStatusOpening;
 }
 
 - (Boolean)isOpen {
+    if (self.webSocket) {
+        return self.webSocketIsOpen;
+    }
     NSStreamStatus i = inputStream.streamStatus;
     NSStreamStatus o = outputStream.streamStatus;
     return i >= NSStreamStatusOpen && i < NSStreamStatusAtEnd && o >= NSStreamStatusOpen && o < NSStreamStatusAtEnd;
+}
+
+- (NSURL *)webSocketURL {
+    if (self.webSocket) {
+        return self.webSocket.url;
+    }
+    return _webSocketURL;
+}
+
+- (void)setWebSocketURL:(NSURL *)webSocketURL {
+    _webSocketURL = webSocketURL;
 }
 
 #pragma mark - Private methods
@@ -148,19 +199,38 @@
 }
 
 - (void)writeData:(NSData *)data {
-    if ([outputStream hasSpaceAvailable]) {
-        [outputStream write:data.bytes maxLength:data.length];
-        [self.delegate JMRINetService:self didSend:data];
-    } else {
-        if (self.useQueue) {
-            [outputQueue enqueue:data];
-        }
-        if (!outputStream) {
+    if (self.webSocketURL) {
+        if (self.webSocketIsOpen) {
+            if (![outputQueue isEmpty]) {
+                [self writeData:[outputQueue dequeue]];
+            }
+            NSString *string = [NSString stringWithUTF8String:[data bytes]];
+            if (string.length) {
+                [self.webSocket send:string];
+            }
+            string = nil;
+        } else {
+            if (self.useQueue) {
+                [outputQueue enqueue:data];
+            }
             [self open];
-        } else if (!self.isOpening) {
-            [self error:[NSError errorWithDomain:JMRIErrorDomain code:1001 userInfo:@{@"stream": @"output", @"streamStatus": @(outputStream.streamStatus)}]];
+        }
+    } else {
+        if ([outputStream hasSpaceAvailable]) {
+            [outputStream write:data.bytes maxLength:data.length];
+            [self.delegate JMRINetService:self didSend:data];
+        } else {
+            if (self.useQueue) {
+                [outputQueue enqueue:data];
+            }
+            if (!outputStream) {
+                [self open];
+            } else if (!self.isOpening) {
+                [self error:[NSError errorWithDomain:JMRIErrorDomain code:1001 userInfo:@{@"stream": @"output", @"streamStatus": @(outputStream.streamStatus)}]];
+            }
         }
     }
+    data = nil;
 }
 
 - (void)error:(NSError *)error {
@@ -208,6 +278,50 @@
 
 - (void)failWithError:(NSError *)error {
     [self.delegate JMRINetService:self didFailWithError:error];
+}
+
+
+#pragma mark - SRWebSocket delegate
+
+- (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message {
+    NSError *error;
+    NSObject *json = [NSJSONSerialization JSONObjectWithData:[message dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&error];
+    if (error) {
+        switch (error.code) {
+            case NSPropertyListReadCorruptError:
+                // The connected JMRI server does not support JSON
+                [self.delegate JMRINetService:self
+                             didFailWithError:[NSError errorWithDomain:JMRIErrorDomain
+                                                                  code:JMRIWebServiceJsonUnsupported
+                                                              userInfo:nil]];
+            default:
+                NSLog(@"WebSocket/JSON error %@", error.localizedDescription);
+        }
+    } else {
+        [self.delegate JMRINetService:self didReceive:[json description]];
+        if ([json isKindOfClass:[NSArray class]] || [((NSDictionary *)json)[@"type"] isEqualToString:JMRITypeList]) {
+            [self didGetList:json];
+        } else {
+            [self didGetItem:(NSDictionary *)json];
+        }
+    }
+}
+
+- (void)webSocketDidOpen:(SRWebSocket *)webSocket {
+    self.webSocketIsOpen = YES;
+    if (![outputQueue isEmpty]) {
+        [self writeData:[outputQueue dequeue]];
+    }
+}
+
+- (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error {
+    NSLog(@"Socket failed because %@", error.localizedDescription);
+    [self.delegate JMRINetService:self didFailWithError:error];
+}
+
+- (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean {
+    self.webSocketIsOpen = NO;
+    NSLog(@"Socket closed (%@) because %@ (%ld).", (wasClean) ? @"clean" : @"dirty", reason, (long)code);
 }
 
 #pragma mark - NSStream delegate
@@ -367,8 +481,10 @@
         [self didGetTurnoutState:json];
     } else if ([json[@"type"] isEqualToString:JMRITypeList]) {
         [self didGetList:json];
-    } else if ([json[@"type"] isEqualToString:@"hello"]) {
+    } else if ([json[@"type"] isEqualToString:JMRITypeHello]) {
         [self hello:json];
+    } else if ([json[@"type"] isEqualToString:JMRITypeGoodbye]) {
+        [self close];
     }
 }
 

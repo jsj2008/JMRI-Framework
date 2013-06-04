@@ -13,9 +13,10 @@
 
 - (void)didGetResponse:(NSHTTPURLResponse *)response withData:(NSData *)data withError:(NSError *)error;
 
+- (void)hello:(NSDictionary *)json;
 - (void)didGetItem:(NSDictionary *)json;
 - (void)didGetLightState:(NSDictionary *)json;
-- (void)didGetList:(NSDictionary *)json;
+- (void)didGetList:(NSObject *)json;
 - (void)didGetMemoryValue:(NSDictionary *)json;
 - (void)didGetMetadata:(NSDictionary *)json;
 - (void)didGetPowerState:(NSDictionary *)json;
@@ -52,12 +53,13 @@
     serviceType = JMRIServiceWeb;
     _openConnections = 0;
     self.JSONPath = @"json/";
+    [self read:JMRITypeHello];
     [self readItem:JMRIMetadataJMRICanonicalVersion ofType:JMRITypeMetadata];
 }
 
 #pragma mark - Properties
 
-- (NSURL *)url {
+- (NSURL *)urlWithFormat:(NSString *)format {
 	if (self.port == -1) {
 		return nil;
 	}
@@ -67,11 +69,19 @@
     if (![self.JSONPath hasSuffix:@"/"]) {
         self.JSONPath = [self.JSONPath stringByAppendingString:@"/"];
     }
-	return [[NSURL URLWithString:[NSString stringWithFormat:@"http://%@:%li%@", self.hostName, (long)self.port, self.JSONPath, nil]] absoluteURL];
+	return [[NSURL URLWithString:[NSString stringWithFormat:format, self.hostName, (long)self.port, self.JSONPath, nil]] absoluteURL];
+}
+
+- (NSURL *)url {
+    return [self urlWithFormat:@"http://%@:%li%@"];
 }
 
 - (Boolean)isOpen {
     return (_openConnections);
+}
+
+- (NSURL *)socketURL {
+    return [self urlWithFormat:@"ws://%@:%li%@"];
 }
 
 #pragma mark - Private methods
@@ -152,7 +162,7 @@
 
 - (void)didGetResponse:(NSHTTPURLResponse *)response withData:(NSData *)data withError:(NSError *)error {
     if (response.statusCode == 200 && data) {
-        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+        NSObject *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
         if (error) {
             switch (error.code) {
                 case NSPropertyListReadCorruptError:
@@ -162,17 +172,21 @@
                                                                       code:JMRIWebServiceJsonUnsupported
                                                                   userInfo:nil]];
                 default:
-                    NSLog(@"%@", error.description);
+                    NSLog(@"WebService/JSON failure %@", error.localizedDescription);
             }
         } else {
             [self.delegate JMRINetService:self didReceive:[json description]];
-            if ([json[@"type"] isEqualToString:JMRITypeList]) {
+            if ([json isKindOfClass:[NSArray class]] || [((NSDictionary *)json)[@"type"] isEqualToString:JMRITypeList]) {
                 [self didGetList:json];
             } else {
-                [self didGetItem:json];
+                [self didGetItem:(NSDictionary *)json];
             }
         }
     } else {
+        if (response.statusCode == 404 && [response.URL.path hasSuffix:JMRITypeHello]) {
+            [self.delegate useXmlIOServiceWithName:self.name withAddress:self.addresses[0] withPort:self.port];
+        }
+        NSLog(@"Web Service failure %lu for %@", (long)response.statusCode, response.URL.path);
         [self.delegate JMRINetService:self didFailWithError:error];
     }
 }
@@ -194,6 +208,8 @@
         [self didGetTurnoutState:json];
     } else if ([json[@"type"] isEqualToString:JMRITypeList]) {
         [self didGetList:json];
+    } else if ([json[@"type"] isEqualToString:JMRITypeHello]) {
+        [self hello:json];
     }
 }
 
@@ -211,14 +227,6 @@
 
 - (void)didGetMetadata:(NSDictionary *)json {
     [self.delegate JMRINetService:self didGetMetadata:json[@"data"][@"name"] withValue:json[@"data"][@"value"] withProperties:json[@"data"]];
-    if ([json[@"data"][@"name"] isEqualToString:JMRIMetadataJMRICanonicalVersion]) {
-        if ([json[@"data"][@"value"] compare:JMRI_WEB_JSON_RECOMMENDED_VERSION options:NSNumericSearch] == NSOrderedAscending) {
-            [self.delegate JMRINetService:self
-                         didFailWithError:[NSError errorWithDomain:JMRIErrorDomain
-                                                              code:JMRIWebServiceJsonReadOnly
-                                                          userInfo:@{JMRIMetadataJMRICanonicalVersion: json[@"data"][@"value"]}]];
-        }
-    }
 }
 
 - (void)didGetPowerState:(NSDictionary *)json {
@@ -254,8 +262,22 @@
 }
 
 - (void)didGetList:(NSDictionary *)json {
-    for (NSDictionary *item in json[@"list"]) {
-        [self didGetItem:item];
+    if ([json isKindOfClass:[NSDictionary class]]) {
+        for (NSDictionary *item in ((NSDictionary *)json)[@"list"]) {
+            [self didGetItem:item];
+        }
+    } else {
+        for (NSDictionary *item in (NSArray *)json) {
+            [self didGetItem:item];
+        }
+    }
+}
+
+- (void)hello:(NSDictionary *)json {
+    serviceVersion = json[@"data"][JMRITXTRecordKeyJMRI];
+    if (json[@"data"][JMRITXTRecordKeyJSON]) {
+        NSLog(@"What up with this?");
+        [self.delegate useJsonServiceWithURL:[self socketURL]];
     }
 }
 
