@@ -34,10 +34,11 @@ NSString *const JMRINetServiceWiThrottle = @"_withrottle._tcp.";
 
 - (id)init {
 	if ((self = [super init])) {
-		self.browser = [[NSNetServiceBrowser alloc] init];
-        self.browser.delegate = self;
-		self.services = [NSMutableArray arrayWithCapacity:0];
-        self.unresolvedServices = [NSMutableSet setWithCapacity:0];
+		_browser = [[NSNetServiceBrowser alloc] init];
+        _browser.delegate = self;
+        [_browser scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+		_services = [NSMutableArray arrayWithCapacity:0];
+        unresolvedServices = [NSMutableSet setWithCapacity:0];
 		_searching = NO;
 	}
 	return self;
