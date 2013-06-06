@@ -346,7 +346,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
                             waitUntilDone:NO];
         return;
     }
-    NSLog(@"listing %lu %@s", (unsigned long)[items count], type);
+    [self.delegate logEvent:@"listing %lu %@s", (unsigned long)[items count], type];
 	if ([self.delegate respondsToSelector:@selector(XMLIOService:didListItems:ofType:)]) {
 		[self.delegate XMLIOService:self didListItems:items ofType:type];
 	}

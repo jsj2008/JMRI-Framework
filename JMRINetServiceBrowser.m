@@ -44,7 +44,6 @@ NSString *const JMRINetServiceWiThrottle = @"_withrottle._tcp.";
 	return self;
 }
 
-
 #pragma mark - Service browser methods
 
 - (void)searchForServices {
@@ -132,7 +131,7 @@ NSString *const JMRINetServiceWiThrottle = @"_withrottle._tcp.";
 }
 
 - (void)netService:(NSNetService *)sender didNotResolve:(NSDictionary *)errorDict {
-	NSLog(@"JMRINetServiceBrowser error resolving new service!\n%@", errorDict);
+    [self.delegate logEvent:@"JMRINetServiceBrowser error resolving new service!\n%@", errorDict];
 }
 
 @end

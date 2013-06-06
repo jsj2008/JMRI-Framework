@@ -105,7 +105,7 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
 #pragma mark - URL Connection delegate
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    NSLog(@"Did receieve response");
+    [self.delegate.delegate logEvent:@"Did receieve response"];
     // This method is called when the server has determined that it
     // has enough information to create the NSURLResponse.
 	
@@ -127,9 +127,9 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     // inform the user
-    NSLog(@"Connection failed! Error - %@ %@",
+    [self.delegate.delegate logEvent:@"Connection failed! Error - %@ %@",
           [error localizedDescription],
-          [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
+          [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]];
 	if ([self.delegate respondsToSelector:@selector(XMLIOServiceHelper:didFailWithError:)]) {
 		[self.delegate XMLIOServiceHelper:self didFailWithError:error];
 	}
@@ -138,7 +138,7 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    NSLog(@"Finished loading");
+    [self.delegate.delegate logEvent:@"Finished loading"];
 	NSXMLParser *parser;
 	if ([self.delegate respondsToSelector:@selector(XMLIOServiceHelperDidFinishLoading:)]) {
 		[self.delegate XMLIOServiceHelperDidFinishLoading:self];
@@ -336,19 +336,19 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
                 [self.delegate XMLIOServiceHelper:self didFailWithError:[NSError errorWithDomain:JMRIErrorDomain code:JMRICannotCreateItem userInfo:@{@"item": self.name, @"type": self.type}]];
                 break;
             default:
-                NSLog(@"Error %ld, Description: %@, Line: %ld, Column: %ld",
+                [self.delegate.delegate logEvent:@"Error %ld, Description: %@, Line: %ld, Column: %ld",
                       (long)[parseError code],
                       [[parser parserError] localizedDescription],
                       (long)[parser lineNumber],
-                      (long)[parser columnNumber]);
+                      (long)[parser columnNumber]];
                 [self.delegate XMLIOServiceHelper:self didFailWithError:parseError];
         }
 	} else {
-        NSLog(@"Error %ld, Description: %@, Line: %ld, Column: %ld",
+        [self.delegate.delegate logEvent:@"Error %ld, Description: %@, Line: %ld, Column: %ld",
               (long)[parseError code],
               [[parser parserError] localizedDescription],
               (long)[parser lineNumber],
-              (long)[parser columnNumber]);
+              (long)[parser columnNumber]];
     }
 }
 

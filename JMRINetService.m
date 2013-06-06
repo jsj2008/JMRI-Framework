@@ -139,17 +139,17 @@ static JMRINetService *sharedNetService_ = nil;
 #pragma mark - Net service delegate
 
 - (void)netService:(NSNetService *)sender didNotResolve:(NSDictionary *)errorDict {
-	NSLog(@"%@ failed to resolve: %@", self.name, errorDict);
+    [self.delegate logEvent:@"%@ failed to resolve: %@", self.name, errorDict];
     [self.delegate JMRINetService:self didNotResolve:errorDict];
 }
 
 - (void)netServiceDidResolveAddress:(NSNetService *)sender {
-	NSLog(@"%@ resolved", self.name);
+	[self.delegate logEvent:@"%@ resolved", self.name];
     [self.delegate JMRINetServiceDidResolveAddress:self];
 }
 
 - (void)netServiceWillResolve:(NSNetService *)sender {
-	NSLog(@"%@ will resolve", self.name);
+	[self.delegate logEvent:@"%@ will resolve", self.name];
     [self.delegate JMRINetServiceWillResolve:self];
 }
 

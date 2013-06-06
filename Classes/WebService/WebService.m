@@ -172,7 +172,7 @@
                                                                       code:JMRIWebServiceJsonUnsupported
                                                                   userInfo:nil]];
                 default:
-                    NSLog(@"WebService/JSON failure %@", error.localizedDescription);
+                    [self.delegate logEvent:@"WebService/JSON failure %@", error.localizedDescription];
             }
         } else {
             [self.delegate JMRINetService:self didReceive:[json description]];
@@ -186,7 +186,7 @@
         if (response.statusCode == 404 && [response.URL.path hasSuffix:JMRITypeHello]) {
             [self.delegate useXmlIOServiceWithName:self.name withAddress:self.addresses[0] withPort:self.port];
         }
-        NSLog(@"Web Service failure %lu for %@", (long)response.statusCode, response.URL.path);
+        [self.delegate logEvent:@"Web Service failure %lu for %@", (long)response.statusCode, response.URL.path];
         [self.delegate JMRINetService:self didFailWithError:error];
     }
 }

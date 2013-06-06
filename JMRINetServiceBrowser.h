@@ -63,6 +63,7 @@ extern NSString *const JMRINetServiceWeb;
 
 @required
 - (void)JMRINetServiceBrowser:(JMRINetServiceBrowser *)browser didNotSearch:(NSDictionary *)errorDict;
+- (void)logEvent:(NSString *)format, ...;
 
 @required
 - (void)JMRINetServiceBrowserWillSearch:(JMRINetServiceBrowser *)browser;

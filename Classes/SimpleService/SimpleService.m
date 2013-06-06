@@ -136,7 +136,7 @@
     if ([aStream isEqual:inputStream]) {
         switch (eventCode) {
             case NSStreamEventNone:
-                NSLog(@"[IN] Nothing to see here.");
+                [self.delegate logEvent:@"[IN] Nothing to see here."];
                 break;
             case NSStreamEventOpenCompleted:
                 [self.delegate JMRINetServiceDidOpenConnection:self];
@@ -145,10 +145,10 @@
                 [self didGetInput:inputStream];
                 break;
             case NSStreamEventErrorOccurred:
-                NSLog(@"[IN] An error!");
+                [self.delegate logEvent:@"[IN] An error!"];
                 break;
             case NSStreamEventEndEncountered:
-                NSLog(@"[IN] Over.");
+                [self.delegate logEvent:@"[IN] Over."];
                 break;
             default:
                 break;
@@ -156,7 +156,7 @@
     } else { // event in outputStream
         switch (eventCode) {
             case NSStreamEventNone:
-                NSLog(@"[OUT] Nothing to see here.");
+                [self.delegate logEvent:@"[OUT] Nothing to see here."];
                 break;
             case NSStreamEventOpenCompleted:
                 [self.delegate JMRINetServiceDidOpenConnection:self];
@@ -164,10 +164,10 @@
             case NSStreamEventHasSpaceAvailable:
                 break;
             case NSStreamEventErrorOccurred:
-                NSLog(@"[OUT] An error!");
+                [self.delegate logEvent:@"[OUT] An error!"];
                 break;
             case NSStreamEventEndEncountered:
-                NSLog(@"[OUT] Over.");
+                [self.delegate logEvent:@"[OUT] Over."];
             default:
                 break;
         }
@@ -204,7 +204,7 @@
             }
         }
     } else {
-        NSLog(@"[IN] No data.");
+        [self.delegate logEvent:@"[IN] No data."];
     }
 }
 

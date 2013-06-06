@@ -133,7 +133,10 @@
  Services that must be provided by a JMRI server for the browser to retain it while searching.
  */
 @property (readonly) NSSet *requiredServices;
-
+/**
+ Log all events as they occur. Defaults to NO.
+ */
+@property BOOL logEvents;
 @end
 
 #pragma mark - JMRI service browser delegate protocol

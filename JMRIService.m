@@ -425,6 +425,16 @@
     return collection;
 }
 
+- (void)logEvent:(NSString *)format, ... {
+    if (self.logEvents) {
+        va_list args;
+        va_start(args, format);
+        NSString *message = [[NSString alloc] initWithFormat:[@"JMRI \"%@\": " stringByAppendingFormat:format, self.name] arguments:args];
+        va_end(args);
+        NSLog(@"%@", message);
+    }
+}
+
 #pragma mark - JMRINetService delegate
 
 - (void)JMRINetService:(JMRINetService *)service didNotResolve:(NSDictionary *)errorDict {
@@ -522,47 +532,39 @@
 }
 
 - (void)JMRINetService:(JMRINetService *)service didReceive:(NSString *)input {
-    if (self.logNetworkActivity) {
-        NSLog(@"%@ received %@", service.type, input);
-    }
+    [self logEvent:@"%@ received %@", service.type, input];
     if ([self.delegate respondsToSelector:@selector(JMRIService:didGetInput:)]) {
         [self.delegate JMRIService:self didGetInput:input];
     }
 }
 
 - (void)JMRINetService:(JMRINetService *)service didSend:(NSData *)data {
-    if (self.logNetworkActivity) {
-        NSLog(@"%@ sent %@", service.type, [NSString stringWithUTF8String:data.bytes]);
-    }
+    [self logEvent:@"%@ sent %@", service.type, [NSString stringWithUTF8String:data.bytes]];
 }
 
 - (void)JMRINetServiceDidOpenConnection:(JMRINetService *)service {
-    if (self.logNetworkActivity) {
-        NSLog(@"%@ opened connection", service.type);
-    }
+    [self logEvent:@"%@ opened connection", service.type];
     if ([self.delegate respondsToSelector:@selector(JMRIServiceDidOpenConnection:)]) {
         [self.delegate JMRIServiceDidOpenConnection:self];
     }
 }
 
 - (void)JMRINetServiceDidStart:(JMRINetService *)service {
-    NSLog(@"%@ started", service.type);
+    [self logEvent:@"%@ started", service.type];
     if ([self.delegate respondsToSelector:@selector(JMRIService:didStart:)]) {
         [self.delegate JMRIService:self didStart:service];
     }
 }
 
 - (void)JMRINetServiceDidStop:(JMRINetService *)service {
-    NSLog(@"%@ stopped", service.type);
+    [self logEvent:@"%@ stopped", service.type];
     if ([self.delegate respondsToSelector:@selector(JMRIService:didStop:)]) {
         [self.delegate JMRIService:self didStop:service];
     }
 }
 
 - (void)JMRINetService:(JMRINetService *)service didWrite:(NSData *)data {
-    if (self.logNetworkActivity) {
-        NSLog(@"%@ wrote %@", service.type, [data description]);
-    }
+    [self logEvent:@"%@ wrote %@", service.type, [data description]];
 }
 
 - (void)useJsonServiceWithURL:(NSURL *)url {
@@ -637,9 +639,7 @@
 
 - (void)XMLIOService:(XMLIOService *)service didGetThrottle:(XMLIOThrottle *)throttle withAddress:(NSUInteger)address {}
 - (void)XMLIOService:(XMLIOService *)service didConnectWithRequest:(NSURLRequest *)request {
-    if (self.logNetworkActivity) {
-        NSLog(@"XMLIO%@ opened new connection. %lu connections are open.", service, (unsigned long)service.openConnections);
-    }
+    [self logEvent:@"XMLIO%@ opened new connection. %lu connections are open.", service, (unsigned long)service.openConnections];
     if ([self.delegate respondsToSelector:@selector(JMRIServiceDidOpenConnection:)]) {
         [self.delegate JMRIServiceDidOpenConnection:self];
     }

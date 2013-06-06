@@ -25,6 +25,7 @@
 @synthesize searching;
 @synthesize services = _services;
 @synthesize requiredServices = _requiredServices;
+@synthesize logEvents;
 
 - (id)init {
     if ((self = [super init])) {
@@ -37,9 +38,10 @@
         // uncomment following two lines when re-enabling the WiThrottle service
         //wiThrottleBrowser = [[WiThrottleServiceBrowser alloc] init];
         //wiThrottleBrowser.delegate = self;
-        self.services = [NSMutableArray arrayWithCapacity:0];
+        _services = [NSMutableArray arrayWithCapacity:0];
         _requiredServices = nil;
         searching = NO;
+        logEvents = NO;
     }
     return self;
 }
@@ -107,9 +109,20 @@
     return [self.services objectWithName:name];
 }
 
+- (void)logEvent:(NSString *)format, ... {
+    if (self.logEvents) {
+        va_list args;
+        va_start(args, format);
+        NSString *message = [[NSString alloc] initWithFormat:[@"JMRI Browser: " stringByAppendingString:format] arguments:args];
+        va_end(args);
+        NSLog(@"%@", message);
+    }
+}
+
 #pragma mark - JMRI net service browser delegate
 
 - (void)JMRINetServiceBrowser:(JMRINetServiceBrowser *)browser didNotSearch:(NSDictionary *)errorDict {
+    [self logEvent:@"Did not search for %@s", browser.type];
     searching = NO;
     if ([delegate respondsToSelector:@selector(JMRIServiceBrowser:didNotSearch:forType:)]) {
         [delegate JMRIServiceBrowser:self didNotSearch:errorDict forType:browser.type];
@@ -120,6 +133,7 @@
 }
 
 - (void)JMRINetServiceBrowserWillSearch:(JMRINetServiceBrowser *)browser {
+    [self logEvent:@"Will search for %@s", browser.type];
     searching = YES;
     if ([delegate respondsToSelector:@selector(JMRIServiceBrowserWillSearch:forType:)]) {
         [delegate JMRIServiceBrowserWillSearch:self forType:browser.type];
@@ -130,6 +144,7 @@
 }
 
 - (void)JMRINetServiceBrowserDidStopSearch:(JMRINetServiceBrowser *)browser {
+    [self logEvent:@"Stopped searching for %@s", browser.type];
     searching = NO;
     if ([delegate respondsToSelector:@selector(JMRIServiceBrowserDidStopSearch:forType:)]) {
         [delegate JMRIServiceBrowserDidStopSearch:self forType:browser.type];
@@ -193,6 +208,7 @@
     searching = moreComing;
     if ([self indexOfServiceWithName:aNetService.name] != NSNotFound) {
         JMRIService *service = [self serviceWithName:aNetService.name];
+        [self logEvent:@"Removing %@ from \"%@\"", aNetService.type, service.name];
         if ([aNetService.type isEqualToString:JMRIServiceJson]) {
             service.jsonService = nil;
         } else if ([aNetService.type isEqualToString:JMRIServiceSimple]) {
@@ -200,6 +216,9 @@
         } else if ([aNetService.type isEqualToString:JMRIServiceWeb]) {
             service.webService = nil;
             service.xmlIOService = nil;
+            if (service.jsonService && service.jsonService.webSocketURL) {
+                service.jsonService = nil;
+            }
         } else {
             service.wiThrottleService = nil;
         }
@@ -211,10 +230,12 @@
             }
         }
         if (retain && (service.hasJsonService || service.hasSimpleService || service.hasWebService || service.hasWiThrottleService || service.hasXmlIOService)) {
+            [self logEvent:@"Retaining service \"%@\"", service.name];
             if ([delegate respondsToSelector:@selector(JMRIServiceBrowser:didChangeService:moreComing:)]) {
                 [delegate JMRIServiceBrowser:self didChangeService:service moreComing:searching];
             }
         } else {
+            [self logEvent:@"No longer retaining service \"%@\"", service.name];
             [self.services removeObject:service];
             if ([delegate respondsToSelector:@selector(JMRIServiceBrowser:didRemoveService:moreComing:)]) {
                 [delegate JMRIServiceBrowser:self didRemoveService:service moreComing:searching];

@@ -121,5 +121,6 @@
 @required
 - (NSString *)collectionForType:(NSString *)type;
 - (NSString *)typeForCollection:(NSString *)collection;
+- (void)logEvent:(NSString *)format, ...;
 
 @end

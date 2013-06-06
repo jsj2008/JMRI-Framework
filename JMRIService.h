@@ -122,11 +122,11 @@
 @property Boolean useXmlIOService;
 
 /**
- Be verbose about network activity in NSLog.
+ Log events and network activities.
  
  Default is NO.
  */
-@property Boolean logNetworkActivity;
+@property Boolean logEvents;
 /**
  The JMRI server version.
  

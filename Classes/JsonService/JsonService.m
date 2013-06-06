@@ -294,7 +294,7 @@
                                                                   code:JMRIWebServiceJsonUnsupported
                                                               userInfo:nil]];
             default:
-                NSLog(@"WebSocket/JSON error %@", error.localizedDescription);
+                [self.delegate logEvent:@"WebSocket/JSON error %@", error.localizedDescription];
         }
     } else {
         [self.delegate JMRINetService:self didReceive:[json description]];
@@ -314,13 +314,13 @@
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error {
-    NSLog(@"Socket failed because %@", error.localizedDescription);
+    [self.delegate logEvent:@"Socket failed because %@", error.localizedDescription];
     [self.delegate JMRINetService:self didFailWithError:error];
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean {
     self.webSocketIsOpen = NO;
-    NSLog(@"Socket closed (%@) because %@ (%ld).", (wasClean) ? @"clean" : @"dirty", reason, (long)code);
+    [self.delegate logEvent:@"Socket closed (%@) because %@ (%ld).", (wasClean) ? @"clean" : @"dirty", reason, (long)code];
 }
 
 #pragma mark - NSStream delegate
@@ -329,7 +329,7 @@
     if ([aStream isEqual:inputStream]) {
         switch (eventCode) {
             case NSStreamEventNone:
-                NSLog(@"[IN] Nothing to see here.");
+                [self.delegate logEvent:@"[IN] Nothing to see here."];
                 break;
             case NSStreamEventOpenCompleted:
                 [self.delegate JMRINetServiceDidOpenConnection:self];
@@ -341,10 +341,10 @@
                 // should never be called, OutputStream only
                 break;
             case NSStreamEventErrorOccurred:
-                NSLog(@"[IN] An error!");
+                [self.delegate logEvent:@"[IN] An error!"];
                 break;
             case NSStreamEventEndEncountered:
-                NSLog(@"[IN] Over.");
+                [self.delegate logEvent:@"[IN] Over."];
                 break;
             default:
                 // should never be called, all events are listed
@@ -353,7 +353,7 @@
     } else { // event in outputStream
         switch (eventCode) {
             case NSStreamEventNone:
-                NSLog(@"[OUT] Nothing to see here.");
+                [self.delegate logEvent:@"[OUT] Nothing to see here."];
                 break;
             case NSStreamEventOpenCompleted:
                 [self.delegate JMRINetServiceDidOpenConnection:self];
@@ -366,10 +366,10 @@
                 // should never be called, InputStream only
                 break;
             case NSStreamEventErrorOccurred:
-                NSLog(@"[OUT] An error!");
+                [self.delegate logEvent:@"[OUT] An error!"];
                 break;
             case NSStreamEventEndEncountered:
-                NSLog(@"[OUT] Over.");
+                [self.delegate logEvent:@"[OUT] Over."];
             default:
                 // should never be called, all events are listed
                 break;
@@ -387,7 +387,7 @@
         [self.buffer appendData:[NSData dataWithBytes:buf length:len]];
         [self getJsonFromInput];
     } else {
-        NSLog(@"[IN] No data.");
+        [self.delegate logEvent:@"[IN] No data."];
     }
 }
 
@@ -447,7 +447,7 @@
                     [self didGetList:json];
                 }
             } else {
-                NSLog(@"JSONService error processing JSON: %@", error.debugDescription);
+                [self.delegate logEvent:@"JSONService error processing JSON: %@", error.debugDescription];
             }
             if (self.buffer.length) {
                 [self getJsonFromInput];
