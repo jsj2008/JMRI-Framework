@@ -466,6 +466,7 @@
     if ([self.delegate respondsToSelector:@selector(JMRIService:didFailWithError:)]) {
         [self.delegate JMRIService:self didFailWithError:error];
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:JMRINotificationDidFailWithError object:self userInfo:@{JMRITypeError: error}];
 }
 
 - (void)JMRINetService:(JMRINetService *)service didGetLight:(NSString *)light withState:(NSUInteger)state withProperties:(NSDictionary *)properties {
@@ -547,6 +548,15 @@
     if ([self.delegate respondsToSelector:@selector(JMRIServiceDidOpenConnection:)]) {
         [self.delegate JMRIServiceDidOpenConnection:self];
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:JMRINotificationDidOpenConnection object:self userInfo:nil];
+}
+
+- (void)JMRINetServiceDidCloseConnection:(JMRINetService *)service {
+    [self logEvent:@"%@ closed connection", service.type];
+    if ([self.delegate respondsToSelector:@selector(JMRIServiceDidCloseConnection:)]) {
+        [self.delegate JMRIServiceDidCloseConnection:self];
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:JMRINotificationDidCloseConnection object:self userInfo:nil];
 }
 
 - (void)JMRINetServiceDidStart:(JMRINetService *)service {
@@ -554,6 +564,7 @@
     if ([self.delegate respondsToSelector:@selector(JMRIService:didStart:)]) {
         [self.delegate JMRIService:self didStart:service];
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:JMRINotificationDidStart object:self userInfo:@{JMRIServiceKey:service}];
 }
 
 - (void)JMRINetServiceDidStop:(JMRINetService *)service {
@@ -561,6 +572,7 @@
     if ([self.delegate respondsToSelector:@selector(JMRIService:didStop:)]) {
         [self.delegate JMRIService:self didStop:service];
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:JMRINotificationDidStop object:self userInfo:@{JMRIServiceKey:service}];
 }
 
 - (void)JMRINetService:(JMRINetService *)service didWrite:(NSData *)data {
@@ -643,12 +655,14 @@
     if ([self.delegate respondsToSelector:@selector(JMRIServiceDidOpenConnection:)]) {
         [self.delegate JMRIServiceDidOpenConnection:self];
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:JMRINotificationDidOpenConnection object:self userInfo:nil];
 }
 
 - (void)XMLIOServiceDidFinishLoading:(XMLIOService *)service { // need to log response being consumed by XMLIOServiceHelper
     if ([self.delegate respondsToSelector:@selector(JMRIServiceDidCloseConnection:)]) {
         [self.delegate JMRIServiceDidCloseConnection:self];
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:JMRINotificationDidCloseConnection object:self userInfo:nil];
 }
 
 #pragma mark - Private methods

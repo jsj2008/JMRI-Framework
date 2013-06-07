@@ -16,6 +16,7 @@ NSString *const JMRIServiceWiThrottle = @"wiThrottleService";
 NSString *const JMRIServiceXmlIO = @"xmlIOService";
 
 // JMRI item types
+NSString *const JMRITypeError = @"error";
 NSString *const JMRITypeFrame = @"frame";
 NSString *const JMRITypeHello = @"hello";
 NSString *const JMRITypeGoodbye = @"goodbye";
@@ -77,11 +78,17 @@ NSString *const JMRINotificationBonjourServiceRemoved = @"JMRINotificationBonjou
 NSString *const JMRINotificationBrowserDidNotSearch = @"JMRINotificationBrowserDidNotSearch";
 NSString *const JMRINotificationBrowserDidStopSearch = @"JMRINotificationBrowserDidStopSearch";
 NSString *const JMRINotificationBrowserWillSearch = @"JMRINotificationBrowserWillSearch";
+NSString *const JMRINotificationDidOpenConnection = @"JMRINotificationDidOpenConnection";
+NSString *const JMRINotificationDidCloseConnection = @"JMRINotificationDidCloseConnection";
+NSString *const JMRINotificationDidStart = @"JMRINotificationDidStart";
+NSString *const JMRINotificationDidStop = @"JMRINotificationDidStop";
+NSString *const JMRINotificationDidFailWithError = @"JMRINotificationDidFailWithError";
 
 // Framework notification userInfo dictionary keys
 NSString *const JMRIAddedBonjourService = @"JMRIAddedBonjourService";
 NSString *const JMRIAddedItem = @"item";
 NSString *const JMRIChangedService = @"JMRIChangedService";
+NSString *const JMRIErrorKey = @"error";
 NSString *const JMRIList = @"list";
 NSString *const JMRIRemovedBonjourService = @"JMRIRemovedBonjourService";
 NSString *const JMRIServiceKey = @"service";

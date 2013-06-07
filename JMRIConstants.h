@@ -15,6 +15,7 @@ extern NSString *const JMRIServiceWiThrottle;
 extern NSString *const JMRIServiceXmlIO;
 
 // JMRI item types
+extern NSString *const JMRITypeError;
 extern NSString *const JMRITypeFrame;
 extern NSString *const JMRITypeHello;
 extern NSString *const JMRITypeGoodbye;
@@ -76,6 +77,11 @@ extern NSString *const JMRINotificationBonjourServiceRemoved;
 extern NSString *const JMRINotificationBrowserDidNotSearch;
 extern NSString *const JMRINotificationBrowserDidStopSearch;
 extern NSString *const JMRINotificationBrowserWillSearch;
+extern NSString *const JMRINotificationDidOpenConnection;
+extern NSString *const JMRINotificationDidCloseConnection;
+extern NSString *const JMRINotificationDidStart;
+extern NSString *const JMRINotificationDidStop;
+extern NSString *const JMRINotificationDidFailWithError;
 
 // Framework notification userInfo dictionary keys
 extern NSString *const JMRIAddedBonjourService;
