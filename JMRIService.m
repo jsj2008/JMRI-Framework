@@ -429,7 +429,7 @@
     if (self.logEvents) {
         va_list args;
         va_start(args, format);
-        NSString *message = [[NSString alloc] initWithFormat:[@"JMRI \"%@\": " stringByAppendingFormat:format, self.name] arguments:args];
+        NSString *message = [[NSString alloc] initWithFormat:[@"JMRI Service: " stringByAppendingString:format] arguments:args];
         va_end(args);
         NSLog(@"%@", message);
     }
