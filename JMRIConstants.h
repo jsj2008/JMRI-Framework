@@ -127,6 +127,6 @@ typedef enum {
     JMRICannotCreateItem = 403,
     JMRIItemNotFound = 404,
     JMRIInternalError = 500,
-    JMRIWebServiceJsonUnsupported = 511,
-    JMRIXMLUnexpectedRootElement = 512
+    JMRIWebServiceJsonUnsupported = 611,
+    JMRIXMLUnexpectedRootElement = 612
 } JMRIErrorCodes;
