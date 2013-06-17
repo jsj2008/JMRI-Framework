@@ -448,18 +448,20 @@
     if ([error.domain isEqualToString:JMRIErrorDomain]) {
         if (error.code == JMRIWebServiceJsonUnsupported) {
             // assume connection to JMRI 2.14.X server and that no other service is available
-            if (service.bonjourService) {
-                self.xmlIOService = [[XMLIOService alloc] initWithNetService:service.bonjourService];
-            } else {
-                self.xmlIOService = [[XMLIOService alloc] initWithName:service.name
-                                                           withAddress:service.addresses[0]
-                                                              withPort:service.port];
+            if (!self.hasXmlIOService) {
+                if (service.bonjourService) {
+                    self.xmlIOService = [[XMLIOService alloc] initWithNetService:service.bonjourService];
+                } else {
+                    self.xmlIOService = [[XMLIOService alloc] initWithName:service.name
+                                                               withAddress:service.addresses[0]
+                                                                  withPort:service.port];
+                }
+                self.useXmlIOService = YES;
+                self.requiresXmlIOService = self.requiresWebService;
+                self.useWebService = NO;
+                self.requiresWebService = NO;
+                self.webService = nil;
             }
-            self.useXmlIOService = YES;
-            self.requiresXmlIOService = self.requiresWebService;
-            self.useWebService = NO;
-            self.requiresWebService = NO;
-            self.webService = nil;
             return; // don't pass on this error, we've handled it
         }
     }
@@ -584,18 +586,6 @@
         self.jsonService = [[JsonService alloc] initWithName:self.name withURL:url];
     } else {
         self.jsonService.webSocketURL = url;
-    }
-}
-
-- (void)useXmlIOServiceWithName:(NSString *)name withAddress:(NSString *)address withPort:(NSUInteger)port {
-    if (!self.hasJsonService && !self.hasXmlIOService) {
-        if (web.bonjourService) {
-            self.xmlIOService = [[XMLIOService alloc] initWithNetService:web.bonjourService];
-        } else {
-            self.xmlIOService = [[XMLIOService alloc] initWithName:web.name withAddress:web.addresses[0] withPort:web.port];
-        }
-        self.useWebService = NO;
-        self.useXmlIOService = YES;
     }
 }
 

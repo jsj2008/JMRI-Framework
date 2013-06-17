@@ -116,7 +116,6 @@
 #pragma mark - Interservice communications (required)
 @required
 - (void)useJsonServiceWithURL:(NSURL *)url;
-- (void)useXmlIOServiceWithName:(NSString *)name withAddress:(NSString *)address withPort:(NSUInteger)port;
 
 #pragma mark - Service support (required)
 @required

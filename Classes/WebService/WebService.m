@@ -161,8 +161,9 @@
 #pragma mark - Response handlers
 
 - (void)didGetResponse:(NSHTTPURLResponse *)response withData:(NSData *)data withError:(NSError *)error {
+    NSObject *json = nil;
     if (response.statusCode == 200 && data) {
-        NSObject *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+        json = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
         if (error) {
             switch (error.code) {
                 case NSPropertyListReadCorruptError:
@@ -182,9 +183,19 @@
                 [self didGetItem:(NSDictionary *)json];
             }
         }
+    } else if (response.statusCode == 404 && [response.URL.path hasSuffix:JMRITypeHello]) {
+        [self.delegate JMRINetService:self didFailWithError:[NSError errorWithDomain:JMRIErrorDomain
+                                                                                code:JMRIWebServiceJsonUnsupported
+                                                                            userInfo:nil]];
     } else {
-        if (response.statusCode == 404 && [response.URL.path hasSuffix:JMRITypeHello]) {
-            [self.delegate useXmlIOServiceWithName:self.name withAddress:self.addresses[0] withPort:self.port];
+        if (data) {
+            json = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+        }
+        if (json) {
+            error = [NSError errorWithDomain:JMRIErrorDomain code:response.statusCode userInfo:(NSDictionary *)json];
+        }
+        if (!error) {
+            error = [NSError errorWithDomain:JMRIErrorDomain code:response.statusCode userInfo:@{@"URL": response.URL.path, @"response": response}];
         }
         [self.delegate logEvent:@"Web Service failure %lu for %@", (long)response.statusCode, response.URL.path];
         [self.delegate JMRINetService:self didFailWithError:error];
