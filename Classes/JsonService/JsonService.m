@@ -151,8 +151,10 @@
     outputQueue = nil;
     [inputStream close];
     [outputStream close];
+    [self.webSocket close];
     inputStream = nil;
     outputStream = nil;
+    self.webSocket = nil;
     [self.delegate JMRINetServiceDidStop:self];
 }
 
@@ -316,10 +318,12 @@
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error {
     [self.delegate logEvent:@"Socket failed because %@", error.localizedDescription];
     [self.delegate JMRINetService:self didFailWithError:error];
+    [self close];
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean {
     self.webSocketIsOpen = NO;
+    [self close];
     [self.delegate logEvent:@"Socket closed (%@) because %@ (%ld).", (wasClean) ? @"clean" : @"dirty", reason, (long)code];
 }
 
@@ -341,10 +345,14 @@
                 // should never be called, OutputStream only
                 break;
             case NSStreamEventErrorOccurred:
-                [self.delegate logEvent:@"[IN] An error!"];
+                [self.delegate logEvent:@"JSONService inputStream error %@", [inputStream streamError].debugDescription];
+                [self.delegate JMRINetService:self didFailWithError:[NSError errorWithDomain:JMRIErrorDomain
+                                                                                        code:JMRIInputStreamError
+                                                                                    userInfo:@{@"streamError": [inputStream streamError]}]];
                 break;
             case NSStreamEventEndEncountered:
-                [self.delegate logEvent:@"[IN] Over."];
+                [self.delegate logEvent:@"JSONService inputStream closed by server."];
+                [self close];
                 break;
             default:
                 // should never be called, all events are listed
@@ -366,10 +374,14 @@
                 // should never be called, InputStream only
                 break;
             case NSStreamEventErrorOccurred:
-                [self.delegate logEvent:@"[OUT] An error!"];
+                [self.delegate logEvent:@"JSONService outputStream error %@", [outputStream streamError].debugDescription];
+                [self.delegate JMRINetService:self didFailWithError:[NSError errorWithDomain:JMRIErrorDomain
+                                                                                        code:JMRIInputStreamError
+                                                                                    userInfo:@{@"streamError": [outputStream streamError]}]];
                 break;
             case NSStreamEventEndEncountered:
-                [self.delegate logEvent:@"[OUT] Over."];
+                [self.delegate logEvent:@"JSONService outputStream closed by server."];
+                [self close];
             default:
                 // should never be called, all events are listed
                 break;
