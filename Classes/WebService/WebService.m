@@ -103,7 +103,7 @@
     // need to pluralize type
     NSError *error = nil;
     NSData *data = [NSJSONSerialization dataWithJSONObject:jsonObject options:0 error:&error];
-    NSString *path = [NSString stringWithFormat:@"%@/%@", [self.delegate collectionForType:type], jsonObject[@"data"][@"name"]];
+    NSString *path = [NSString stringWithFormat:@"%@/%@", [self.delegate collectionForType:type], jsonObject[JMRIJsonData][JMRIItemName]];
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[self.url URLByAppendingPathComponent:path]
                                                            cachePolicy:NSURLRequestReloadIgnoringCacheData
                                                        timeoutInterval:self.timeoutInterval];
@@ -131,11 +131,11 @@
 }
 
 - (void)writeItem:(NSString *)name ofType:(NSString *)type value:(NSString *)value {
-    [self write:@{@"name": name, @"state": value} type:type method:@"POST"];
+    [self write:@{JMRIItemName: name, JMRIItemState: value} type:type method:@"POST"];
 }
 
 - (void)writeItem:(NSString *)name ofType:(NSString *)type state:(NSUInteger)state {
-    [self write:@{@"name": name, @"state":[NSNumber numberWithInteger:state]} type:type method:@"POST"];
+    [self write:@{JMRIItemName: name, JMRIItemState:[NSNumber numberWithInteger:state]} type:type method:@"POST"];
 }
 
 - (void)writeItem:(JMRIItem *)item ofType:(NSString *)type {
@@ -143,11 +143,11 @@
 }
 
 - (void)createItem:(NSString *)name ofType:(NSString *)type withState:(NSUInteger)state {
-    [self write:@{@"name": name, @"state":[NSNumber numberWithInteger:state]} type:type method:@"PUT"];
+    [self write:@{JMRIItemName: name, JMRIItemState:[NSNumber numberWithInteger:state]} type:type method:@"PUT"];
 }
 
 - (void)createItem:(NSString *)name ofType:(NSString *)type withValue:(NSString *)value {
-    [self write:@{@"name": name, @"value":value} type:type method:@"PUT"];
+    [self write:@{JMRIItemName: name, JMRIItemValue:value} type:type method:@"PUT"];
 }
 
 - (void)createItem:(JMRIItem *)item ofType:(NSString *)type {
@@ -177,7 +177,7 @@
             }
         } else {
             [self.delegate JMRINetService:self didReceive:[json description]];
-            if ([json isKindOfClass:[NSArray class]] || [((NSDictionary *)json)[@"type"] isEqualToString:JMRITypeList]) {
+            if ([json isKindOfClass:[NSArray class]] || [((NSDictionary *)json)[JMRIType] isEqualToString:JMRITypeList]) {
                 [self didGetList:json];
             } else {
                 [self didGetItem:(NSDictionary *)json];
@@ -203,45 +203,45 @@
 }
 
 - (void)didGetItem:(NSDictionary *)json {
-    if ([json[@"type"] isEqualToString:JMRITypeLight]) {
+    if ([json[JMRIType] isEqualToString:JMRITypeLight]) {
         [self didGetLightState:json];
-    } else if ([json[@"type"] isEqualToString:JMRITypeMemory]) {
+    } else if ([json[JMRIType] isEqualToString:JMRITypeMemory]) {
         [self didGetMemoryValue:json];
-    } else if ([json[@"type"] isEqualToString:JMRITypeMetadata]) {
+    } else if ([json[JMRIType] isEqualToString:JMRITypeMetadata]) {
         [self didGetMetadata:json];
-    } else if ([json[@"type"] isEqualToString:JMRITypePower]) {
+    } else if ([json[JMRIType] isEqualToString:JMRITypePower]) {
         [self didGetPowerState:json];
-    } else if ([json[@"type"] isEqualToString:JMRITypeReporter]) {
+    } else if ([json[JMRIType] isEqualToString:JMRITypeReporter]) {
         [self didGetReporterValue:json];
-    } else if ([json[@"type"] isEqualToString:JMRITypeSensor]) {
+    } else if ([json[JMRIType] isEqualToString:JMRITypeSensor]) {
         [self didGetSensorState:json];
-    } else if ([json[@"type"] isEqualToString:JMRITypeTurnout]) {
+    } else if ([json[JMRIType] isEqualToString:JMRITypeTurnout]) {
         [self didGetTurnoutState:json];
-    } else if ([json[@"type"] isEqualToString:JMRITypeList]) {
+    } else if ([json[JMRIType] isEqualToString:JMRITypeList]) {
         [self didGetList:json];
-    } else if ([json[@"type"] isEqualToString:JMRITypeHello]) {
+    } else if ([json[JMRIType] isEqualToString:JMRITypeHello]) {
         [self hello:json];
     }
 }
 
 - (void)didGetLightState:(NSDictionary *)json {
-    NSUInteger state = [json[@"data"][@"state"] integerValue];
+    NSUInteger state = [json[JMRIJsonData][JMRIItemState] integerValue];
     if (state == JMRIBeanStateUnknown) {
         state = JMRIItemStateUnknown;
     }
-    [self.delegate JMRINetService:self didGetLight:json[@"data"][@"name"] withState:state withProperties:json[@"data"]];
+    [self.delegate JMRINetService:self didGetLight:json[JMRIJsonData][JMRIItemName] withState:state withProperties:json[JMRIJsonData]];
 }
 
 - (void)didGetMemoryValue:(NSDictionary *)json {
-    [self.delegate JMRINetService:self didGetMemory:json[@"data"][@"name"] withValue:json[@"data"][@"value"] withProperties:json[@"data"]];
+    [self.delegate JMRINetService:self didGetMemory:json[JMRIJsonData][JMRIItemName] withValue:json[JMRIJsonData][JMRIItemValue] withProperties:json[JMRIJsonData]];
 }
 
 - (void)didGetMetadata:(NSDictionary *)json {
-    [self.delegate JMRINetService:self didGetMetadata:json[@"data"][@"name"] withValue:json[@"data"][@"value"] withProperties:json[@"data"]];
+    [self.delegate JMRINetService:self didGetMetadata:json[JMRIJsonData][JMRIItemName] withValue:json[JMRIJsonData][JMRIItemValue] withProperties:json[JMRIJsonData]];
 }
 
 - (void)didGetPowerState:(NSDictionary *)json {
-    NSUInteger state = [json[@"data"][@"state"] integerValue];
+    NSUInteger state = [json[JMRIJsonData][JMRIItemState] integerValue];
     if (state == JMRIBeanStateUnknown) {
         state = JMRIItemStateUnknown;
     }
@@ -249,32 +249,32 @@
 }
 
 - (void)didGetReporterValue:(NSDictionary *)json {
-    [self.delegate JMRINetService:self didGetReporter:json[@"data"][@"name"] withValue:json[@"data"][@"report"] withProperties:json[@"data"]];
+    [self.delegate JMRINetService:self didGetReporter:json[JMRIJsonData][JMRIItemName] withValue:json[JMRIJsonData][@"report"] withProperties:json[JMRIJsonData]];
 }
 
 - (void)didGetSensorState:(NSDictionary *)json {
-    NSUInteger state = [json[@"data"][@"state"] integerValue];
+    NSUInteger state = [json[JMRIJsonData][JMRIItemState] integerValue];
     if (state == JMRIBeanStateUnknown) {
         state = JMRIItemStateUnknown;
     }
-    [self.delegate JMRINetService:self didGetSensor:json[@"data"][@"name"] withState:state withProperties:json[@"data"]];
+    [self.delegate JMRINetService:self didGetSensor:json[JMRIJsonData][JMRIItemName] withState:state withProperties:json[JMRIJsonData]];
 }
 
 - (void)didGetSignalHeadState:(NSDictionary *)json {
-    [self.delegate JMRINetService:self didGetSignalHead:json[@"data"][@"name"] withState:[json[@"data"][@"state"] integerValue] withProperties:json[@"data"]];
+    [self.delegate JMRINetService:self didGetSignalHead:json[JMRIJsonData][JMRIItemName] withState:[json[JMRIJsonData][JMRIItemState] integerValue] withProperties:json[JMRIJsonData]];
 }
 
 - (void)didGetTurnoutState:(NSDictionary *)json {
-    NSUInteger state = [json[@"data"][@"state"] integerValue];
+    NSUInteger state = [json[JMRIJsonData][JMRIItemState] integerValue];
     if (state == JMRIBeanStateUnknown) {
         state = JMRIItemStateUnknown;
     }
-    [self.delegate JMRINetService:self didGetTurnout:json[@"data"][@"name"] withState:state withProperties:json[@"data"]];
+    [self.delegate JMRINetService:self didGetTurnout:json[JMRIJsonData][JMRIItemName] withState:state withProperties:json[JMRIJsonData]];
 }
 
 - (void)didGetList:(NSDictionary *)json {
     if ([json isKindOfClass:[NSDictionary class]]) {
-        for (NSDictionary *item in ((NSDictionary *)json)[@"list"]) {
+        for (NSDictionary *item in ((NSDictionary *)json)[JMRITypeList]) {
             [self didGetItem:item];
         }
     } else {
@@ -285,8 +285,8 @@
 }
 
 - (void)hello:(NSDictionary *)json {
-    serviceVersion = json[@"data"][JMRITXTRecordKeyJMRI];
-    if (json[@"data"][JMRITXTRecordKeyJSON]) {
+    serviceVersion = json[JMRIJsonData][JMRITXTRecordKeyJMRI];
+    if (json[JMRIJsonData][JMRITXTRecordKeyJSON]) {
         [self.delegate useJsonServiceWithURL:[self socketURL]];
     }
 }

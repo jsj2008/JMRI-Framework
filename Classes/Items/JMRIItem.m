@@ -36,11 +36,11 @@
             self.userName = properties[@"userName"];
         }
         self.inverted = [properties[@"inverted"] boolValue];
-        if (properties[@"state"]) {
-            _state = [properties[@"state"] integerValue];
-        } else if (properties[@"value"]) {
+        if (properties[JMRIItemState]) {
+            _state = [properties[JMRIItemState] integerValue];
+        } else if (properties[JMRIItemValue]) {
             _state = JMRIItemStateStateless;
-            _value = properties[@"value"];
+            _value = properties[JMRIItemValue];
         } else {
             _state = JMRIItemStateUnknown;
         }
@@ -217,14 +217,14 @@
 
 - (NSDictionary *)properties {
     if (self.state == JMRIItemStateStateless) {
-        return @{@"name": (self.name) ? self.name : [NSNull null],
+        return @{JMRIItemName: (self.name) ? self.name : [NSNull null],
                  @"comment": (self.comment) ? self.comment : [NSNull null],
-                 @"value": (self.value) ? self.value : [NSNull null],
+                 JMRIItemValue: (self.value) ? self.value : [NSNull null],
                  @"userName": (self.userName) ? self.userName : [NSNull null]};
     } else {
-        return @{@"name": (self.name) ? self.name : [NSNull null],
+        return @{JMRIItemName: (self.name) ? self.name : [NSNull null],
                  @"comment": (self.comment) ? self.comment : [NSNull null],
-                 @"state": [NSNumber numberWithInteger:self.state],
+                 JMRIItemState: [NSNumber numberWithInteger:self.state],
                  @"userName": (self.userName) ? self.userName : [NSNull null]};
     }
 }

@@ -211,7 +211,7 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
             [(XMLIORoster *)newElement setMaxSpeedPct:[[attributeDict objectForKey:XMLIORosterMaxSpeedPct] floatValue]];
             [(XMLIORoster *)newElement setMfg:[attributeDict objectForKey:XMLIORosterMFG]];
             [(XMLIORoster *)newElement setModel:[attributeDict objectForKey:XMLIORosterModel]];
-            [(XMLIORoster *)newElement setName:[attributeDict objectForKey:XMLIOItemName]];
+            [(XMLIORoster *)newElement setName:[attributeDict objectForKey:JMRIItemName]];
             [(XMLIORoster *)newElement setRoadName:[attributeDict objectForKey:XMLIORosterRoadName]];
             [(XMLIORoster *)newElement setRoadNumber:[attributeDict objectForKey:XMLIORosterRoadNumber]];
             [(XMLIORoster *)newElement setUserName:[[NSString stringWithFormat:@"%@ %@", [attributeDict objectForKey:XMLIORosterRoadName], [attributeDict objectForKey:XMLIORosterRoadNumber]] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
@@ -230,7 +230,7 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
                 newElement = [[XMLIOItem alloc] init];
             }
             [(XMLIOItem *)newElement setType:elementName];
-            [(XMLIOItem *)newElement setName:[attributeDict objectForKey:XMLIOItemName]];
+            [(XMLIOItem *)newElement setName:[attributeDict objectForKey:JMRIItemName]];
             [(XMLIOItem *)newElement setUserName:[attributeDict objectForKey:XMLIOItemUserName]];
             [(XMLIOItem *)newElement setValue:[attributeDict objectForKey:XMLIOItemValue]];
             [(XMLIOItem *)newElement setComment:[attributeDict objectForKey:XMLIOItemComment]];
@@ -284,7 +284,7 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
             newElement = t;
             // its an error to have requested a throttle that does not already exist
         } else if ([elementName isEqualToString:XMLIOXMLFunction]) {
-            NSUInteger i = [[[attributeDict objectForKey:XMLIOItemName] substringFromIndex:1] integerValue];
+            NSUInteger i = [[[attributeDict objectForKey:JMRIItemName] substringFromIndex:1] integerValue];
             XMLIOFunction *f = [[(XMLIORoster *)currentElement functions] objectAtIndex:i];
             f.label = [attributeDict objectForKey:XMLIORosterFunctionLabel];
             f.lockable = [[attributeDict objectForKey:XMLIORosterFunctionLockable] isEqualToString:XMLIOBooleanYES];
@@ -333,7 +333,7 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
 	if ([self.delegate respondsToSelector:@selector(XMLIOServiceHelper:didFailWithError:)]) {
         switch (parseError.code) {
             case NSXMLParserPrematureDocumentEndError: // NSXMLParserErrorDomain code 5
-                [self.delegate XMLIOServiceHelper:self didFailWithError:[NSError errorWithDomain:JMRIErrorDomain code:JMRICannotCreateItem userInfo:@{@"item": self.name, @"type": self.type}]];
+                [self.delegate XMLIOServiceHelper:self didFailWithError:[NSError errorWithDomain:JMRIErrorDomain code:JMRICannotCreateItem userInfo:@{@"item": self.name, JMRIType: self.type}]];
                 break;
             default:
                 [self.delegate.delegate logEvent:@"Error %ld, Description: %@, Line: %ld, Column: %ld",

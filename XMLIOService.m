@@ -34,10 +34,7 @@ NSString *const JMRITypeThrottle = @"throttle";
 
 NSString *const XMLIOItemComment = @"comment";
 NSString *const XMLIOItemInverted = @"inverted";
-NSString *const XMLIOItemName = @"name";
-NSString *const XMLIOItemType = @"type";
 NSString *const XMLIOItemUserName = @"userName";
-NSString *const XMLIOItemValue = @"value";
 NSString *const XMLIOItemIsNull = @"isNull";
 
 NSString *const XMLIORosterDCCAddress = @"dccAddress";
@@ -286,23 +283,23 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 - (void)helperDidListItems:(NSDictionary *)parameters {
     [self XMLIOServiceHelper:[parameters objectForKey:@"helper"]
                 didListItems:[parameters objectForKey:@"items"]
-                      ofType:[parameters objectForKey:@"type"]];
+                      ofType:[parameters objectForKey:JMRIType]];
 }
 
 - (void)helperDidReadItem:(NSDictionary *)parameters {
     [self XMLIOServiceHelper:[parameters objectForKey:@"helper"]
                  didReadItem:[parameters objectForKey:@"item"]
-                    withName:[parameters objectForKey:@"name"]
-                      ofType:[parameters objectForKey:@"type"]
-                   withValue:[parameters objectForKey:@"value"]];
+                    withName:[parameters objectForKey:JMRIItemName]
+                      ofType:[parameters objectForKey:JMRIType]
+                   withValue:[parameters objectForKey:JMRIItemValue]];
 }
 
 - (void)helperDidWriteItem:(NSDictionary *)parameters {
     [self XMLIOServiceHelper:[parameters objectForKey:@"helper"]
                 didWriteItem:[parameters objectForKey:@"item"]
-                    withName:[parameters objectForKey:@"name"]
-                      ofType:[parameters objectForKey:@"type"]
-                   withValue:[parameters objectForKey:@"value"]];
+                    withName:[parameters objectForKey:JMRIItemName]
+                      ofType:[parameters objectForKey:JMRIType]
+                   withValue:[parameters objectForKey:JMRIItemValue]];
 }
 
 - (void)helperDidGetThrottle:(NSDictionary *)parameters {
@@ -342,7 +339,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 - (void)XMLIOServiceHelper:(XMLIOServiceHelper *)helper didListItems:(NSArray *)items ofType:(NSString *)type {
     if ([self.delegate isKindOfClass:[RESPONDER class]] && ![NSThread isMainThread]) {
         [self performSelectorOnMainThread:@selector(helperDidListItems:) 
-                               withObject:[NSDictionary dictionaryWithObjectsAndKeys:helper, @"helper", items, @"items", type, @"type", nil]
+                               withObject:[NSDictionary dictionaryWithObjectsAndKeys:helper, @"helper", items, @"items", type, JMRIType, nil]
                             waitUntilDone:NO];
         return;
     }
@@ -361,7 +358,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 - (void)XMLIOServiceHelper:(XMLIOServiceHelper *)helper didReadItem:(XMLIOItem *)item withName:(NSString *)name ofType:(NSString *)type withValue:(NSString *)value {
     if ([self.delegate isKindOfClass:[RESPONDER class]] && ![NSThread isMainThread]) {
         [self performSelectorOnMainThread:@selector(helperDidReadItem:) 
-                               withObject:[NSDictionary dictionaryWithObjectsAndKeys:helper, @"helper", item, @"item", name, @"name", type, @"type", value, @"value", nil]
+                               withObject:[NSDictionary dictionaryWithObjectsAndKeys:helper, @"helper", item, @"item", name, JMRIItemName, type, JMRIType, value, JMRIItemValue, nil]
                             waitUntilDone:NO];
         return;
     }
@@ -392,7 +389,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 - (void)XMLIOServiceHelper:(XMLIOServiceHelper *)helper didWriteItem:(XMLIOItem *)item withName:(NSString *)name ofType:(NSString *)type withValue:(NSString *)value {
     if ([self.delegate isKindOfClass:[RESPONDER class]] && ![NSThread isMainThread]) {
         [self performSelectorOnMainThread:@selector(helperDidWriteItem:) 
-                               withObject:[NSDictionary dictionaryWithObjectsAndKeys:helper, @"helper", item, @"item", name, @"name", type, @"type", value, @"value", nil]
+                               withObject:[NSDictionary dictionaryWithObjectsAndKeys:helper, @"helper", item, @"item", name, JMRIItemName, type, JMRIType, value, JMRIItemValue, nil]
                             waitUntilDone:NO];
         return;
     }

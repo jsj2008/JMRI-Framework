@@ -102,6 +102,16 @@ extern NSString *const JMRISignalAppearanceTextYellow;
 #pragma mark Framework error domain
 extern NSString *const JMRIErrorDomain;
 
+#pragma mark JSON elements
+extern NSString *const JMRIJsonComment;
+extern NSString *const JMRIJsonData;
+extern NSString *const JMRIJsonInverted;
+extern NSString *const JMRIJsonList;
+extern NSString *const JMRIItemName;
+extern NSString *const JMRIItemState;
+extern NSString *const JMRIJsonUserName;
+extern NSString *const JMRIItemValue;
+
 #pragma mark JMRI states
 // Need to maintain two Unknown states due to inconsistencies in JMRI
 typedef enum {

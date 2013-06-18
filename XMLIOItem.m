@@ -57,15 +57,15 @@
     if ([self.type isEqualToString:JMRITypeSensor] ||
         [self.type isEqualToString:JMRITypeRoute] ||
         [self.type isEqualToString:JMRITypeTurnout]) {
-        return @{@"name": (self.name) ? self.name : [NSNull null],
+        return @{JMRIItemName: (self.name) ? self.name : [NSNull null],
                  @"comment": (self.comment) ? self.comment : [NSNull null],
                  @"inverted": (self.inverted) ? [NSNumber numberWithBool:self.inverted] : [NSNumber numberWithBool:NO],
-                 @"state": [NSNumber numberWithInteger:[self.value integerValue]],
+                 JMRIItemState: [NSNumber numberWithInteger:[self.value integerValue]],
                  @"userName": (self.userName) ? self.userName : [NSNull null]};
     } else {
-        return @{@"name": (self.name) ? self.name : [NSNull null],
+        return @{JMRIItemName: (self.name) ? self.name : [NSNull null],
                  @"comment": (self.comment) ? self.comment : [NSNull null],
-                 @"value": (self.value) ? self.value : [NSNull null],
+                 JMRIItemValue: (self.value) ? self.value : [NSNull null],
                  @"userName": (self.userName) ? self.userName : [NSNull null]};
     }
 }
@@ -97,8 +97,8 @@
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
 	if ((self = [super init])) {
-		self.name = [aDecoder decodeObjectForKey:XMLIOItemName];
-		self.type = [aDecoder decodeObjectForKey:XMLIOItemType];
+		self.name = [aDecoder decodeObjectForKey:JMRIItemName];
+		self.type = [aDecoder decodeObjectForKey:JMRIType];
 		self.userName = [aDecoder decodeObjectForKey:XMLIOItemUserName];
 		self.value = [aDecoder decodeObjectForKey:XMLIOItemValue];
 		self.comment = [aDecoder decodeObjectForKey:XMLIOItemComment];
@@ -121,8 +121,8 @@
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    [aCoder encodeObject:self.name forKey:XMLIOItemName];
-    [aCoder encodeObject:self.type forKey:XMLIOItemType];
+    [aCoder encodeObject:self.name forKey:JMRIItemName];
+    [aCoder encodeObject:self.type forKey:JMRIType];
     [aCoder encodeObject:self.userName forKey:XMLIOItemUserName];
     [aCoder encodeObject:self.value forKey:XMLIOItemValue];
     [aCoder encodeObject:self.comment forKey:XMLIOItemComment];
