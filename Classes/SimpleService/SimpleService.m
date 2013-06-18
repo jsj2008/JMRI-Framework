@@ -8,7 +8,6 @@
 
 #import "SimpleService.h"
 #import "JMRIConstants.h"
-#import "JMRIPanel.h"
 #ifdef TARGET_OS_IPHONE
 #import "NSStream+JMRIExtensions.h"
 #endif
@@ -258,21 +257,21 @@
     NSUInteger state = JMRISignalAppearanceDark;
     NSArray *tokens = [string componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     // since dark is the default/fallback state, we aren't checking for it.
-    if ([[tokens objectAtIndex:2] isEqualToString:JMRIPanelSignalFlashGreen]) {
+    if ([[tokens objectAtIndex:2] isEqualToString:JMRISignalAppearanceTextFlashGreen]) {
         state = JMRISignalAppearanceFlashGreen;
-    } else if ([[tokens objectAtIndex:2] isEqualToString:JMRIPanelSignalFlashLunar]) {
+    } else if ([[tokens objectAtIndex:2] isEqualToString:JMRISignalAppearanceTextFlashLunar]) {
         state = JMRISignalAppearanceFlashLunar;
-    } else if ([[tokens objectAtIndex:2] isEqualToString:JMRIPanelSignalFlashRed]) {
+    } else if ([[tokens objectAtIndex:2] isEqualToString:JMRISignalAppearanceTextFlashRed]) {
         state = JMRISignalAppearanceFlashRed;
-    } else if ([[tokens objectAtIndex:2] isEqualToString:JMRIPanelSignalFlashYellow]) {
+    } else if ([[tokens objectAtIndex:2] isEqualToString:JMRISignalAppearanceTextFlashYellow]) {
         state = JMRISignalAppearanceFlashYellow;
-    } else if ([[tokens objectAtIndex:2] isEqualToString:JMRIPanelSignalGreen]) {
+    } else if ([[tokens objectAtIndex:2] isEqualToString:JMRISignalAppearanceTextGreen]) {
         state = JMRISignalAppearanceGreen;
-    } else if ([[tokens objectAtIndex:2] isEqualToString:JMRIPanelSignalLunar]) {
+    } else if ([[tokens objectAtIndex:2] isEqualToString:JMRISignalAppearanceTextLunar]) {
         state = JMRISignalAppearanceLunar;
-    } else if ([[tokens objectAtIndex:2] isEqualToString:JMRIPanelSignalRed]) {
+    } else if ([[tokens objectAtIndex:2] isEqualToString:JMRISignalAppearanceTextRed]) {
         state = JMRISignalAppearanceRed;
-    } else if ([[tokens objectAtIndex:2] isEqualToString:JMRIPanelSignalYellow]) {
+    } else if ([[tokens objectAtIndex:2] isEqualToString:JMRISignalAppearanceTextYellow]) {
         state = JMRISignalAppearanceYellow;
     }
     [self.delegate JMRINetService:self didGetSignalHead:[tokens objectAtIndex:1] withState:state withProperties:nil];

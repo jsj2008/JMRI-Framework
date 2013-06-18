@@ -59,12 +59,6 @@ extern NSString *const JMRIMetadataVersionMinor;
 extern NSString *const JMRIMetadataVersionTest;
 extern NSString *const JMRISensorClockRunning;
 
-// JMRI panel elements
-extern NSString *const JMRIPanelPositionableLabel;
-extern NSString *const JMRIPanelSensorIcon;
-extern NSString *const JMRIPanelSignalHeadIcon;
-extern NSString *const JMRIPanelTurnoutIcon;
-
 // JMRI zeroconf elements
 extern NSString *const JMRITXTRecordKeyJMRI;
 extern NSString *const JMRITXTRecordKeyJSON;
@@ -91,6 +85,18 @@ extern NSString *const JMRIList;
 extern NSString *const JMRIRemovedBonjourService;
 extern NSString *const JMRIServiceKey;
 extern NSString *const JMRIType;
+
+// Signal head appearance names
+extern NSString *const JMRISignalAppearanceTextDark;
+extern NSString *const JMRISignalAppearanceTextFlashGreen;
+extern NSString *const JMRISignalAppearanceTextFlashLunar;
+extern NSString *const JMRISignalAppearanceTextFlashRed;
+extern NSString *const JMRISignalAppearanceTextFlashYellow;
+extern NSString *const JMRISignalAppearanceTextGreen;
+extern NSString *const JMRISignalAppearanceTextHeld;
+extern NSString *const JMRISignalAppearanceTextLunar;
+extern NSString *const JMRISignalAppearanceTextRed;
+extern NSString *const JMRISignalAppearanceTextYellow;
 
 // Framework error domain
 extern NSString *const JMRIErrorDomain;

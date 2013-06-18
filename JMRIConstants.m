@@ -60,12 +60,6 @@ NSString *const JMRIMetadataVersionMinor = @"minor";
 NSString *const JMRIMetadataVersionTest = @"test";
 NSString *const JMRISensorClockRunning = @"ISCLOCKRUNNING";
 
-// JMRI panel elements
-NSString *const JMRIPanelPositionableLabel = @"positionablelabel";
-NSString *const JMRIPanelSensorIcon = @"sensoricon";
-NSString *const JMRIPanelSignalHeadIcon = @"signalheadicon";
-NSString *const JMRIPanelTurnoutIcon = @"turnouticon";
-
 // JMRI zeroconf elements
 NSString *const JMRITXTRecordKeyJMRI = @"jmri";
 NSString *const JMRITXTRecordKeyJSON = @"json";
@@ -93,6 +87,18 @@ NSString *const JMRIList = @"list";
 NSString *const JMRIRemovedBonjourService = @"JMRIRemovedBonjourService";
 NSString *const JMRIServiceKey = @"service";
 NSString *const JMRIType = @"type";
+
+// Signal head appearance names
+NSString *const JMRISignalAppearanceTextFlashYellow = @"flashyellow";
+NSString *const JMRISignalAppearanceTextGreen = @"green";
+NSString *const JMRISignalAppearanceTextRed = @"red";
+NSString *const JMRISignalAppearanceTextYellow = @"yellow";
+NSString *const JMRISignalAppearanceTextDark = @"dark";
+NSString *const JMRISignalAppearanceTextFlashGreen = @"flashgreen";
+NSString *const JMRISignalAppearanceTextFlashLunar = @"flashlunar";
+NSString *const JMRISignalAppearanceTextFlashRed = @"flashred";
+NSString *const JMRISignalAppearanceTextHeld = @"held";
+NSString *const JMRISignalAppearanceTextLunar = @"lunar";
 
 // Framework error domain
 NSString *const JMRIErrorDomain = @"JMRIError";

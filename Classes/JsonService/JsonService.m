@@ -9,7 +9,6 @@
 #import "JsonService.h"
 #import "JMRIConstants.h"
 #import "JMRIItem.h"
-#import "JMRIPanel.h"
 #import "NSMutableArray+QueueExtensions.h"
 #import "SocketRocket/SRWebSocket.h"
 #ifdef TARGET_OS_IPHONE
