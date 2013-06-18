@@ -7,7 +7,7 @@
 //
 
 #import "JMRINetService.h"
-#define MIN_JSON_VERSION @"3.3.6"
+#define MIN_JSON_VERSION @"3.3.7"
 
 @class JMRIItem;
 

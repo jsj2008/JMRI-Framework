@@ -7,7 +7,7 @@
 //
 
 #import "JMRINetService.h"
-#define JMRI_WEB_RECOMMENDED_VERSION @"3.3.6"
+#define JMRI_WEB_RECOMMENDED_VERSION @"3.3.7"
 #define JMRI_JSON_RECOMMENDED_VERSION @"0.1"
 
 @class JMRIItem;
