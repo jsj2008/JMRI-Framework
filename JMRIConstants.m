@@ -8,14 +8,14 @@
 
 #import "JMRIConstants.h"
 
-// Known service types
+#pragma mark Known service types
 NSString *const JMRIServiceJson = @"jsonService";
 NSString *const JMRIServiceSimple = @"simpleService";
 NSString *const JMRIServiceWeb = @"webService";
 NSString *const JMRIServiceWiThrottle = @"wiThrottleService";
 NSString *const JMRIServiceXmlIO = @"xmlIOService";
 
-// JMRI item types
+#pragma mark JMRI item types
 NSString *const JMRITypeError = @"error";
 NSString *const JMRITypeFrame = @"frame";
 NSString *const JMRITypeHello = @"hello";
@@ -35,7 +35,8 @@ NSString *const JMRITypeSensor = @"sensor";
 NSString *const JMRITypeSignalHead = @"signalHead";
 NSString *const JMRITypeTurnout = @"turnout";
 
-// JMRI collections (where the collection name != contained item type)
+#pragma mark JMRI collections
+// where the collection name != contained item type
 NSString *const JMRIListLights = @"lights";
 NSString *const JMRIListMemories = @"memories";
 NSString *const JMRIListPanels = @"panels";
@@ -45,7 +46,7 @@ NSString *const JMRIListSensors = @"sensors";
 NSString *const JMRIListSignalHeads = @"signalHeads";
 NSString *const JMRIListTurnouts = @"turnouts";
 
-// JMRI known item names
+#pragma mark JMRI known item names
 NSString *const JMRIMemoryCurrentTime = @"IMCURRENTTIME";
 NSString *const JMRIMemoryRateFactor = @"IMRATEFACTOR";
 NSString *const JMRIMetadataJMRIVersion = @"JMRIVERSION";
@@ -60,11 +61,11 @@ NSString *const JMRIMetadataVersionMinor = @"minor";
 NSString *const JMRIMetadataVersionTest = @"test";
 NSString *const JMRISensorClockRunning = @"ISCLOCKRUNNING";
 
-// JMRI zeroconf elements
+#pragma mark JMRI zeroconf elements
 NSString *const JMRITXTRecordKeyJMRI = @"jmri";
 NSString *const JMRITXTRecordKeyJSON = @"json";
 
-// Framework notifications
+#pragma mark Framework notifications
 NSString *const JMRINotificationStateChange = @"JMRINotificationStateChange";
 NSString *const JMRINotificationItemAdded = @"JMRINotificationItemAdded";
 NSString *const JMRINotificationBonjourServiceAdded = @"JMRINotificationBonjourServiceAdded";
@@ -78,7 +79,7 @@ NSString *const JMRINotificationDidStart = @"JMRINotificationDidStart";
 NSString *const JMRINotificationDidStop = @"JMRINotificationDidStop";
 NSString *const JMRINotificationDidFailWithError = @"JMRINotificationDidFailWithError";
 
-// Framework notification userInfo dictionary keys
+#pragma mark Framework notification userInfo dictionary keys
 NSString *const JMRIAddedBonjourService = @"JMRIAddedBonjourService";
 NSString *const JMRIAddedItem = @"item";
 NSString *const JMRIChangedService = @"JMRIChangedService";
@@ -88,7 +89,7 @@ NSString *const JMRIRemovedBonjourService = @"JMRIRemovedBonjourService";
 NSString *const JMRIServiceKey = @"service";
 NSString *const JMRIType = @"type";
 
-// Signal head appearance names
+#pragma mark Signal head appearance names
 NSString *const JMRISignalAppearanceTextFlashYellow = @"flashyellow";
 NSString *const JMRISignalAppearanceTextGreen = @"green";
 NSString *const JMRISignalAppearanceTextRed = @"red";
@@ -100,6 +101,6 @@ NSString *const JMRISignalAppearanceTextFlashRed = @"flashred";
 NSString *const JMRISignalAppearanceTextHeld = @"held";
 NSString *const JMRISignalAppearanceTextLunar = @"lunar";
 
-// Framework error domain
+#pragma mark Framework error domain
 NSString *const JMRIErrorDomain = @"JMRIError";
 

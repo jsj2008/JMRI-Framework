@@ -7,14 +7,14 @@
 //
 
 
-// Known service types
+#pragma mark Known service types
 extern NSString *const JMRIServiceJson;
 extern NSString *const JMRIServiceSimple;
 extern NSString *const JMRIServiceWeb;
 extern NSString *const JMRIServiceWiThrottle;
 extern NSString *const JMRIServiceXmlIO;
 
-// JMRI item types
+#pragma mark JMRI item types
 extern NSString *const JMRITypeError;
 extern NSString *const JMRITypeFrame;
 extern NSString *const JMRITypeHello;
@@ -34,7 +34,8 @@ extern NSString *const JMRITypeSensor;
 extern NSString *const JMRITypeSignalHead;
 extern NSString *const JMRITypeTurnout;
 
-// JMRI collections (where the collection name != contained item type)
+#pragma mark JMRI collections
+// where the collection name != contained item type
 extern NSString *const JMRIListLights;
 extern NSString *const JMRIListMemories;
 extern NSString *const JMRIListPanels;
@@ -44,7 +45,7 @@ extern NSString *const JMRIListSensors;
 extern NSString *const JMRIListSignalHeads;
 extern NSString *const JMRIListTurnouts;
 
-// JMRI known item names
+#pragma mark JMRI known item names
 extern NSString *const JMRIMemoryCurrentTime;
 extern NSString *const JMRIMemoryRateFactor;
 extern NSString *const JMRIMetadataJMRIVersion;
@@ -59,11 +60,11 @@ extern NSString *const JMRIMetadataVersionMinor;
 extern NSString *const JMRIMetadataVersionTest;
 extern NSString *const JMRISensorClockRunning;
 
-// JMRI zeroconf elements
+#pragma mark JMRI zeroconf elements
 extern NSString *const JMRITXTRecordKeyJMRI;
 extern NSString *const JMRITXTRecordKeyJSON;
 
-// Framework notifications
+#pragma mark Framework notifications
 extern NSString *const JMRINotificationStateChange;
 extern NSString *const JMRINotificationItemAdded;
 extern NSString *const JMRINotificationBonjourServiceAdded;
@@ -77,7 +78,7 @@ extern NSString *const JMRINotificationDidStart;
 extern NSString *const JMRINotificationDidStop;
 extern NSString *const JMRINotificationDidFailWithError;
 
-// Framework notification userInfo dictionary keys
+#pragma mark Framework notification userInfo dictionary keys
 extern NSString *const JMRIAddedBonjourService;
 extern NSString *const JMRIAddedItem;
 extern NSString *const JMRIChangedService;
@@ -86,7 +87,7 @@ extern NSString *const JMRIRemovedBonjourService;
 extern NSString *const JMRIServiceKey;
 extern NSString *const JMRIType;
 
-// Signal head appearance names
+#pragma mark Signal head appearance names
 extern NSString *const JMRISignalAppearanceTextDark;
 extern NSString *const JMRISignalAppearanceTextFlashGreen;
 extern NSString *const JMRISignalAppearanceTextFlashLunar;
@@ -98,10 +99,10 @@ extern NSString *const JMRISignalAppearanceTextLunar;
 extern NSString *const JMRISignalAppearanceTextRed;
 extern NSString *const JMRISignalAppearanceTextYellow;
 
-// Framework error domain
+#pragma mark Framework error domain
 extern NSString *const JMRIErrorDomain;
 
-// JMRI states
+#pragma mark JMRI states
 // Need to maintain two Unknown states due to inconsistencies in JMRI
 typedef enum {
 	JMRIItemStateUnknown = 0,
@@ -114,7 +115,7 @@ typedef enum {
     JMRIItemStateStateless = INT_MAX
 } JMRIItemStates;
 
-// Signal head appearances
+#pragma mark Signal head appearances
 typedef enum {
     JMRISignalAppearanceDark = 0,
     JMRISignalAppearanceRed = 1,
@@ -127,7 +128,7 @@ typedef enum {
     JMRISignalAppearanceFlashLunar = 80
 } JMRISignalAppearances;
 
-// Framework error codes
+#pragma mark Framework error codes
 typedef enum {
     JMRIMalformedRequest = 400,
     JMRICannotCreateItem = 403,

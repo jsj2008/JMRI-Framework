@@ -6,7 +6,7 @@
 //
 //
 
-#pragma mark - JMRI Panel Elements
+#pragma mark JMRI Panel Elements
 NSString *const JMRIPanelIcon = @"icon";
 NSString *const JMRIPanelIconMaps = @"iconmaps";
 NSString *const JMRIPanelIcons = @"icons";
@@ -15,5 +15,5 @@ NSString *const JMRIPanelSensorIcon = @"sensoricon";
 NSString *const JMRIPanelSignalHeadIcon = @"signalheadicon";
 NSString *const JMRIPanelTurnoutIcon = @"turnouticon";
 
-#pragma mark - JMRI Panel Attributes
+#pragma mark JMRI Panel Attributes
 NSString *const JMRIPanelRotation = @"rotation";
