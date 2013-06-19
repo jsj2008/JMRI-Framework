@@ -189,6 +189,7 @@
 #pragma mark - Private methods
 
 - (void)write:(NSDictionary *)jsonObject {
+    [self.delegate logEvent:@"jsonService sending %@", jsonObject.description];
     NSError* error = nil;
     NSData *data = [NSJSONSerialization dataWithJSONObject:jsonObject options:0 error:&error];
     if (error != nil) {
