@@ -58,15 +58,15 @@
         [self.type isEqualToString:JMRITypeRoute] ||
         [self.type isEqualToString:JMRITypeTurnout]) {
         return @{JMRIItemName: (self.name) ? self.name : [NSNull null],
-                 @"comment": (self.comment) ? self.comment : [NSNull null],
-                 @"inverted": (self.inverted) ? [NSNumber numberWithBool:self.inverted] : [NSNumber numberWithBool:NO],
+                 JMRIItemComment: (self.comment) ? self.comment : [NSNull null],
+                 JMRIItemInverted: (self.inverted) ? [NSNumber numberWithBool:self.inverted] : [NSNumber numberWithBool:NO],
                  JMRIItemState: [NSNumber numberWithInteger:[self.value integerValue]],
-                 @"userName": (self.userName) ? self.userName : [NSNull null]};
+                 JMRIItemUserName: (self.userName) ? self.userName : [NSNull null]};
     } else {
         return @{JMRIItemName: (self.name) ? self.name : [NSNull null],
-                 @"comment": (self.comment) ? self.comment : [NSNull null],
+                 JMRIItemComment: (self.comment) ? self.comment : [NSNull null],
                  JMRIItemValue: (self.value) ? self.value : [NSNull null],
-                 @"userName": (self.userName) ? self.userName : [NSNull null]};
+                 JMRIItemUserName: (self.userName) ? self.userName : [NSNull null]};
     }
 }
 
@@ -99,10 +99,10 @@
 	if ((self = [super init])) {
 		self.name = [aDecoder decodeObjectForKey:JMRIItemName];
 		self.type = [aDecoder decodeObjectForKey:JMRIType];
-		self.userName = [aDecoder decodeObjectForKey:XMLIOItemUserName];
-		self.value = [aDecoder decodeObjectForKey:XMLIOItemValue];
-		self.comment = [aDecoder decodeObjectForKey:XMLIOItemComment];
-		self.inverted = [aDecoder decodeBoolForKey:XMLIOItemInverted];
+		self.userName = [aDecoder decodeObjectForKey:JMRIItemUserName];
+		self.value = [aDecoder decodeObjectForKey:JMRIItemValue];
+		self.comment = [aDecoder decodeObjectForKey:JMRIItemComment];
+		self.inverted = [aDecoder decodeBoolForKey:JMRIItemInverted];
 		self.dccAddress = 0;
 		self.addressLength = nil;
 		self.roadName = nil;
@@ -123,10 +123,10 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [aCoder encodeObject:self.name forKey:JMRIItemName];
     [aCoder encodeObject:self.type forKey:JMRIType];
-    [aCoder encodeObject:self.userName forKey:XMLIOItemUserName];
-    [aCoder encodeObject:self.value forKey:XMLIOItemValue];
-    [aCoder encodeObject:self.comment forKey:XMLIOItemComment];
-    [aCoder encodeBool:self.inverted forKey:XMLIOItemInverted];
+    [aCoder encodeObject:self.userName forKey:JMRIItemUserName];
+    [aCoder encodeObject:self.value forKey:JMRIItemValue];
+    [aCoder encodeObject:self.comment forKey:JMRIItemComment];
+    [aCoder encodeBool:self.inverted forKey:JMRIItemInverted];
 }
 
 @end

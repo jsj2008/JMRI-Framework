@@ -29,13 +29,13 @@
 - (id)initWithName:(NSString *)name withService:(JMRIService *)service withProperties:(NSDictionary *)properties {
     if ((self = [super init])) {
         self.name = name;
-        if (properties[@"comment"] != [NSNull null]) {
-            self.comment = properties[@"comment"];
+        if (properties[JMRIItemComment] != [NSNull null]) {
+            self.comment = properties[JMRIItemComment];
         }
-        if (properties[@"userName"] != [NSNull null]) {
-            self.userName = properties[@"userName"];
+        if (properties[JMRIItemUserName] != [NSNull null]) {
+            self.userName = properties[JMRIItemUserName];
         }
-        self.inverted = [properties[@"inverted"] boolValue];
+        self.inverted = [properties[JMRIItemInverted] boolValue];
         if (properties[JMRIItemState]) {
             _state = [properties[JMRIItemState] integerValue];
         } else if (properties[JMRIItemValue]) {
@@ -218,14 +218,14 @@
 - (NSDictionary *)properties {
     if (self.state == JMRIItemStateStateless) {
         return @{JMRIItemName: (self.name) ? self.name : [NSNull null],
-                 @"comment": (self.comment) ? self.comment : [NSNull null],
+                 JMRIItemComment: (self.comment) ? self.comment : [NSNull null],
                  JMRIItemValue: (self.value) ? self.value : [NSNull null],
-                 @"userName": (self.userName) ? self.userName : [NSNull null]};
+                 JMRIItemUserName: (self.userName) ? self.userName : [NSNull null]};
     } else {
         return @{JMRIItemName: (self.name) ? self.name : [NSNull null],
-                 @"comment": (self.comment) ? self.comment : [NSNull null],
+                 JMRIItemComment: (self.comment) ? self.comment : [NSNull null],
                  JMRIItemState: [NSNumber numberWithInteger:self.state],
-                 @"userName": (self.userName) ? self.userName : [NSNull null]};
+                 JMRIItemUserName: (self.userName) ? self.userName : [NSNull null]};
     }
 }
 

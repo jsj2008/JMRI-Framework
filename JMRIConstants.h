@@ -80,7 +80,7 @@ extern NSString *const JMRINotificationDidFailWithError;
 
 #pragma mark Framework notification userInfo dictionary keys
 extern NSString *const JMRIAddedBonjourService;
-extern NSString *const JMRIAddedItem;
+extern NSString *const JMRIItemKey;
 extern NSString *const JMRIChangedService;
 extern NSString *const JMRIList;
 extern NSString *const JMRIRemovedBonjourService;
@@ -103,14 +103,18 @@ extern NSString *const JMRISignalAppearanceTextYellow;
 extern NSString *const JMRIErrorDomain;
 
 #pragma mark JSON elements
-extern NSString *const JMRIJsonComment;
+extern NSString *const JMRIItemComment;
 extern NSString *const JMRIJsonData;
-extern NSString *const JMRIJsonInverted;
+extern NSString *const JMRIItemInverted;
 extern NSString *const JMRIJsonList;
 extern NSString *const JMRIItemName;
 extern NSString *const JMRIItemState;
-extern NSString *const JMRIJsonUserName;
+extern NSString *const JMRIItemUserName;
 extern NSString *const JMRIItemValue;
+
+#pragma mark HTTP Methods
+extern NSString *const HTTPMethodPost;
+extern NSString *const HTTPMethodPut;
 
 #pragma mark JMRI states
 // Need to maintain two Unknown states due to inconsistencies in JMRI

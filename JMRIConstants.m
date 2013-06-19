@@ -81,7 +81,7 @@ NSString *const JMRINotificationDidFailWithError = @"JMRINotificationDidFailWith
 
 #pragma mark Framework notification userInfo dictionary keys
 NSString *const JMRIAddedBonjourService = @"JMRIAddedBonjourService";
-NSString *const JMRIAddedItem = @"item";
+NSString *const JMRIItemKey = @"item";
 NSString *const JMRIChangedService = @"JMRIChangedService";
 NSString *const JMRIErrorKey = @"error";
 NSString *const JMRIList = @"list";
@@ -105,10 +105,14 @@ NSString *const JMRISignalAppearanceTextLunar = @"lunar";
 NSString *const JMRIErrorDomain = @"JMRIError";
 
 #pragma mark JSON elements
-NSString *const JMRIJsonComment = @"comment";
+NSString *const JMRIItemComment = @"comment";
 NSString *const JMRIJsonData = @"data";
-NSString *const JMRIJsonInverted = @"inverted";
+NSString *const JMRIItemInverted = @"inverted";
 NSString *const JMRIItemName = @"name";
 NSString *const JMRIItemState = @"state";
-NSString *const JMRIJsonUserName = @"userName";
+NSString *const JMRIItemUserName = @"userName";
 NSString *const JMRIItemValue = @"value";
+
+#pragma mark HTTP Methods
+NSString *const HTTPMethodPost = @"POST";
+NSString *const HTTPMethodPut = @"PUT";

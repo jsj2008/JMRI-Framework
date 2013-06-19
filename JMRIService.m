@@ -666,7 +666,7 @@
                                                         object:self
                                                       userInfo:@{
                                                 JMRIServiceKey: self,
-                                                 JMRIAddedItem: item,
+                                                   JMRIItemKey: item,
                                                       JMRIList: list,
                                                       JMRIType: item.type}];
 }

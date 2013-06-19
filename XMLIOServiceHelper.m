@@ -27,7 +27,6 @@
 
 // XMLIO Types
 NSString *const XMLIOXMLXMLIO = @"xmlio";
-NSString *const XMLIOXMLItem = @"item";
 NSString *const XMLIOXMLThrottle = @"throttle";
 
 // XMLIO Roster function attribute names that are properties of XMLIOFunction objects
@@ -178,12 +177,12 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
 			break;
 		case XMLIOOperationRead:
 			if ([self.delegate respondsToSelector:@selector(XMLIOServiceHelper:didReadItem:withName:ofType:withValue:)]) {
-				[self.delegate XMLIOServiceHelper:self didReadItem:[items objectForKey:name_] withName:name_ ofType:type_ withValue:[[items objectForKey:name_] valueForKey:XMLIOItemValue]];
+				[self.delegate XMLIOServiceHelper:self didReadItem:[items objectForKey:name_] withName:name_ ofType:type_ withValue:[[items objectForKey:name_] valueForKey:JMRIItemValue]];
 			}
 			break;
 		case XMLIOOperationWrite:
 			if ([self.delegate respondsToSelector:@selector(XMLIOServiceHelper:didWriteItem:ofType:withValue:)]) {
-				[self.delegate XMLIOServiceHelper:self didWriteItem:[items objectForKey:name_] withName:name_ ofType:type_ withValue:[[items objectForKey:name_] valueForKey:XMLIOItemValue]];
+				[self.delegate XMLIOServiceHelper:self didWriteItem:[items objectForKey:name_] withName:name_ ofType:type_ withValue:[[items objectForKey:name_] valueForKey:JMRIItemValue]];
 			}
             break;
         case XMLIOOperationThrottle:
@@ -205,7 +204,7 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
             newElement = [[XMLIORoster alloc] init];
             [(XMLIORoster *)newElement setDccAddress:[[attributeDict objectForKey:XMLIORosterDCCAddress] integerValue]];
             [(XMLIORoster *)newElement setAddressLength:[attributeDict objectForKey:XMLIORosterAddressLength]];
-            [(XMLIORoster *)newElement setComment:[attributeDict objectForKey:XMLIOItemComment]];
+            [(XMLIORoster *)newElement setComment:[attributeDict objectForKey:JMRIItemComment]];
             [(XMLIORoster *)newElement setImageFileName:[attributeDict objectForKey:XMLIORosterImageFileName]];
             [(XMLIORoster *)newElement setImageIconName:[attributeDict objectForKey:XMLIORosterImageIconName]];
             [(XMLIORoster *)newElement setMaxSpeedPct:[[attributeDict objectForKey:XMLIORosterMaxSpeedPct] floatValue]];
@@ -231,10 +230,10 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
             }
             [(XMLIOItem *)newElement setType:elementName];
             [(XMLIOItem *)newElement setName:[attributeDict objectForKey:JMRIItemName]];
-            [(XMLIOItem *)newElement setUserName:[attributeDict objectForKey:XMLIOItemUserName]];
-            [(XMLIOItem *)newElement setValue:[attributeDict objectForKey:XMLIOItemValue]];
-            [(XMLIOItem *)newElement setComment:[attributeDict objectForKey:XMLIOItemComment]];
-            [(XMLIOItem *)newElement setInverted:[[attributeDict objectForKey:XMLIOItemInverted] isEqualToString:XMLIOBooleanYES]];
+            [(XMLIOItem *)newElement setUserName:[attributeDict objectForKey:JMRIItemUserName]];
+            [(XMLIOItem *)newElement setValue:[attributeDict objectForKey:JMRIItemValue]];
+            [(XMLIOItem *)newElement setComment:[attributeDict objectForKey:JMRIItemComment]];
+            [(XMLIOItem *)newElement setInverted:[[attributeDict objectForKey:JMRIItemInverted] isEqualToString:XMLIOBooleanYES]];
             if ([XMLIOBooleanYES isEqualToString:[attributeDict objectForKey:XMLIOItemIsNull]]) {
                 [(XMLIOItem *)newElement setValue:nil];
             }
@@ -289,7 +288,7 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
             f.label = [attributeDict objectForKey:XMLIORosterFunctionLabel];
             f.lockable = [[attributeDict objectForKey:XMLIORosterFunctionLockable] isEqualToString:XMLIOBooleanYES];
             newElement = [[XMLIOObject alloc] init];
-        } else if ([elementName isEqualToString:XMLIOXMLItem]) {
+        } else if ([elementName isEqualToString:JMRIItemKey]) {
             newElement = [[XMLIOItem alloc] init];
         } else {
             newElement = [[XMLIOObject alloc] init];
@@ -333,7 +332,7 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
 	if ([self.delegate respondsToSelector:@selector(XMLIOServiceHelper:didFailWithError:)]) {
         switch (parseError.code) {
             case NSXMLParserPrematureDocumentEndError: // NSXMLParserErrorDomain code 5
-                [self.delegate XMLIOServiceHelper:self didFailWithError:[NSError errorWithDomain:JMRIErrorDomain code:JMRICannotCreateItem userInfo:@{@"item": self.name, JMRIType: self.type}]];
+                [self.delegate XMLIOServiceHelper:self didFailWithError:[NSError errorWithDomain:JMRIErrorDomain code:JMRICannotCreateItem userInfo:@{JMRIItemKey: self.name, JMRIType: self.type}]];
                 break;
             default:
                 [self.delegate.delegate logEvent:@"Error %ld, Description: %@, Line: %ld, Column: %ld",

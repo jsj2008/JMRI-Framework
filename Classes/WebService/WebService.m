@@ -27,6 +27,8 @@
 
 @end
 
+NSString *const rootPath = @"/";
+
 @implementation WebService
 
 #pragma mark - Object management
@@ -52,7 +54,7 @@
 - (void)commonInit {
     serviceType = JMRIServiceWeb;
     _openConnections = 0;
-    self.JSONPath = @"json/";
+    self.jsonPath = @"json/";
     [self read:JMRITypeHello];
     [self readItem:JMRIMetadataJMRICanonicalVersion ofType:JMRITypeMetadata];
 }
@@ -63,13 +65,13 @@
 	if (self.port == -1) {
 		return nil;
 	}
-	if (![self.JSONPath hasPrefix:@"/"]) {
-		self.JSONPath = [@"/" stringByAppendingString:self.JSONPath];
+	if (![self.jsonPath hasPrefix:rootPath]) {
+		self.jsonPath = [rootPath stringByAppendingString:self.jsonPath];
 	}
-    if (![self.JSONPath hasSuffix:@"/"]) {
-        self.JSONPath = [self.JSONPath stringByAppendingString:@"/"];
+    if (![self.jsonPath hasSuffix:rootPath]) {
+        self.jsonPath = [self.jsonPath stringByAppendingString:rootPath];
     }
-	return [[NSURL URLWithString:[NSString stringWithFormat:format, self.hostName, (long)self.port, self.JSONPath, nil]] absoluteURL];
+	return [[NSURL URLWithString:[NSString stringWithFormat:format, self.hostName, (long)self.port, self.jsonPath, nil]] absoluteURL];
 }
 
 - (NSURL *)url {
@@ -131,27 +133,27 @@
 }
 
 - (void)writeItem:(NSString *)name ofType:(NSString *)type value:(NSString *)value {
-    [self write:@{JMRIItemName: name, JMRIItemState: value} type:type method:@"POST"];
+    [self write:@{JMRIItemName: name, JMRIItemState: value} type:type method:HTTPMethodPost];
 }
 
 - (void)writeItem:(NSString *)name ofType:(NSString *)type state:(NSUInteger)state {
-    [self write:@{JMRIItemName: name, JMRIItemState:[NSNumber numberWithInteger:state]} type:type method:@"POST"];
+    [self write:@{JMRIItemName: name, JMRIItemState:[NSNumber numberWithInteger:state]} type:type method:HTTPMethodPost];
 }
 
 - (void)writeItem:(JMRIItem *)item ofType:(NSString *)type {
-    [self write:item.properties type:type method:@"POST"];
+    [self write:item.properties type:type method:HTTPMethodPost];
 }
 
 - (void)createItem:(NSString *)name ofType:(NSString *)type withState:(NSUInteger)state {
-    [self write:@{JMRIItemName: name, JMRIItemState:[NSNumber numberWithInteger:state]} type:type method:@"PUT"];
+    [self write:@{JMRIItemName: name, JMRIItemState:[NSNumber numberWithInteger:state]} type:type method:HTTPMethodPut];
 }
 
 - (void)createItem:(NSString *)name ofType:(NSString *)type withValue:(NSString *)value {
-    [self write:@{JMRIItemName: name, JMRIItemValue:value} type:type method:@"PUT"];
+    [self write:@{JMRIItemName: name, JMRIItemValue:value} type:type method:HTTPMethodPut];
 }
 
 - (void)createItem:(JMRIItem *)item ofType:(NSString *)type {
-    [self write:item.properties type:type method:@"PUT"];
+    [self write:item.properties type:type method:HTTPMethodPut];
 }
 
 - (void)failWithError:(NSError *)error {

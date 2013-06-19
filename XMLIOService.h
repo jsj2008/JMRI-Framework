@@ -26,11 +26,6 @@
 extern NSString *const JMRITypeThrottle;
 
 // JMRI XMLIO item attributes
-extern NSString *const XMLIOItemComment;
-extern NSString *const XMLIOItemInverted;
-extern NSString *const JMRIItemName;
-extern NSString *const XMLIOItemUserName;
-extern NSString *const XMLIOItemValue;
 extern NSString *const XMLIOItemIsNull;
 
 // JMRI XMLIO roster attributes
@@ -87,7 +82,6 @@ extern NSString *const XMLIOServiceDidReadItem;
 extern NSString *const XMLIOServiceDidWriteItem;
 extern NSString *const XMLIOServiceDidGetThrottle;
 extern NSString *const XMLIOItemsListKey;
-extern NSString *const XMLIOItemKey;
 extern NSString *const XMLIOItemNameKey;
 extern NSString *const XMLIOItemTypeKey;
 extern NSString *const XMLIOItemValueKey;

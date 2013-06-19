@@ -77,7 +77,7 @@
 
 - (NSDictionary *)properties {
     NSMutableDictionary *data = [NSMutableDictionary dictionaryWithDictionary:[super properties]];
-    [data setValue:[NSNumber numberWithBool:self.inverted] forKey:@"inverted"];
+    [data setValue:[NSNumber numberWithBool:self.inverted] forKey:JMRIItemInverted];
     return data;
 }
 

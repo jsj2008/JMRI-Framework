@@ -30,7 +30,7 @@
 #pragma mark - Properties
 
 @property (readonly) NSURL* url;
-@property (strong) NSString *JSONPath;
+@property (strong) NSString *jsonPath;
 @property (readonly) NSUInteger openConnections;
 
 @end
