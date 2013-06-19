@@ -65,9 +65,9 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
         [self performSelectorOnMainThread:@selector(start) withObject:nil waitUntilDone:NO];
         return;
     }
-    [self willChangeValueForKey:@"isExecuting"];
+    [self willChangeValueForKey:XmlIOHelperIsExecuting];
     isExecuting_ = YES;
-    [self didChangeValueForKey:@"isExecuting"];
+    [self didChangeValueForKey:XmlIOHelperIsExecuting];
     
     // do stuff from XMLIOService:performOperation
     NSURLConnection *connection = [NSURLConnection connectionWithRequest:self.request delegate:self];
@@ -81,12 +81,12 @@ NSString *const XMLIORosterFunctionLockable = @"lockable";
 }
 
 - (void)finish {
-    [self willChangeValueForKey:@"isExecuting"];
-    [self willChangeValueForKey:@"isFinished"];    
+    [self willChangeValueForKey:XmlIOHelperIsExecuting];
+    [self willChangeValueForKey:XmlIOHelperIsFinished];    
     isExecuting_ = NO;
     isFinished_ = YES;    
-    [self didChangeValueForKey:@"isExecuting"];
-    [self didChangeValueForKey:@"isFinished"];
+    [self didChangeValueForKey:XmlIOHelperIsExecuting];
+    [self didChangeValueForKey:XmlIOHelperIsFinished];
 }
 
 - (BOOL)isConcurrent {

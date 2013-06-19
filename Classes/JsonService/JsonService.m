@@ -244,13 +244,10 @@
 }
 
 - (void)readItem:(NSString *)name ofType:(NSString *)type {
-    // {"type":"power","data":{"name":"CT1"}}
-    // NSString *string = [NSString stringWithFormat:@"{\"type\":\"%@\",\"data\":{\"name\":\"%@\"}}\n", type, name];
     [self write:@{JMRIType: type, JMRIJsonData: @{JMRIItemName: name}}];
 }
 
 - (void)writeItem:(NSString *)name ofType:(NSString *)type value:(NSString *)value {
-    //NSString *string = [NSString stringWithFormat:@"{\"type\":\"%@\",\"data\":{\"name\":\"%@\",\"state\":\"%@\"}}\n", type, name, value];
     [self write:@{JMRIType: type, JMRIJsonData: @{JMRIItemName: name, JMRIItemState: value}}];
 }
 

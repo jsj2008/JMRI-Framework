@@ -98,6 +98,11 @@ NSString *const XMLIOErrorDomain = @"XMLIOErrorDomain";
 NSString *const XMLIOBooleanYES = @"true"; // java.lang.Boolean.toString returns "true" for YES
 NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns "false" for NO
 
+// XmlIO Helper
+NSString *const XmlIOHelper = @"helper";
+NSString *const XmlIOHelperIsExecuting = @"isExecuting";
+NSString *const XmlIOHelperIsFinished = @"isFinished";
+
 #pragma mark - Private interface
 
 @interface XMLIOService () <XMLIOServiceHelperDelegate>
@@ -267,23 +272,23 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 #pragma mark - JMRI XMLIO service rethreading
 
 - (void)helperDidFail:(NSDictionary *)parameters {
-    [self XMLIOServiceHelper:[parameters objectForKey:@"helper"]
+    [self XMLIOServiceHelper:[parameters objectForKey:XmlIOHelper]
             didFailWithError:[parameters objectForKey:@"error"]];
 }
 
 - (void)helperDidConnectWithRequest:(NSDictionary *)parameters {
-    [self XMLIOServiceHelper:[parameters objectForKey:@"helper"]
+    [self XMLIOServiceHelper:[parameters objectForKey:XmlIOHelper]
        didConnectWithRequest:[parameters objectForKey:@"request"]];
 }
 
 - (void)helperDidListItems:(NSDictionary *)parameters {
-    [self XMLIOServiceHelper:[parameters objectForKey:@"helper"]
+    [self XMLIOServiceHelper:[parameters objectForKey:XmlIOHelper]
                 didListItems:[parameters objectForKey:@"items"]
                       ofType:[parameters objectForKey:JMRIType]];
 }
 
 - (void)helperDidReadItem:(NSDictionary *)parameters {
-    [self XMLIOServiceHelper:[parameters objectForKey:@"helper"]
+    [self XMLIOServiceHelper:[parameters objectForKey:XmlIOHelper]
                  didReadItem:[parameters objectForKey:JMRIItemKey]
                     withName:[parameters objectForKey:JMRIItemName]
                       ofType:[parameters objectForKey:JMRIType]
@@ -291,7 +296,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 }
 
 - (void)helperDidWriteItem:(NSDictionary *)parameters {
-    [self XMLIOServiceHelper:[parameters objectForKey:@"helper"]
+    [self XMLIOServiceHelper:[parameters objectForKey:XmlIOHelper]
                 didWriteItem:[parameters objectForKey:JMRIItemKey]
                     withName:[parameters objectForKey:JMRIItemName]
                       ofType:[parameters objectForKey:JMRIType]
@@ -299,7 +304,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 }
 
 - (void)helperDidGetThrottle:(NSDictionary *)parameters {
-    [self XMLIOServiceHelper:[parameters objectForKey:@"helper"]
+    [self XMLIOServiceHelper:[parameters objectForKey:XmlIOHelper]
               didGetThrottle:[parameters objectForKey:@"throttle"]
                    atAddress:[[parameters objectForKey:@"address"] integerValue]];
 }
@@ -309,7 +314,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 - (void)XMLIOServiceHelper:(XMLIOServiceHelper *)helper didFailWithError:(NSError *)error {
     if ([self.delegate isKindOfClass:[RESPONDER class]] && ![NSThread isMainThread]) {
         [self performSelectorOnMainThread:@selector(helperDidFail:) 
-                               withObject:[NSDictionary dictionaryWithObjectsAndKeys:helper, @"helper", error, @"error", nil]
+                               withObject:[NSDictionary dictionaryWithObjectsAndKeys:helper, XmlIOHelper, error, @"error", nil]
                             waitUntilDone:NO];
         return;
     }
@@ -324,7 +329,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 - (void)XMLIOServiceHelper:(XMLIOServiceHelper *)helper didConnectWithRequest:(NSURLRequest *)request {
     if ([self.delegate isKindOfClass:[RESPONDER class]] && ![NSThread isMainThread]) {
         [self performSelectorOnMainThread:@selector(helperDidConnectWithRequest:) 
-                               withObject:[NSDictionary dictionaryWithObjectsAndKeys:helper, @"helper", request, @"request", nil]
+                               withObject:[NSDictionary dictionaryWithObjectsAndKeys:helper, XmlIOHelper, request, @"request", nil]
                             waitUntilDone:NO];
         return;
     }
@@ -335,7 +340,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 - (void)XMLIOServiceHelper:(XMLIOServiceHelper *)helper didListItems:(NSArray *)items ofType:(NSString *)type {
     if ([self.delegate isKindOfClass:[RESPONDER class]] && ![NSThread isMainThread]) {
         [self performSelectorOnMainThread:@selector(helperDidListItems:) 
-                               withObject:[NSDictionary dictionaryWithObjectsAndKeys:helper, @"helper", items, @"items", type, JMRIType, nil]
+                               withObject:[NSDictionary dictionaryWithObjectsAndKeys:helper, XmlIOHelper, items, @"items", type, JMRIType, nil]
                             waitUntilDone:NO];
         return;
     }
@@ -354,7 +359,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 - (void)XMLIOServiceHelper:(XMLIOServiceHelper *)helper didReadItem:(XMLIOItem *)item withName:(NSString *)name ofType:(NSString *)type withValue:(NSString *)value {
     if ([self.delegate isKindOfClass:[RESPONDER class]] && ![NSThread isMainThread]) {
         [self performSelectorOnMainThread:@selector(helperDidReadItem:) 
-                               withObject:[NSDictionary dictionaryWithObjectsAndKeys:helper, @"helper", item, JMRIItemKey, name, JMRIItemName, type, JMRIType, value, JMRIItemValue, nil]
+                               withObject:[NSDictionary dictionaryWithObjectsAndKeys:helper, XmlIOHelper, item, JMRIItemKey, name, JMRIItemName, type, JMRIType, value, JMRIItemValue, nil]
                             waitUntilDone:NO];
         return;
     }
@@ -385,7 +390,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 - (void)XMLIOServiceHelper:(XMLIOServiceHelper *)helper didWriteItem:(XMLIOItem *)item withName:(NSString *)name ofType:(NSString *)type withValue:(NSString *)value {
     if ([self.delegate isKindOfClass:[RESPONDER class]] && ![NSThread isMainThread]) {
         [self performSelectorOnMainThread:@selector(helperDidWriteItem:) 
-                               withObject:[NSDictionary dictionaryWithObjectsAndKeys:helper, @"helper", item, JMRIItemKey, name, JMRIItemName, type, JMRIType, value, JMRIItemValue, nil]
+                               withObject:[NSDictionary dictionaryWithObjectsAndKeys:helper, XmlIOHelper, item, JMRIItemKey, name, JMRIItemName, type, JMRIType, value, JMRIItemValue, nil]
                             waitUntilDone:NO];
         return;
     }
@@ -415,7 +420,7 @@ NSString *const XMLIOBooleanNO = @"false"; // java.lang.Boolean.toString returns
 - (void)XMLIOServiceHelper:(XMLIOServiceHelper *)helper didGetThrottle:(XMLIOThrottle *)throttle atAddress:(NSUInteger)address {
     if ([self.delegate isKindOfClass:[RESPONDER class]] && ![NSThread isMainThread]) {
         [self performSelectorOnMainThread:@selector(helperDidGetThrottle:) 
-                               withObject:[NSDictionary dictionaryWithObjectsAndKeys:helper, @"helper", throttle, @"throttle", [NSNumber numberWithInteger:address], @"address", nil]
+                               withObject:[NSDictionary dictionaryWithObjectsAndKeys:helper, XmlIOHelper, throttle, @"throttle", [NSNumber numberWithInteger:address], @"address", nil]
                             waitUntilDone:NO];
         return;
     }

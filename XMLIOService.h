@@ -94,6 +94,11 @@ extern NSString *const XMLIOErrorDomain;
 extern NSString *const XMLIOBooleanYES;
 extern NSString *const XMLIOBooleanNO;
 
+// XmlIO Helper
+extern NSString *const XmlIOHelper;
+extern NSString *const XmlIOHelperIsExecuting;
+extern NSString *const XmlIOHelperIsFinished;
+
 typedef enum {
 	XMLIOOperationNone = 0,
 	XMLIOOperationList,
