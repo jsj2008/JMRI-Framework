@@ -104,15 +104,17 @@ NSString *const JMRISignalAppearanceTextLunar = @"lunar";
 #pragma mark Framework error domain
 NSString *const JMRIErrorDomain = @"JMRIError";
 
-#pragma mark JSON elements
+#pragma mark Item attributes
 NSString *const JMRIItemComment = @"comment";
-NSString *const JMRIJsonData = @"data";
 NSString *const JMRIItemInverted = @"inverted";
 NSString *const JMRIItemName = @"name";
 NSString *const JMRIItemState = @"state";
 NSString *const JMRIItemUserName = @"userName";
 NSString *const JMRIItemValue = @"value";
 
-#pragma mark HTTP Methods
+#pragma mark JSON elements
+NSString *const JMRIJsonData = @"data";
+
+#pragma mark HTTP methods
 NSString *const HTTPMethodPost = @"POST";
 NSString *const HTTPMethodPut = @"PUT";

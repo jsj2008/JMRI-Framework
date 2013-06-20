@@ -102,17 +102,18 @@ extern NSString *const JMRISignalAppearanceTextYellow;
 #pragma mark Framework error domain
 extern NSString *const JMRIErrorDomain;
 
-#pragma mark JSON elements
+#pragma mark Item attributes
 extern NSString *const JMRIItemComment;
-extern NSString *const JMRIJsonData;
 extern NSString *const JMRIItemInverted;
-extern NSString *const JMRIJsonList;
 extern NSString *const JMRIItemName;
 extern NSString *const JMRIItemState;
 extern NSString *const JMRIItemUserName;
 extern NSString *const JMRIItemValue;
 
-#pragma mark HTTP Methods
+#pragma mark JSON elements
+extern NSString *const JMRIJsonData;
+
+#pragma mark HTTP methods
 extern NSString *const HTTPMethodPost;
 extern NSString *const HTTPMethodPut;
 
