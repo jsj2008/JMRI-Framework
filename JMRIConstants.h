@@ -109,6 +109,8 @@ extern NSString *const JMRIItemName;
 extern NSString *const JMRIItemState;
 extern NSString *const JMRIItemUserName;
 extern NSString *const JMRIItemValue;
+extern NSString *const JMRIItemReport;
+extern NSString *const JMRIItemLastReport;
 
 #pragma mark JSON elements
 extern NSString *const JMRIJsonData;

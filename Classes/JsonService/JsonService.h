@@ -25,6 +25,7 @@
 - (void)readItem:(NSString *)name ofType:(NSString *)type;
 - (void)writeItem:(NSString *)name ofType:(NSString *)type state:(NSUInteger)state;
 - (void)writeItem:(NSString *)name ofType:(NSString *)type value:(NSString *)value;
+- (void)writeItem:(NSString *)name ofType:(NSString *)type withProperties:(NSDictionary *)properties;
 - (void)writeItem:(JMRIItem *)item;
 - (void)createItem:(NSString *)name ofType:(NSString *)type withState:(NSUInteger)state;
 - (void)createItem:(NSString *)name ofType:(NSString *)type withValue:(NSString *)value;

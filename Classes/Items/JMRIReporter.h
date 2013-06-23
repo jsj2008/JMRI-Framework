@@ -10,4 +10,7 @@
 
 @interface JMRIReporter : JMRIItem
 
+@property (copy) NSString* report;
+@property (copy) NSString* lastReport;
+
 @end

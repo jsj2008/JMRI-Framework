@@ -36,6 +36,8 @@
 		48642FBE137A5DD900B93C86 /* WebServiceBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 48642FBC137A5DD900B93C86 /* WebServiceBrowser.m */; };
 		48642FCC137A5F3400B93C86 /* WiThrottleServiceBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 48642FCA137A5F3400B93C86 /* WiThrottleServiceBrowser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48642FCD137A5F3400B93C86 /* WiThrottleServiceBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 48642FCB137A5F3400B93C86 /* WiThrottleServiceBrowser.m */; };
+		4872FA16177724070068F88F /* JMRIReporter+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 4872FA15177724070068F88F /* JMRIReporter+Internal.h */; };
+		4872FA17177724070068F88F /* JMRIReporter+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 4872FA15177724070068F88F /* JMRIReporter+Internal.h */; };
 		487875CF15D9054D00BD3E0D /* NSArray+JMRIExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 4813F4841386DE8900718FFC /* NSArray+JMRIExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		487AA4B615AC33BE00F76F47 /* JMRIItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 487AA4B415AC33BD00F76F47 /* JMRIItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		487AA4B815AC33BE00F76F47 /* JMRIItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 487AA4B515AC33BE00F76F47 /* JMRIItem.m */; };
@@ -225,6 +227,7 @@
 		48642FBC137A5DD900B93C86 /* WebServiceBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = WebServiceBrowser.m; path = Classes/WebService/WebServiceBrowser.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		48642FCA137A5F3400B93C86 /* WiThrottleServiceBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; lineEnding = 0; path = WiThrottleServiceBrowser.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		48642FCB137A5F3400B93C86 /* WiThrottleServiceBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = WiThrottleServiceBrowser.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		4872FA15177724070068F88F /* JMRIReporter+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "JMRIReporter+Internal.h"; path = "Classes/Items/JMRIReporter+Internal.h"; sourceTree = "<group>"; };
 		487AA4B415AC33BD00F76F47 /* JMRIItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; name = JMRIItem.h; path = Classes/Items/JMRIItem.h; sourceTree = "<group>"; };
 		487AA4B515AC33BE00F76F47 /* JMRIItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = JMRIItem.m; path = Classes/Items/JMRIItem.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		487AA4BB15AC43DA00F76F47 /* JMRITurnout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; name = JMRITurnout.h; path = Classes/Items/JMRITurnout.h; sourceTree = "<group>"; };
@@ -446,6 +449,7 @@
 				48BA517E15CB53DF0066095E /* JMRISensor.h */,
 				48BA517F15CB53DF0066095E /* JMRISensor.m */,
 				48BA518715CBE0310066095E /* JMRIReporter.h */,
+				4872FA15177724070068F88F /* JMRIReporter+Internal.h */,
 				48BA518815CBE0310066095E /* JMRIReporter.m */,
 				48B1DF3515B310CD007DCD57 /* JMRIPower.h */,
 				48B1DF3615B310CD007DCD57 /* JMRIPower.m */,
@@ -586,6 +590,7 @@
 				48BA51A915CD51BE0066095E /* JMRIPanelConstants.h in Headers */,
 				48280C2316EC900500925806 /* NSMutableArray+QueueExtensions.h in Headers */,
 				48F0E906173127CF00A1FA3D /* JMRIService+Internal.h in Headers */,
+				4872FA17177724070068F88F /* JMRIReporter+Internal.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -632,6 +637,7 @@
 				48F0E905173127BB00A1FA3D /* JMRIService+Internal.h in Headers */,
 				48BA51A815CD51BE0066095E /* JMRIPanelConstants.h in Headers */,
 				48280C2216EC900500925806 /* NSMutableArray+QueueExtensions.h in Headers */,
+				4872FA16177724070068F88F /* JMRIReporter+Internal.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

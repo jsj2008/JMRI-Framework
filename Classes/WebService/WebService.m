@@ -140,6 +140,12 @@ NSString *const rootPath = @"/";
     [self write:@{JMRIItemName: name, JMRIItemState:[NSNumber numberWithInteger:state]} type:type method:HTTPMethodPost];
 }
 
+- (void)writeItem:(NSString *)name ofType:(NSString *)type withProperties:(NSDictionary *)properties {
+    NSMutableDictionary *data = [NSMutableDictionary dictionaryWithObject:name forKey:JMRIItemName];
+    [data addEntriesFromDictionary:properties];
+    [self write:properties type:type method:HTTPMethodPost];
+}
+
 - (void)writeItem:(JMRIItem *)item ofType:(NSString *)type {
     [self write:item.properties type:type method:HTTPMethodPost];
 }

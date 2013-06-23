@@ -111,6 +111,8 @@ NSString *const JMRIItemName = @"name";
 NSString *const JMRIItemState = @"state";
 NSString *const JMRIItemUserName = @"userName";
 NSString *const JMRIItemValue = @"value";
+NSString *const JMRIItemReport = @"report";
+NSString *const JMRIItemLastReport = @"lastReport";
 
 #pragma mark JSON elements
 NSString *const JMRIJsonData = @"data";

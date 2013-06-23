@@ -20,6 +20,7 @@
 #import "JMRIMetadata.h"
 #import "JMRIPower.h"
 #import "JMRIReporter.h"
+#import "JMRIReporter+Internal.h"
 #import "JMRISensor.h"
 #import "JMRISignalHead.h"
 #import "JMRITurnout.h"
@@ -500,10 +501,10 @@
 }
 
 - (void)JMRINetService:(JMRINetService *)service didGetReporter:(NSString *)reporter withValue:(NSString *)value withProperties:(NSDictionary *)properties {
-    if (![self.memories objectForKey:reporter]) {
+    if (![self.reporters objectForKey:reporter]) {
         (void) [[JMRIReporter alloc] initWithName:reporter withService:self withProperties:properties];
     }
-    [((JMRIMemory *)[self.memories objectForKey:reporter]) setValue:value updateService:NO];
+    [((JMRIReporter *)[self.reporters objectForKey:reporter]) setReport:properties[JMRIItemReport] withLastReport:properties[JMRIItemLastReport] updateService:NO];
 }
 
 - (void)JMRINetService:(JMRINetService *)service didGetRoute:(NSString *)route withState:(NSUInteger)state withProperties:(NSDictionary *)properties {

@@ -256,6 +256,12 @@
     [self write:@{JMRIType: type, JMRIJsonData: @{JMRIItemName: name, JMRIItemState:[NSNumber numberWithInteger:state]}}];
 }
 
+- (void)writeItem:(NSString *)name ofType:(NSString *)type withProperties:(NSDictionary *)properties {
+    NSMutableDictionary *data = [NSMutableDictionary dictionaryWithObject:name forKey:JMRIItemName];
+    [data addEntriesFromDictionary:properties];
+    [self write:@{JMRIType: type, JMRIJsonData: data}];
+}
+
 - (void)writeItem:(JMRIItem *)item {
     [self write:@{JMRIType: item.type, JMRIJsonData: item.properties}];
 }
