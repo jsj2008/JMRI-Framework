@@ -197,6 +197,7 @@
         return;
     }
     [self writeData:data];
+    data = nil;
 }
 
 - (void)writeData:(NSData *)data {
@@ -205,7 +206,8 @@
             if (![outputQueue isEmpty]) {
                 [self writeData:[outputQueue dequeue]];
             }
-            NSString *string = [NSString stringWithUTF8String:[data bytes]];
+            // convert data to NSString so webSocket sends text data instead of binary data
+            NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             if (string.length) {
                 [self.webSocket send:string];
             }
@@ -231,7 +233,6 @@
             }
         }
     }
-    data = nil;
 }
 
 - (void)error:(NSError *)error {
