@@ -167,6 +167,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		48A400FA182707C10002614D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 48DAC6FF173DC52800211579 /* SocketRocket.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F668C87F153E91210044DBAC;
+			remoteInfo = SocketRocketOSX;
+		};
 		48DAC706173DC52900211579 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 48DAC6FF173DC52800211579 /* SocketRocket.xcodeproj */;
@@ -656,6 +663,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				48A400FB182707C10002614D /* PBXTargetDependency */,
 			);
 			name = JMRI;
 			productName = jmri.framework;
@@ -863,6 +871,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		48A400FB182707C10002614D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SocketRocketOSX;
+			targetProxy = 48A400FA182707C10002614D /* PBXContainerItemProxy */;
+		};
 		48DAC719173DC6C300211579 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SocketRocket;
