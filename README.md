@@ -2,7 +2,8 @@ JMRI Framework
 ==============
 
 [![Build Status](https://services01.alexandriasoftware.com/buildStatus/icon?job=JMRI_Framework)](https://services01.alexandriasoftware.com/job/JMRI_Framework/) on Jenkins at [Alexandria Software](http://alexandriasoftware.com)
-[![Build Status](https://travis-ci.org/[YOUR_GITHUB_USERNAME]/[YOUR_PROJECT_NAME].png)](https://travis-ci.org/[YOUR_GITHUB_USERNAME]/[YOUR_PROJECT_NAME]) on [Travis CI](http://travis-ci.org)
+
+[![Build Status](https://travis-ci.org/rhwood/JMRI-Framework.png)](https://travis-ci.org/[YOUR_GITHUB_USERNAME]/[YOUR_PROJECT_NAME]) on [Travis CI](http://travis-ci.org)
 
 *JMRI Framework* is an Objective-C library for developing [iOS](http://developer.apple.com/devcenter/ios/index.action "iOS Developer Center @ Apple") applications that network with [JMRI](http://jmri.org) software.  Currently, this library only supports iOS and the JMRI [XMLIO](http://jmri.sourceforge.net/help/en/html/web/XMLIO.shtml) protocol.
 
