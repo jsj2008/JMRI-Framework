@@ -9,10 +9,8 @@
 #import "JMRIService.h"
 #import "JMRIService+Internal.h"
 #import "JsonService.h"
-#import "SimpleService.h"
 #import "WebService.h"
 #import "WiThrottleService.h"
-#import "XMLIOService.h"
 #import "JMRIConstants.h"
 #import "JMRIItem+Internal.h"
 #import "JMRILight.h"
@@ -25,7 +23,7 @@
 #import "JMRISignalHead.h"
 #import "JMRITurnout.h"
 
-@interface JMRIService (Private) <JMRINetServiceDelegate, XMLIOServiceDelegate>
+@interface JMRIService (Private) <JMRINetServiceDelegate>
 
 - (void)commonInit;
 
@@ -44,20 +42,8 @@
         } else {
             self.useJsonService = NO;
         }
-        if ([ports valueForKey:JMRIServiceSimple]) {
-            self.simpleService = [[SimpleService alloc] initWithName:name withAddress:address withPort:[ports[JMRIServiceSimple] integerValue]];
-            self.requiresSimpleService = YES;
-        } else {
-            self.useSimpleService = NO;
-        }
         if ([ports valueForKey:JMRIServiceWeb]) {
             self.webService = [[WebService alloc] initWithName:name withAddress:address withPort:[ports[JMRIServiceWeb] integerValue]];
-            self.requiresWebService = YES;
-        } else {
-            self.useWebService = NO;
-        }
-        if ([ports valueForKey:JMRIServiceXmlIO] && ![ports valueForKey:JMRIServiceWeb]) {
-            self.webService = [[WebService alloc] initWithName:name withAddress:address withPort:[ports[JMRIServiceXmlIO] integerValue]];
             self.requiresWebService = YES;
         } else {
             self.useWebService = NO;
@@ -86,13 +72,6 @@
                 self.requiresJsonService = YES;
             } else {
                 self.useJsonService = NO;
-            }
-            if ([service.type isEqualToString:JMRIServiceSimple]) {
-                self.simpleService = (SimpleService *)service;
-                [self.simpleService startMonitoring];
-                self.requiresSimpleService = YES;
-            } else {
-                self.useSimpleService = NO;
             }
             if ([service.type isEqualToString:JMRIServiceWeb]) {
                 self.webService = (WebService *)service;
@@ -126,15 +105,11 @@
     _turnouts = [NSMutableDictionary dictionaryWithCapacity:0];
     _power = [NSMutableDictionary dictionaryWithCapacity:0];
     self.requiresJsonService = NO;
-    self.requiresSimpleService = NO;
     self.requiresWebService = NO;
     self.requiresWiThrottleService = NO;
-    self.requiresXmlIOService = NO;
     self.useJsonService = YES;
-    self.useSimpleService = YES;
     self.useWebService = YES;
     self.useWiThrottleService = YES;
-    self.useXmlIOService = NO;
 }
 
 - (void)dealloc {
@@ -152,10 +127,6 @@
 - (NSArray *)addresses {
     if (self.hasJsonService) {
         return self.jsonService.addresses;
-    } else if (self.hasSimpleService) {
-        return self.simpleService.addresses;
-    } else if (self.hasWebService) {
-        return self.webService.addresses;
     } else if (self.hasWiThrottleService) {
         return self.wiThrottleService.addresses;
     }
@@ -198,35 +169,6 @@
         _name = json.name;
     }
     self.useJsonService = YES;
-    // Do not want to use the XmlIOService if the JsonService is available
-    if (self.hasXmlIOService) {
-        self.xmlIOService = nil;
-        self.useXmlIOService = NO;
-        if (self.hasWebService) {
-            self.useWebService = YES;
-        }
-    }
-}
-
-- (SimpleService *)simpleService {
-    return simple;
-}
-
-- (void)setSimpleService:(SimpleService *)simpleService {
-    if (simple == simpleService) {
-        return;
-    }
-    [simple stopMonitoring];
-    [simple stop];
-    simple.delegate = nil;
-    simple = simpleService;
-    simple.delegate = self;
-    [simple startMonitoring];
-    if (simple) {
-        domain = simple.domain;
-        hostName = simple.hostName;
-        _name = simple.name;
-    }
 }
 
 - (WebService *)webService {
@@ -250,9 +192,7 @@
     }
     if (web.bonjourService) {
         if (!web.txtRecords[JMRITXTRecordKeyJSON]) {
-            self.xmlIOService = [[XMLIOService alloc] initWithNetService:web.bonjourService];
             self.useWebService = NO;
-            self.useXmlIOService = YES;
         }
     } else {
         [web list:JMRITypeHello];
@@ -280,28 +220,8 @@
     }
 }
 
-- (XMLIOService *)xmlIOService {
-    return xmlio;
-}
-
-- (void)setXmlIOService:(XMLIOService *)xmlIOService {
-    if (xmlio == xmlIOService) {
-        return;
-    }
-    [xmlio stopMonitoring];
-    [xmlio stop];
-    xmlio.delegate = nil;
-    xmlio = xmlIOService;
-    xmlio.delegate = self;
-    [xmlio startMonitoring];
-}
-
 - (Boolean)hasJsonService {
     return (self.jsonService != nil);
-}
-
-- (Boolean)hasSimpleService {
-    return (self.simpleService != nil);
 }
 
 - (Boolean)hasWebService {
@@ -312,30 +232,18 @@
     return (self.wiThrottleService != nil);
 }
 
-- (Boolean)hasXmlIOService {
-    return (self.xmlIOService != nil);
-}
-
 - (NSString *)version {
     if (self.hasJsonService) {
         return self.jsonService.version;
     } else if (self.hasWebService) {
         return self.webService.version;
-    } else if (self.hasXmlIOService) {
-        return self.xmlIOService.version;
-    } else if (self.hasSimpleService) {
-        return self.simpleService.version;
     } else {
         return self.wiThrottleService.version;
     }
 }
 
-@synthesize requiresSimpleService = _requiresSimpleService;
 @synthesize requiresWiThrottleService = _requiresWiThrottleService;
-@synthesize requiresXmlIOService = _requiresXmlIOService;
-@synthesize useSimpleService = _useSimpleService;
 @synthesize useWiThrottleService = _useWiThrottleService;
-@synthesize useXmlIOService = _useXmlIOService;
 
 #pragma mark - JMRI Elements
 
@@ -346,42 +254,13 @@
         [self.webService list:type];
     } else if (self.hasJsonService && self.useJsonService) {
         [self.jsonService list:type];
-    } else if (self.hasXmlIOService && self.useXmlIOService) {
-        [self.xmlIOService list:type];
-    }
-}
-
-- (void)monitor:(JMRIItem *)item {
-    if (self.hasXmlIOService && self.useXmlIOService) {
-        [self.xmlIOService startMonitoring:item.name ofType:item.type];
-    }
-}
-
-- (void)stopMonitoring:(JMRIItem *)item {
-    if (self.hasXmlIOService) {
-        [self.xmlIOService stopMonitoring:item.name ofType:item.type];
-    }
-}
-
-- (Boolean)isMonitoring:(JMRIItem *)item {
-    if (self.hasXmlIOService) {
-        return [self.xmlIOService isMonitoring:item.name ofType:item.type];
-    }
-    return NO;
-}
-
-- (void)stopMonitoringAllItems {
-    if (self.hasXmlIOService) {
-        [self.xmlIOService stopMonitoringAllItems];
     }
 }
 
 - (void)stop {
     [self.jsonService stop];
-    [self.simpleService stop];
     [self.webService stop];
     [self.wiThrottleService stop];
-    [self.xmlIOService stop];
 }
 
 #pragma mark - Utilities
@@ -446,24 +325,10 @@
 }
 
 - (void)JMRINetService:(JMRINetService *)service didFailWithError:(NSError *)error {
+    // error.domain JMRIErrorDomain + error.code JMRIWebServiceJsonUnsupported = JMRI too old
     if ([error.domain isEqualToString:JMRIErrorDomain]) {
         if (error.code == JMRIWebServiceJsonUnsupported) {
-            // assume connection to JMRI 2.14.X server and that no other service is available
-            if (!self.hasXmlIOService) {
-                if (service.bonjourService) {
-                    self.xmlIOService = [[XMLIOService alloc] initWithNetService:service.bonjourService];
-                } else {
-                    self.xmlIOService = [[XMLIOService alloc] initWithName:service.name
-                                                               withAddress:service.addresses[0]
-                                                                  withPort:service.port];
-                }
-                self.useXmlIOService = YES;
-                self.requiresXmlIOService = self.requiresWebService;
-                self.useWebService = NO;
-                self.requiresWebService = NO;
-                self.webService = nil;
-            }
-            return; // don't pass on this error, we've handled it
+            // do we need to do anything here?
         }
     }
     if ([self.delegate respondsToSelector:@selector(JMRIService:didFailWithError:)]) {
@@ -588,72 +453,6 @@
     } else {
         self.jsonService.webSocketURL = url;
     }
-}
-
-#pragma mark - XmlIO service delegate
-
-- (void)XMLIOService:(XMLIOService *)service didListItems:(NSArray *)items ofType:(NSString *)type {
-    if ([type isEqualToString:JMRITypeMemory]) {
-        for (XMLIOItem *i in items) {
-            [self JMRINetService:service didGetMemory:i.name withValue:i.value withProperties:i.properties];
-        }
-    } else if ([type isEqualToString:JMRITypeMetadata]) {
-        for (XMLIOItem *i in items) {
-            [self JMRINetService:service didGetMetadata:i.name withValue:i.value withProperties:i.properties];
-        }
-    } else if ([type isEqualToString:JMRITypePower]) {
-        for (XMLIOItem *i in items) {
-            [self JMRINetService:service didGetPowerState:[i.value integerValue]];
-        }
-    } else if ([type isEqualToString:JMRITypeRoute]) {
-        for (XMLIOItem *i in items) {
-            [self JMRINetService:service didGetRoute:i.name withState:[i.value integerValue] withProperties:i.properties];
-        }
-    } else if ([type isEqualToString:JMRITypeSensor]) {
-        for (XMLIOItem *i in items) {
-            [self JMRINetService:service didGetSensor:i.name withState:[i.value integerValue] withProperties:i.properties];
-        }
-    } else if ([type isEqualToString:JMRITypeTurnout]) {
-        for (XMLIOItem *i in items) {
-            [self JMRINetService:service didGetTurnout:i.name withState:[i.value integerValue] withProperties:i.properties];
-        }
-    }
-}
-
-- (void)XMLIOService:(XMLIOService *)service didReadItem:(XMLIOItem *)item withName:(NSString *)aName ofType:(NSString *)type withValue:(NSString *)value {
-    if ([type isEqualToString:JMRITypeMemory]) {
-        [self JMRINetService:service didGetMemory:item.name withValue:item.value withProperties:item.properties];
-    } else if ([type isEqualToString:JMRITypeMetadata]) {
-        [self JMRINetService:service didGetMetadata:item.name withValue:item.value withProperties:item.properties];
-    } else if ([type isEqualToString:JMRITypePower]) {
-        [self JMRINetService:service didGetPowerState:[item.value integerValue]];
-    } else if ([type isEqualToString:JMRITypeRoute]) {
-        [self JMRINetService:service didGetRoute:item.name withState:[item.value integerValue] withProperties:item.properties];
-    } else if ([type isEqualToString:JMRITypeSensor]) {
-        [self JMRINetService:service didGetSensor:item.name withState:[item.value integerValue] withProperties:item.properties];
-    } else if ([type isEqualToString:JMRITypeTurnout]) {
-        [self JMRINetService:service didGetTurnout:item.name withState:[item.value integerValue] withProperties:item.properties];
-    }
-}
-
-- (void)XMLIOService:(XMLIOService *)service didWriteItem:(XMLIOItem *)item withName:(NSString *)aName ofType:(NSString *)type withValue:(NSString *)value {
-    [self XMLIOService:service didReadItem:item withName:aName ofType:type withValue:value];
-}
-
-- (void)XMLIOService:(XMLIOService *)service didGetThrottle:(XMLIOThrottle *)throttle withAddress:(NSUInteger)address {}
-- (void)XMLIOService:(XMLIOService *)service didConnectWithRequest:(NSURLRequest *)request {
-    [self logEvent:@"XMLIO%@ opened new connection. %lu connections are open.", service, (unsigned long)service.openConnections];
-    if ([self.delegate respondsToSelector:@selector(JMRIServiceDidOpenConnection:)]) {
-        [self.delegate JMRIServiceDidOpenConnection:self];
-    }
-    [[NSNotificationCenter defaultCenter] postNotificationName:JMRINotificationDidOpenConnection object:self userInfo:nil];
-}
-
-- (void)XMLIOServiceDidFinishLoading:(XMLIOService *)service { // need to log response being consumed by XMLIOServiceHelper
-    if ([self.delegate respondsToSelector:@selector(JMRIServiceDidCloseConnection:)]) {
-        [self.delegate JMRIServiceDidCloseConnection:self];
-    }
-    [[NSNotificationCenter defaultCenter] postNotificationName:JMRINotificationDidCloseConnection object:self userInfo:nil];
 }
 
 #pragma mark - Private methods

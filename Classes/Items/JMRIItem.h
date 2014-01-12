@@ -48,20 +48,6 @@
 /** @name Network communications */
 
 /**
- Monitor the item's status in JMRI.
- 
- Since the JSON, Simple, and WiThrottle services all automatically monitor items, and the Web service
- does not provide a monitoring capability, this method acts like query when XmlIO service is not in use.
- */
-- (void)monitor;
-/**
- Stop monitoring the item's status in JMRI.
- 
- Since the JSON, Simple, and WiThrottle services all automatically monitor items, and the Web service
- does not provide a monitoring capability, this method does nothing unless the XmlIO service is in use.
- */
-- (void)stopMonitoring;
-/**
  Request an update of the item's properties from JMRI.
  */
 - (void)query;

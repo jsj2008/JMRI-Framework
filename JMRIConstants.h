@@ -9,10 +9,8 @@
 
 #pragma mark Known service types
 extern NSString *const JMRIServiceJson;
-extern NSString *const JMRIServiceSimple;
 extern NSString *const JMRIServiceWeb;
 extern NSString *const JMRIServiceWiThrottle;
-extern NSString *const JMRIServiceXmlIO;
 
 #pragma mark JMRI item types
 extern NSString *const JMRITypeError;

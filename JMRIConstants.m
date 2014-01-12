@@ -10,10 +10,8 @@
 
 #pragma mark Known service types
 NSString *const JMRIServiceJson = @"jsonService";
-NSString *const JMRIServiceSimple = @"simpleService";
 NSString *const JMRIServiceWeb = @"webService";
 NSString *const JMRIServiceWiThrottle = @"wiThrottleService";
-NSString *const JMRIServiceXmlIO = @"xmlIOService";
 
 #pragma mark JMRI item types
 NSString *const JMRITypeError = @"error";

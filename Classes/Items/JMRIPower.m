@@ -13,41 +13,16 @@
 
 #pragma mark - Operations
 
-- (void)monitorWithXmlIOService {
-    [self.service.xmlIOService readItem:JMRITypePower ofType:JMRITypePower initialValue:[[NSNumber numberWithInteger:self.state] stringValue]];
-}
-
 - (void)queryFromJsonService:(JsonService *)service {
     [service readItem:JMRITypePower ofType:JMRITypePower];
-}
-
-- (void)queryFromSimpleService:(SimpleService *)service {
-    [service send:[JMRITypePower uppercaseString]];
 }
 
 - (void)queryFromWebService:(WebService *)service {
     [service list:JMRITypePower]; // treat specially since the power indicator has no name
 }
 
-- (void)queryFromXmlIOService:(XMLIOService *)service {
-    [service readItem:JMRITypePower ofType:JMRITypePower];
-}
-
 - (void)writeToJsonService:(JsonService *)service {
     [service writeItem:JMRITypePower ofType:JMRITypePower state:self.state];
-}
-
-- (void)writeToSimpleService:(SimpleService *)service {
-    switch (self.state) {
-        case JMRIItemStateActive:
-            [service send:@"POWER ON"];
-            break;
-        case JMRIItemStateInactive:
-            [service send:@"POWER OFF"];
-            break;
-        default:
-            break;
-    }
 }
 
 - (void)writeToWebService:(WebService *)service {
@@ -65,10 +40,6 @@
         default:
             break;
     }
-}
-
-- (void)writeToXmlIOService:(XMLIOService *)service {
-    [service writeItem:JMRITypePower ofType:JMRITypePower value:self.value];
 }
 
 #pragma mark - Properties

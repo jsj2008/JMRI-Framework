@@ -11,10 +11,8 @@
 @class JMRIService;
 @class JMRINetService;
 @class JsonService;
-@class SimpleService;
 @class WebService;
 @class WiThrottleService;
-@class XMLIOService;
 @class JMRIItem;
 @class JMRIPower;
 
@@ -43,10 +41,8 @@
 @interface JMRIService : NSObject {
     
     JsonService *json;
-    SimpleService *simple;
     WebService *web;
     WiThrottleService *wiThrottle;
-    XMLIOService *xmlio;
     NSString *domain;
     NSString *hostName;
     NSString *_name;
@@ -65,10 +61,8 @@
  
  The ports dictionary maps services that can be enabled in JMRI to ports, and can have the following keys:
  - *JMRIServiceJson*
- - *JMRIServiceSimple*
  - *JMRIServiceWeb*
  - *JMRIServiceWiThrottle*
- - *JMRIServiceXmlIO* (ignored if JMRIServiceWeb is used as a key)
  
  @param name The name of the service.
  @param address The domain name or IP address of the service.
@@ -101,25 +95,17 @@
 #pragma mark - Service properties
 
 @property (readwrite, strong) JsonService *jsonService;
-@property (readwrite, strong) SimpleService *simpleService;
 @property (readwrite, strong) WebService *webService;
 @property (readwrite, strong) WiThrottleService *wiThrottleService;
-@property (readwrite, strong) XMLIOService *xmlIOService;
 @property (readonly) Boolean hasJsonService;
-@property (readonly) Boolean hasSimpleService;
 @property (readonly) Boolean hasWebService;
 @property (readonly) Boolean hasWiThrottleService;
-@property (readonly) Boolean hasXmlIOService;
 @property Boolean requiresJsonService;
-@property Boolean requiresSimpleService;
 @property Boolean requiresWebService;
 @property Boolean requiresWiThrottleService;
-@property Boolean requiresXmlIOService;
 @property Boolean useJsonService;
-@property Boolean useSimpleService;
 @property Boolean useWebService;
 @property Boolean useWiThrottleService;
-@property Boolean useXmlIOService;
 
 /**
  Log events and network activities.
@@ -131,7 +117,6 @@
  The JMRI server version.
  
  This property may be difficult to determine accurately for JMRI versions earlier than 3.2. 
- JMRI servers older than 2.14 will always return 2.14 in the Web or XmlIO services.
  */
 @property (readonly, strong) NSString *version;
 
@@ -196,57 +181,9 @@
  */
 - (void)list:(NSString *)type;
 /**
- Request that the JMRI service provide status updates for an item.
- 
- You should rarely need to invoke this method; use [JMRIItem monitor] instead.
- 
- Since the JSON, Simple, and WiThrottle services all automatically monitor items, and the Web service
- does not provide a monitoring capability, this method does nothing unless the XmlIO service is in use.
- 
- @param item The item to monitor.
- @see [JMRIItem monitor]
- */
-- (void)monitor:(JMRIItem *)item;
-/**
- Stop requesting that the JMRI service provide status updates for an item.
- 
- You should rarely need to invoke this method; use [JMRIItem stopMonitoring] instead.
- 
- Since the JSON, Simple, and WiThrottle services all automatically monitor items, and the Web service
- does not provide a monitoring capability, this method does nothing unless the XmlIO service is in use. Note
- that the services that automatically monitor items cannot be stopped from providing updates to an item's
- state without breaking the connection to the service.
- 
- @param item The item to stop monitoring.
- @see [JMRIItem stopMonitoring]
- */
-- (void)stopMonitoring:(JMRIItem *)item;
-/**
- Stop requesting that the JMRI service provide status updates for all items.
- 
- Since the JSON, Simple, and WiThrottle services all automatically monitor items, and the Web service
- does not provide a monitoring capability, this method does nothing unless the XmlIO service is in use. Note
- that the services that automatically monitor items cannot be stopped from providing updates to an item's
- state without breaking the connection to the service.
- */
-- (void)stopMonitoringAllItems;
-/**
- Is the JMRI service monitoring an item?
- 
- Returns YES if the XmlIO service is monitoring an item, and NO in all other cases.
- 
- Since the JSON, Simple, and WiThrottle services all automatically monitor items, and the Web service
- does not provide a monitoring capability, this method returns NO unless the XmlIO service is monitoring the item.
- Note that the services that automatically monitor items cannot be stopped from providing updates to an item's
- state without breaking the connection to the service.
- 
- @param item The item to stop monitoring.
- */
-- (Boolean)isMonitoring:(JMRIItem *)item;
-/**
  Stop all network connections to a JMRI service.
  
- Cleanly closes the JSON, Simple, and WiThrottle service connections and stops any XmlIO monitoring.
+ Cleanly closes the JSON, WebSocket and WiThrottle service connections.
  */
 - (void)stop;
 

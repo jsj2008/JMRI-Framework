@@ -20,7 +20,6 @@
 #import "JMRINetService.h"
 
 NSString *const JMRINetServiceJson = @"_jmri-json._tcp.";
-NSString *const JMRINetServiceSimple = @"_jmri._tcp.";
 NSString *const JMRINetServiceWeb = @"_http._tcp.";
 NSString *const JMRINetServiceWiThrottle = @"_withrottle._tcp.";
 
@@ -49,7 +48,7 @@ NSString *const JMRINetServiceWiThrottle = @"_withrottle._tcp.";
 - (void)searchForServices {
 	[self doesNotRecognizeSelector:_cmd];
 	// sample implementation:
-	//[self.browser searchForServicesOfType:JMRIServiceXMLIO inDomain:@""];
+	//[self.browser searchForServicesOfType:JMRIServiceJSON inDomain:@""];
 }
 
 - (void)addServiceWithAddress:(NSString *)address withPort:(NSInteger)port {

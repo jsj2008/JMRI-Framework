@@ -8,10 +8,8 @@
 
 #import "JMRIService.h"
 #import "JsonService.h"
-#import "SimpleService.h"
 #import "WebService.h"
 #import "WiThrottleService.h"
-#import "XMLIOService.h"
 #import "JMRIItem.h"
 
 @interface JMRIItem (Internal)
@@ -24,15 +22,11 @@
 #pragma mark - Communications
 
 - (void)queryFromJsonService:(JsonService *)service;
-- (void)queryFromSimpleService:(SimpleService *)service;
 - (void)queryFromWebService:(WebService *)service;
 - (void)queryFromWiThrottleService:(WiThrottleService *)service;
-- (void)queryFromXmlIOService:(XMLIOService *)service;
 - (void)writeToJsonService:(JsonService *)service;
-- (void)writeToSimpleService:(SimpleService *)service;
 - (void)writeToWebService:(WebService *)service;
 - (void)writeToWiThrottleService:(WiThrottleService *)service;
-- (void)writeToXmlIOService:(XMLIOService *)service;
 
 #pragma mark - Utilities
 

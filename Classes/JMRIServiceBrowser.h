@@ -10,7 +10,6 @@
 
 @class JMRIService;
 @class JsonServiceBrowser;
-@class SimpleServiceBrowser;
 @class WiThrottleServiceBrowser;
 @class WebServiceBrowser;
 
@@ -21,7 +20,6 @@
     
 	BOOL searching;
     JsonServiceBrowser *jsonBrowser;
-    SimpleServiceBrowser *simpleBrowser;
     WiThrottleServiceBrowser *wiThrottleBrowser;
     WebServiceBrowser *webBrowser;
     
@@ -38,7 +36,7 @@
 /**
  Create a browser, requiring that it only enumerate JMRI servers providing specified services.
  
- Valid services are JMRIServiceJson, JMRIServiceSimple, JMRIServiceWeb, JMRIServiceWiThrottle, and JMRIServiceXmlIO.
+ Valid services are JMRIServiceJson, JMRIServiceWeb, and JMRIServiceWiThrottle.
  
  @param services A set of service types.
  */

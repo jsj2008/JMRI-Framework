@@ -11,7 +11,6 @@
 #import "JMRIService.h"
 #import "JMRIService+Internal.h"
 #import "JsonServiceBrowser.h"
-#import "SimpleServiceBrowser.h"
 #import "WebServiceBrowser.h"
 #import "WiThrottleServiceBrowser.h"
 
@@ -31,8 +30,6 @@
     if ((self = [super init])) {
         jsonBrowser = [[JsonServiceBrowser alloc] init];
         jsonBrowser.delegate = self;
-        simpleBrowser = [[SimpleServiceBrowser alloc] init];
-        simpleBrowser.delegate = self;
         webBrowser = [[WebServiceBrowser alloc] init];
         webBrowser.delegate = self;
         // uncomment following two lines when re-enabling the WiThrottle service
@@ -50,11 +47,6 @@
     NSMutableSet *sanitize = [[NSMutableSet alloc] initWithSet:services];
     // remove or comment the following line when re-enabling the WiThrottle service
     [sanitize removeObject:JMRIServiceWiThrottle];
-    // allow XmlIO service to be required, even though it can't be browsed (it uses the same port/zeroconf advertisement as the Web service)
-    if ([sanitize containsObject:JMRIServiceXmlIO]) {
-        [sanitize addObject:JMRIServiceWeb];
-        [sanitize removeObject:JMRIServiceXmlIO];
-    }
     services = [[NSSet alloc] initWithSet:sanitize];
 	if ((self = [self init])) {
         _requiredServices = services;
@@ -66,7 +58,6 @@
 
 - (void)searchForServices {
     [jsonBrowser searchForServices];
-    [simpleBrowser searchForServices];
     [wiThrottleBrowser searchForServices];
     [webBrowser searchForServices];
 }
@@ -86,7 +77,6 @@
 
 - (void)stop {
     [jsonBrowser stop];
-    [simpleBrowser stop];
     [wiThrottleBrowser stop];
     [webBrowser stop];
 }
@@ -162,8 +152,6 @@
         service = [self serviceWithName:aNetService.name];
         if ([aNetService.type isEqualToString:JMRIServiceJson]) {
             service.jsonService = (JsonService *)aNetService;
-        } else if ([aNetService.type isEqualToString:JMRIServiceSimple]) {
-            service.simpleService = (SimpleService *)aNetService;
         } else if ([aNetService.type isEqualToString:JMRIServiceWeb]) {
             service.webService = (WebService *)aNetService;
         } else {
@@ -211,11 +199,8 @@
         [self logEvent:@"Removing %@ from \"%@\"", aNetService.type, service.name];
         if ([aNetService.type isEqualToString:JMRIServiceJson]) {
             service.jsonService = nil;
-        } else if ([aNetService.type isEqualToString:JMRIServiceSimple]) {
-            service.simpleService = nil;
         } else if ([aNetService.type isEqualToString:JMRIServiceWeb]) {
             service.webService = nil;
-            service.xmlIOService = nil;
             if (service.jsonService && service.jsonService.webSocketURL) {
                 service.jsonService = nil;
             }
@@ -229,7 +214,7 @@
                 break;
             }
         }
-        if (retain && (service.hasJsonService || service.hasSimpleService || service.hasWebService || service.hasWiThrottleService || service.hasXmlIOService)) {
+        if (retain && (service.hasJsonService || service.hasWebService || service.hasWiThrottleService)) {
             [self logEvent:@"Retaining service \"%@\"", service.name];
             if ([delegate respondsToSelector:@selector(JMRIServiceBrowser:didChangeService:moreComing:)]) {
                 [delegate JMRIServiceBrowser:self didChangeService:service moreComing:searching];

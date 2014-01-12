@@ -19,19 +19,11 @@
     [service readItem:self.name ofType:self.type];
 }
 
-- (void)queryFromXmlIOService:(XMLIOService *)service {
-    [service readItem:self.name ofType:self.type];
-}
-
 - (void)writeToJsonService:(JsonService *)service {
     [service writeItem:self.name ofType:self.type value:self.value];
 }
 
 - (void)writeToWebService:(WebService *)service {
-    [service writeItem:self.name ofType:self.type value:self.value];
-}
-
-- (void)writeToXmlIOService:(XMLIOService *)service {
     [service writeItem:self.name ofType:self.type value:self.value];
 }
 

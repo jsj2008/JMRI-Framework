@@ -11,9 +11,7 @@
 #import "JMRIConstants.h"
 #import "JMRINetService.h"
 #import "JsonService.h"
-#import "SimpleService.h"
 #import "WiThrottleService.h"
-#import "XMLIOService.h"
 
 @implementation JMRIItem
 
@@ -51,40 +49,17 @@
 
 #pragma mark - Communications
 
-- (void)monitor {
-    // monitoring is not automatic in XmlIO, so support a special monitor command
-    // for that protocol. Otherwise treat a monitor request as a normal read
-    [self query];
-    [self.service monitor:self];
-}
-
-- (Boolean)isMonitoring {
-    return [self.service isMonitoring:self];
-}
-
-- (void)stopMonitoring {
-    [self.service stopMonitoring:self];
-}
-
 - (void)query {
     if (self.service.hasJsonService && self.service.useJsonService) {
         [self queryFromJsonService:self.service.jsonService];
-    } else if (self.service.hasSimpleService && self.service.useSimpleService) {
-        [self queryFromSimpleService:self.service.simpleService];
     } else if (self.service.hasWebService && self.service.useWebService) {
         [self queryFromWebService:self.service.webService];
     } else if (self.service.hasWiThrottleService && self.service.useWiThrottleService) {
         // WiThrottle has no explicit query mechanism
-    } else if (self.service.hasXmlIOService && self.service.useXmlIOService) {
-        [self queryFromXmlIOService:self.service.xmlIOService];
     }
 }
 
 - (void)queryFromJsonService:(JsonService *)service {
-    // silently do nothing if not supported by protocol
-}
-
-- (void)queryFromSimpleService:(SimpleService *)service {
     // silently do nothing if not supported by protocol
 }
 
@@ -96,21 +71,13 @@
     // silently do nothing if not supported by protocol
 }
 
-- (void)queryFromXmlIOService:(XMLIOService *)service {
-    // silently do nothing if not supported by protocol
-}
-
 - (void)write {
     if (self.service.hasJsonService && self.service.useJsonService) {
         [self writeToJsonService:self.service.jsonService];
-    } else if (self.service.hasSimpleService && self.service.useSimpleService) {
-        [self writeToSimpleService:self.service.simpleService];
     } else if (self.service.hasWiThrottleService && self.service.useWiThrottleService) {
         [self writeToWiThrottleService:self.service.wiThrottleService];
     } else if (self.service.hasWebService && self.service.useWebService) {
         [self writeToWebService:self.service.webService];
-    } else if (self.service.hasXmlIOService && self.service.useXmlIOService) {
-        [self writeToXmlIOService:self.service.xmlIOService];
     }
 }
 
@@ -118,19 +85,11 @@
     //silently do nothing if not supported by protocol
 }
 
-- (void)writeToSimpleService:(SimpleService *)service {
-    // silently do nothing if not supported by protocol
-}
-
 - (void)writeToWebService:(WebService *)service {
     // silently do nothing if not supported by protocol
 }
 
 - (void)writeToWiThrottleService:(WiThrottleService *)service {
-    // silently do nothing if not supported by protocol
-}
-
-- (void)writeToXmlIOService:(XMLIOService *)service {
     // silently do nothing if not supported by protocol
 }
 
@@ -200,7 +159,6 @@
     if (service != nil) {
         [[service valueForKey:[service collectionForType:self.type]] setValue:self forKey:self.name];
         [service item:self addedToList:[service valueForKey:[service collectionForType:self.type]]];
-        [self monitor];
     }
 }
 
