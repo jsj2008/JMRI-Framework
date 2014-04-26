@@ -117,7 +117,7 @@
     } else {
 #if TARGET_OS_IPHONE
         [NSStream getStreamsToHostNamed:self.addresses[0]
-                                   port:self.port
+                                   port:(unsigned)self.port
                             inputStream:&is
                            outputStream:&os];
 #else
