@@ -6,5 +6,5 @@ before_install:
   - gem install cocoapods -v '0.32.1'
   
 language: objective-c
-xcode_workspace: "JMRI Framework.xcworkspace"
+xcode_workspace: JMRI-Framework.xcworkspace
 xcode_scheme: libJMRI
