@@ -7,20 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1BC1E229C037420B9AEC6459 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6D32B1FA19B4DD8AE1D8E5F /* CFNetwork.framework */; };
-		2009A412B3E1453F8A254092 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EC234CD61624C6693C2269E /* Foundation.framework */; };
 		27575207C72D420AAE40086B /* NSData+SRB64Additions.h in Headers */ = {isa = PBXBuildFile; fileRef = C156D8B43432495AAB8DA6CF /* NSData+SRB64Additions.h */; };
 		29D48D86EF2B477590D3104B /* base64.c in Sources */ = {isa = PBXBuildFile; fileRef = 8AB0B81464F3435F865C0F1E /* base64.c */; settings = {COMPILER_FLAGS = "-fobjc-arc -DOS_OBJECT_USE_OBJC=0"; }; };
 		4056F93DCA3E46259C712A07 /* Pods-SocketRocket-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E327DB2A3CA94D5292205CB4 /* Pods-SocketRocket-dummy.m */; };
 		45B0B809CB0D49AF90DCD3F6 /* base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 02E9632D8B404E49BCEA2EDA /* base64.h */; };
 		45EC69C60E6742E09EF5AC1E /* SRWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AC192722037408EB253AB34 /* SRWebSocket.h */; };
-		489DF32B190BCD3D007CB121 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 489DF32A190BCD3D007CB121 /* libicucore.dylib */; };
 		4D79592BA40943DB980434DE /* libPods-SocketRocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7292DC0DEA0F42AAB9BCE791 /* libPods-SocketRocket.a */; };
 		5A159EA89BD246B091A7789E /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A7027FEAFA394392B458797F /* SRWebSocket.m */; settings = {COMPILER_FLAGS = "-fobjc-arc -DOS_OBJECT_USE_OBJC=0"; }; };
 		5F105ABE65FD4D9D98A04DFE /* NSData+SRB64Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 633424F12FCB413AB13C52E3 /* NSData+SRB64Additions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc -DOS_OBJECT_USE_OBJC=0"; }; };
 		B3E27DC2B61041DCB3413521 /* Pods-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F082A37D608244A585A036C8 /* Pods-dummy.m */; };
-		BAC518B26E33407D9B983A36 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EC234CD61624C6693C2269E /* Foundation.framework */; };
-		FF8DC4F6120B4108B6F733CA /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDA34C7A4FDF419D9F334039 /* Security.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,10 +31,8 @@
 /* Begin PBXFileReference section */
 		02E9632D8B404E49BCEA2EDA /* base64.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = base64.h; path = SocketRocket/base64.h; sourceTree = "<group>"; };
 		364EC60A13814CF8AD966F5D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		3EC234CD61624C6693C2269E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		4184E9974DBC4697A5EA9B06 /* Pods-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-acknowledgements.plist"; sourceTree = "<group>"; };
 		4570A1E94739445A9520B9A3 /* Pods-SocketRocket.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SocketRocket.xcconfig"; sourceTree = "<group>"; };
-		489DF32A190BCD3D007CB121 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = ../../../../iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		633424F12FCB413AB13C52E3 /* NSData+SRB64Additions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSData+SRB64Additions.m"; path = "SocketRocket/NSData+SRB64Additions.m"; sourceTree = "<group>"; };
 		7292DC0DEA0F42AAB9BCE791 /* libPods-SocketRocket.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SocketRocket.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AC192722037408EB253AB34 /* SRWebSocket.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SRWebSocket.h; path = SocketRocket/SRWebSocket.h; sourceTree = "<group>"; };
@@ -55,8 +48,6 @@
 		E327DB2A3CA94D5292205CB4 /* Pods-SocketRocket-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SocketRocket-dummy.m"; sourceTree = "<group>"; };
 		E5632EC1FD314E7098FCB5D8 /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		F082A37D608244A585A036C8 /* Pods-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-dummy.m"; sourceTree = "<group>"; };
-		F6D32B1FA19B4DD8AE1D8E5F /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = DEVELOPER_DIR; };
-		FDA34C7A4FDF419D9F334039 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,7 +55,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BAC518B26E33407D9B983A36 /* Foundation.framework in Frameworks */,
 				4D79592BA40943DB980434DE /* libPods-SocketRocket.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -73,10 +63,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				489DF32B190BCD3D007CB121 /* libicucore.dylib in Frameworks */,
-				1BC1E229C037420B9AEC6459 /* CFNetwork.framework in Frameworks */,
-				2009A412B3E1453F8A254092 /* Foundation.framework in Frameworks */,
-				FF8DC4F6120B4108B6F733CA /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,7 +73,6 @@
 			isa = PBXGroup;
 			children = (
 				E5632EC1FD314E7098FCB5D8 /* Podfile */,
-				8DF799A9872944639FD80DC9 /* Frameworks */,
 				CC9A6AE40B7740F8BE6BAFD0 /* Pods */,
 				BFEDAF365EC8463991044DF7 /* Products */,
 				386B207D753C4076BE4B21C9 /* Targets Support Files */,
@@ -100,17 +85,6 @@
 				526338AFFA1B4B0F9811CE1C /* Pods */,
 			);
 			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		42322FE3A653484C914A2C74 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				F6D32B1FA19B4DD8AE1D8E5F /* CFNetwork.framework */,
-				3EC234CD61624C6693C2269E /* Foundation.framework */,
-				FDA34C7A4FDF419D9F334039 /* Security.framework */,
-				489DF32A190BCD3D007CB121 /* libicucore.dylib */,
-			);
-			name = iOS;
 			sourceTree = "<group>";
 		};
 		526338AFFA1B4B0F9811CE1C /* Pods */ = {
@@ -138,14 +112,6 @@
 				D07F40B9CE184E4A89DC15B0 /* Support Files */,
 			);
 			path = SocketRocket;
-			sourceTree = "<group>";
-		};
-		8DF799A9872944639FD80DC9 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				42322FE3A653484C914A2C74 /* iOS */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		BFEDAF365EC8463991044DF7 /* Products */ = {
