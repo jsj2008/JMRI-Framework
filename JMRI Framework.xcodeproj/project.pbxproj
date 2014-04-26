@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		128032E050C54EAC8937B3F3 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 787CE875A42B4DF6998CB4E9 /* libPods.a */; };
 		4813F4871386DE8900718FFC /* NSArray+JMRIExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4813F4851386DE8900718FFC /* NSArray+JMRIExtensions.m */; };
 		48280C2216EC900500925806 /* NSMutableArray+QueueExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 48280C2116EC900500925806 /* NSMutableArray+QueueExtensions.h */; };
 		48280C2316EC900500925806 /* NSMutableArray+QueueExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 48280C2116EC900500925806 /* NSMutableArray+QueueExtensions.h */; };
@@ -50,7 +51,6 @@
 		48B0149715B1CBF600997BD3 /* NSStream+JMRIExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 483FD43E145BA5DB00BCED0D /* NSStream+JMRIExtensions.m */; };
 		48B0149815B1CBF600997BD3 /* JMRIService.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D4AD7C15514149000B964C /* JMRIService.m */; };
 		48B0149915B1CBF600997BD3 /* JMRIServiceBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D4AD881559132D000B964C /* JMRIServiceBrowser.m */; };
-		48B0149B15B1CC2400997BD3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48B0149A15B1CC2400997BD3 /* Foundation.framework */; };
 		48B0149C15B1CCFE00997BD3 /* JMRIItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 487AA4B415AC33BD00F76F47 /* JMRIItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48B0149D15B1CCFE00997BD3 /* JMRITurnout.h in Headers */ = {isa = PBXBuildFile; fileRef = 487AA4BB15AC43DA00F76F47 /* JMRITurnout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48B014A015B1CCFE00997BD3 /* WiThrottleService.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F65A7E137984C40086D4E3 /* WiThrottleService.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -62,7 +62,6 @@
 		48B014AE15B1CCFE00997BD3 /* NSStream+JMRIExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 483FD43D145BA5DB00BCED0D /* NSStream+JMRIExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48B014AF15B1CCFE00997BD3 /* JMRIService.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D4AD7B15514149000B964C /* JMRIService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48B014B015B1CCFE00997BD3 /* JMRIServiceBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D4AD871559132D000B964C /* JMRIServiceBrowser.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		48B014B415B1CEA600997BD3 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48B014B315B1CEA600997BD3 /* Cocoa.framework */; };
 		48B014BA15B1D06200997BD3 /* JMRI.h in Headers */ = {isa = PBXBuildFile; fileRef = 48B014B915B1D06200997BD3 /* JMRI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48B1DF3915B310CD007DCD57 /* JMRIPower.m in Sources */ = {isa = PBXBuildFile; fileRef = 48B1DF3615B310CD007DCD57 /* JMRIPower.m */; };
 		48B1DF3A15B310CD007DCD57 /* JMRIPower.m in Sources */ = {isa = PBXBuildFile; fileRef = 48B1DF3615B310CD007DCD57 /* JMRIPower.m */; };
@@ -107,11 +106,6 @@
 		48D4AD7F15514149000B964C /* JMRIService.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D4AD7C15514149000B964C /* JMRIService.m */; };
 		48D4AD891559132D000B964C /* JMRIServiceBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D4AD871559132D000B964C /* JMRIServiceBrowser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48D4AD8B1559132D000B964C /* JMRIServiceBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D4AD881559132D000B964C /* JMRIServiceBrowser.m */; };
-		48DAC70E173DC5E300211579 /* libSocketRocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48DAC707173DC52900211579 /* libSocketRocket.a */; };
-		48DAC70F173DC5EB00211579 /* SocketRocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48DAC709173DC52900211579 /* SocketRocket.framework */; };
-		48DAC711173DC65B00211579 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 48DAC710173DC65B00211579 /* libicucore.dylib */; };
-		48DAC713173DC66500211579 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48DAC712173DC66500211579 /* CFNetwork.framework */; };
-		48DAC715173DC67100211579 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48DAC714173DC67100211579 /* Security.framework */; };
 		48DCFB5415D705A00096D2D0 /* JMRISignalHead.h in Headers */ = {isa = PBXBuildFile; fileRef = 48DCFB5215D705A00096D2D0 /* JMRISignalHead.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48DCFB5515D705A00096D2D0 /* JMRISignalHead.h in Headers */ = {isa = PBXBuildFile; fileRef = 48DCFB5215D705A00096D2D0 /* JMRISignalHead.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48DCFB5615D705A00096D2D0 /* JMRISignalHead.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DCFB5315D705A00096D2D0 /* JMRISignalHead.m */; };
@@ -123,55 +117,10 @@
 		48F65A80137984C40086D4E3 /* WiThrottleService.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F65A7E137984C40086D4E3 /* WiThrottleService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48F65A81137984C40086D4E3 /* WiThrottleService.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F65A7F137984C40086D4E3 /* WiThrottleService.m */; };
 		AA747D9F0F9514B9006C5449 /* Framework_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* Framework_Prefix.pch */; settings = {ATTRIBUTES = (Public, ); }; };
-		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		48A400FA182707C10002614D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 48DAC6FF173DC52800211579 /* SocketRocket.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = F668C87F153E91210044DBAC;
-			remoteInfo = SocketRocketOSX;
-		};
-		48DAC706173DC52900211579 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 48DAC6FF173DC52800211579 /* SocketRocket.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F6B2082D1450F597009315AF;
-			remoteInfo = SocketRocket;
-		};
-		48DAC708173DC52900211579 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 48DAC6FF173DC52800211579 /* SocketRocket.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F668C880153E91210044DBAC;
-			remoteInfo = SocketRocketOSX;
-		};
-		48DAC70A173DC52900211579 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 48DAC6FF173DC52800211579 /* SocketRocket.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F6BDA802145900D200FE3253;
-			remoteInfo = SRWebSocketTests;
-		};
-		48DAC70C173DC52900211579 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 48DAC6FF173DC52800211579 /* SocketRocket.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F62417E314D52F3C003CE997;
-			remoteInfo = TestChat;
-		};
-		48DAC718173DC6C300211579 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 48DAC6FF173DC52800211579 /* SocketRocket.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = F6B2082C1450F597009315AF;
-			remoteInfo = SocketRocket;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
+		3934823C99FC47ACB2C85AA9 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		4813F4841386DE8900718FFC /* NSArray+JMRIExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; lineEnding = 0; path = "NSArray+JMRIExtensions.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4813F4851386DE8900718FFC /* NSArray+JMRIExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSArray+JMRIExtensions.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		48280C2116EC900500925806 /* NSMutableArray+QueueExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSMutableArray+QueueExtensions.h"; path = "Classes/NSMutableArray+QueueExtensions.h"; sourceTree = "<group>"; };
@@ -198,9 +147,7 @@
 		4888594F1375B1F4001EAD5B /* JMRINetServiceBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = JMRINetServiceBrowser.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		48AB635413A4EBBF002DB6AE /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; lineEnding = 0; path = README.md; sourceTree = "<group>"; };
 		48B0147115B1CB6400997BD3 /* JMRI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JMRI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		48B0149A15B1CC2400997BD3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		48B014B115B1CD4600997BD3 /* JMRI.framework-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "JMRI.framework-Info.plist"; sourceTree = "<group>"; };
-		48B014B315B1CEA600997BD3 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
 		48B014B915B1D06200997BD3 /* JMRI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMRI.h; sourceTree = "<group>"; };
 		48B1DF3515B310CD007DCD57 /* JMRIPower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; name = JMRIPower.h; path = Classes/Items/JMRIPower.h; sourceTree = "<group>"; };
 		48B1DF3615B310CD007DCD57 /* JMRIPower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JMRIPower.m; path = Classes/Items/JMRIPower.m; sourceTree = "<group>"; };
@@ -225,10 +172,6 @@
 		48D4AD7C15514149000B964C /* JMRIService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = JMRIService.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		48D4AD871559132D000B964C /* JMRIServiceBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JMRIServiceBrowser.h; path = Classes/JMRIServiceBrowser.h; sourceTree = "<group>"; };
 		48D4AD881559132D000B964C /* JMRIServiceBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = JMRIServiceBrowser.m; path = Classes/JMRIServiceBrowser.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		48DAC6FF173DC52800211579 /* SocketRocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SocketRocket.xcodeproj; path = SocketRocket/SocketRocket.xcodeproj; sourceTree = "<group>"; };
-		48DAC710173DC65B00211579 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
-		48DAC712173DC66500211579 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		48DAC714173DC67100211579 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		48DCFB5215D705A00096D2D0 /* JMRISignalHead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JMRISignalHead.h; path = Classes/Items/JMRISignalHead.h; sourceTree = "<group>"; };
 		48DCFB5315D705A00096D2D0 /* JMRISignalHead.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JMRISignalHead.m; path = Classes/Items/JMRISignalHead.m; sourceTree = "<group>"; };
 		48F0E904173126FC00A1FA3D /* JMRIService+Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMRIService+Internal.h"; sourceTree = "<group>"; };
@@ -236,8 +179,8 @@
 		48F65A1113796DEF0086D4E3 /* JMRINetService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = JMRINetService.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		48F65A7E137984C40086D4E3 /* WiThrottleService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; lineEnding = 0; path = WiThrottleService.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		48F65A7F137984C40086D4E3 /* WiThrottleService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = WiThrottleService.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		787CE875A42B4DF6998CB4E9 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA747D9E0F9514B9006C5449 /* Framework_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Framework_Prefix.pch; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libJMRI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJMRI.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -246,9 +189,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48DAC70F173DC5EB00211579 /* SocketRocket.framework in Frameworks */,
-				48B014B415B1CEA600997BD3 /* Cocoa.framework in Frameworks */,
-				48B0149B15B1CC2400997BD3 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,11 +196,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48DAC715173DC67100211579 /* Security.framework in Frameworks */,
-				48DAC713173DC66500211579 /* CFNetwork.framework in Frameworks */,
-				48DAC711173DC65B00211579 /* libicucore.dylib in Frameworks */,
-				48DAC70E173DC5E300211579 /* libSocketRocket.a in Frameworks */,
-				AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */,
+				128032E050C54EAC8937B3F3 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,6 +220,7 @@
 				0867D69AFE84028FC02AAC07 /* Frameworks */,
 				034768DFFF38A50411DB9C8B /* Products */,
 				48AB635413A4EBBF002DB6AE /* README.md */,
+				3934823C99FC47ACB2C85AA9 /* Pods.xcconfig */,
 			);
 			name = Framework;
 			sourceTree = "<group>";
@@ -291,9 +228,7 @@
 		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				48DAC6FF173DC52800211579 /* SocketRocket.xcodeproj */,
-				48B014B615B1CEB700997BD3 /* OS X */,
-				48B014B515B1CEB000997BD3 /* iOS */,
+				787CE875A42B4DF6998CB4E9 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -385,26 +320,6 @@
 			name = WebService;
 			sourceTree = "<group>";
 		};
-		48B014B515B1CEB000997BD3 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				48DAC712173DC66500211579 /* CFNetwork.framework */,
-				AACBBE490F95108600F1A2B1 /* Foundation.framework */,
-				48DAC714173DC67100211579 /* Security.framework */,
-				48DAC710173DC65B00211579 /* libicucore.dylib */,
-			);
-			name = iOS;
-			sourceTree = "<group>";
-		};
-		48B014B615B1CEB700997BD3 /* OS X */ = {
-			isa = PBXGroup;
-			children = (
-				48B0149A15B1CC2400997BD3 /* Foundation.framework */,
-				48B014B315B1CEA600997BD3 /* Cocoa.framework */,
-			);
-			name = "OS X";
-			sourceTree = "<group>";
-		};
 		48B014BB15B1D77400997BD3 /* Core */ = {
 			isa = PBXGroup;
 			children = (
@@ -443,17 +358,6 @@
 				48BA51A715CD51BE0066095E /* JMRIPanelConstants.m */,
 			);
 			name = Panels;
-			sourceTree = "<group>";
-		};
-		48DAC700173DC52800211579 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				48DAC707173DC52900211579 /* libSocketRocket.a */,
-				48DAC709173DC52900211579 /* SocketRocket.framework */,
-				48DAC70B173DC52900211579 /* SRWebSocketTests.octest */,
-				48DAC70D173DC52900211579 /* TestChat.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -547,7 +451,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				48A400FB182707C10002614D /* PBXTargetDependency */,
 			);
 			name = JMRI;
 			productName = jmri.framework;
@@ -558,15 +461,16 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1DEB921E08733DC00010E9CD /* Build configuration list for PBXNativeTarget "libJMRI" */;
 			buildPhases = (
+				F8B659CB7FD149599B35F26F /* Check Pods Manifest.lock */,
 				D2AAC07A0554694100DB518D /* Headers */,
 				D2AAC07B0554694100DB518D /* Sources */,
 				D2AAC07C0554694100DB518D /* Frameworks */,
 				487875CE15D9031000BD3E0D /* Prepare Framework */,
+				139062C5747B44999AB5AA14 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				48DAC719173DC6C300211579 /* PBXTargetDependency */,
 			);
 			name = libJMRI;
 			productName = Framework;
@@ -595,12 +499,6 @@
 			mainGroup = 0867D691FE84028FC02AAC07 /* Framework */;
 			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 48DAC700173DC52800211579 /* Products */;
-					ProjectRef = 48DAC6FF173DC52800211579 /* SocketRocket.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				D2AAC07D0554694100DB518D /* libJMRI */,
@@ -608,37 +506,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		48DAC707173DC52900211579 /* libSocketRocket.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libSocketRocket.a;
-			remoteRef = 48DAC706173DC52900211579 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		48DAC709173DC52900211579 /* SocketRocket.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SocketRocket.framework;
-			remoteRef = 48DAC708173DC52900211579 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		48DAC70B173DC52900211579 /* SRWebSocketTests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = SRWebSocketTests.octest;
-			remoteRef = 48DAC70A173DC52900211579 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		48DAC70D173DC52900211579 /* TestChat.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = TestChat.app;
-			remoteRef = 48DAC70C173DC52900211579 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		48B0146F15B1CB6400997BD3 /* Resources */ = {
@@ -651,6 +518,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		139062C5747B44999AB5AA14 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		487875CE15D9031000BD3E0D /* Prepare Framework */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 12;
@@ -664,6 +546,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nmkdir -p \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers\"\n\n# Link the \"Current\" version to \"A\"\n/bin/ln -sfh A \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/Current\"\n/bin/ln -sfh Versions/Current/Headers \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Headers\"\n/bin/ln -sfh \"Versions/Current/${PRODUCT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/${PRODUCT_NAME}\"\n\n# The -a ensures that the headers maintain the source modification date so that we don't constantly\n# cause propagating rebuilds of files that import these headers.\n/bin/cp -a \"${TARGET_BUILD_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers\"";
+		};
+		F8B659CB7FD149599B35F26F /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -734,22 +631,10 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		48A400FB182707C10002614D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SocketRocketOSX;
-			targetProxy = 48A400FA182707C10002614D /* PBXContainerItemProxy */;
-		};
-		48DAC719173DC6C300211579 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SocketRocket;
-			targetProxy = 48DAC718173DC6C300211579 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin XCBuildConfiguration section */
 		1DEB921F08733DC00010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3934823C99FC47ACB2C85AA9 /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -773,6 +658,7 @@
 		};
 		1DEB922008733DC00010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3934823C99FC47ACB2C85AA9 /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -795,6 +681,7 @@
 		1DEB922308733DC00010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -802,7 +689,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
@@ -814,13 +701,14 @@
 		1DEB922408733DC00010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";

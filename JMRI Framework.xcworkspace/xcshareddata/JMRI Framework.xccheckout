@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>3E047FD4-4427-4F85-B070-DCF6A9CCAB00</string>
+	<key>IDESourceControlProjectName</key>
+	<string>JMRI Framework</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>508FBA72-437C-4C1D-8C53-D9FE7BF5A384</key>
+		<string>ssh://github.com/rhwood/JMRI-Framework.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>JMRI Framework.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>508FBA72-437C-4C1D-8C53-D9FE7BF5A384</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/rhwood/JMRI-Framework.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>508FBA72-437C-4C1D-8C53-D9FE7BF5A384</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>508FBA72-437C-4C1D-8C53-D9FE7BF5A384</string>
+			<key>IDESourceControlWCCName</key>
+			<string>master</string>
+		</dict>
+	</array>
+</dict>
+</plist>
