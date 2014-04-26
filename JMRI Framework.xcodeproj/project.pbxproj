@@ -106,6 +106,7 @@
 		48D4AD7F15514149000B964C /* JMRIService.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D4AD7C15514149000B964C /* JMRIService.m */; };
 		48D4AD891559132D000B964C /* JMRIServiceBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D4AD871559132D000B964C /* JMRIServiceBrowser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48D4AD8B1559132D000B964C /* JMRIServiceBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D4AD881559132D000B964C /* JMRIServiceBrowser.m */; };
+		48D98340190BD6CC0023F22B /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 48D9833F190BD6CC0023F22B /* libicucore.dylib */; };
 		48DCFB5415D705A00096D2D0 /* JMRISignalHead.h in Headers */ = {isa = PBXBuildFile; fileRef = 48DCFB5215D705A00096D2D0 /* JMRISignalHead.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48DCFB5515D705A00096D2D0 /* JMRISignalHead.h in Headers */ = {isa = PBXBuildFile; fileRef = 48DCFB5215D705A00096D2D0 /* JMRISignalHead.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48DCFB5615D705A00096D2D0 /* JMRISignalHead.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DCFB5315D705A00096D2D0 /* JMRISignalHead.m */; };
@@ -172,6 +173,7 @@
 		48D4AD7C15514149000B964C /* JMRIService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = JMRIService.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		48D4AD871559132D000B964C /* JMRIServiceBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JMRIServiceBrowser.h; path = Classes/JMRIServiceBrowser.h; sourceTree = "<group>"; };
 		48D4AD881559132D000B964C /* JMRIServiceBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = JMRIServiceBrowser.m; path = Classes/JMRIServiceBrowser.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		48D9833F190BD6CC0023F22B /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		48DCFB5215D705A00096D2D0 /* JMRISignalHead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JMRISignalHead.h; path = Classes/Items/JMRISignalHead.h; sourceTree = "<group>"; };
 		48DCFB5315D705A00096D2D0 /* JMRISignalHead.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JMRISignalHead.m; path = Classes/Items/JMRISignalHead.m; sourceTree = "<group>"; };
 		48F0E904173126FC00A1FA3D /* JMRIService+Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMRIService+Internal.h"; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48D98340190BD6CC0023F22B /* libicucore.dylib in Frameworks */,
 				128032E050C54EAC8937B3F3 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -228,6 +231,7 @@
 		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				48D9833F190BD6CC0023F22B /* libicucore.dylib */,
 				787CE875A42B4DF6998CB4E9 /* libPods.a */,
 			);
 			name = Frameworks;
