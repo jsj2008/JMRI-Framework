@@ -6,7 +6,7 @@
 //
 //
 
-#import <JMRI/JMRI.h>
+#import "JMRI.h"
 
 @interface JMRIReporter (Internal)
 
