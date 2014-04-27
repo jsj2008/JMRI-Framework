@@ -8,28 +8,28 @@
 
 //  JMRI constants
 
-#import <JMRI/JMRIConstants.h>
+#import "JMRIConstants.h"
 
 //  JMRI core
 
-#import <JMRI/JMRIService.h>
-#import <JMRI/JMRIServiceBrowser.h>
-#import <JMRI/JsonService.h>
-#import <JMRI/WebService.h>
-#import <JMRI/WiThrottleService.h>
+#import "JMRIService.h"
+#import "JMRIServiceBrowser.h"
+#import "JsonService.h"
+#import "WebService.h"
+#import "WiThrottleService.h"
 
 //  JMRI items
 
-#import <JMRI/JMRILight.h>
-#import <JMRI/JMRIMemory.h>
-#import <JMRI/JMRIMetadata.h>
-#import <JMRI/JMRIPower.h>
-#import <JMRI/JMRISensor.h>
-#import <JMRI/JMRIReporter.h>
-#import <JMRI/JMRIRoute.h>
-#import <JMRI/JMRITurnout.h>
+#import "JMRILight.h"
+#import "JMRIMemory.h"
+#import "JMRIMetadata.h"
+#import "JMRIPower.h"
+#import "JMRISensor.h"
+#import "JMRIReporter.h"
+#import "JMRIRoute.h"
+#import "JMRITurnout.h"
 
 //  Extensions
 
-#import <JMRI/NSArray+JMRIExtensions.h>
-#import <JMRI/NSStream+JMRIExtensions.h>
+#import "NSArray+JMRIExtensions.h"
+#import "NSStream+JMRIExtensions.h"
