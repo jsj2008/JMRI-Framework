@@ -31,14 +31,14 @@
                BlueprintIdentifier = "D2AAC07D0554694100DB518D"
                BuildableName = "libJMRI.a"
                BlueprintName = "libJMRI"
-               ReferencedContainer = "container:JMRI Framework.xcodeproj">
+               ReferencedContainer = "container:JMRI-Framework.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
-      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.GDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
