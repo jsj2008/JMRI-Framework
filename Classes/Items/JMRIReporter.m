@@ -1,6 +1,6 @@
 //
 //  JMRIReporter.m
-//  JMRI Framework
+//  JMRI-Framework
 //
 //  Created by Randall Wood on 3/8/2012.
 //

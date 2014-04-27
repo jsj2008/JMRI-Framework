@@ -11,7 +11,7 @@
  */
 //
 //  JMRIWiThrottleServiceBrowser.m
-//  JMRI Framework
+//  JMRI-Framework
 //
 //  Created by Randall Wood on 11/5/2011.
 //

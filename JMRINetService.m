@@ -11,7 +11,7 @@
  */
 //
 //  JMRINetService.m
-//  JMRI Framework
+//  JMRI-Framework
 //
 //  Created by Randall Wood on 10/5/2011.
 //

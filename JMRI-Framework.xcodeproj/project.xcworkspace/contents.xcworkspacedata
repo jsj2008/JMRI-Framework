@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:JMRI Framework.xcodeproj">
+      location = "self:JMRI-Framework.xcodeproj">
    </FileRef>
 </Workspace>

@@ -11,7 +11,7 @@
  */
 //
 //  NSArray+JMRIExtensions.h
-//  JMRI Framework
+//  JMRI-Framework
 //
 //  Created by Randall Wood on 20/5/2011.
 //

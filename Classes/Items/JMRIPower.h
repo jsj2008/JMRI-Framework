@@ -1,6 +1,6 @@
 //
 //  JMRIPower.h
-//  JMRI Framework
+//  JMRI-Framework
 //
 //  Created by Randall Wood on 15/7/2012.
 //  Copyright (c) 2012 Alexandria Software. All rights reserved.

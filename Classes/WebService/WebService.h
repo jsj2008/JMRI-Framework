@@ -1,6 +1,6 @@
 //
 //  WebService.h
-//  JMRI Framework
+//  JMRI-Framework
 //
 //  Created by Randall Wood on 28/3/2013.
 //

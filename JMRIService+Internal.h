@@ -1,6 +1,6 @@
 //
 //  JMRIService_JMRIService_Internal.h
-//  JMRI Framework
+//  JMRI-Framework
 //
 //  Created by Randall Wood on 1/5/2013.
 //

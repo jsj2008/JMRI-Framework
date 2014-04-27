@@ -1,6 +1,6 @@
 //
 //  JMRIItem_JMRIItem_Internal.h
-//  JMRI Framework
+//  JMRI-Framework
 //
 //  Created by Randall Wood on 23/6/2013.
 //

@@ -1,6 +1,6 @@
 //
 //  JsonServiceBrowser.h
-//  JMRI Framework
+//  JMRI-Framework
 //
 //  Created by Randall Wood on 3/3/2013.
 //

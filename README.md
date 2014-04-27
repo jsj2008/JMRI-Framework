@@ -1,10 +1,10 @@
-# JMRI Framework #
+# JMRI-Framework #
 
 [![Build Status](https://services01.alexandriasoftware.com/buildStatus/icon?job=JMRI_Framework)](https://services01.alexandriasoftware.com/job/JMRI_Framework/)
 
 [![Build Status](https://travis-ci.org/rhwood/JMRI-Framework.png)](https://travis-ci.org/rhwood/JMRI-Framework)
 
-*JMRI Framework* is an Objective-C library for developing [iOS](http://developer.apple.com/devcenter/ios/index.action "iOS Developer Center @ Apple") applications that network with [JMRI](http://jmri.org) software.  Currently, this library only supports iOS and the JMRI [JSON](http://jmri.sourceforge.net/help/en/html/web/JsonServlet.shtml) protocol.
+*JMRI-Framework* is an Objective-C library for developing [iOS](http://developer.apple.com/devcenter/ios/index.action "iOS Developer Center @ Apple") applications that network with [JMRI](http://jmri.org) software.  Currently, this library only supports iOS and the JMRI [JSON](http://jmri.sourceforge.net/help/en/html/web/JsonServlet.shtml) protocol.
 
 ## Installation & Use ##
 

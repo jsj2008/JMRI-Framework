@@ -17,7 +17,7 @@
                BlueprintIdentifier = "48B0147015B1CB6400997BD3"
                BuildableName = "JMRI.framework"
                BlueprintName = "JMRI"
-               ReferencedContainer = "container:JMRI Framework.xcodeproj">
+               ReferencedContainer = "container:JMRI-Framework.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
