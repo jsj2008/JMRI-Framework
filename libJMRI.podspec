@@ -7,7 +7,8 @@ Pod::Spec.new do |spec|
   spec.summary      = 'A library for networking with JMRI software.'
 
 # Source Info
-  spec.platform     = :ios, '7.1'
+  spec.ios.deployment_target = '7.1'
+  spec.osx.deployment_target = '10.9'
   spec.source       = { :git => 'https://github.com/rhwood/JMRI-Framework.git' }
   spec.source_files = 'JMRI.h', 'Classes/*.{h,m}', 'Classes/**/*.{h,m}'
   spec.framework    = 'Foundation'
