@@ -1,0 +1,481 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		480CB738190E5D4E002BDD19 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 480CB737190E5D4E002BDD19 /* Cocoa.framework */; };
+		480CB742190E5D4E002BDD19 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 480CB740190E5D4E002BDD19 /* InfoPlist.strings */; };
+		480CB744190E5D4E002BDD19 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 480CB743190E5D4E002BDD19 /* main.m */; };
+		480CB748190E5D4E002BDD19 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 480CB746190E5D4E002BDD19 /* Credits.rtf */; };
+		480CB74B190E5D4E002BDD19 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 480CB74A190E5D4E002BDD19 /* AppDelegate.m */; };
+		480CB74E190E5D4E002BDD19 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 480CB74C190E5D4E002BDD19 /* MainMenu.xib */; };
+		480CB750190E5D4E002BDD19 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 480CB74F190E5D4E002BDD19 /* Images.xcassets */; };
+		480CB757190E5D4E002BDD19 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 480CB756190E5D4E002BDD19 /* XCTest.framework */; };
+		480CB758190E5D4E002BDD19 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 480CB737190E5D4E002BDD19 /* Cocoa.framework */; };
+		480CB760190E5D4E002BDD19 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 480CB75E190E5D4E002BDD19 /* InfoPlist.strings */; };
+		480CB762190E5D4E002BDD19 /* JMRIKit_ExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 480CB761190E5D4E002BDD19 /* JMRIKit_ExampleTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		480CB759190E5D4E002BDD19 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 480CB72C190E5D4E002BDD19 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 480CB733190E5D4E002BDD19;
+			remoteInfo = "JMRIKit Example";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		480CB734190E5D4E002BDD19 /* JMRIKit Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "JMRIKit Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		480CB737190E5D4E002BDD19 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		480CB73A190E5D4E002BDD19 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		480CB73B190E5D4E002BDD19 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		480CB73C190E5D4E002BDD19 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		480CB73F190E5D4E002BDD19 /* JMRIKit Example-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JMRIKit Example-Info.plist"; sourceTree = "<group>"; };
+		480CB741190E5D4E002BDD19 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		480CB743190E5D4E002BDD19 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		480CB745190E5D4E002BDD19 /* JMRIKit Example-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMRIKit Example-Prefix.pch"; sourceTree = "<group>"; };
+		480CB747190E5D4E002BDD19 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		480CB749190E5D4E002BDD19 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		480CB74A190E5D4E002BDD19 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		480CB74D190E5D4E002BDD19 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		480CB74F190E5D4E002BDD19 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		480CB755190E5D4E002BDD19 /* JMRIKit ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "JMRIKit ExampleTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		480CB756190E5D4E002BDD19 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		480CB75D190E5D4E002BDD19 /* JMRIKit ExampleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JMRIKit ExampleTests-Info.plist"; sourceTree = "<group>"; };
+		480CB75F190E5D4E002BDD19 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		480CB761190E5D4E002BDD19 /* JMRIKit_ExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMRIKit_ExampleTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		480CB731190E5D4E002BDD19 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				480CB738190E5D4E002BDD19 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		480CB752190E5D4E002BDD19 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				480CB758190E5D4E002BDD19 /* Cocoa.framework in Frameworks */,
+				480CB757190E5D4E002BDD19 /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		480CB72B190E5D4E002BDD19 = {
+			isa = PBXGroup;
+			children = (
+				480CB73D190E5D4E002BDD19 /* JMRIKit Example */,
+				480CB75B190E5D4E002BDD19 /* JMRIKit ExampleTests */,
+				480CB736190E5D4E002BDD19 /* Frameworks */,
+				480CB735190E5D4E002BDD19 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		480CB735190E5D4E002BDD19 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				480CB734190E5D4E002BDD19 /* JMRIKit Example.app */,
+				480CB755190E5D4E002BDD19 /* JMRIKit ExampleTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		480CB736190E5D4E002BDD19 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				480CB737190E5D4E002BDD19 /* Cocoa.framework */,
+				480CB756190E5D4E002BDD19 /* XCTest.framework */,
+				480CB739190E5D4E002BDD19 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		480CB739190E5D4E002BDD19 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				480CB73A190E5D4E002BDD19 /* AppKit.framework */,
+				480CB73B190E5D4E002BDD19 /* CoreData.framework */,
+				480CB73C190E5D4E002BDD19 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		480CB73D190E5D4E002BDD19 /* JMRIKit Example */ = {
+			isa = PBXGroup;
+			children = (
+				480CB749190E5D4E002BDD19 /* AppDelegate.h */,
+				480CB74A190E5D4E002BDD19 /* AppDelegate.m */,
+				480CB74C190E5D4E002BDD19 /* MainMenu.xib */,
+				480CB74F190E5D4E002BDD19 /* Images.xcassets */,
+				480CB73E190E5D4E002BDD19 /* Supporting Files */,
+			);
+			path = "JMRIKit Example";
+			sourceTree = "<group>";
+		};
+		480CB73E190E5D4E002BDD19 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				480CB73F190E5D4E002BDD19 /* JMRIKit Example-Info.plist */,
+				480CB740190E5D4E002BDD19 /* InfoPlist.strings */,
+				480CB743190E5D4E002BDD19 /* main.m */,
+				480CB745190E5D4E002BDD19 /* JMRIKit Example-Prefix.pch */,
+				480CB746190E5D4E002BDD19 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		480CB75B190E5D4E002BDD19 /* JMRIKit ExampleTests */ = {
+			isa = PBXGroup;
+			children = (
+				480CB761190E5D4E002BDD19 /* JMRIKit_ExampleTests.m */,
+				480CB75C190E5D4E002BDD19 /* Supporting Files */,
+			);
+			path = "JMRIKit ExampleTests";
+			sourceTree = "<group>";
+		};
+		480CB75C190E5D4E002BDD19 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				480CB75D190E5D4E002BDD19 /* JMRIKit ExampleTests-Info.plist */,
+				480CB75E190E5D4E002BDD19 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		480CB733190E5D4E002BDD19 /* JMRIKit Example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 480CB765190E5D4E002BDD19 /* Build configuration list for PBXNativeTarget "JMRIKit Example" */;
+			buildPhases = (
+				480CB730190E5D4E002BDD19 /* Sources */,
+				480CB731190E5D4E002BDD19 /* Frameworks */,
+				480CB732190E5D4E002BDD19 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "JMRIKit Example";
+			productName = "JMRIKit Example";
+			productReference = 480CB734190E5D4E002BDD19 /* JMRIKit Example.app */;
+			productType = "com.apple.product-type.application";
+		};
+		480CB754190E5D4E002BDD19 /* JMRIKit ExampleTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 480CB768190E5D4E002BDD19 /* Build configuration list for PBXNativeTarget "JMRIKit ExampleTests" */;
+			buildPhases = (
+				480CB751190E5D4E002BDD19 /* Sources */,
+				480CB752190E5D4E002BDD19 /* Frameworks */,
+				480CB753190E5D4E002BDD19 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				480CB75A190E5D4E002BDD19 /* PBXTargetDependency */,
+			);
+			name = "JMRIKit ExampleTests";
+			productName = "JMRIKit ExampleTests";
+			productReference = 480CB755190E5D4E002BDD19 /* JMRIKit ExampleTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		480CB72C190E5D4E002BDD19 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Alexandria Software";
+				TargetAttributes = {
+					480CB754190E5D4E002BDD19 = {
+						TestTargetID = 480CB733190E5D4E002BDD19;
+					};
+				};
+			};
+			buildConfigurationList = 480CB72F190E5D4E002BDD19 /* Build configuration list for PBXProject "JMRIKit Example" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 480CB72B190E5D4E002BDD19;
+			productRefGroup = 480CB735190E5D4E002BDD19 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				480CB733190E5D4E002BDD19 /* JMRIKit Example */,
+				480CB754190E5D4E002BDD19 /* JMRIKit ExampleTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		480CB732190E5D4E002BDD19 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				480CB742190E5D4E002BDD19 /* InfoPlist.strings in Resources */,
+				480CB750190E5D4E002BDD19 /* Images.xcassets in Resources */,
+				480CB748190E5D4E002BDD19 /* Credits.rtf in Resources */,
+				480CB74E190E5D4E002BDD19 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		480CB753190E5D4E002BDD19 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				480CB760190E5D4E002BDD19 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		480CB730190E5D4E002BDD19 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				480CB74B190E5D4E002BDD19 /* AppDelegate.m in Sources */,
+				480CB744190E5D4E002BDD19 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		480CB751190E5D4E002BDD19 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				480CB762190E5D4E002BDD19 /* JMRIKit_ExampleTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		480CB75A190E5D4E002BDD19 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 480CB733190E5D4E002BDD19 /* JMRIKit Example */;
+			targetProxy = 480CB759190E5D4E002BDD19 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		480CB740190E5D4E002BDD19 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				480CB741190E5D4E002BDD19 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		480CB746190E5D4E002BDD19 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				480CB747190E5D4E002BDD19 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		480CB74C190E5D4E002BDD19 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				480CB74D190E5D4E002BDD19 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		480CB75E190E5D4E002BDD19 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				480CB75F190E5D4E002BDD19 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		480CB763190E5D4E002BDD19 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		480CB764190E5D4E002BDD19 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		480CB766190E5D4E002BDD19 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JMRIKit Example/JMRIKit Example-Prefix.pch";
+				INFOPLIST_FILE = "JMRIKit Example/JMRIKit Example-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		480CB767190E5D4E002BDD19 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JMRIKit Example/JMRIKit Example-Prefix.pch";
+				INFOPLIST_FILE = "JMRIKit Example/JMRIKit Example-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		480CB769190E5D4E002BDD19 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/JMRIKit Example.app/Contents/MacOS/JMRIKit Example";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JMRIKit Example/JMRIKit Example-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "JMRIKit ExampleTests/JMRIKit ExampleTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		480CB76A190E5D4E002BDD19 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/JMRIKit Example.app/Contents/MacOS/JMRIKit Example";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JMRIKit Example/JMRIKit Example-Prefix.pch";
+				INFOPLIST_FILE = "JMRIKit ExampleTests/JMRIKit ExampleTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		480CB72F190E5D4E002BDD19 /* Build configuration list for PBXProject "JMRIKit Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				480CB763190E5D4E002BDD19 /* Debug */,
+				480CB764190E5D4E002BDD19 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		480CB765190E5D4E002BDD19 /* Build configuration list for PBXNativeTarget "JMRIKit Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				480CB766190E5D4E002BDD19 /* Debug */,
+				480CB767190E5D4E002BDD19 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		480CB768190E5D4E002BDD19 /* Build configuration list for PBXNativeTarget "JMRIKit ExampleTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				480CB769190E5D4E002BDD19 /* Debug */,
+				480CB76A190E5D4E002BDD19 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 480CB72C190E5D4E002BDD19 /* Project object */;
+}
